@@ -1,0 +1,26 @@
+<resources>
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <!--底部导航字体没有选中的样式-->
+    <style name="bottom_normal_text">
+        <item name="android:textColor">@color/font_hint</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!--底部导航字体选中的样式-->
+    <style name="bottom_selected_text">
+        <item name="android:textColor">@color/font_select</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+</resources>

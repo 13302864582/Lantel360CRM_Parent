@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--  <include
+          android:elevation="@dimen/toolbar_elevation"
+          android:id="@+id/mine_top_layout_toolbar"
+          layout="@layout/layout_toolbar_mine"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mine_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_toolbar"
+        android:background="@mipmap/mine_card_bg"
+        app:layout_constraintHeight_percent="0.286"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.947">
+
+        <!--切换-->
+        <ImageView
+            android:id="@+id/mine_change"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@mipmap/change"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.136"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.094"
+            app:layout_constraintWidth_percent="0.157" />
+
+        <!--头像-->
+        <ImageView
+            android:id="@+id/mine_head_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@mipmap/circle_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.319"
+            app:layout_constraintHorizontal_bias="0.076"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.183"
+            app:layout_constraintWidth_percent="0.171" />
+
+        <!--名字-->
+        <TextView
+            android:id="@+id/mine_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mine_name_marginLeft"
+            android:text="王宝宝"
+            android:textColor="@color/mine_name"
+            android:textSize="@dimen/mine_name"
+            app:layout_constraintStart_toEndOf="@+id/mine_head_img"
+            app:layout_constraintTop_toTopOf="@+id/mine_head_img" />
+
+        <!--昵称-->
+        <TextView
+            android:id="@+id/mine_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mine_call_marginLeft"
+            android:text="anyway"
+            android:textColor="@color/mine_name"
+            android:textSize="@dimen/mine_call"
+            app:layout_constraintBaseline_toBaselineOf="@+id/mine_name"
+            app:layout_constraintLeft_toRightOf="@id/mine_name" />
+
+        <!--年龄-->
+        <TextView
+            android:id="@+id/mine_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mine_call_marginLeft"
+            android:text="8岁"
+            android:textColor="@color/mine_name"
+            android:textSize="@dimen/mine_call"
+            app:layout_constraintBaseline_toBaselineOf="@+id/mine_call"
+            app:layout_constraintLeft_toRightOf="@id/mine_call" />
+
+        <!--学号-->
+        <TextView
+            android:id="@+id/mine_student_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mine_name_marginLeft"
+            android:text="学号：2578954"
+            android:textColor="@color/mine_name"
+            android:textSize="@dimen/head_img"
+            app:layout_constraintBottom_toBottomOf="@+id/mine_head_img"
+            app:layout_constraintStart_toEndOf="@+id/mine_head_img" />-->
+
+        <!--卡号-->
+        <TextView
+            android:id="@+id/mine_card_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="卡号：551"
+            android:textColor="@color/mine_name"
+            android:textSize="@dimen/head_img"
+            app:layout_constraintBaseline_toBaselineOf="@id/mine_student_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.123"
+            app:layout_constraintStart_toEndOf="@+id/mine_student_id" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mine_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mine_head_img">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mine_menu_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/mine_menu_list_padding"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mine_card"
+        app:layout_constraintWidth_percent="0.947"></androidx.recyclerview.widget.RecyclerView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--===========================================================我的================================================================-->
+    <!--模块：我的   菜单标题-->
+    <string-array name="mine_menu_title">
+        <item>@string/mine_invite</item>
+        <item>@string/mine_wallet</item>
+        <item>@string/mine_order</item>
+        <item>@string/mine_feedback</item>
+    </string-array>
+
+    <!--模块：我的   菜单跳转的路径-->
+    <string-array name="mine_menu_router_path">
+        <item>@string/mine_invite_path</item>
+        <item>@string/mine_wallet_path</item>
+        <item>@string/mine_order_path</item>
+        <item>@string/mine_feedback_path</item>
+    </string-array>
+
+    <!--模块：我的   菜单图标-->
+    <integer-array name="mine_menu_icon">
+        <item>@mipmap/invite</item>
+        <item>@mipmap/wallet</item>
+        <item>@mipmap/order</item>
+        <item>@mipmap/feedback</item>
+    </integer-array>
+
+    <!--模块：我的   卡片课时积分信息标题-->
+    <string-array name="mine_card_item_title">
+        <item>@string/mine_integral</item>
+        <item>@string/mine_total_class_hour</item>
+        <item>@string/mine_consumption_hour</item>
+        <item>@string/mine_hour_left</item>
+    </string-array>
+
+<!--===========================================================主页================================================================-->
+    <!--模块：首页   菜单标题-->
+    <string-array name="home_menu_title">
+        <item>@string/home_curriculum</item>
+        <item>@string/home_attence</item>
+        <item>@string/home_homework</item>
+        <item>@string/home_assessment</item>
+        <item>@string/home_book</item>
+        <item>@string/home_notify</item>
+        <item>@string/home_output</item>
+        <item>@string/home_credit</item>
+    </string-array>
+
+    <!--模块：首页   菜单跳转的路径-->
+    <string-array name="home_menu_router_path">
+        <item>@string/home_curriculum_path</item>
+        <item>@string/home_attence_path</item>
+        <item>@string/home_homework_path</item>
+        <item>@string/home_assessment_path</item>
+        <item>@string/home_book_path</item>
+        <item>@string/home_notify_path</item>
+        <item>@string/home_output_path</item>
+        <item>@string/home_credit_path</item>
+    </string-array>
+
+    <!--模块：首页   菜单图标-->
+    <integer-array name="home_menu_icon">
+        <item>@mipmap/curriculum</item>
+        <item>@mipmap/attence</item>
+        <item>@mipmap/homework</item>
+        <item>@mipmap/assessment</item>
+        <item>@mipmap/book</item>
+        <item>@mipmap/notify</item>
+        <item>@mipmap/output</item>
+        <item>@mipmap/credit</item>
+    </integer-array>
+
+
+    <!--===========================================================学习================================================================-->
+    <!--模块：学习   菜单标题-->
+    <string-array name="study_menu_title">
+        <item>@string/study_course</item>
+        <item>@string/study_class</item>
+        <item>@string/study_preview</item>
+        <item>@string/study_appointment</item>
+    </string-array>
+
+    <!--模块：学习   菜单跳转的路径-->
+    <string-array name="study_menu_router_path">
+        <item>@string/study_course_path</item>
+        <item>@string/study_class_path</item>
+        <item>@string/study_preview_path</item>
+        <item>@string/study_appointment_path</item>
+    </string-array>
+
+    <!--模块：学习   菜单图标-->
+    <integer-array name="study_menu_icon">
+        <item>@mipmap/study_course</item>
+        <item>@mipmap/study_class</item>
+        <item>@mipmap/study_preview</item>
+        <item>@mipmap/study_appointment</item>
+    </integer-array>
+    <!--===========================================================成长================================================================-->
+
+
+
+
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HomeLibrary</string>
+    <string name="leave">请假</string>
+    <string name="course_title">课表</string>
+    <string name="sick_leave">病假</string>
+    <string name="casual_leave">事假</string>
+    <string name="ok_btn">确认</string>
+    <string name="attence">考勤</string>
+    <string name="select_time">选择时间</string>
+</resources>

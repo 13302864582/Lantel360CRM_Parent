@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/splashFragment"
+    >
+    <!--启动页-->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.lantel.Splash.SplashFragment"
+        android:label="fragment_page_splash"
+        >
+    </fragment>
+
+    <!--首页-->
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.lantel.home.HomeFragment"
+        android:label="HomeFragment"
+        >
+    </fragment>
+
+    <!--学习页-->
+    <fragment
+        android:id="@+id/StudyFragment"
+        android:name="com.lantel.study.StudyFragment"
+        android:label="StudentFragment"
+        >
+    </fragment>
+
+    <!--成长页-->
+    <fragment
+        android:id="@+id/GrowupFragment"
+        android:name="com.lantel.mine.MineFragment"
+        android:label="ClassesFragment"
+        >
+    </fragment>
+
+
+    <!--我的页-->
+    <fragment
+        android:id="@+id/Mine_Fragment"
+        android:name="com.lantel.mine.MineFragment"
+        android:label="MineFragment"
+        >
+    </fragment>
+
+    <!--跳转到学习-->
+    <action
+        android:id="@+id/action_study"
+        app:destination="@id/StudyFragment"
+        />
+
+    <!--跳转到首页-->
+    <action
+        android:id="@+id/action_home"
+        app:destination="@id/HomeFragment"
+        />
+
+    <!--跳转到我的-->
+    <action
+        android:id="@+id/action_mine"
+        app:destination="@id/Mine_Fragment"
+        app:clearTask="true"
+        />
+
+    <!--跳转到成长-->
+    <action
+        android:id="@+id/action_growup"
+        app:destination="@id/GrowupFragment"
+        />
+</navigation>

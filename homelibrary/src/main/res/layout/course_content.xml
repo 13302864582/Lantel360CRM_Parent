@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/course_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/course_bottom_select"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/course_bottom_select">
+        <RadioGroup
+            android:id="@+id/leave_radioGroup"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/sick_leave_marginLeft"
+            android:layout_width="wrap_content"
+            android:checkedButton="@id/sick_leave"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/sick_leave"
+                style="@style/checkbox"
+                android:text="@string/sick_leave"
+                />
+
+            <RadioButton
+                android:layout_marginLeft="60dp"
+                android:id="@+id/casual_leave"
+                android:text="@string/casual_leave"
+                style="@style/checkbox"
+                />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ok_btn"
+            android:gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/leave_radioGroup"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.811"
+            android:background="@drawable/bt_shape"
+            android:text="@string/ok_btn"
+            android:textColor="@color/ok_btn"
+            android:textSize="@dimen/ok_btn_text" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

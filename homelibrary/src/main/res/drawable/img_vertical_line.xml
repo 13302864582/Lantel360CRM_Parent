@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_enabled="false" android:drawable="@mipmap/img_ver_line_unselect"/>
+    <item android:state_enabled="true" android:drawable="@mipmap/img_ver_line"/>
+    <item  android:drawable="@mipmap/img_ver_line"/>
+</selector>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <!--底部导航未选中-->
+    <color name="font_hint">#979AA0</color>
+    <!--底部导航选中-->
+    <color name="font_select">#ff5400</color>
+
+
+
+    <color name="mine_toolbarTitle">#1c1d1d</color>
+    <color name="mine_name">@color/white</color>
+    <color name="mine_call" >@color/white</color>
+    <color name="home_toolbar_user">#171616</color>
+    <color name="organ">#333333</color>
+    <color name="school_area">#969696</color>
+    <color name="home_line">#ececec</color>
+    <color name="location_text">#3f3f3f</color>
+    <color name="vertical_line">#ff5400</color>
+    <color name="ad_text">#121313</color>
+    <color name="ad_top">#f6f6f6</color>
+    <color name="more">#9f9fa0</color>
+    <color name="ad_txt1">#454646</color>
+    <color name="ad_txt2">#9b9b9b</color>
+</resources>

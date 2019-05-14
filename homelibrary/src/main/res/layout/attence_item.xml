@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/attence_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/attence_date_marginLeft"
+        android:layout_marginTop="@dimen/attence_date_marginTop"
+        android:text="2019-04-25"
+        android:textColor="@color/attence_date"
+        android:textSize="@dimen/attence_date" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/attence_item_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <TextView
+                android:id="@+id/attence_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/attence_date_marginLeft"
+                android:text="09:30"
+                android:textSize="@dimen/attence_time"
+                android:textColor="@color/attence_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.506" />
+
+            <ImageView
+                android:src="@mipmap/state_normal"
+                android:id="@+id/attence_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="@dimen/attence_date_marginLeft"/>
+
+            <TextView
+                android:id="@+id/attence_class_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="秋季基础班"
+                android:textColor="@color/attence_class_name"
+                android:textSize="@dimen/attence_class_name"
+                app:layout_constraintLeft_toRightOf="@id/attence_time"
+                app:layout_constraintRight_toLeftOf="@id/attence_state"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

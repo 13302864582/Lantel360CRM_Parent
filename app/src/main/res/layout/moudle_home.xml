@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+ <!--   <include
+        android:id="@+id/home_top_layout_toolbar"
+        layout="@layout/layout_toolbar_home"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.core.widget.NestedScrollView
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/toolbar_elevation">
+
+                <TextView
+                    android:id="@+id/organ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/organ_marginLeft"
+                    android:layout_marginTop="@dimen/organ_marginTop"
+                    android:text="新概念英语"
+                    android:textColor="@color/organ"
+                    android:textSize="@dimen/organ"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/phone_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/organ_marginLeft"
+                    android:layout_marginTop="@dimen/phone_layout_marginTop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/organ">
+
+                    <ImageView
+                        android:id="@+id/phone_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:src="@mipmap/home_phone" />
+
+                    <TextView
+                        android:id="@+id/phone_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/phone_text_marginLeft"
+                        android:layout_toRightOf="@id/phone_img"
+                        android:paddingTop="8dp"
+                        android:paddingRight="@dimen/phone_text_paddingRight"
+                        android:paddingBottom="8dp"
+                        android:text="13029007685"
+                        android:textSize="@dimen/phone_text" />
+
+
+                </RelativeLayout>
+
+                <View
+                    app:layout_constraintLeft_toLeftOf="@id/phone_layout"
+                    app:layout_constraintRight_toRightOf="@id/phone_layout"
+                    app:layout_constraintTop_toBottomOf="@id/phone_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/home_line"
+                    android:layout_alignParentBottom="true" />
+
+                <RelativeLayout
+                    android:id="@+id/location_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/organ_marginLeft"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_layout">
+
+                    <ImageView
+                        android:id="@+id/location_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:src="@mipmap/home_loacation" />
+
+                    <TextView
+                        android:text="广东省深圳市龙华区龙华街道某个大楼17层"
+                        android:id="@+id/location_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/phone_text_marginLeft"
+                        android:layout_toRightOf="@id/location_img"
+                        android:paddingTop="8dp"
+                        android:paddingRight="@dimen/phone_text_paddingRight"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/location_text"
+                        android:textSize="@dimen/phone_text" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/school_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/organ_marginLeft"
+                    android:text="龙华校区"
+                    android:textColor="@color/school_area"
+                    android:textSize="@dimen/school_area"
+                    app:layout_constraintBaseline_toBaselineOf="@id/organ"
+                    app:layout_constraintLeft_toRightOf="@id/organ" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="@dimen/logo_marginRight"
+                    android:src="@mipmap/home_area_default"
+                    app:layout_constraintBottom_toTopOf="@+id/location_layout"
+                    app:layout_constraintHeight_percent="0.48"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.258" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:elevation="@dimen/toolbar_elevation"
+                android:id="@+id/home_menu_list"
+                android:overScrollMode="never"
+                android:layout_marginTop="@dimen/margin_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ad_title_layout"
+                android:background="@color/ad_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/margin_vertical_line">
+                <View
+                    android:id="@+id/vertical_line"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="@dimen/margin_vertical_line"
+                    android:background="@color/vertical_line"
+                    android:layout_width="3dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:text="@string/ad_title"
+                    android:id="@+id/ad_text"
+                    android:layout_marginLeft="@dimen/margin_vertical_line"
+                    app:layout_constraintLeft_toRightOf="@id/vertical_line"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="@dimen/ad_text"
+                    android:textColor="@color/ad_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/home_arrow_ad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/arrrow_more_marginRight"
+                    android:src="@mipmap/home_arrrow_more"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/home_more_ad"
+                    android:text="@string/more"
+                    android:layout_marginRight="3dp"
+                    app:layout_constraintRight_toLeftOf="@id/home_arrow_ad"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="@dimen/more"
+                    android:textColor="@color/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <com.lantel.common.AdBanner
+                    app:scale_wh = "2.200"
+                    android:id="@+id/banner"
+                    android:layout_width="0dp"
+                    app:layout_constraintWidth_percent="0.977"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:image_scale_type="fit_center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+                <TextView
+                    android:id="@+id/ad_txt1"
+                    app:layout_constraintTop_toBottomOf="@id/banner"
+                    app:layout_constraintLeft_toLeftOf="@id/banner"
+                    android:text="@string/ad_txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ad_txt1_marginTop"
+                    android:textSize="@dimen/ad_txt1"
+                    android:textColor="@color/ad_txt1"/>
+
+                <TextView
+                    android:id="@+id/ad_txt2"
+                    app:layout_constraintTop_toBottomOf="@id/ad_txt1"
+                    app:layout_constraintLeft_toLeftOf="@id/banner"
+                    android:text="@string/ad_txt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ad_txt1_marginTop"
+                    android:textSize="@dimen/ad_txt2"
+                    android:textColor="@color/ad_txt2"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:background="@color/black_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="600dp">
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

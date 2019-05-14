@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="curriculum_time_start">#202020</color>
+    <color name="curriculum_time_end">#c5c5c5</color>
+    <color name="curriculum_img_text">#787878</color>
+    <color name="curriculum_img_text_gray">#9e9e9e</color>
+    <color name="leave">#FE4C4E</color>
+    <color name="course_title">#010714</color>
+    <color name="sick_leave">#292929</color>
+    <color name="ok_btn">#ffffff</color>
+    <color name="card_unselect">#eeeeee</color>
+    <color name="img_text_unselect">#c5c5c5</color>
+    <color name="img_text">#787878</color>
+    <color name="calendar_today">#ff5400</color>
+    <color name="calendar_other">#ffcdb5</color>
+    <color name="attence_date">#3d3b3b</color>
+    <color name="attence_time">#999999</color>
+    <color name="attence_class_name">#333333</color>
+    <color name="time_pick_btn">#fe4c4e</color>
+</resources>

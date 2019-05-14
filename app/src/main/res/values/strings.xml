@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">360CRMParent</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!--===========================================================底部导航================================================================-->
+
+    <!--模块：底部导航菜单   菜单title-->
+    <string name="tabhost_home">首页</string>
+    <string name="tabhost_study">学习</string>
+    <string name="tabhost_growup">成长</string>
+    <string name="tabhost_mine">我的</string>
+
+
+    <!--===========================================================我的================================================================-->
+
+    <!--模块：我的   菜单title-->
+    <string name="mine_invite">邀请有奖</string>
+    <string name="mine_wallet">我的钱包</string>
+    <string name="mine_order">我的订单</string>
+    <string name="mine_feedback">意见反馈</string>
+
+    <!--模块：我的   顶部卡片title-->
+    <string name="mine_integral">积分</string>
+    <string name="mine_total_class_hour">总课时</string>
+    <string name="mine_consumption_hour">消耗课时</string>
+    <string name="mine_hour_left">剩余课时</string>
+
+
+
+    <!--===========================================================主页================================================================-->
+
+
+    <!--模块：主页   菜单标题-->
+    <string name="home_curriculum">课表</string>
+    <string name="home_attence">考勤</string>
+    <string name="home_homework">作业</string>
+    <string name="home_assessment">课评</string>
+    <string name="home_book">图书</string>
+    <string name="home_notify">通知</string>
+    <string name="home_output">作品</string>
+    <string name="home_credit">积分</string>
+
+    <string name="more">更多</string>
+    <string name="ad_txt1">邀请更多家长加入学习管家</string>
+    <string name="ad_txt2">通过手机号邀请学生家长加入手机管家赢取积分送豪礼</string>
+    <string name="ad_title">推荐有奖</string>
+
+
+    <!--===========================================================学习================================================================-->
+
+    <string name="study_course">课程</string>
+    <string name="study_class">班级</string>
+    <string name="study_preview">预习</string>
+    <string name="study_appointment">预约</string>
+
+
+
+</resources>
