@@ -1,8 +1,5 @@
 package com.lantel.app;
 
-import android.view.View;
-import com.cangwang.core.IBaseClient;
-import com.cangwang.core.ModuleEvent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
@@ -67,7 +64,7 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
                 .init();
     }
 
-    @ModuleEvent(coreClientClass = IBaseClient.class)
+  /*  @ModuleEvent(coreClientClass = IBaseClient.class)
     public void funfz(boolean FullScreen) {
         int visable = bottomNavigation.getVisibility();
         if(View.GONE == visable){
@@ -75,7 +72,7 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
         }else {
             bottomNavigation.setVisibility(View.GONE);
         }
-    }
+    }*/
 
     @Override
     public void navigate(int action_id) {

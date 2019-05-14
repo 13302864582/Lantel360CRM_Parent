@@ -18,4 +18,12 @@
     <dimen name="attence_item_margin">10dp</dimen>
     <dimen name="attence_time">12sp</dimen>
     <dimen name="attence_class_name">14sp</dimen>
+    <dimen name="head_img">58dp</dimen>
+    <dimen name="head_img_marginStart">24dp</dimen>
+    <dimen name="head_img_marginTop">17dp</dimen>
+    <dimen name="classes_name">14sp</dimen>
+    <dimen name="classes_place">11sp</dimen>
+    <dimen name="line_margin">16dp</dimen>
+    <dimen name="classes_progress_margin">19dp</dimen>
+    <item name="line" type="dimen" format="float">0.5dp</item>
 </resources>

@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, ClassesModel> implements ClassesContract.View{
-    @BindView(R.id.back)
+    /*@BindView(R.id.back)
     ImageView back;
     @BindView(R.id.title)
     TextView title;
@@ -34,7 +34,7 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
     ImageView filterDate;
     @BindView(R.id.attence_list)
     RecyclerView classesList;
-    private ClassesAdapter mAdapter;
+    private ClassesAdapter mAdapter;*/
 
     @Override
     protected int getContainerLayoutID() {
@@ -89,7 +89,7 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
     @Override
     protected void initView() {
         stateLayout.showContentView();
-        filterDate.setVisibility(View.GONE);
+        //filterDate.setVisibility(View.GONE);
       /*  classesList.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ClassesAdapter(getContext(),null);
         classesList.setAdapter(mAdapter);*/
@@ -97,8 +97,8 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
 
     @Override
     public void initAttenceData(ArrayList<ClassesCardModel> menu) {
-        mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();
+        //mAdapter.setDatas(menu);
+        //mAdapter.notifyDataSetChanged();
     }
 
     @OnClick({R.id.back, R.id.filter_date})
