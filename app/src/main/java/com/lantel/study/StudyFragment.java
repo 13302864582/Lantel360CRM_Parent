@@ -54,22 +54,22 @@ public class StudyFragment extends ToolBarStateFragment<StudyPresenter, StudyMod
 
     @Override
     protected int getContainerLayoutID() {
-        return 0;
+        return R.layout.common_container;
     }
 
     @Override
     protected int getFailViewId() {
-        return 0;
+        return R.id.error;
     }
 
     @Override
     protected int getLoadingViewId() {
-        return 0;
+        return R.id.loading;
     }
 
     @Override
     protected int getEmptyViewId() {
-        return 0;
+        return R.id.empty;
     }
 
     @Override

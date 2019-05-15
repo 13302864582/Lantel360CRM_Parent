@@ -7,4 +7,5 @@
     <string name="ok_btn">确认</string>
     <string name="attence">考勤</string>
     <string name="select_time">选择时间</string>
+    <string name="classes_progress">教学进度：</string>
 </resources>

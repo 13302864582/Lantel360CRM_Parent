@@ -20,4 +20,7 @@
     <color name="attence_time">#999999</color>
     <color name="attence_class_name">#333333</color>
     <color name="time_pick_btn">#fe4c4e</color>
+    <color name="classes_name">#333333</color>
+    <color name="classes_place">#999999</color>
+    <color name="line">#e6e6e6</color>
 </resources>
