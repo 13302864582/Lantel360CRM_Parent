@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include layout="@layout/attence_toolbar"/>
+
+    <!--tabIndicatorColor：指示器的颜色-->
+    <!--tabIndicatorHeight：指示器的高度，可设置为0，相当于没有指示器-->
+    <!--tabTextColor：Tab未选中时字体的颜色-->
+    <!--tabSelectedTextColor：Tab选中时字体的颜色-->
+    <!--tabTextAppearance：Tab内文字的样式，TabLayout没有提供直接属性设置文字大小，需通过该属性指定style样式从而改变文字大小-->
+    <!--tabMode：Tab的显示模式，默认为fixed（固定不能滑动，标签很多时会被挤压），可设置为scrollable（标签很多时可向左滑动）-->
+    <!--tabGravity：内容的显示模式，可选center（居中）和fill（填充）-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_top"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:tabIndicatorColor="@color/tab_IndicatorColor"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextColor="@color/tab_text"
+        app:tabSelectedTextColor="@color/tab_text">
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </androidx.viewpager.widget.ViewPager>
+</LinearLayout>

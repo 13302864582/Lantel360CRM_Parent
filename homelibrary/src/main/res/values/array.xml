@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--===========================================================主页================================================================-->
+    <!--模块：首页   菜单标题-->
+    <string-array name="course_page_title">
+        <item>@string/course_reading</item>
+        <item>@string/course_has_read</item>
+        <item>@string/course_read_plan</item>
+    </string-array>
+
+</resources>

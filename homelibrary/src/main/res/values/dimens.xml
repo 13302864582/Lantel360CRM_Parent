@@ -22,8 +22,13 @@
     <dimen name="head_img_marginStart">24dp</dimen>
     <dimen name="head_img_marginTop">17dp</dimen>
     <dimen name="classes_name">14sp</dimen>
-    <dimen name="classes_place">11sp</dimen>
+    <dimen name="classes_place">12sp</dimen>
     <dimen name="line_margin">16dp</dimen>
     <dimen name="classes_progress_margin">19dp</dimen>
-    <item name="line" type="dimen" format="float">0.5dp</item>
+    <dimen name="course_progress_margin">13dp</dimen>
+    <dimen name="line">0.5dp</dimen>
+    <dimen name="seekbar_width">170dp</dimen>
+    <dimen name="seekbar_height">12dp</dimen>
+    <dimen name="course_start_date">12sp</dimen>
+    <dimen name="use_course_maigin">35dp</dimen>
 </resources>

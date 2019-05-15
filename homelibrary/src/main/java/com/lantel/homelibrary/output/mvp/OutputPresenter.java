@@ -1,15 +1,13 @@
-package com.lantel.studylibrary.classes.mvp;
+package com.lantel.homelibrary.output.mvp;
 
 import android.os.Bundle;
 
-import com.lantel.homelibrary.R;
-import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
+import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class ClassesPresenter extends ClassesContract.Presenter{
+public class OutputPresenter extends OutputContract.Presenter{
     @Override
     public void onCrete(Bundle savedInstanceState) {
         LogUtils.d("onCrete: ");
@@ -49,19 +47,16 @@ public class ClassesPresenter extends ClassesContract.Presenter{
 
     public void initMenu() {
         //添加菜单数据
-        ArrayList<ClassesCardModel> menu = new ArrayList<>();
+        ArrayList<BaseModel> menu = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            ClassesCardModel model = new ClassesCardModel(R.mipmap.ic_launcher,"教师fz1","教室1","行政一班",0,10);
-
-            ClassesCardModel mode2 = new ClassesCardModel(R.mipmap.ic_launcher,"教师fz2","教室2","行政一班",1,10);
-
-            ClassesCardModel mode3 = new ClassesCardModel(R.mipmap.ic_launcher,"教师fz2","教室3","行政一班",5,10);
-
+            BaseModel model = new BaseModel();
+            model.setType(0);
+            BaseModel mode2 = new BaseModel();
+            mode2.setType(1);
             menu.add(model);
             menu.add(mode2);
-            menu.add(mode3);
         }
-        mView.initAttenceData(menu);
+        mView.initCourseData(menu);
     }
 
 }

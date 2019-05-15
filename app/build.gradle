@@ -29,7 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     if (rootProject.ext.isMoudle) {
        // implementation project(':common')
-        implementation 'com.github.15914415934:Lantel360BaseLibrary:v1.0.1'
+        implementation 'com.github.15914415934:Lantel360BaseLibrary:v1.0.2'
     }
     annotationProcessor rootProject.ext.dependencies.glideCompiler
     annotationProcessor rootProject.ext.dependencies.butterknifecompiler

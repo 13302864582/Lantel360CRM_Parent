@@ -23,4 +23,7 @@
     <color name="classes_name">#333333</color>
     <color name="classes_place">#999999</color>
     <color name="line">#e6e6e6</color>
+    <color name="classes_percent">#ff9524</color>
+    <color name="tab_IndicatorColor">#ff5400</color>
+    <color name="tab_text">#525252</color>
 </resources>

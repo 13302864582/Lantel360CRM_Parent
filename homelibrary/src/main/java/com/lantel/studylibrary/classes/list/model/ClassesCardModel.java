@@ -2,33 +2,46 @@ package com.lantel.studylibrary.classes.list.model;
 
 import com.xiao360.baselibrary.base.BaseModel;
 
-public class ClassesCardModel extends BaseModel implements Comparable<ClassesCardModel>{
-    private String date;
-    private String time;
+public class ClassesCardModel extends BaseModel{
+    private String teacher;
+    private String place;
     private String className;
-    private int state;
+    private int percent;
+    private int total;
+    private Object heaImg;
 
-    public String getDate() {
-        return date;
+    public ClassesCardModel(Object heaImg,String teacher, String place, String className,int percent, int total) {
+        this.teacher = teacher;
+        this.place = place;
+        this.className = className;
+        this.percent = percent;
+        this.total = total;
+        this.heaImg = heaImg;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+
+    public Object getHeaImg() {
+        return heaImg;
     }
 
-    public String getTime() {
-        return time;
+    public void setHeaImg(Object heaImg) {
+        this.heaImg = heaImg;
     }
 
-    public long getTimeLong() {
-        if(time.indexOf(0)==0){
-            time.replaceAll("^(0+)", "").trim();
-        }
-        return Long.valueOf(time);
+    public String getTeacher() {
+        return teacher;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public String getClassName() {
@@ -39,25 +52,19 @@ public class ClassesCardModel extends BaseModel implements Comparable<ClassesCar
         this.className = className;
     }
 
-    public int getState() {
-        return state;
+    public int getPercent() {
+        return percent;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setPercent(int percent) {
+        this.percent = percent;
     }
 
-    @Override
-    public int compareTo(ClassesCardModel attenceModel) {
-        long i = Long.valueOf(this.getDate()) - Long.valueOf(attenceModel.getDate());
-        if(i == 0){
-            i = getTimeLong() - attenceModel.getTimeLong();
-        }
-        if(i == 0)
-            return 0;
-        if(i>0)
-            return 1;
-        else
-            return -1;
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

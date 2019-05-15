@@ -8,4 +8,11 @@
     <string name="attence">考勤</string>
     <string name="select_time">选择时间</string>
     <string name="classes_progress">教学进度：</string>
+    <string name="classes">班级</string>
+    <string name="course">课程</string>
+    <string name="course_progress">完成度</string>
+
+    <string name="course_reading">在读课程</string>
+    <string name="course_has_read">已读课程</string>
+    <string name="course_read_plan">计划课程</string>
 </resources>

@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.lantel.common.view.EqulizerSeekBar;
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 
@@ -14,7 +15,7 @@ public class ClassesHolder extends BaseViewHolder {
     public TextView classes_place;
     public TextView classes_teacher;
     public TextView classes_percent;
-    public SeekBar seekBar;
+    public EqulizerSeekBar seekBar;
 
     public ClassesHolder(View view) {
         super(view);

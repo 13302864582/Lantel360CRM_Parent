@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/course_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="15dp"
+                android:text="班级：粤港澳一班"
+                android:textColor="@color/classes_name"
+                android:textSize="@dimen/classes_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/course_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报名时间：2019-01-22"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/course_start_date"
+                app:layout_constraintLeft_toLeftOf="@id/course_name"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
+                android:layout_marginTop="@dimen/course_progress_margin"/>
+
+            <TextView
+                android:id="@+id/course_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报名时间：2019-01-22"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/course_start_date"
+                app:layout_constraintLeft_toRightOf="@id/course_start_date"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/course_start_date"/>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"
+                android:layout_marginTop="@dimen/course_progress_margin"
+                android:background="@color/line"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/course_start_date"
+                app:layout_constraintWidth_percent="0.886" />
+
+            <TextView
+                android:id="@+id/classes_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/course_progress_margin"
+                android:layout_marginBottom="@dimen/classes_progress_margin"
+                android:text="@string/course_progress"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place"
+                app:layout_constraintLeft_toLeftOf="@id/course_start_date"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+            <com.lantel.common.view.EqulizerSeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="@dimen/seekbar_width"
+                android:layout_height="@dimen/seekbar_height"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/classes_progress"
+                app:layout_constraintLeft_toRightOf="@id/classes_progress" />
+
+            <TextView
+                android:id="@+id/course_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/head_img_marginStart"
+                android:text="0/0"
+                android:textColor="@color/classes_percent"
+                android:textSize="@dimen/classes_place"
+                app:layout_constraintBaseline_toBaselineOf="@id/classes_progress"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintLeft_toRightOf="@id/seekbar"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/total_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/course_progress_margin"
+                android:layout_marginBottom="@dimen/course_progress_margin"
+                android:text="总课时：17"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place"
+                app:layout_constraintLeft_toLeftOf="@id/classes_progress"
+                app:layout_constraintTop_toBottomOf="@id/classes_progress"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/use_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/total_course"
+                app:layout_constraintLeft_toRightOf="@id/total_course"
+                android:layout_marginLeft="@dimen/use_course_maigin"
+                android:text="消耗课时：15"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place" />
+
+            <TextView
+                android:id="@+id/left_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/total_course"
+                app:layout_constraintLeft_toRightOf="@id/use_course"
+                android:text="剩余课时：2"
+                android:layout_marginLeft="@dimen/use_course_maigin"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

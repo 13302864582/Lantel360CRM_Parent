@@ -20,6 +20,10 @@
         </activity>
 
         <activity android:name="com.lantel.studylibrary.classes.ClassesActivity">
+
+        </activity>
+
+        <activity android:name="com.lantel.studylibrary.course.CourseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
