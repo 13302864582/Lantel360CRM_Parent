@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.course.list.adpter.CourseAdapter;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
@@ -16,7 +17,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T,E>{
-    @BindView(R.id.classes_list)
+    @BindView(R2.id.classes_list)
     protected RecyclerView classes_list;
     protected CourseAdapter mAdapter;
 

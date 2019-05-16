@@ -15,4 +15,8 @@
     <string name="course_reading">在读课程</string>
     <string name="course_has_read">已读课程</string>
     <string name="course_read_plan">计划课程</string>
+    <string name="output">作品</string>
+    <string name="share">分享</string>
+    <string name="remark">评论</string>
+    <string name="support">点赞</string>
 </resources>

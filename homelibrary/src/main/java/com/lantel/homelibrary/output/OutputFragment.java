@@ -1,26 +1,37 @@
 package com.lantel.homelibrary.output;
 
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import com.haibin.calendarview.Calendar;
-import com.haibin.calendarview.CalendarView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.lantel.homelibrary.R;
-import com.lantel.homelibrary.course.list.adpter.CurriculumAdapter;
-import com.lantel.homelibrary.course.mvp.CourseContract;
-import com.lantel.homelibrary.course.mvp.CoursePresenter;
+import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.output.list.adpter.OutputAdapter;
 import com.lantel.homelibrary.output.mvp.OutputContract;
 import com.lantel.homelibrary.output.mvp.OutputModel;
 import com.lantel.homelibrary.output.mvp.OutputPresenter;
-import com.lantel.studylibrary.course.list.adpter.CourseAdapter;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
+import com.xiao360.baselibrary.util.LogUtils;
+
 import java.util.ArrayList;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class OutputFragment extends ToolBarStateFragment<OutputPresenter, OutputModel> implements OutputContract.View {
+    @BindView(R2.id.output_listView)
+    RecyclerView outputListView;
+    @BindView(R2.id.statebarView)
+    View statebarView;
+    @BindView(R2.id.back)
+    ImageView back;
+    @BindView(R2.id.title)
+    TextView title;
+    @BindView(R2.id.filter_date)
+    ImageView filterDate;
     private OutputAdapter mAdapter;
 
     @Override
@@ -75,14 +86,27 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
 
     @Override
     protected void initView() {
+        initToolBar();
         stateLayout.showContentView();
-        classes_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new CourseAdapter(getContext(),null);
-        classes_list.setAdapter(mAdapter);
+        outputListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new OutputAdapter(getContext(), null);
+        outputListView.setAdapter(mAdapter);
+    }
+
+    private void initToolBar() {
+        title.setText(getString(R.string.output));
     }
 
     @Override
     public void initCourseData(ArrayList<BaseModel> menu) {
+        mAdapter.setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+    }
 
+    @OnClick(R2.id.back)
+    public void onViewClicked(View view) {
+        int id = view.getId();
+        if(id == R.id.back)
+        LogUtils.d("=====onViewClicked:back");
     }
 }

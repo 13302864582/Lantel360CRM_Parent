@@ -26,4 +26,9 @@
     <color name="classes_percent">#ff9524</color>
     <color name="tab_IndicatorColor">#ff5400</color>
     <color name="tab_text">#525252</color>
+    <color name="output_name">#010714</color>
+    <color name="output_time">#b6b6b6</color>
+    <color name="output_content">#3d3d3d</color>
+    <color name="output_classes">#7a7a7a</color>
+    <color name="output_detail_inside_text">#9a9a9a</color>
 </resources>

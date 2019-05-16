@@ -31,4 +31,34 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#525252</item>
     </style>
+
+    <style name="output_img_text" parent="wrap_wh">
+        <item name="android:textSize">@dimen/output_classes</item>
+        <item name="android:textColor">@color/output_classes</item>
+        <item name="android:layout_marginLeft">@dimen/output_classes_marginLeft</item>
+    </style>
+
+    <style name="output_btm_img">
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/output_btm_img</item>
+    </style>
+
+    <style name="output_btm_img_detail" parent="match_h_0_w">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="output_img_detail_inside" parent="LineH_wrap_wh">
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="output_btm_inside_text" parent="LineV_wrap_wh">
+        <item name="android:layout_marginLeft">@dimen/output_detail_inside_text_marginLeft</item>
+        <item name="android:textSize">@dimen/output_detail_inside_text</item>
+        <item name="android:textColor">@color/output_detail_inside_text</item>
+    </style>
+
+
+    <dimen name="output_classes_marginLeft">3dp</dimen>
 </resources>

@@ -2,62 +2,68 @@ package com.lantel.homelibrary.output.list.model;
 
 import com.xiao360.baselibrary.base.BaseModel;
 
-public class CardOutputModel extends BaseModel implements Comparable<CardOutputModel>{
-    private String date;
-    private String time;
-    private String className;
-    private int state;
+public class CardOutputModel extends BaseModel{
+    private String headImg;
+    private String name;
+    private String content;
+    private String[] imgs;
+    private String classes;
+    private String adress;
+    private boolean isSupport;
 
-    public String getDate() {
-        return date;
+    public boolean isSupport() {
+        return isSupport;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setSupport(boolean support) {
+        isSupport = support;
     }
 
-    public String getTime() {
-        return time;
+    public String getHeadImg() {
+        return headImg;
     }
 
-    public long getTimeLong() {
-        if(time.indexOf(0)==0){
-            time.replaceAll("^(0+)", "").trim();
-        }
-        return Long.valueOf(time);
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getName() {
+        return name;
     }
 
-    public String getClassName() {
-        return className;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public String getContent() {
+        return content;
     }
 
-    public int getState() {
-        return state;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public String[] getImgs() {
+        return imgs;
     }
 
-    @Override
-    public int compareTo(CardOutputModel attenceModel) {
-        long i = Long.valueOf(this.getDate()) - Long.valueOf(attenceModel.getDate());
-        if(i == 0){
-            i = getTimeLong() - attenceModel.getTimeLong();
-        }
-        if(i == 0)
-            return 0;
-        if(i>0)
-            return 1;
-        else
-            return -1;
+    public void setImgs(String[] imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getClasses() {
+        return classes;
+    }
+
+    public void setClasses(String classes) {
+        this.classes = classes;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }

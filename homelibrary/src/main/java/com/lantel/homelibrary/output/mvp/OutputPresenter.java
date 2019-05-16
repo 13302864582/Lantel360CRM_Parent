@@ -2,6 +2,7 @@ package com.lantel.homelibrary.output.mvp;
 
 import android.os.Bundle;
 
+import com.lantel.homelibrary.output.list.model.CardOutputModel;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
 
@@ -49,12 +50,18 @@ public class OutputPresenter extends OutputContract.Presenter{
         //添加菜单数据
         ArrayList<BaseModel> menu = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            BaseModel model = new BaseModel();
-            model.setType(0);
-            BaseModel mode2 = new BaseModel();
-            mode2.setType(1);
+            BaseModel model = new CardOutputModel();
+            ((CardOutputModel)model).setImgs(new String[]{"1","2","2","2"});
+            ((CardOutputModel)model).setSupport(true);
+            BaseModel mode2 = new CardOutputModel();
+            ((CardOutputModel)mode2).setImgs(new String[]{"1","2"});
+            ((CardOutputModel)mode2).setSupport(false);
+            BaseModel mode3 = new CardOutputModel();
+            ((CardOutputModel)mode3).setImgs(new String[]{"1"});
+            ((CardOutputModel)mode3).setSupport(false);
             menu.add(model);
             menu.add(mode2);
+            menu.add(mode3);
         }
         mView.initCourseData(menu);
     }

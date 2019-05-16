@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.AppConfig;
 import com.lantel.common.GlideImageLoader;
 import com.lantel.common.list.model.SimpleMenuModel;
@@ -140,6 +142,7 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
     @Override
     public void navigationPath(String path) {
         LogUtils.d("onViewClicked===navigationPath=======" + path);
+        ARouter.getInstance().build(path).navigation();
     }
 
     @OnClick({R.id.top_img_left_user, R.id.username, R.id.arrow_user, R.id.top_img_right_notify, R.id.top_img_right_scan, R.id.phone_img, R.id.phone_text, R.id.home_arrow_ad, R.id.banner,R.id.home_more_ad})

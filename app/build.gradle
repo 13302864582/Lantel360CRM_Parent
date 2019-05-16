@@ -15,6 +15,12 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME : project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -26,13 +32,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     if (rootProject.ext.isMoudle) {
-       // implementation project(':common')
+        // implementation project(':common')
         implementation 'com.github.15914415934:Lantel360BaseLibrary:v1.0.2'
+    } else {
+        implementation project(':homelibrary')
     }
     annotationProcessor rootProject.ext.dependencies.glideCompiler
     annotationProcessor rootProject.ext.dependencies.butterknifecompiler
+    annotationProcessor rootProject.ext.dependencies.arouterCompiler
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.zxing
+
 }

@@ -14,4 +14,6 @@ public class Config {
     public static final int TAG_HAS_READ = 1;
     public static final int TAG_READ_PLAN = 2;
 
+    public static final int TYPE_WRAP = 0;
+    public static final int TYPE_SQUARE = 1;
 }

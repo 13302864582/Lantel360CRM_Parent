@@ -7,6 +7,7 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.attence.list.adpter.AttenceAdapter;
 import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.lantel.homelibrary.attence.mvp.AttenceContract;
@@ -23,13 +24,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, AttenceModel> implements AttenceContract.View, OnTimeSelectListener {
-    @BindView(R.id.back)
+    @BindView(R2.id.back)
     ImageView back;
-    @BindView(R.id.title)
+    @BindView(R2.id.title)
     TextView title;
-    @BindView(R.id.filter_date)
+    @BindView(R2.id.filter_date)
     ImageView filterDate;
-    @BindView(R.id.attence_list)
+    @BindView(R2.id.attence_list)
     RecyclerView attenceList;
     private AttenceAdapter mAdapter;
 
@@ -83,6 +84,7 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
         mPresenter.setVM(this, mModel);
     }
 
+
     @Override
     protected void initView() {
         stateLayout.showContentView();
@@ -97,7 +99,7 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick({R.id.back, R.id.filter_date})
+    @OnClick({R2.id.back, R2.id.filter_date})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.filter_date) {

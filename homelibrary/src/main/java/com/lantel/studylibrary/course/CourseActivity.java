@@ -4,10 +4,13 @@ package com.lantel.studylibrary.course;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.course.fragment.HasReadFrag;
 import com.lantel.studylibrary.course.fragment.PlanReadFrag;
 import com.lantel.studylibrary.course.fragment.ReadingFrag;
@@ -20,18 +23,20 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+
+@Route(path = "/lantel/360/course")
 public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
-    @BindView(R.id.statebarView)
+    @BindView(R2.id.statebarView)
     View statebarView;
-    @BindView(R.id.back)
+    @BindView(R2.id.back)
     ImageView back;
-    @BindView(R.id.title)
+    @BindView(R2.id.title)
     TextView title;
-    @BindView(R.id.filter_date)
+    @BindView(R2.id.filter_date)
     ImageView filterDate;
-    @BindView(R.id.tab_top)
+    @BindView(R2.id.tab_top)
     TabLayout tabTop;
-    @BindView(R.id.pager)
+    @BindView(R2.id.pager)
     ViewPager mViewPager;
 
     private CourseFragmentPagerAdapter mAdapter;
@@ -77,7 +82,7 @@ public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelec
         tabTop.setupWithViewPager(mViewPager); //关联TabLayout和ViewPager
     }
 
-    @OnClick(R.id.back)
+    @OnClick(R2.id.back)
     public void onViewClicked() {
         finish();
     }

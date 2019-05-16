@@ -9,36 +9,35 @@ import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.view.ImageText;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CardOutputHolder extends BaseViewHolder {
-    public TextView start_time;
-    public TextView end_time;
-    public TextView class_name;
-    public TextView course_name;
-    public ImageText room;
-    public ImageText teacher;
-    public ImageText imformation;
-    public CardView card;
-    public FrameLayout check_layout;
-    public FrameLayout cl_root;
-    public CheckBox check;
-    public ImageView ver_line;
-    public ImageView leave;
+    public ImageView head_img;
+    public TextView name;
+    public TextView time;
+    public TextView content;
+    public RecyclerView img_list;
+
+    public TextView text_classes;
+    public TextView text_adress;
+    public ImageView share_img;
+    public ImageView support_img;
+    public ImageView remark_img;
+    public ConstraintLayout card_ConstraintLayout;
 
     public CardOutputHolder(View view) {
         super(view);
-        start_time = getView(R.id.start_time);
-        end_time = getView(R.id.end_time);
-        class_name = getView(R.id.class_name);
-        course_name = getView(R.id.course_name);
-        room = getView(R.id.room);
-        teacher = getView(R.id.teacher);
-        imformation = getView(R.id.imformation);
-        check_layout = getView(R.id.check_layout);
-        cl_root = getView(R.id.cl_root);
-        card = getView(R.id.card);
-        check = getView(R.id.check);
-        ver_line = getView(R.id.ver_line);
-        leave = getView(R.id.img_leave);
+        head_img = getView(R.id.head_img);
+        name = getView(R.id.name);
+        time = getView(R.id.time);
+        content = getView(R.id.content);
+        img_list = getView(R.id.img_list);
+        text_classes = getView(R.id.text_classes);
+        text_adress = getView(R.id.text_adress);
+        share_img = getView(R.id.share_img);
+        support_img = getView(R.id.support_img);
+        remark_img = getView(R.id.remark_img);
+        card_ConstraintLayout = getView(R.id.card_ConstraintLayout);
     }
 }

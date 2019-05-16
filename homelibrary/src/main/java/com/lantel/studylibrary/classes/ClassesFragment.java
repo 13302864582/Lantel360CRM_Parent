@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.classes.list.adpter.ClassesAdapter;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.classes.mvp.ClassesContract;
@@ -17,11 +18,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, ClassesModel> implements ClassesContract.View{
-    @BindView(R.id.back)
+    @BindView(R2.id.back)
     ImageView back;
-    @BindView(R.id.title)
+    @BindView(R2.id.title)
     TextView title;
-    @BindView(R.id.classes_list)
+    @BindView(R2.id.classes_list)
     RecyclerView classes_list;
     private ClassesAdapter mAdapter;
 
@@ -90,7 +91,7 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick({R.id.back})
+    @OnClick({R2.id.back})
     public void onViewClicked(View view) {
         int id = view.getId();
         if(id == R.id.back){

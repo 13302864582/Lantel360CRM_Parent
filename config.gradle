@@ -1,5 +1,5 @@
 ext{
- isMoudle = true
+ isMoudle = false
 
  android = [
          applicationId: "com.example.moudletest",

@@ -2,7 +2,6 @@ package com.lantel.homelibrary.course;
 
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,10 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.course.list.adpter.CurriculumAdapter;
 import com.lantel.homelibrary.course.mvp.CourseContract;
 import com.lantel.homelibrary.course.mvp.CourseModel;
@@ -28,29 +27,29 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CourseFragment extends ToolBarStateFragment<CoursePresenter, CourseModel> implements CourseContract.View , CalendarView.OnCalendarSelectListener {
-    @BindView(R.id.course_list)
+    @BindView(R2.id.course_list)
     RecyclerView mCourseList;
-    @BindView(R.id.sick_leave)
+    @BindView(R2.id.sick_leave)
     RadioButton sickLeave;
-    @BindView(R.id.casual_leave)
+    @BindView(R2.id.casual_leave)
     RadioButton casualLeave;
-    @BindView(R.id.leave_radioGroup)
+    @BindView(R2.id.leave_radioGroup)
     RadioGroup leaveRadioGroup;
-    @BindView(R.id.ok_btn)
+    @BindView(R2.id.ok_btn)
     Button okBtn;
-    @BindView(R.id.course_bottom_select)
+    @BindView(R2.id.course_bottom_select)
     ConstraintLayout courseBottomSelect;
-    @BindView(R.id.statebarView)
+    @BindView(R2.id.statebarView)
     View statebarView;
-    @BindView(R.id.back)
+    @BindView(R2.id.back)
     ImageView back;
-    @BindView(R.id.title)
+    @BindView(R2.id.title)
     TextView title;
-    @BindView(R.id.leave)
+    @BindView(R2.id.leave)
     TextView leave;
-    @BindView(R.id.course_top)
+    @BindView(R2.id.course_top)
     LinearLayout courseTop;
-    @BindView(R.id.calendarView)
+    @BindView(R2.id.calendarView)
     CalendarView calendarView;
     private CurriculumAdapter mAdapter;
     private LinearLayoutManager mLineManager;
@@ -111,11 +110,11 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
         calendarView.setOnCalendarSelectListener(this);
     }
 
-    @OnClick({R.id.back, R.id.leave, R.id.ok_btn})
+    @OnClick({R2.id.back, R2.id.leave, R2.id.ok_btn})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.back) {
-
+            getActivity().finish();
         } else if (id == R.id.leave) {
             if (mAdapter != null) {
                 if (!mAdapter.isAnimation()) {

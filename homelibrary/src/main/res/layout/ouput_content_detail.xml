@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/attence_toolbar"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/btm_img_layout"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/output_btm_img">
+
+        <RelativeLayout
+            style="@style/output_btm_img_detail"
+            >
+            <LinearLayout
+                style="@style/output_img_detail_inside">
+                  <ImageView
+                      android:id="@+id/share_img"
+                      android:src="@mipmap/share_img"
+                      style="@style/LineV_wrap_wh"
+                       />
+
+                <TextView
+                    android:id="@+id/share"
+                    android:text="@string/share"
+                   style="@style/output_btm_inside_text" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/output_btm_img_detail">
+            <LinearLayout
+                style="@style/output_img_detail_inside">
+                <ImageView
+                    android:id="@+id/remark_img"
+                    android:src="@mipmap/remark_img"
+                    style="@style/LineV_wrap_wh"
+                    />
+
+                <TextView
+                    android:id="@+id/remark"
+                    android:text="@string/remark"
+                    style="@style/output_btm_inside_text" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/output_btm_img_detail">
+            <LinearLayout
+                style="@style/output_img_detail_inside">
+                <ImageView
+                    android:id="@+id/support_img"
+                    android:src="@mipmap/support_img"
+                    style="@style/LineV_wrap_wh"
+                    />
+
+                <TextView
+                    android:id="@+id/support"
+                    android:text="@string/support"
+                    style="@style/output_btm_inside_text" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btm_img_layout"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <ImageView
+                android:id="@+id/head_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:background="@color/line"
+                app:layout_constraintTop_toBottomOf="@+id/head_img" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="阳光哦"
+                android:textColor="@color/output_name"
+                android:textSize="@dimen/output_name"
+                app:layout_constraintHorizontal_bias="0.050"
+                app:layout_constraintLeft_toRightOf="@id/head_img"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/head_img" />
+
+            <ImageView
+                android:id="@+id/img_classes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@mipmap/classes_img"
+                app:layout_constraintBottom_toBottomOf="@id/name"
+                app:layout_constraintLeft_toRightOf="@id/name" />
+
+            <TextView
+                android:id="@+id/text_classes"
+                style="@style/output_img_text"
+                android:text="水彩一班"
+                app:layout_constraintBottom_toBottomOf="@id/img_classes"
+                app:layout_constraintLeft_toRightOf="@id/img_classes"
+                tools:layout_editor_absoluteY="22dp" />
+
+            <ImageView
+                android:id="@+id/img_adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/adress_img"
+                app:layout_constraintBottom_toBottomOf="@+id/head_img"
+                app:layout_constraintLeft_toLeftOf="@id/name"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintVertical_bias="0.80" />
+
+            <TextView
+                android:id="@+id/text_adress"
+                style="@style/output_img_text"
+                android:text="深圳市龙湖区"
+                app:layout_constraintBottom_toBottomOf="@+id/img_adress"
+                app:layout_constraintLeft_toRightOf="@id/img_adress" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:clickable="false"
+                android:inputType="textMultiLine"
+                android:text="13minutedwjdaddjdajdoapadkaokaodkaopdkpkokdokadaopkdadkdkdaokdopdakdaookdkdakdkadkaopakdodpkaokdawkdapkddakapodka"
+                android:textColor="@color/output_content"
+                android:textSize="@dimen/output_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/img_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/line_margin_output"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/content"
+                app:layout_constraintWidth_percent="1">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:text="13minute"
+                android:textColor="@color/output_time"
+                android:textSize="@dimen/output_time"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_list" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:background="@color/line"
+                app:layout_constraintTop_toBottomOf="@id/time" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/btm_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
