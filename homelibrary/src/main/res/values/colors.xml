@@ -31,4 +31,9 @@
     <color name="output_content">#3d3d3d</color>
     <color name="output_classes">#7a7a7a</color>
     <color name="output_detail_inside_text">#9a9a9a</color>
+
+    <color name="setting_pesonal_title">#bcbcbc</color>
+    <color name="setting_pesonal_chageHead">#ff5400</color>
+    <color name="text_left">#323232</color>
+    <color name="text_right">#323232</color>
 </resources>

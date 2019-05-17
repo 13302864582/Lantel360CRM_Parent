@@ -103,34 +103,38 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.filter_date) {
-//时间选择器
-            Calendar calendar = Calendar.getInstance();
-            Calendar startDate = Calendar.getInstance();
-            Calendar endDate = Calendar.getInstance();
-
-            //正确设置方式 原因：注意事项有说明
-            startDate.set(1993,0,1);
-            endDate.set(2020,11,31);
-            TimePickerView timePicker = new TimePickerBuilder(getContext(),this)
-                    .setType(new boolean[]{true, true, false,false,false,false})//分别对应年月日时分秒，默认全部显示
-                    .setCancelText(getString(R.string.pickerview_cancel))//取消按钮文字
-                    .setCancelColor(getResColor(R.color.time_pick_btn))
-                    .setSubmitColor(getResColor(R.color.time_pick_btn))
-                    .setSubmitText(getString(R.string.pickerview_submit))//确认按钮文字
-                    .setContentTextSize(25)//滚轮文字大小
-                    .setTitleSize(28)//标题文字大小
-                    .setTitleText(getString(R.string.select_time))//标题文字
-                    .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
-                    .isCyclic(true)//是否循环滚动
-                    .setDate(calendar)
-                    .setRangDate(startDate,endDate)
-                    .setLabel("年","月","日","时","分","秒")
-                    .isDialog(false)
-                    .build();//是否显示为对话框样式
+            TimePickerView timePicker = getTimePickerView();
             timePicker.show();
         } else if(id == R.id.back){
 
         }
+    }
+
+    private TimePickerView getTimePickerView() {
+        //时间选择器
+        Calendar calendar = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+
+        //正确设置方式 原因：注意事项有说明
+        startDate.set(1993,0,1);
+        endDate.set(2020,11,31);
+        return new TimePickerBuilder(getContext(), this)
+                .setType(new boolean[]{true, true, false,false,false,false})//分别对应年月日时分秒，默认全部显示
+                .setCancelText(getString(R.string.pickerview_cancel))//取消按钮文字
+                .setCancelColor(getResColor(R.color.time_pick_btn))
+                .setSubmitColor(getResColor(R.color.time_pick_btn))
+                .setSubmitText(getString(R.string.pickerview_submit))//确认按钮文字
+                .setContentTextSize(25)//滚轮文字大小
+                .setTitleSize(28)//标题文字大小
+                .setTitleText(getString(R.string.select_time))//标题文字
+                .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
+                .isCyclic(true)//是否循环滚动
+                .setDate(calendar)
+                .setRangDate(startDate,endDate)
+                .setLabel("年","月","日","时","分","秒")
+                .isDialog(false)
+                .build();
     }
 
     @Override

@@ -27,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.lantel.setting.SettingActivity"/>
+
+        <activity android:name="com.lantel.setting.bindfile.SettingBindFile"/>
     </application>
 
 </manifest>

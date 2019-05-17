@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.lantel.common.list.holder.SimpleMenuHolder;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
+
 import java.util.List;
 
 public abstract class SimpleMenuListApater extends BaseRecyclerViewAdapter<SimpleMenuModel> {

@@ -3,6 +3,8 @@ package com.lantel.mine;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
 import com.lantel.mine.list.adpter.mineCardListApater;
@@ -168,7 +170,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.top_img_right) {
-            LogUtils.d("onViewClicked===top_img_right");
+            ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
         }else if(id == R.id.mine_change){
             LogUtils.d("onViewClicked===mine_change");
         }

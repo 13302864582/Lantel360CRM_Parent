@@ -59,6 +59,46 @@
         <item name="android:textColor">@color/output_detail_inside_text</item>
     </style>
 
+    <style name="setting_pesonal_layout" parent="match_wrap">
+        <item name="android:layout_marginLeft">@dimen/line_margin_output</item>
+        <item name="android:layout_marginRight">@dimen/line_margin_output</item>
+    </style>
 
-    <dimen name="output_classes_marginLeft">3dp</dimen>
+    <style name="line">
+        <item name="android:background">@color/line</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/line</item>
+    </style>
+
+    <style name="setting_pesonal_headImg">
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_marginTop">@dimen/setting_headImg</item>
+        <item name="android:layout_width">@dimen/setting_pesonal_headImg</item>
+        <item name="android:layout_height">@dimen/setting_pesonal_headImg</item>
+    </style>
+
+    <style name="setting_pesonal_title" parent="wrap_wh">
+        <item name="android:layout_marginLeft">@dimen/setting_pesonal_title_marginLeft</item>
+        <item name="android:layout_marginTop">@dimen/setting_pesonal_title_margin</item>
+        <item name="android:layout_marginBottom">@dimen/setting_pesonal_title_margin</item>
+        <item name="android:textSize">@dimen/setting_pesonal_title</item>
+        <item name="android:textColor">@color/setting_pesonal_title</item>
+    </style>
+
+    <style name="setting_pesonal_value" parent="wrap_wh">
+        <item name="android:layout_marginLeft">@dimen/setting_pesonal_title_marginLeft</item>
+        <item name="android:layout_marginTop">@dimen/setting_pesonal_title_margin</item>
+        <item name="android:layout_marginBottom">@dimen/setting_pesonal_title_margin</item>
+        <item name="android:textSize">@dimen/setting_pesonal_title</item>
+        <item name="android:textColor">@color/setting_pesonal_title</item>
+    </style>
+
+    <style name="setting_name" parent="wrap_wh">
+        <item name="android:textSize">@dimen/setting_pesonal_chageHead</item>
+        <item name="android:textColor">@color/setting_pesonal_chageHead</item>
+        <item name="android:layout_marginTop">@dimen/setting_headImg</item>
+        <item name="android:layout_marginBottom">@dimen/setting_headImg</item>
+    </style>
+
+    <dimen name="setting_pesonal_headImg">100dp</dimen>
 </resources>

@@ -31,10 +31,7 @@
     <dimen name="mine_call_marginLeft">12dp</dimen>
     <dimen name="mine_name_marginLeft">15dp</dimen>
 
-    <dimen name="mine_menu_list_padding">20dp</dimen>
-    <dimen name="mine_menu_height">80dp</dimen>
-    <dimen name="mine_menu_item_margin" >10dp</dimen>
-    <dimen name="mine_menu_icon">22dp</dimen>
+
     <dimen name="toolbar_home_img_user">41dp</dimen>
     <dimen name="toolbar_home_img_user_margin">16dp</dimen>
     <dimen name="home_toolbar_user">12sp</dimen>
@@ -63,4 +60,7 @@
     <dimen name="home_menu_height">85dp</dimen>
     <dimen name="home_menu_margin">4dp</dimen>
     <dimen name="home_menu_size">26dp</dimen>
+    <dimen name="exit_count">16sp</dimen>
+
+
 </resources>

@@ -45,8 +45,8 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     ImageView back;
     @BindView(R2.id.title)
     TextView title;
-    @BindView(R2.id.leave)
-    TextView leave;
+    @BindView(R2.id.text_right)
+    TextView text_right;
     @BindView(R2.id.course_top)
     LinearLayout courseTop;
     @BindView(R2.id.calendarView)
@@ -107,15 +107,16 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     @Override
     protected void initView() {
         stateLayout.showContentView();
+        text_right.setText(R.string.leave);
         calendarView.setOnCalendarSelectListener(this);
     }
 
-    @OnClick({R2.id.back, R2.id.leave, R2.id.ok_btn})
+    @OnClick({R2.id.back, R2.id.text_right, R2.id.ok_btn})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.back) {
             getActivity().finish();
-        } else if (id == R.id.leave) {
+        } else if (id == R.id.text_right) {
             if (mAdapter != null) {
                 if (!mAdapter.isAnimation()) {
                     boolean state = mAdapter.toogleEdit();
@@ -128,7 +129,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     }
 
     private void toogleBottomMenu(boolean state) {
-        leave.setText(getString(state ? R.string.cancel : R.string.leave));
+        text_right.setText(getString(state ? R.string.cancel : R.string.leave));
         // 组合动画设置
         Animation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0,
                 Animation.RELATIVE_TO_SELF, state ? 1 : 0, Animation.RELATIVE_TO_SELF, state ? 0 : 1);

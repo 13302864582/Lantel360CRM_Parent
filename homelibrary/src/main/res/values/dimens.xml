@@ -39,4 +39,19 @@
     <dimen name="output_btm_img">40dp</dimen>
     <dimen name="output_detail_inside_text">14sp</dimen>
     <dimen name="output_detail_inside_text_marginLeft">5dp</dimen>
+    <dimen name="setting_headImg">14dp</dimen>
+
+    <dimen name="output_classes_marginLeft">3dp</dimen>
+    <dimen name="setting_pesonal_title">15sp</dimen>
+    <dimen name="setting_pesonal_title_margin">16dp</dimen>
+    <dimen name="setting_pesonal_title_marginLeft">25dp</dimen>
+    <dimen name="setting_pesonal_chageHead">14sp</dimen>
+    <dimen name="attence_item_height">100dp</dimen>
+
+    <dimen name="mine_menu_list_padding">20dp</dimen>
+    <dimen name="mine_menu_height">80dp</dimen>
+    <dimen name="mine_menu_item_margin" >10dp</dimen>
+    <dimen name="mine_menu_icon">22dp</dimen>
+    <dimen name="text_left">15sp</dimen>
+    <dimen name="text_right">13sp</dimen>
 </resources>

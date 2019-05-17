@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/setting_personal_toolbar"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/headImg"
+            android:src="@mipmap/ad"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/setting_pesonal_headImg"/>
+
+        <TextView
+            android:text="@string/chageHead"
+            android:id="@+id/chageHead"
+            app:layout_constraintTop_toBottomOf="@id/headImg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/setting_name"
+             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@id/chageHead"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingLeft="@dimen/line_margin_output"
+            android:paddingRight="@dimen/line_margin_output"
+            android:overScrollMode="never"
+            android:id="@+id/setting_personal_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

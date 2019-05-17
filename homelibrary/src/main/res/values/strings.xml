@@ -19,4 +19,27 @@
     <string name="share">分享</string>
     <string name="remark">评论</string>
     <string name="support">点赞</string>
+    <string name="chageHead">更换头像</string>
+    <string name="name">昵称</string>
+
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="birth">出生日期</string>
+    <string name="sex">性别</string>
+
+    <string name="setting_Personal">个人资料</string>
+    <string name="setting_BindFile">档案绑定</string>
+    <string name="setting_BindAccount">账号绑定</string>
+    <string name="setting_EditPasswrod">密码修改</string>
+    <string name="setting_AboutUs">关于我们</string>
+
+
+    <string name="setting_Personal_path">/lantel/360/SetPersonal</string>
+    <string name="setting_BindFile_path">/lantel/360/Setting/BindFile</string>
+    <string name="setting_BindAccount_path">/lantel/360/Setting/BindAccount</string>
+    <string name="setting_EditPasswrod_path">/lantel/360/Setting/EditPasswrod</string>
+    <string name="setting_AboutUs_path">/lantel/360/Setting/AboutUs</string>
+
+    <string name="bind_student_path">/lantel/360/bindFile/bindStudent</string>
+    <string name="bind_other_path">/lantel/360/bindFile/bindOther</string>
 </resources>

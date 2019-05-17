@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_statebar"/>
+
+    <include layout="@layout/toolbar_btt"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingLeft="@dimen/line_margin_output"
+        android:paddingRight="@dimen/line_margin_output"
+        android:overScrollMode="never"
+        android:id="@+id/setting_bindfile_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

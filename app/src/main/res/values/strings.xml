@@ -54,7 +54,8 @@
     <string name="study_class">班级</string>
     <string name="study_preview">预习</string>
     <string name="study_appointment">预约</string>
+    <string name="exit_count">退出账号</string>
+    <string name="setting">设置</string>
 
-
-
+    <string name="version">当前版本</string>
 </resources>

@@ -6,53 +6,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <include layout="@layout/layout_statebar"/>
+    <include layout="@layout/layout_statebar"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="@dimen/back_width"
-                android:layout_height="@dimen/back_height"
-                android:layout_marginLeft="@dimen/toolbar_lr_margin"
-                android:src="@mipmap/back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/course_title"
-                android:textColor="@color/course_title"
-                android:textSize="@dimen/course_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/leave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/toolbar_lr_margin"
-                android:text="@string/leave"
-                android:textColor="@color/leave"
-                android:textSize="@dimen/leave"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+    <include layout="@layout/toolbar_btt"/>
 
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
