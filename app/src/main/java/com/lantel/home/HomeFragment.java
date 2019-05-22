@@ -16,6 +16,7 @@ import com.lantel.home.mvp.HomeContract;
 import com.lantel.home.mvp.HomeModel;
 import com.lantel.home.mvp.HomePresenter;
 import com.xiao360.baselibrary.base.ToolBarFragment;
+import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.youth.banner.Banner;
@@ -30,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeFragment extends ToolBarFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener {
+public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener {
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_left_user)
