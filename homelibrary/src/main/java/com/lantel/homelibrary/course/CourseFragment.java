@@ -18,7 +18,9 @@ import com.lantel.homelibrary.course.mvp.CourseContract;
 import com.lantel.homelibrary.course.mvp.CourseModel;
 import com.lantel.homelibrary.course.mvp.CoursePresenter;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
+
 import java.util.ArrayList;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;

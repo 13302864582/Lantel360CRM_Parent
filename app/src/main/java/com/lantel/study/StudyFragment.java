@@ -11,19 +11,18 @@ import com.lantel.study.list.adpter.StudyMenuListApater;
 import com.lantel.study.mvp.StudyContract;
 import com.lantel.study.mvp.StudyModel;
 import com.lantel.study.mvp.StudyPresenter;
-import com.xiao360.baselibrary.base.BaseMVPFragment;
-import com.xiao360.baselibrary.base.ToolBarStateFragment;
+import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
-import java.util.List;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class StudyFragment extends ToolBarStateFragment<StudyPresenter, StudyModel> implements StudyContract.View, OnActionPathListener {
+public class StudyFragment extends ToolBarFragment<StudyPresenter, StudyModel> implements StudyContract.View, OnActionPathListener {
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_right)

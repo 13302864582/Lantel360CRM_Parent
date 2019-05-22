@@ -54,4 +54,34 @@
     <dimen name="mine_menu_icon">22dp</dimen>
     <dimen name="text_left">15sp</dimen>
     <dimen name="text_right">13sp</dimen>
+    <dimen name="text_progress">12sp</dimen>
+    <dimen name="setting_exit_bg">16sp</dimen>
+    <dimen name="edit_pass_item_Left">30dp</dimen>
+    <dimen name="edit_pass_item_title">14sp</dimen>
+    <dimen name="pass_rule_tip">12sp</dimen>
+
+    <dimen name="setting_pesonal_headImg">100dp</dimen>
+    <dimen name="phoneTitle_edit">12sp</dimen>
+    <dimen name="edit_pass_item_title_marginBottm">10dp</dimen>
+    <dimen name="bind_account_title">14sp</dimen>
+    <dimen name="state_btn">12sp</dimen>
+    <dimen name="unbind_w">57dp</dimen>
+    <dimen name="unbind_h">26dp</dimen>
+    <dimen name="bind_account_title_dialog">16sp</dimen>
+    <dimen name="dialog_title_marginTop">15dp</dimen>
+    <dimen name="edit_phone">12sp</dimen>
+    <dimen name="edit_phone_marginleft">15dp</dimen>
+    <dimen name="accept_check_sms">12sp</dimen>
+    <dimen name="accept_sms_paddingHori">13dp</dimen>
+    <dimen name="accept_sms_paddingVerti">8dp</dimen>
+    <dimen name="confirm_btn_dilog_margin">24dp</dimen>
+    <dimen name="bind_head_img">80dp</dimen>
+    <dimen name="bind_head_img_margin">12dp</dimen>
+    <dimen name="bind_student_name">14sp</dimen>
+    <dimen name="bind_student_sex">9sp</dimen>
+    <dimen name="bind_text">9sp</dimen>
+    <dimen name="classes_area">12sp</dimen>
+    <dimen name="classes_room">10sp</dimen>
+    <dimen name="list_margin">15dp</dimen>
+    <dimen name="circle_img_access">40dp</dimen>
 </resources>

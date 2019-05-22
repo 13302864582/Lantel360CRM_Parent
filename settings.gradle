@@ -1,1 +1,1 @@
-include ':app',':homelibrary'
+include ':app', ':homelibrary', ':httpsdk', ':common'

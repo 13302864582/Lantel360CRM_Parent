@@ -100,5 +100,33 @@
         <item name="android:layout_marginBottom">@dimen/setting_headImg</item>
     </style>
 
-    <dimen name="setting_pesonal_headImg">100dp</dimen>
+    <style name="edit_pass_item_title" parent="wrap_wh">
+        <item name="android:textSize">@dimen/edit_pass_item_title</item>
+        <item name="android:textColor">@color/edit_pass_item_title</item>
+        <item name="android:layout_marginBottom">@dimen/edit_pass_item_title_marginBottm</item>
+    </style>
+
+    <style name="phoneTitle_edit" parent="wrap_wh">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxEms">21</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/phoneTitle_edit</item>
+        <item name="android:textColor">@color/phoneTitle_edit</item>
+        <item name="android:textColorHint">@color/phoneTitle_edit</item>
+    </style>
+
+    <style name="bind_account_title" parent="wrap_wh">
+        <item name="android:textSize">@dimen/bind_account_title</item>
+        <item name="android:textColor">@color/bind_account_title</item>
+    </style>
+
+    <style name="bind_account_value" parent="wrap_wh">
+        <item name="android:layout_margin">@dimen/account_value_margin</item>
+        <item name="android:textSize">@dimen/phoneTitle_edit</item>
+        <item name="android:textColor">@color/phoneTitle_edit</item>
+    </style>
+
+
+    <dimen name="account_value_margin">4dp</dimen>
 </resources>

@@ -73,6 +73,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.exit_count:
                 LogUtils.d("onViewClicked====exit_count");
+
                 break;
         }
     }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+        <!--一共有六个属性-->
+        <!--大小-->
+        <size android:width="@dimen/unbind_w" android:height="@dimen/unbind_h"></size>
+
+        <!--圆角-->
+        <corners android:radius="13dp"></corners>
+
+    <solid android:color="@color/bind"/>
+
+        </shape>

@@ -10,7 +10,9 @@ import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.classes.mvp.ClassesContract;
 import com.lantel.studylibrary.classes.mvp.ClassesModel;
 import com.lantel.studylibrary.classes.mvp.ClassesPresenter;
+import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
+
 import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

@@ -36,4 +36,24 @@
     <color name="setting_pesonal_chageHead">#ff5400</color>
     <color name="text_left">#323232</color>
     <color name="text_right">#323232</color>
+    <color name="text_progress">#4c4c4c</color>
+    <color name="edit_bg">#F9f9f9</color>
+    <color name="edit_pass_item_title">#959494</color>
+    <color name="pass_rule_tip">#545454</color>
+    <color name="forget_pass">#3880d1</color>
+
+    <color name="phoneTitle_edit">#959494</color>
+    <color name="bind_account_title">#323232</color>
+    <color name="unbind">#42ACFF</color>
+    <color name="bind_account_title_dialog">#666666</color>
+    <color name="edit_phone_hint">#999999</color>
+    <color name="edit_phone">#666666</color>
+    <color name="accept_check_sms">#ff5400</color>
+    <color name="bind_student_name">#333333</color>
+    <color name="unbind_student_text">#737373</color>
+    <color name="classes_area_color">#797979</color>
+    <color name="classes_room">#838383</color>
+    <color name="bind">#f7f6fb</color>
+    <color name="dialog_content">#999999</color>
+    <color name="black">#000000</color>
 </resources>

@@ -1,14 +1,10 @@
 package com.lantel.homelibrary.output;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
-import com.lantel.homelibrary.output.list.adpter.ImagAdapter;
-import com.lantel.homelibrary.output.list.holder.CardOutputHolder;
 import com.lantel.homelibrary.output.list.model.CardOutputModel;
 import com.lantel.homelibrary.output.mvp.OutputDetailContract;
 import com.lantel.homelibrary.output.mvp.OutputDetailModel;
@@ -16,20 +12,11 @@ import com.lantel.homelibrary.output.mvp.OutputDetailPresenter;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = "/lantel/360/output/detail")
 public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,OutputDetailModel> implements OutputDetailContract.View {
-    @BindView(R2.id.back)
+    /*@BindView(R2.id.back)
     ImageView back;
     @BindView(R2.id.title)
     TextView title;
@@ -56,7 +43,7 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
     @BindView(R2.id.btm_list)
     RecyclerView btmList;
     @BindView(R2.id.card_ConstraintLayout)
-    ConstraintLayout card_ConstraintLayout;
+    ConstraintLayout card_ConstraintLayout;*/
 
 
 
@@ -111,7 +98,7 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
     }
 
     private void bindImageList(String[] images) {
-        RecyclerView.LayoutManager manager =  null;
+       /* RecyclerView.LayoutManager manager =  null;
         int count = images.length;
         ConstraintSet set= new ConstraintSet();
         //获取当前使用的约束布局
@@ -131,6 +118,6 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
         set.applyTo(card_ConstraintLayout);
         ImagAdapter adapter = new ImagAdapter(this, Arrays.asList(images),manager);
         imgList.setLayoutManager(manager);
-        imgList.setAdapter(adapter);
+        imgList.setAdapter(adapter);*/
     }
 }

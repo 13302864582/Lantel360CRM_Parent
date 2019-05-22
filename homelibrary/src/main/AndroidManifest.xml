@@ -39,5 +39,13 @@
         <activity android:name="com.lantel.common.EditTextActivity"/>
 
         <activity android:name="com.lantel.setting.bindfile.SettingBindFile"/>
+
+        <activity android:name="com.lantel.setting.feedback.FeedBackActivity"/>
+
+        <activity android:name="com.lantel.setting.editPassword.EditPassword"/>
+
+        <activity android:name="com.lantel.setting.bindAccount.BindAccount"/>
+
+        <activity android:name="com.lantel.setting.bindfile.bindstudent.BindStudentActivity"/>
     </application>
 </manifest>

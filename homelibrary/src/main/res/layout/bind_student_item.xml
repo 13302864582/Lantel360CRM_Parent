@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:layout_marginLeft="@dimen/list_margin"
+    android:layout_marginRight="@dimen/list_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<ImageView
+    android:id="@+id/head_img"
+    android:scaleType="fitXY"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_margin="@dimen/bind_head_img_margin"
+    android:layout_width="@dimen/bind_head_img"
+    android:layout_height="@dimen/bind_head_img" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:layout_marginLeft="@dimen/bind_head_img_margin"
+        app:layout_constraintLeft_toRightOf="@id/head_img"
+        app:layout_constraintTop_toTopOf="@id/head_img"
+        android:textColor="@color/bind_student_name"
+        android:textSize="@dimen/bind_student_name"
+       />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12岁"
+        android:textColor="@color/bind_student_name"
+        android:textSize="@dimen/bind_student_sex"
+        app:layout_constraintLeft_toRightOf="@id/name"
+        android:layout_marginLeft="@dimen/bind_head_img_margin"
+        app:layout_constraintBaseline_toBaselineOf="@id/name"/>
+
+    <ImageView
+        android:id="@+id/sex_img"
+        android:src="@mipmap/male"
+        app:layout_constraintLeft_toRightOf="@id/age"
+        app:layout_constraintBottom_toBottomOf="@id/age"
+        android:layout_marginLeft="@dimen/bind_head_img_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/bind_img"
+        android:src="@drawable/bind_img_selector"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/bind_head_img_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/bind_text"
+        android:text="已绑定"
+        android:textColor="@color/bind_student_selector"
+        android:textSize="@dimen/bind_text"
+        android:layout_marginTop="@dimen/output_detail_inside_text_marginLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/bind_img"
+        app:layout_constraintLeft_toLeftOf="@id/bind_img"/>
+
+    <TextView
+        android:id="@+id/classes_area"
+        android:text="@string/confirm"
+        android:textSize="@dimen/classes_area"
+        android:textColor="@color/classes_area_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/head_img"
+        app:layout_constraintLeft_toLeftOf="@+id/name"/>
+
+
+    <TextView
+        android:id="@+id/classes_room"
+        android:text="@string/confirm"
+        android:textSize="@dimen/classes_room"
+        android:textColor="@color/classes_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/classes_area"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintLeft_toLeftOf="@+id/name"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

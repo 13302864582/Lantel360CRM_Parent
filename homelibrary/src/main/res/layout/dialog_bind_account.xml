@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:textSize="@dimen/bind_account_title_dialog"
+        android:textColor="@color/bind_account_title_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dialog_title_marginTop"
+        android:layout_margin="20dp"
+        android:text="@string/bind_phone_title" />
+
+    <ImageView
+        android:id="@+id/close"
+        android:src="@mipmap/close"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintLeft_toRightOf="@+id/title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:id="@+id/img_phone"
+        android:src="@mipmap/phone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="@dimen/top_img_margin_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edit_phone"
+        android:hint="@string/edit_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/img_phone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.47"
+        app:layout_constraintHorizontal_bias="0.10"
+        app:layout_constraintBottom_toBottomOf="@id/img_phone"
+        app:layout_constraintTop_toTopOf="@+id/img_phone"
+        android:background="@null"
+        android:gravity="bottom"
+        android:textSize="@dimen/edit_phone"
+        android:textColor="@color/edit_phone"
+        android:textColorHint="@color/edit_phone_hint"/>
+
+    <View
+        android:id="@+id/line1"
+        app:layout_constraintTop_toBottomOf="@+id/img_phone"
+        android:layout_marginTop="@dimen/dialog_title_marginTop"
+        app:layout_constraintLeft_toLeftOf="@id/img_phone"
+        app:layout_constraintRight_toRightOf="@id/edit_phone"
+        style="@style/line"/>
+
+    <ImageView
+        android:id="@+id/img_sms"
+        android:src="@mipmap/sms_check"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        android:layout_marginTop="@dimen/dialog_title_marginTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edit_sms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/img_sms"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintBottom_toBottomOf="@id/img_sms"
+        app:layout_constraintTop_toTopOf="@+id/img_sms"
+        android:background="@null"
+        android:gravity="bottom"
+        android:maxEms="7"
+        android:textSize="@dimen/edit_phone"
+        android:textColor="@color/edit_phone"
+        android:textColorHint="@color/edit_phone_hint"/>
+
+    <View
+        android:id="@+id/line2"
+        app:layout_constraintTop_toBottomOf="@+id/img_sms"
+        android:layout_marginTop="@dimen/dialog_title_marginTop"
+        app:layout_constraintLeft_toLeftOf="@id/img_sms"
+        app:layout_constraintRight_toRightOf="@id/edit_phone"
+        style="@style/line"/>
+
+    <TextView
+        android:id="@+id/send_sms"
+        android:paddingTop="@dimen/accept_sms_paddingVerti"
+        android:paddingBottom="@dimen/accept_sms_paddingVerti"
+        android:paddingLeft="@dimen/accept_sms_paddingHori"
+        android:paddingRight="@dimen/accept_sms_paddingHori"
+        app:layout_constraintLeft_toRightOf="@id/edit_sms"
+        app:layout_constraintBaseline_toBaselineOf="@id/edit_sms"
+        android:layout_marginLeft="@dimen/accept_sms_paddingHori"
+        android:text="@string/accept_check_sms"
+        android:textColor="@color/accept_check_sms"
+        android:textSize="@dimen/accept_check_sms"
+        android:background="@drawable/btn_radius_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/confirm_sure"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_confirm_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.14"
+        android:gravity="center"
+        android:layout_margin="@dimen/confirm_btn_dilog_margin"
+        app:layout_constraintWidth_percent="0.457"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

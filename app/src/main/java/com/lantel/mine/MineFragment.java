@@ -13,7 +13,7 @@ import com.lantel.mine.mvp.MineContract;
 import com.lantel.mine.mvp.MineModel;
 import com.lantel.mine.mvp.MinePresenter;
 import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.base.ToolBarStateFragment;
+import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel> implements MineContract.View, OnActionPathListener {
+public class MineFragment extends ToolBarFragment<MinePresenter, MineModel> implements MineContract.View, OnActionPathListener {
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_right)
@@ -164,6 +164,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     @Override
     public void navigationPath(String path) {
         LogUtils.d("onViewClicked===navigationPath======="+path);
+        ARouter.getInstance().build(path).navigation();
     }
 
     @OnClick({R.id.top_img_right, R.id.mine_change, R.id.mine_head_img})

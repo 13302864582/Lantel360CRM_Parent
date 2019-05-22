@@ -3,13 +3,9 @@ package com.lantel.setting.bindfile.mvp;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.homelibrary.R;
-import com.lantel.homelibrary.app.Config;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
 
 public class BindFilePresenter extends BindFileContract.Presenter {

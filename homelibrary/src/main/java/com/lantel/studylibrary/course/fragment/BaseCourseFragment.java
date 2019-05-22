@@ -1,22 +1,20 @@
 package com.lantel.studylibrary.course.fragment;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.course.list.adpter.CourseAdapter;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
+import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T,E>{
+public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T,E> {
     @BindView(R2.id.classes_list)
     protected RecyclerView classes_list;
     protected CourseAdapter mAdapter;

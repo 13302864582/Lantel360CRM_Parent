@@ -34,12 +34,31 @@
     <string name="setting_AboutUs">关于我们</string>
 
 
-    <string name="setting_Personal_path">/lantel/360/SetPersonal</string>
-    <string name="setting_BindFile_path">/lantel/360/Setting/BindFile</string>
-    <string name="setting_BindAccount_path">/lantel/360/Setting/BindAccount</string>
-    <string name="setting_EditPasswrod_path">/lantel/360/Setting/EditPasswrod</string>
-    <string name="setting_AboutUs_path">/lantel/360/Setting/AboutUs</string>
 
-    <string name="bind_student_path">/lantel/360/bindFile/bindStudent</string>
-    <string name="bind_other_path">/lantel/360/bindFile/bindOther</string>
+    <string name="feed_back">意见反馈</string>
+    <string name="commit_feedback">提交反馈</string>
+    <string name="phoneTitle">手机号</string>
+    <string name="hintphoneTitle">未知</string>
+    <string name="oldPassTitle">旧密码</string>
+    <string name="oldPassTitle_hint">请填写旧密码</string>
+    <string name="newPassTitle">新密码</string>
+    <string name="newPassTitle_hint">请输入新密码</string>
+    <string name="confirmTitle">确认密码</string>
+    <string name="confirmTitle_hint">请再次输入新密码</string>
+    <string name="pass_tip">密码必须至少8个字符，而且同时包含字母和数字</string>
+    <string name="forget_pass">忘记旧密码</string>
+    <string name="bind_account">账号绑定</string>
+    <string name="bind">已绑定</string>
+    <string name="unbind">绑定</string>
+    <string name="cancel_bind">取消绑定</string>
+
+    <string name="bind_student">绑定学员档案</string>
+    <string name="bind_other">绑定其他机构</string>
+    <string name="bind_phone_title">绑定手机</string>
+    <string name="edit_phone">请填写您的手机号码</string>
+    <string name="accept_check_sms">获取验证码</string>
+    <string name="confirm_sure">确定</string>
+    <string name="unbind_yet">未绑定</string>
+    <string name="bind_tip">确定取消与%1$s的绑定?</string>
+    <string name="accessment">课评</string>
 </resources>
