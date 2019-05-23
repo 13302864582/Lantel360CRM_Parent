@@ -2,8 +2,8 @@ package com.lantel.mine;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
@@ -12,8 +12,9 @@ import com.lantel.mine.list.adpter.mineMenuListApater;
 import com.lantel.mine.mvp.MineContract;
 import com.lantel.mine.mvp.MineModel;
 import com.lantel.mine.mvp.MinePresenter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.base.ToolBarFragment;
+import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
@@ -25,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MineFragment extends ToolBarFragment<MinePresenter, MineModel> implements MineContract.View, OnActionPathListener {
+public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel> implements MineContract.View, OnActionPathListener {
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_right)
@@ -50,6 +51,12 @@ public class MineFragment extends ToolBarFragment<MinePresenter, MineModel> impl
     RecyclerView mineCardList;
     @BindView(R.id.mine_menu_list)
     RecyclerView mineMenuList;
+
+    @BindView(R.id.empty_add_layout)
+    RelativeLayout empty_add_layout;
+
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
@@ -102,7 +109,7 @@ public class MineFragment extends ToolBarFragment<MinePresenter, MineModel> impl
 
     @Override
     protected int getFailViewId() {
-        return R.id.error;
+        return R.id.fail;
     }
 
     @Override
@@ -167,16 +174,18 @@ public class MineFragment extends ToolBarFragment<MinePresenter, MineModel> impl
         ARouter.getInstance().build(path).navigation();
     }
 
-    @OnClick({R.id.top_img_right, R.id.mine_change, R.id.mine_head_img})
+    @OnClick({R.id.top_img_right, R.id.mine_change, R.id.mine_head_img,R.id.add_account})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.top_img_right) {
             ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
         }else if(id == R.id.mine_change){
             LogUtils.d("onViewClicked===mine_change");
-        }
-        else if(id == R.id.mine_head_img){
+        }else if(id == R.id.mine_head_img){
             LogUtils.d("onViewClicked===mine_head_img");
+        }else if(id == R.id.add_account){
+            ARouter.getInstance().build("/lantelhome/360/ChangeAccount").navigation();
+            LogUtils.d("onViewClicked===add_account");
         }
     }
 }

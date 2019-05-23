@@ -6,7 +6,6 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.course.list.adpter.CourseAdapter;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
-import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 
 import androidx.lifecycle.ViewModel;

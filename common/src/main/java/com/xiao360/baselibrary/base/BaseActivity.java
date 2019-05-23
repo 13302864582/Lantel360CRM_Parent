@@ -9,6 +9,8 @@ import android.view.Window;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cangwang.core.ModuleBus;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.xiao360.baselibrary.util.AppManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -16,7 +18,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
     private Context mContext;
-    private boolean isConfigChange=false;
+    private boolean isConfigChange = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ModuleBus.getInstance().register(this);
 
         mContext = this;
-
+//初始化状态栏
+        ImmersionBar.with(this)
+                .hideBar(BarHide.FLAG_SHOW_BAR)
+                .init();
         this.initView();
     }
 
@@ -53,6 +58,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         // 设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+
     /*********************子类实现*****************************/
     //获取布局文件
     public abstract int getLayoutId();
@@ -102,14 +108,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        isConfigChange=true;
+        isConfigChange = true;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ModuleBus.getInstance().unregister(this);
-        if(!isConfigChange){
+        if (!isConfigChange) {
             AppManager.getAppManager().finishActivity(this);
         }
     }

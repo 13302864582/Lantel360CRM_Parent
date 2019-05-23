@@ -1,6 +1,6 @@
 package com.xiao360.baselibrary.base;
 
-import android.app.Application;
+
 import android.content.Context;
 import android.content.res.Resources;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -14,15 +14,18 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
-public abstract class BaseApplication extends Application {
+
+public abstract class BaseApplication extends MultiDexApplication {
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
+                layout.setPrimaryColorsId(android.R.color.white);//全局设置主题颜色
                 return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });
@@ -37,6 +40,7 @@ public abstract class BaseApplication extends Application {
     }
 
     private static BaseApplication baseApplication;
+
 
     @Override
     public void onCreate() {
@@ -72,6 +76,6 @@ public abstract class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        //MultiDex.install(this);
+        MultiDex.install(this);
     }
 }

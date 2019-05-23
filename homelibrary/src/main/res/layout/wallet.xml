@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/wallet_card"
+            android:background="@mipmap/wallet_card_bg"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintWidth_percent="0.94"
+            android:layout_height="@dimen/wallet_card_height"
+            >
+            <!--名字-->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.075"
+                app:layout_constraintVertical_bias="0.188"
+                android:text="王宝宝"
+                android:textColor="@color/white"
+                android:textSize="@dimen/wallet_title"
+                />
+
+
+            <!--名字-->
+            <TextView
+                android:id="@+id/money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="28,666.00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/wallet_money"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/date_title"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_card"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/list_margin"
+            android:text="2019-10"
+            android:textStyle="bold"
+            android:textSize="@dimen/date_title"
+            android:textColor="@color/date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wallet_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/mine_menu_list_padding"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.93">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/pick_date"
+            android:src="@mipmap/pick_date"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/date_title"
+            app:layout_constraintHorizontal_bias="0.90"
+            app:layout_constraintTop_toBottomOf="@id/wallet_card"
+            app:layout_constraintBottom_toTopOf="@id/wallet_list"
+            android:layout_width="@dimen/setting_pesonal_title_marginLeft"
+            android:layout_height="@dimen/setting_pesonal_title_marginLeft" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

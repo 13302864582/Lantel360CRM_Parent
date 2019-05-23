@@ -38,7 +38,7 @@
 
         <activity android:name="com.lantel.common.EditTextActivity"/>
 
-        <activity android:name="com.lantel.setting.bindfile.SettingBindFile"/>
+        <activity android:name="com.lantel.setting.bindfile.bindstudent.BindAddActivity"/>
 
         <activity android:name="com.lantel.setting.feedback.FeedBackActivity"/>
 
@@ -47,5 +47,7 @@
         <activity android:name="com.lantel.setting.bindAccount.BindAccount"/>
 
         <activity android:name="com.lantel.setting.bindfile.bindstudent.BindStudentActivity"/>
+
+        <activity android:name="com.lantel.mine.wallet.WalletActivity"/>
     </application>
 </manifest>

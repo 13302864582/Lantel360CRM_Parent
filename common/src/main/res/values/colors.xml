@@ -20,4 +20,7 @@
     <color name="edit_txt_color">#3e3e3e</color>
     <color name="edit_tip_color">#a8a8a8</color>
     <color name="imgText_title">#787878</color>
+
+    <color name="state_text">#666666</color>
+    <color name="toolbar_title">#010714</color>
 </resources>

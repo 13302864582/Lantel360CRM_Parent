@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_statebar"/>
-
     <include layout="@layout/toolbar_btt"/>
 
     <com.haibin.calendarview.CalendarLayout

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">HomeLibrary</string>
     <string name="leave">请假</string>
     <string name="course_title">课表</string>
@@ -52,7 +52,7 @@
     <string name="unbind">绑定</string>
     <string name="cancel_bind">取消绑定</string>
 
-    <string name="bind_student">绑定学员档案</string>
+    <string name="bind_student">档案绑定</string>
     <string name="bind_other">绑定其他机构</string>
     <string name="bind_phone_title">绑定手机</string>
     <string name="edit_phone">请填写您的手机号码</string>
@@ -61,4 +61,15 @@
     <string name="unbind_yet">未绑定</string>
     <string name="bind_tip">确定取消与%1$s的绑定?</string>
     <string name="accessment">课评</string>
+    <string name="addFile">添加</string>
+    <string name="password">密码:</string>
+    <string name="username">账号:</string>
+    <string name="organ">机构名:</string>
+    <string name="organ_hint">请填写机构名称</string>
+    <string name="username_hint">请填写账号</string>
+    <string name="password_hint">请填写密码</string>
+    <string name="bind_add">添加绑定</string>
+    <string name="bind_error">信息填写有误,请重新绑定</string>
+    <string name="bind_success">绑定成功</string>
+    <string name="wallet">我的钱包</string>
 </resources>

@@ -4,8 +4,6 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.gyf.immersionbar.BarHide;
-import com.gyf.immersionbar.ImmersionBar;
 import com.lantel.common.list.LineDecoration;
 import com.lantel.crmparent.BuildConfig;
 import com.lantel.crmparent.R;
@@ -39,10 +37,6 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void initMenuList() {
-        //初始化状态栏
-        ImmersionBar.with(this)
-                .hideBar(BarHide.FLAG_SHOW_BAR)
-                .init();
         //添加菜单数据
         ArrayList<SettingModel> menu = new ArrayList<>();
         Resources resources = getResources();

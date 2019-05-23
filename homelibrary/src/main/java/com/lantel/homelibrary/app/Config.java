@@ -6,6 +6,7 @@ public class Config {
     public static final String CLASSES_TAG = "CLASSES_TAG";
     public static final String OUTPUT_TAG = "OUTPUT_TAG";
     public static final String ACCESSMENT_TAG = "ACCESSMENT_TAG";
+    public static final String WALLET_TAG = "WALLET_TAG";
 
     public static final String BIND_STUDENT_TAG = "BIND_STUDENT_TAG";
     public static final String BIND_OTHER_TAG = "BIND_OTHER_TAG";
@@ -36,6 +37,7 @@ public class Config {
 
 
     public static final int REQUEST_EDIT_TEXT = 100;
+    public static final int REQUEST_BIND_ADD = 101;
 
     public static final String BIND_PHONE = "BIND_PHONE";
     public static final String BIND_WEIBO = "BIND_WEIBO";

@@ -23,11 +23,8 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-
 @Route(path = "/lantel/360/course")
 public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
-    @BindView(R2.id.statebarView)
-    View statebarView;
     @BindView(R2.id.back)
     ImageView back;
     @BindView(R2.id.title)
@@ -49,11 +46,6 @@ public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelec
 
     @Override
     public void initView() {
-        //初始化状态栏
-        ImmersionBar.with(this)
-                .hideBar(BarHide.FLAG_SHOW_BAR)
-                .init();
-
         initTab();
         setupWithViewPager();
         title.setText(R.string.course);
@@ -77,14 +69,16 @@ public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelec
         mFragments.add(new PlanReadFrag());
         mAdapter = new CourseFragmentPagerAdapter(getSupportFragmentManager());
         mAdapter.addTitlesAndFragments(titles, mFragments);
-
         mViewPager.setAdapter(mAdapter); // 给ViewPager设置适配器
         tabTop.setupWithViewPager(mViewPager); //关联TabLayout和ViewPager
     }
 
     @OnClick(R2.id.back)
-    public void onViewClicked() {
-        finish();
+    public void onViewClicked(View view) {
+        int id = view.getId();
+        if(id == R.id.back){
+            finish();
+        }
     }
 
     @Override

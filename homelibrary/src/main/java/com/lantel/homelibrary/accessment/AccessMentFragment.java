@@ -1,77 +1,51 @@
 package com.lantel.homelibrary.accessment;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import com.example.baselibrary.R2;
 import com.lantel.homelibrary.R;
-import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.accessment.list.adpter.AccessAdapter;
 import com.lantel.homelibrary.accessment.list.model.AccessItemModel;
 import com.lantel.homelibrary.accessment.mvp.AccessContract;
 import com.lantel.homelibrary.accessment.mvp.AccessModel;
 import com.lantel.homelibrary.accessment.mvp.AccessPresenter;
-import com.lantel.homelibrary.output.list.adpter.OutputAdapter;
-import com.lantel.homelibrary.output.mvp.OutputContract;
-import com.lantel.homelibrary.output.mvp.OutputModel;
-import com.lantel.homelibrary.output.mvp.OutputPresenter;
-import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.base.ToolBarFragment;
-import com.xiao360.baselibrary.base.ToolBarStateFragment;
-import com.xiao360.baselibrary.util.LogUtils;
-
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xiao360.baselibrary.base.NormalListFragment;
 import java.util.ArrayList;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public class AccessMentFragment extends ToolBarStateFragment<AccessPresenter, AccessModel> implements AccessContract.View {
-    @BindView(R2.id.output_listView)
-    RecyclerView outputListView;
-    @BindView(R2.id.title)
-    TextView title;
-    private AccessAdapter mAdapter;
+public class AccessMentFragment extends NormalListFragment<AccessPresenter, AccessModel> implements AccessContract.View {
+    @BindView(R2.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     @Override
-    protected int getContainerLayoutID() {
-        return R.layout.course_container;
+    protected void InitView() {
+        stateLayout.showContentView();
     }
 
     @Override
-    protected int getFailViewId() {
-        return R.id.fail;
+    protected int getListView() {
+        return R.id.recyclerView;
     }
 
     @Override
-    protected int getLoadingViewId() {
-        return R.id.loading;
+    protected RecyclerView.Adapter getAdapter() {
+        return new AccessAdapter(getContext(),null);
     }
 
     @Override
-    protected int getEmptyViewId() {
-        return R.id.empty;
+    protected int getToolbarTitle() {
+        return R.string.accessment;
     }
 
     @Override
     protected int getContentViewLayoutId() {
-        return R.layout.ouput_content;
+        return R.layout.common_list_layout;
     }
 
     @Override
     protected View getContentView() {
         return null;
-    }
-
-    @Override
-    protected int getToolBarLayoutID() {
-        return R.layout.attence_toolbar;
-    }
-
-    @Override
-    protected int getStateBarviewID() {
-        return R.id.statebarView;
     }
 
     @Override
@@ -85,28 +59,9 @@ public class AccessMentFragment extends ToolBarStateFragment<AccessPresenter, Ac
     }
 
     @Override
-    protected void initView() {
-        initToolBar();
-        stateLayout.showContentView();
-        outputListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new AccessAdapter(getContext(), null);
-        outputListView.setAdapter(mAdapter);
-    }
-
-    private void initToolBar() {
-        title.setText(getString(R.string.accessment));
-    }
-
-    @OnClick(R2.id.back)
-    public void onViewClicked(View view) {
-        int id = view.getId();
-        if(id == R.id.back)
-        LogUtils.d("=====onViewClicked:back");
-    }
-
-    @Override
     public void initAttenceData(ArrayList<AccessItemModel> menu) {
-        mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();
+        AccessAdapter adapter = (AccessAdapter)mAdapter;
+        adapter.setDatas(menu);
+        adapter.notifyDataSetChanged();
     }
 }

@@ -23,4 +23,11 @@
         <item name="android:textSize">11sp</item>
     </style>
 
+    <style name="card_empty_add" parent="wrap_wh">
+        <item name="android:textSize">@dimen/card_empty_add</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginTop">@dimen/toolbar_home_img_user_margin</item>
+    </style>
+
+    <dimen name="card_empty_add">11sp</dimen>
 </resources>

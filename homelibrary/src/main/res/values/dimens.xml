@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbar_lr_margin">30dp</dimen>
+
     <dimen name="leave">14sp</dimen>
     <dimen name="course_title">18sp</dimen>
     <dimen name="sick_leave">14sp</dimen>
@@ -10,8 +10,7 @@
     <dimen name="course_bottom_select">54dp</dimen>
     <dimen name="class_name">15sp</dimen>
     <dimen name="course_name">12sp</dimen>
-    <dimen name="back_width">11dp</dimen>
-    <dimen name="back_height">19dp</dimen>
+
     <dimen name="attence_date_marginLeft">23dp</dimen>
     <dimen name="attence_date_marginTop">5dp</dimen>
     <dimen name="attence_date">13sp</dimen>
@@ -84,4 +83,17 @@
     <dimen name="classes_room">10sp</dimen>
     <dimen name="list_margin">15dp</dimen>
     <dimen name="circle_img_access">40dp</dimen>
+    <dimen name="bind_add_edit">15sp</dimen>
+    <dimen name="account_value_margin">4dp</dimen>
+    <dimen name="bind_add_title">15sp</dimen>
+    <dimen name="back_padding">8dp</dimen>
+    <dimen name="wallet_title_marginLeft">14dp</dimen>
+    <dimen name="wallet_title">16sp</dimen>
+    <dimen name="wallet_money">38sp</dimen>
+    <dimen name="wallet_card_height">190dp</dimen>
+    <dimen name="date_title">18sp</dimen>
+    <dimen name="wallet_item_title">14sp</dimen>
+    <dimen name="wallet_item_detail">12sp</dimen>
+    <dimen name="wallet_item_money_record">17sp</dimen>
+    <dimen name="wallet_item_date_time">10sp</dimen>
 </resources>

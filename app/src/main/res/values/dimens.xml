@@ -61,6 +61,11 @@
     <dimen name="home_menu_margin">4dp</dimen>
     <dimen name="home_menu_size">26dp</dimen>
     <dimen name="exit_count">16sp</dimen>
+    <dimen name="card_circle_img">61dp</dimen>
+    <dimen name="card_circle_img_marginTop">38dp</dimen>
+    <dimen name="card_list_height">100dp</dimen>
+    <dimen name="card_add_img">42dp</dimen>
+    <dimen name="chang_count_title">14sp</dimen>
 
 
 </resources>

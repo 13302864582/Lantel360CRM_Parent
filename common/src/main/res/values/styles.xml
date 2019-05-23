@@ -101,5 +101,12 @@
         <item name="colorControlActivated">@color/edit_color</item>
     </style>
 
+    <style name="state_text" parent="wrap_wh">
+        <item name="android:textColor">@color/state_text</item>
+        <item name="android:textSize">@dimen/state_text</item>
+    </style>
+
+
+
 
 </resources>

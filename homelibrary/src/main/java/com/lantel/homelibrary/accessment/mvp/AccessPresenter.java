@@ -51,7 +51,6 @@ public class AccessPresenter extends AccessContract.Presenter{
         ArrayList<AccessItemModel> menu = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             AccessItemModel mode = new AccessItemModel();
-
             menu.add(mode);
         }
         mView.initAttenceData(menu);

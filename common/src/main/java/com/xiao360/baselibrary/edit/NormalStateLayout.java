@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 public abstract class NormalStateLayout extends StateLayout {
    private View loadingView;
     private View failView;

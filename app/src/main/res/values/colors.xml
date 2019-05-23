@@ -27,6 +27,7 @@
     <color name="more">#9f9fa0</color>
     <color name="ad_txt1">#454646</color>
     <color name="ad_txt2">#9b9b9b</color>
+    <color name="chang_count_title">#333333</color>
 
 
 </resources>

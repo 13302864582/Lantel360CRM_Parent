@@ -11,7 +11,7 @@ import com.lantel.homelibrary.output.mvp.OutputContract;
 import com.lantel.homelibrary.output.mvp.OutputModel;
 import com.lantel.homelibrary.output.mvp.OutputPresenter;
 import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.base.ToolBarFragment;
+
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.util.LogUtils;
 

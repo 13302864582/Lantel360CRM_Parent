@@ -30,7 +30,7 @@
 
         <activity android:name="com.lantel.setting.SettingActivity"/>
 
-        <activity android:name="com.lantel.setting.bindfile.SettingBindFile"/>
+        <activity android:name="com.lantel.mine.ChangeAccountActivity"/>
     </application>
 
 </manifest>

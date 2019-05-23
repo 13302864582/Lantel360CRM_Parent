@@ -44,7 +44,9 @@ public class BindStudentAdapter extends BaseRecyclerViewAdapter<BindStudentListM
             String sAgeFormat1= context.getResources().getString(R.string.bind_tip);
             String sFinal1 = String.format(sAgeFormat1, data.getName());
             unBindDialog = new NormalDialog(context);
+            unBindDialog.widthScale(0.75f);
             unBindDialog.setCanceledOnTouchOutside(false);
+            unBindDialog.btnText(getString(R.string.confirm_sure),getString(R.string.cancel));
             unBindDialog.title(getString(R.string.cancel_bind));
             unBindDialog.content(sFinal1);
             unBindDialog.style(NormalDialog.STYLE_TWO);
@@ -54,14 +56,14 @@ public class BindStudentAdapter extends BaseRecyclerViewAdapter<BindStudentListM
                     new OnBtnClickL() {
                         @Override
                         public void onBtnClick() {
+                            datas.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, getItemCount()); //刷新被删除数据，以及其后面的数据
                             unBindDialog.dismiss();
                         }
                     },new OnBtnClickL() {
                 @Override
                 public void onBtnClick() {
-                    datas.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount()); //刷新被删除数据，以及其后面的数据
                     unBindDialog.dismiss();
                 }
             }

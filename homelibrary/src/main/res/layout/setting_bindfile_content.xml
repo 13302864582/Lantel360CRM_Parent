@@ -3,8 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/layout_statebar"/>
-
     <include layout="@layout/toolbar_btt"/>
     <androidx.recyclerview.widget.RecyclerView
         android:paddingLeft="@dimen/line_margin_output"

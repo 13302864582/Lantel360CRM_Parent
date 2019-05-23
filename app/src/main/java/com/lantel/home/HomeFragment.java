@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.AppConfig;
 import com.lantel.common.GlideImageLoader;
@@ -15,7 +14,6 @@ import com.lantel.home.list.adpter.HomeMenuListApater;
 import com.lantel.home.mvp.HomeContract;
 import com.lantel.home.mvp.HomeModel;
 import com.lantel.home.mvp.HomePresenter;
-import com.xiao360.baselibrary.base.ToolBarFragment;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
@@ -74,7 +72,7 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
 
     @Override
     protected int getFailViewId() {
-        return R.id.error;
+        return R.id.fail;
     }
 
     @Override

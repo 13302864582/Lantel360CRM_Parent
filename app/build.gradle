@@ -16,6 +16,9 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 
+        // Enabling multidex support.
+        multiDexEnabled true
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME : project.getName()]
@@ -43,5 +46,4 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.zxing
-
 }

@@ -18,10 +18,6 @@ public abstract class FragmentActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        //初始化状态栏
-        ImmersionBar.with(this)
-                .hideBar(BarHide.FLAG_SHOW_BAR)
-                .init();
         /*Fragment 动态加载*/
         /*创建实例*/
         fragmentManager = getSupportFragmentManager();/*获取到FragmentManager*/
