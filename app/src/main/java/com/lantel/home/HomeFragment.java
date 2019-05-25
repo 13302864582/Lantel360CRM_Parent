@@ -14,7 +14,7 @@ import com.lantel.home.list.adpter.HomeMenuListApater;
 import com.lantel.home.mvp.HomeContract;
 import com.lantel.home.mvp.HomeModel;
 import com.lantel.home.mvp.HomePresenter;
-import com.xiao360.baselibrary.base.ToolBarStateFragment;
+import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.youth.banner.Banner;
@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener {
+public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener {
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_left_user)
@@ -66,38 +66,21 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
     private HomeMenuListApater mHomeMenuAdapter;
 
     @Override
-    protected int getContainerLayoutID() {
-        return R.layout.common_container;
+    public void notifyMenuData(ArrayList<SimpleMenuModel> list) {
+
     }
 
     @Override
-    protected int getFailViewId() {
-        return R.id.fail;
+    public void loadCircleHeadImage(String url) {
+
     }
 
     @Override
-    protected int getLoadingViewId() {
-        return R.id.loading;
-    }
-
-    @Override
-    protected int getEmptyViewId() {
-        return R.id.empty;
-    }
-
-    @Override
-    protected int getContentViewLayoutId() {
-        return R.layout.moudle_home;
-    }
-
-    @Override
-    protected View getContentView() {
-        return null;
-    }
-
-    @Override
-    protected int getToolBarLayoutID() {
-        return R.layout.layout_toolbar_home;
+    public void initMenuData(ArrayList<SimpleMenuModel> menu) {
+        homeMenuList.setLayoutManager(new GridLayoutManager(getContext(),4));
+        mHomeMenuAdapter = new HomeMenuListApater(getContext(),menu);
+        mHomeMenuAdapter.setListener(this);
+        homeMenuList.setAdapter(mHomeMenuAdapter);
     }
 
     @Override
@@ -106,11 +89,24 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
     }
 
     @Override
+    protected HomeModel getModel() {
+        return FindModel(HomeModel.class);
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.moudle_home;
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setVM(this, mModel);
+    }
+
+    @Override
     protected void initView() {
-        initToolbar();
         mPresenter.initMenu();
         initBanner();
-        stateLayout.showContentView();
     }
 
     private void initBanner() {
@@ -123,24 +119,8 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
         banner.start();
     }
 
-    private void initToolbar() {
-        statebarView.setBackgroundColor(getResColor(R.color.white));
-        toolbar.setBackgroundColor(getResColor(R.color.white));
-    }
-
-    @Override
-    protected HomeModel getModel() {
-        return FindModel(HomeModel.class);
-    }
-
-    @Override
-    public void initPresenter() {
-        mPresenter.setVM(this, mModel);
-    }
-
     @Override
     public void navigationPath(String path) {
-        LogUtils.d("onViewClicked===navigationPath=======" + path);
         ARouter.getInstance().build(path).navigation();
     }
 
@@ -165,44 +145,25 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
         }
     }
 
-    @Override
-    public void notifyMenuData(ArrayList<SimpleMenuModel> list) {
-
-    }
-
-    @Override
-    public void loadCircleHeadImage(String url) {
-
-    }
-
-    @Override
-    public void initMenuData(ArrayList<SimpleMenuModel> menu) {
-        homeMenuList.setLayoutManager(new GridLayoutManager(getContext(),4));
-        mHomeMenuAdapter = new HomeMenuListApater(getContext(),menu);
-        mHomeMenuAdapter.setListener(this);
-        homeMenuList.setAdapter(mHomeMenuAdapter);
-    }
-
-
     public void navigateScan() {
         /**
          * 点击扫描按钮，进入扫一扫二级页面
-         */
-        Intent intent = new Intent(getContext(), CaptureActivity.class);
-        /*ZxingConfig是配置类
+         *ZxingConfig是配置类
          *可以设置是否显示底部布局，闪光灯，相册，
          * 是否播放提示音  震动
          * 设置扫描框颜色等
          * 也可以不传这个参数
-         * */
+         **/
+
         ZxingConfig config = new ZxingConfig();
         config.setPlayBeep(true);//是否播放扫描声音 默认为true
         config.setShake(false);//是否震动  默认为true
         config.setDecodeBarCode(true);//是否扫描条形码 默认为true
-        /*config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
+        config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
         config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
-        config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色*/
+        config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色*//*
         config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
+        Intent intent = new Intent(getContext(), CaptureActivity.class);
         intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
         startActivityForResult(intent, AppConfig.REQUEST_CODE_SCAN);
     }
@@ -212,12 +173,27 @@ public class HomeFragment extends ToolBarStateFragment<HomePresenter, HomeModel>
         super.onActivityResult(requestCode, resultCode, data);
         /**
          * 扫描二维码/条码回传
-         */
+                */
         if (requestCode == AppConfig.REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
                 LogUtils.d("扫描结果为：" + content);
             }
         }
+    }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
     }
 }

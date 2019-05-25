@@ -188,4 +188,19 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
             LogUtils.d("onViewClicked===add_account");
         }
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

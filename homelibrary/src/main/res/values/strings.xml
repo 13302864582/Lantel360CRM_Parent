@@ -72,4 +72,8 @@
     <string name="bind_error">信息填写有误,请重新绑定</string>
     <string name="bind_success">绑定成功</string>
     <string name="wallet">我的钱包</string>
+    <string name="order">我的订单</string>
+    <string name="class_review">课评</string>
+    <string name="remark_title">老师对我的点评</string>
+    <string name="notify">通知</string>
 </resources>

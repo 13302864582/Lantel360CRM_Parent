@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/order_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下单时间: 03-10   22:00"
+        android:textColor="@color/wallet_item_detail"
+        android:layout_margin="@dimen/list_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/wallet_item_date_time"
+        />
+
+    <TextView
+        android:id="@+id/order_state"
+        android:text="交易成功"
+        app:layout_constraintBaseline_toBaselineOf="@id/order_date_time"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/list_margin"
+        android:textSize="@dimen/order_state"
+        android:textColor="@color/order_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/order_img"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ad"
+        app:layout_constraintLeft_toLeftOf="@id/order_date_time"
+        app:layout_constraintTop_toBottomOf="@id/order_date_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/back_padding"
+        android:layout_marginBottom="@dimen/dialog_title_marginTop"
+        android:layout_width="@dimen/order_img"
+        android:layout_height="@dimen/order_img" />
+
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/line"/>
+
+
+    <TextView
+        android:id="@+id/money_record"
+        android:text="-3450"
+        app:layout_constraintTop_toBottomOf="@id/order_state"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/order_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/order_state"
+        android:textSize="@dimen/wallet_item_money_record"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/order_img"
+        app:layout_constraintRight_toLeftOf="@id/money_record"
+        app:layout_constraintTop_toBottomOf="@id/order_date_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/order_title"
+            android:text="下单"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_margin"
+            android:textColor="@color/wallet_item_title"
+            android:textSize="@dimen/wallet_item_title"
+            />
+
+        <TextView
+            android:id="@+id/order_course_count"
+            android:text="title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/order_course_count"
+            android:textSize="@dimen/wallet_item_detail"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/list_margin"
+            app:layout_constraintLeft_toLeftOf="@id/title"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

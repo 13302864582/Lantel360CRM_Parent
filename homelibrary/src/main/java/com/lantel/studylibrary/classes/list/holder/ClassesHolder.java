@@ -2,9 +2,7 @@ package com.lantel.studylibrary.classes.list.holder;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.lantel.common.view.EqulizerSeekBar;
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.listview.BaseViewHolder;

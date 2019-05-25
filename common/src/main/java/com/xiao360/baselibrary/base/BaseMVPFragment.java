@@ -27,11 +27,12 @@ public abstract class BaseMVPFragment<T extends BaseFragmentPresenter, E extends
         ModuleBus.getInstance().register(this);
         mPresenter = TUtil.getT(this, 0);
         mModel=this.getModel();
-        if(mPresenter!=null)
+        if(mPresenter!=null){
             mPresenter.context=this;
-        getLifecycle().addObserver(mPresenter);
-        initPresenter();
-        mPresenter.onCrete(savedInstanceState);
+            getLifecycle().addObserver(mPresenter);
+            initPresenter();
+            mPresenter.onCrete(savedInstanceState);
+        }
         super.onCreate(savedInstanceState);
     }
 

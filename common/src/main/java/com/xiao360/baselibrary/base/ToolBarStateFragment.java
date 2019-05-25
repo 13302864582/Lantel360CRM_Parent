@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.example.baselibrary.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiao360.baselibrary.edit.NormalStateLayout;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
@@ -37,6 +36,9 @@ public abstract class ToolBarStateFragment<T extends BaseFragmentPresenter, E ex
 
         return super.onCreateView(inflater,container,savedInstanceState);
     }
+
+
+
 
     class CommonLyoutState extends NormalStateLayout{
         public CommonLyoutState(Context context) {

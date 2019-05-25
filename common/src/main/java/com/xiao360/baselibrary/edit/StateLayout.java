@@ -6,11 +6,15 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.example.baselibrary.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
 public abstract class StateLayout extends FrameLayout {
     private SparseArray<View> views;
 
     /** 包含多个状态的容器 */
-    private FrameLayout container;
+    public SmartRefreshLayout refreshLayout;
+    protected FrameLayout container;
 
     public StateLayout(Context context) {
         this(context,null);
@@ -25,9 +29,10 @@ public abstract class StateLayout extends FrameLayout {
     /** 初始化容器 */
     private void init() {
         // 创建包含“正在加载”、“加载失败”、“加载为空”状态的容器
-        container = (FrameLayout) View.inflate(getContext(), getContainerLayoutID(), null);
+        refreshLayout = (SmartRefreshLayout) View.inflate(getContext(), getContainerLayoutID(), null);
+        container=refreshLayout.findViewById(R.id.container);
         initContainer(container);
-        addView(container);
+        addView(refreshLayout);
     }
 
 

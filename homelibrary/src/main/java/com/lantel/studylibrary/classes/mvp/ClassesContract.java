@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface ClassesContract {
     interface View extends BaseView {
-        void initAttenceData(ArrayList<ClassesCardModel> menu);
+        void setData(ArrayList<ClassesCardModel> menu);
     }
 
     abstract class Presenter extends BaseFragmentPresenter<View, ClassesModel> {

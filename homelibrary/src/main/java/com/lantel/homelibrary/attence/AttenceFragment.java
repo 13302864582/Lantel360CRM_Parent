@@ -13,7 +13,6 @@ import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.lantel.homelibrary.attence.mvp.AttenceContract;
 import com.lantel.homelibrary.attence.mvp.AttenceModel;
 import com.lantel.homelibrary.attence.mvp.AttencePresenter;
-
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
 
     @Override
     protected int getContainerLayoutID() {
-        return R.layout.course_container;
+        return R.layout.common_container;
     }
 
     @Override
@@ -141,5 +140,20 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     @Override
     public void onTimeSelect(Date date, View v) {
         LogUtils.d("onTimeSelect==="+date.toString());
+    }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
     }
 }

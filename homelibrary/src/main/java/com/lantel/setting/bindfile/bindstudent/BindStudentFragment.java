@@ -88,4 +88,19 @@ public class BindStudentFragment extends NormalListFragment<BindStudentPresenter
         super.onActivityResult(requestCode, resultCode, data);
 
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

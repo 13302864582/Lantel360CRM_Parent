@@ -31,8 +31,8 @@
     <!--成长页-->
     <fragment
         android:id="@+id/GrowupFragment"
-        android:name="com.lantel.mine.MineFragment"
-        android:label="ClassesFragment"
+        android:name="com.lantel.groupUp.GroupUpFragment"
+        android:label="GrowupFragment"
         >
     </fragment>
 

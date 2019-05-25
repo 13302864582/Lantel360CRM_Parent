@@ -20,7 +20,7 @@ public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E exte
 
     @Override
     protected int getContainerLayoutID() {
-        return R.layout.course_container;
+        return R.layout.common_container;
     }
 
     @Override

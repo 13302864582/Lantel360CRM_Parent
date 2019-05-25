@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/course_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="班级：粤港澳一班"
+                android:textColor="@color/classes_name"
+                android:textSize="@dimen/classes_name"
+                android:layout_marginStart="@dimen/head_img_marginStart"
+                android:layout_marginTop="@dimen/head_img_marginTop"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/time_img"
+                android:layout_marginTop="@dimen/list_margin"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
+                app:layout_constraintLeft_toLeftOf="@id/course_name"
+                android:src="@mipmap/review_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="英语二班"
+                android:gravity="bottom"
+                android:layout_marginLeft="@dimen/redpoint_radis"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place"
+                app:layout_constraintLeft_toRightOf="@id/time_img"
+                app:layout_constraintBottom_toBottomOf="@id/time_img"
+                />
+
+            <ImageView
+                android:id="@+id/location_img"
+                app:layout_constraintBottom_toBottomOf="@id/time"
+                app:layout_constraintLeft_toRightOf="@id/time"
+                android:src="@mipmap/preview_location"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019-04-29"
+                android:textColor="@color/classes_place"
+                android:textSize="@dimen/classes_place"
+                android:layout_marginLeft="@dimen/redpoint_radis"
+                app:layout_constraintBaseline_toBaselineOf="@id/time"
+                app:layout_constraintLeft_toRightOf="@id/location_img"
+                />
+
+            <TextView
+                android:background="@mipmap/reiew_btn"
+                android:id="@+id/detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看详情"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/classes_place"
+                app:layout_constraintTop_toBottomOf="@id/location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/setting_pesonal_title_marginLeft"
+                android:layout_marginBottom="@dimen/course_progress_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginEnd="@dimen/head_img_marginStart"
+                />
+
+            <View
+                android:id="@+id/line"
+                android:layout_marginRight="@dimen/list_margin"
+                app:layout_constraintLeft_toLeftOf="@id/course_name"
+                app:layout_constraintRight_toRightOf="@id/detail"
+                app:layout_constraintTop_toBottomOf="@id/time"
+                app:layout_constraintBottom_toTopOf="@id/detail"
+                android:background="@color/line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line"/>
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remark_title"
+                android:textColor="@color/bind_student_name"
+                android:textSize="@dimen/output_name"
+                app:layout_constraintBaseline_toBaselineOf="@id/detail"
+                app:layout_constraintTop_toBottomOf="@id/head_img"
+                app:layout_constraintLeft_toLeftOf="@id/time_img"
+                android:maxEms="13"
+                android:ellipsize="end"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

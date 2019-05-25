@@ -1,7 +1,5 @@
 package com.xiao360.baselibrary.base;
 
-import android.util.Log;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 

@@ -49,5 +49,21 @@
         <activity android:name="com.lantel.setting.bindfile.bindstudent.BindStudentActivity"/>
 
         <activity android:name="com.lantel.mine.wallet.WalletActivity"/>
+
+        <activity android:name="com.lantel.mine.order.OrderActivity"/>
+        
+        <activity android:name=".accessment.AccessMentActivity"/>
+
+        <activity android:name="com.lantel.common.GalleryDetailActivity"/>
+
+        <activity android:name="com.lantel.common.GalleryDetailActivity2"/>
+
+        <activity android:name=".classreview.ClassReviewActivity"/>
+
+        <activity android:name=".notify.NotifyActivity"/>
+
+        <activity android:name=".notify.NotifyDetailActivity"/>
+
+        <activity android:name=".preview.PreviewActivity"/>
     </application>
 </manifest>

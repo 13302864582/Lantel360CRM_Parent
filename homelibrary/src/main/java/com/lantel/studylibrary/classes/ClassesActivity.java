@@ -5,7 +5,7 @@ import com.lantel.common.FragmentActivity;
 import com.lantel.homelibrary.app.Config;
 import androidx.fragment.app.Fragment;
 
-@Route(path = "/lantel/360/classes")
+@Route(path = "/lantel/360/class")
 public class ClassesActivity extends FragmentActivity {
     @Override
     protected String getFragmentTag() {

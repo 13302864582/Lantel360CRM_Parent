@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.haibin.calendarview.CalendarLayout;
 import com.lantel.homelibrary.R;
 import com.lantel.studylibrary.classes.list.holder.ClassesHolder;
@@ -32,7 +33,7 @@ public class ClassesAdapter extends BaseRecyclerViewAdapter<ClassesCardModel> {
         setText(data.getClassName(),classesHolder.classes_name);
         setText(data.getTeacher(),classesHolder.classes_teacher);
         setText(data.getPercent()+"/"+data.getTotal(), classesHolder.classes_percent);
-        GlideUtils.loadCircle(context,data.getHeaImg(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,classesHolder.head_img,true,R.color.image_text);
+        GlideUtils.loadCircle(context,data.getHeaImg(),R.mipmap.ic_launcher,R.mipmap.ic_launcher,classesHolder.head_img,true,R.color.circle);
         if(data.getTotal() != 0)
         classesHolder.seekBar.setMaxprogress(data.getTotal());
         classesHolder.seekBar.setProgress(data.getPercent());

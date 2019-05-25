@@ -8,7 +8,6 @@ import com.lantel.mine.wallet.list.holder.WalletHolder;
 import com.lantel.mine.wallet.list.model.WalletItemModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
-
 import java.util.List;
 
 public class WalletAdapter extends BaseRecyclerViewAdapter<WalletItemModel> {
@@ -29,7 +28,10 @@ public class WalletAdapter extends BaseRecyclerViewAdapter<WalletItemModel> {
 
     @Override
     protected void bindViewHolder(BaseViewHolder holder, WalletItemModel data, int position, int viewType) {
-        WalletHolder changeAccountHolder = (WalletHolder) holder;
-
+        WalletHolder walletHolder = (WalletHolder) holder;
+        setText(data.getTitle(),walletHolder.title);
+        setText(data.getDetail(),walletHolder.detail);
+        setText(data.getMoney_record(),walletHolder.money_record);
+        setText(data.getDate_time(),walletHolder.date_time);
     }
 }

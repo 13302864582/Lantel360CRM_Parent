@@ -1,10 +1,14 @@
 package com.lantel.homelibrary.output.list.adpter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.lantel.common.GalleryDetailActivity;
+import com.lantel.common.GalleryDetailActivity2;
 import com.lantel.homelibrary.R;
-import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.ImageHolder;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
@@ -40,20 +44,9 @@ public class ImagAdapter extends BaseRecyclerViewAdapter {
     @Override
     protected void bindViewHolder(BaseViewHolder holder, Object data, int position, int viewType) {
         ImageHolder imageHolder = (ImageHolder) holder;
-        /*if(viewType == Config.TYPE_SQUARE){
-            GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
-            //设置item的高度跟随宽度走
-            ViewGroup.LayoutParams parm = imageHolder.img.getLayoutParams();
-            parm.height = gridLayoutManager.getWidth()/ gridLayoutManager.getSpanCount();
-        }*/
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        int count = getItemCount();
-        if(count == 1)
-            return Config.TYPE_WRAP;
-        else
-            return Config.TYPE_SQUARE;
+        imageHolder.img.setOnClickListener((View view)-> {
+            Intent intent = new Intent(context, GalleryDetailActivity2.class);
+            context.startActivity(intent);
+        });
     }
 }

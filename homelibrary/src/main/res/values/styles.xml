@@ -146,4 +146,16 @@
         <item name="android:textSize">@dimen/bind_add_edit</item>
     </style>
 
+    <style name="notify_title" parent="wrap_wh">
+        <item name="android:textSize">@dimen/notify_title</item>
+        <item name="android:textColor">@color/notify_title</item>
+        <item name="android:layout_marginTop">@dimen/list_margin</item>
+    </style>
+
+    <style name="notify_time" parent="wrap_wh">
+        <item name="android:textSize">@dimen/notify_time</item>
+        <item name="android:textColor">@color/notify_time</item>
+        <item name="android:layout_marginTop">@dimen/list_margin</item>
+    </style>
+
 </resources>

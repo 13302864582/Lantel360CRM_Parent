@@ -1,15 +1,15 @@
-package com.lantel.study.list.adpter;
+package com.lantel.common.adpter;
 
 import android.content.Context;
 
-import com.lantel.common.list.adpter.SimpleMenuListApater;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
 
+
 import java.util.List;
 
-public class StudyMenuListApater extends SimpleMenuListApater {
-    public StudyMenuListApater(Context context, List<SimpleMenuModel> datas) {
+public class BannerMenuListApater extends SimpleMenuListApater {
+    public BannerMenuListApater(Context context, List<SimpleMenuModel> datas) {
         super(context, datas);
     }
 

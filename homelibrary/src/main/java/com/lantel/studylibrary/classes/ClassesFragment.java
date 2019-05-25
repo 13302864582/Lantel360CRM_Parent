@@ -1,7 +1,9 @@
 package com.lantel.studylibrary.classes;
 
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
@@ -10,15 +12,18 @@ import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.classes.mvp.ClassesContract;
 import com.lantel.studylibrary.classes.mvp.ClassesModel;
 import com.lantel.studylibrary.classes.mvp.ClassesPresenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.api.ScrollBoundaryDecider;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
-
 import java.util.ArrayList;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, ClassesModel> implements ClassesContract.View{
+public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, ClassesModel> implements ClassesContract.View, OnRefreshLoadMoreListener {
     @BindView(R2.id.back)
     ImageView back;
     @BindView(R2.id.title)
@@ -26,10 +31,11 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
     @BindView(R2.id.classes_list)
     RecyclerView classes_list;
     private ClassesAdapter mAdapter;
+    private boolean hasLoadMore = false;
 
     @Override
     protected int getContainerLayoutID() {
-        return R.layout.course_container;
+        return R.layout.common_container;
     }
 
     @Override
@@ -79,15 +85,36 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
 
     @Override
     protected void initView() {
-        stateLayout.showContentView();
+        showLoading();
         title.setText(R.string.classes);
-        classes_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        classes_list.setLayoutManager(manager);
         mAdapter = new ClassesAdapter(getContext(),null);
         classes_list.setAdapter(mAdapter);
+        stateLayout.refreshLayout.setOnRefreshLoadMoreListener(this);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        classes_list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisible = manager.findLastVisibleItemPosition();
+                if(!hasLoadMore && lastVisible>=9){
+                    stateLayout.refreshLayout.setEnableLoadMore(true);
+                    hasLoadMore = true;
+                }
+            }
+        });
     }
 
     @Override
-    public void initAttenceData(ArrayList<ClassesCardModel> menu) {
+    public void setData(ArrayList<ClassesCardModel> menu) {
+        stateLayout.showContentView();
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
     }
@@ -96,8 +123,32 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
     public void onViewClicked(View view) {
         int id = view.getId();
         if(id == R.id.back){
-
+            getActivity().finish();
         }
     }
 
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.initMenu();
+    }
+
+    @Override
+    public void showFail() {
+        stateLayout.showFailView();
+    }
+
+    @Override
+    public void showLoading() {
+        stateLayout.showLoadingView();
+    }
+
+    @Override
+    public void showNetWorkError() {
+        stateLayout.showEmptyView();
+    }
 }

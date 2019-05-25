@@ -1,4 +1,4 @@
-package com.lantel.common.list.adpter;
+package com.lantel.common.adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

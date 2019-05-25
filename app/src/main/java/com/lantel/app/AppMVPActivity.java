@@ -88,4 +88,19 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
         NavOptions options = builder.build();
         mNavController.navigate(action_id,null,options);
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

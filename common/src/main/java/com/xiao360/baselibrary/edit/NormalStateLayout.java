@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 public abstract class NormalStateLayout extends StateLayout {
    private View loadingView;
     private View failView;
@@ -29,7 +27,6 @@ public abstract class NormalStateLayout extends StateLayout {
         } else {
             contentView = View.inflate(getContext(), getContentViewLayoutId(), null);
         }
-
         container.addView(contentView);
 
         // 获取“正在加载”、“加载失败”、“加载为空”这3种状态的View的引用

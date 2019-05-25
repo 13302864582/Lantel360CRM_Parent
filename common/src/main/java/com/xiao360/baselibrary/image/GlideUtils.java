@@ -166,15 +166,14 @@ public class GlideUtils {
         RequestOptions options = new RequestOptions();
         options .error(errRes)
                 .placeholder(defRes)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL);
-
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
                 if(withSolid){
                     options.transform(new GlideCircleWithBorder(3, color));
                 }else {
                     options.transform(new GlideCircleWithBorder());
                 }
         Glide.with(context).load(path)
+                .centerCrop()
                 .apply(options)
                 .into(view);
     }

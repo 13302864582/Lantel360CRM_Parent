@@ -18,6 +18,7 @@
     <dimen name="attence_time">12sp</dimen>
     <dimen name="attence_class_name">14sp</dimen>
     <dimen name="head_img">58dp</dimen>
+    <dimen name="review_img">42dp</dimen>
     <dimen name="head_img_marginStart">24dp</dimen>
     <dimen name="head_img_marginTop">17dp</dimen>
     <dimen name="classes_name">14sp</dimen>
@@ -96,4 +97,13 @@
     <dimen name="wallet_item_detail">12sp</dimen>
     <dimen name="wallet_item_money_record">17sp</dimen>
     <dimen name="wallet_item_date_time">10sp</dimen>
+    <dimen name="order_state">11sp</dimen>
+    <dimen name="order_img">82dp</dimen>
+    <dimen name="review_content">12sp</dimen>
+    <dimen name="notify_title">15sp</dimen>
+    <dimen name="notify_time">11sp</dimen>
+    <dimen name="notify_content">12sp</dimen>
+    <dimen name="from_title">11sp</dimen>
+    <dimen name="detail_text">12sp</dimen>
+    <dimen name="class_head_img">58dp</dimen>
 </resources>

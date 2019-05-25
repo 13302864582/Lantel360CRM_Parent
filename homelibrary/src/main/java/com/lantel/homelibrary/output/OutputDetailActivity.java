@@ -120,4 +120,19 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
         imgList.setLayoutManager(manager);
         imgList.setAdapter(adapter);*/
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

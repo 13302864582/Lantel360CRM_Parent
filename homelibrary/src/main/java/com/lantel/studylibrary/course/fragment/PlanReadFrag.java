@@ -34,4 +34,19 @@ public class PlanReadFrag extends BaseCourseFragment<PlanReadPresenter, PlanRead
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

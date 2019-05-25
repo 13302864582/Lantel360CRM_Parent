@@ -11,7 +11,7 @@
     <string name="home_curriculum_path" >/lantel/360/curriculum</string>
     <string name="home_attence_path" >/lantel/360/attence</string>
     <string name="home_homework_path" >/lantel/360/homework</string>
-    <string name="home_assessment_path" >/lantel/360/assessment</string>
+    <string name="home_assessment_path" >/lantel/360/classreview</string>
     <string name="home_book_path" >/lantel/360/book</string>
     <string name="home_notify_path" >/lantel/360/notify</string>
     <string name="home_output_path" >/lantel/360/output</string>
@@ -28,7 +28,11 @@
     <string name="mine_order_path" >/lantel/360/order</string>
     <string name="mine_feedback_path" >/lantel/360/feedback</string>
 
+    <!--模块：成长   跳转路径-->
+    <string name="growup_care_path" >/lantel/360/groupCare</string>
+    <string name="growup_vs_path" >/lantel/360/groupVs</string>
 
+    <!--模块：设置   跳转路径-->
     <string name="setting_Personal_path">/lantel/360/SetPersonal</string>
     <string name="setting_BindFile_path">/lantel/360/Setting/BindFile</string>
     <string name="setting_BindAccount_path">/lantel/360/Setting/BindAccount</string>

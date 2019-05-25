@@ -37,7 +37,7 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
 
     @Override
     protected int getContainerLayoutID() {
-        return R.layout.course_container;
+        return R.layout.common_container;
     }
 
     @Override
@@ -109,5 +109,20 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
         int id = view.getId();
         if(id == R.id.back)
         LogUtils.d("=====onViewClicked:back");
+    }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
     }
 }

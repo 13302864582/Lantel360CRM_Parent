@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <androidx.cardview.widget.CardView
     android:layout_margin="10dp"
@@ -14,26 +14,25 @@
 
         <ImageView
             android:id="@+id/head_img"
-            android:layout_width="@dimen/head_img"
-            android:layout_height="@dimen/head_img"
-            android:layout_marginStart="@dimen/head_img_marginStart"
+            android:layout_width="@dimen/class_head_img"
+            android:layout_height="@dimen/class_head_img"
             android:layout_marginTop="@dimen/head_img_marginTop"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="@dimen/head_img_marginTop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/classes_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="班级：粤港澳一班"
             android:textColor="@color/classes_name"
             android:textSize="@dimen/classes_name"
+            android:layout_marginTop="@dimen/head_img_marginTop"
             app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintLeft_toRightOf="@id/head_img"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/head_img" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/classes_place"
@@ -42,9 +41,9 @@
             android:text="地点：深圳厅"
             android:textColor="@color/classes_place"
             android:textSize="@dimen/classes_place"
-            app:layout_constraintBottom_toBottomOf="@id/head_img"
             app:layout_constraintLeft_toLeftOf="@id/classes_name"
             app:layout_constraintTop_toBottomOf="@id/classes_name"
+            android:layout_marginTop="@dimen/head_img_marginTop"
             />
 
         <TextView
@@ -63,7 +62,7 @@
             android:id="@+id/line"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/head_img"
+            app:layout_constraintTop_toBottomOf="@id/classes_place"
             android:layout_marginTop="@dimen/line_margin"
             app:layout_constraintWidth_percent="0.856"
             android:background="@color/line"

@@ -7,6 +7,9 @@ public class Config {
     public static final String OUTPUT_TAG = "OUTPUT_TAG";
     public static final String ACCESSMENT_TAG = "ACCESSMENT_TAG";
     public static final String WALLET_TAG = "WALLET_TAG";
+    public static final String CLASSREVIEW_TAG = "CLASSREVIEW_TAG";
+    public static final String PREVIEW_TAG = "PREVIEW_TAG";
+    public static final String NOTIFY_TAG = "NOTIFY_TAG";
 
     public static final String BIND_STUDENT_TAG = "BIND_STUDENT_TAG";
     public static final String BIND_OTHER_TAG = "BIND_OTHER_TAG";
@@ -28,6 +31,9 @@ public class Config {
     public static final int TYPE_WRAP = 0;
     public static final int TYPE_SQUARE = 1;
 
+    public static final int TYPE_IMG = 0;
+    public static final int TYPE_TEXT = 1;
+
     public static final int TYPE_EDIT_TEXT = 0;
     public static final int TYPE_SELECT_TEXT = 1;
     public static final int TYPE_SELECT_DATE = 2;
@@ -43,4 +49,6 @@ public class Config {
     public static final String BIND_WEIBO = "BIND_WEIBO";
     public static final String BIND_QQ = "BIND_QQ";
     public static final String BIND_WEIXIN = "BIND_WEIXIN";
+    public static final int VIDEO = 1;
+    public static final int PHOTO = 0;
 }

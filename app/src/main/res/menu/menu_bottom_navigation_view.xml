@@ -18,14 +18,14 @@
         <item
             android:id="@+id/item_growup"
             android:enabled="true"
-            android:icon="@mipmap/growup"
+            android:icon="@drawable/group_selector"
             android:title="@string/tabhost_growup"
             app:showAsAction="always" />
 
         <item
             android:id="@+id/item_mine"
             android:enabled="true"
-            android:icon="@mipmap/mine"
+            android:icon="@drawable/mine_selector"
             android:title="@string/tabhost_mine"
             app:showAsAction="always" />
 </menu>

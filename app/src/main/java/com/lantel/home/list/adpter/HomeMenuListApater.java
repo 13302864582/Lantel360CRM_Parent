@@ -1,10 +1,9 @@
 package com.lantel.home.list.adpter;
 
 import android.content.Context;
-import com.lantel.common.list.adpter.SimpleMenuListApater;
+import com.lantel.common.adpter.SimpleMenuListApater;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
-
 import java.util.List;
 
 public class HomeMenuListApater extends SimpleMenuListApater {

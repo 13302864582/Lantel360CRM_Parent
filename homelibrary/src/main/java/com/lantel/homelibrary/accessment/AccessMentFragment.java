@@ -64,4 +64,19 @@ public class AccessMentFragment extends NormalListFragment<AccessPresenter, Acce
         adapter.setDatas(menu);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

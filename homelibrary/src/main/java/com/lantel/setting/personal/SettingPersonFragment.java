@@ -90,4 +90,19 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     public void editText(String editText) {
         ARouter.getInstance().build("/lantel/360/EditText").withString(Config.EDIT_TEXT,editText).navigation(getActivity(),Config.TYPE_EDIT_TEXT);
     }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
+
+    }
 }

@@ -58,7 +58,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
 
     @Override
     protected int getContainerLayoutID() {
-        return R.layout.course_container;
+        return R.layout.common_container;
     }
 
     @Override
@@ -175,6 +175,21 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
 
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
+
+    }
+
+    @Override
+    public void showFail() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetWorkError() {
 
     }
 }

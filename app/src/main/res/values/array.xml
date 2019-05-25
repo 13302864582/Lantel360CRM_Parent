@@ -96,7 +96,26 @@
         <item>@mipmap/study_appointment</item>
     </integer-array>
     <!--===========================================================成长================================================================-->
+    <!--模块：成长   菜单标题-->
+    <string-array name="groupup_menu_title">
+        <item>@string/growup_care</item>
+        <item>@string/growup_vs</item>
+        <item>@string/growup_output</item>
+    </string-array>
 
+    <!--模块：成长   菜单跳转的路径-->
+    <string-array name="groupup_menu_router_path">
+        <item>@string/growup_care_path</item>
+        <item>@string/growup_vs_path</item>
+        <item>@string/home_output_path</item>
+    </string-array>
+
+    <!--模块：成长   菜单图标-->
+    <integer-array name="groupup_menu_icon">
+        <item>@mipmap/group_care</item>
+        <item>@mipmap/group_vs</item>
+        <item>@mipmap/group_output</item>
+    </integer-array>
 
 
     <!--===========================================================设置================================================================-->

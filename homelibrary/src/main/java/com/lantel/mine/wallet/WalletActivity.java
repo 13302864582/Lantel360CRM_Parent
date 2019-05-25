@@ -5,11 +5,13 @@ import com.lantel.common.FragmentActivity;
 
 import androidx.fragment.app.Fragment;
 
+import static com.lantel.homelibrary.app.Config.WALLET_TAG;
+
 @Route(path = "/lantel/360/wallet")
 public class WalletActivity extends FragmentActivity {
     @Override
     protected String getFragmentTag() {
-        return "";
+        return WALLET_TAG;
     }
 
     @Override

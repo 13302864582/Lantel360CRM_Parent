@@ -10,7 +10,10 @@ public class ClassesCardModel extends BaseModel{
     private int total;
     private Object heaImg;
 
-    public ClassesCardModel(Object heaImg,String teacher, String place, String className,int percent, int total) {
+    public ClassesCardModel() {
+    }
+
+    public ClassesCardModel(Object heaImg, String teacher, String place, String className, int percent, int total) {
         this.teacher = teacher;
         this.place = place;
         this.className = className;
