@@ -183,7 +183,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     }
 
     @Override
-    public void showFail() {
+    public void showEmpty() {
 
     }
 

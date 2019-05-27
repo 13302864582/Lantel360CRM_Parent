@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.xiao360.baselibrary.base.BaseApplication;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DisplayUtil {
     private DisplayUtil() {
@@ -252,5 +256,50 @@ public class DisplayUtil {
                 - statusBarHeight);
         view.destroyDrawingCache();
         return bp;
+    }
+
+    public static String getDateString(String date) {
+        String year = date.substring(0,4);
+        String month = date.substring(4,6);
+        String day = date.substring(6);
+        StringBuilder builder = new StringBuilder();
+        builder.append(year).append("-").append(month).append("-").append(day);
+        return builder.toString();
+    }
+
+    //由出生日期获得年龄
+    public static int getAge(Date birthDay, Context context) {
+        Calendar cal = Calendar.getInstance();
+        if (cal.before(birthDay)) {
+            Toast.makeText(context, "出生日期不能在当今日期之后！", Toast.LENGTH_SHORT).show();
+            return -1;
+        }
+        int yearNow = cal.get(Calendar.YEAR);
+        int monthNow = cal.get(Calendar.MONTH);
+        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+        cal.setTime(birthDay);
+
+        int yearBirth = cal.get(Calendar.YEAR);
+        int monthBirth = cal.get(Calendar.MONTH);
+        int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+
+        int age = yearNow - yearBirth;
+
+        if (monthNow <= monthBirth) {
+            if (monthNow == monthBirth) {
+                if (dayOfMonthNow < dayOfMonthBirth) age--;
+            }else{
+                age--;
+            }
+        }
+        return age;
+    }
+
+    public static String getTimeString(String time) {
+        String hour = time.substring(0,2);
+        String minute = time.substring(2);
+        StringBuilder builder = new StringBuilder();
+        builder.append(hour).append(":").append(minute);
+        return builder.toString();
     }
 }

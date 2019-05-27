@@ -6,8 +6,13 @@ public class CourseCardModel extends BaseModel{
     private String course_name;
     private String course_start_date;
     private String course_end_date;
-    private int percent;
-    private int total;
+    private float percent;
+    private float total;
+    private float remain;
+
+
+    public CourseCardModel() {
+    }
 
     public CourseCardModel(String name, String start_date, String end_date, int usecount, int totalcount) {
         this.course_name = name;
@@ -16,6 +21,14 @@ public class CourseCardModel extends BaseModel{
         this.percent = percent;
         this.percent = usecount;
         this.total = totalcount;
+    }
+
+    public float getRemain() {
+        return remain;
+    }
+
+    public void setRemain(float remain) {
+        this.remain = remain;
     }
 
     public String getCourse_name() {
@@ -42,19 +55,19 @@ public class CourseCardModel extends BaseModel{
         this.course_end_date = course_end_date;
     }
 
-    public int getPercent() {
+    public float getPercent() {
         return percent;
     }
 
-    public void setPercent(int percent) {
+    public void setPercent(float percent) {
         this.percent = percent;
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 }

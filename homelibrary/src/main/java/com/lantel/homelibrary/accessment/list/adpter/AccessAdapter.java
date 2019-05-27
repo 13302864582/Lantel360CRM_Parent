@@ -10,6 +10,7 @@ import com.lantel.homelibrary.accessment.list.model.AccessItemModel;
 import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.xiao360.baselibrary.util.DisplayUtil;
 
 import java.util.List;
 
@@ -46,20 +47,4 @@ public class AccessAdapter extends BaseRecyclerViewAdapter<AccessItemModel> {
         return res;
     }
 
-    private String getDateString(String date) {
-        String year = date.substring(0,4);
-        String month = date.substring(4,6);
-        String day = date.substring(6);
-        StringBuilder builder = new StringBuilder();
-        builder.append(year).append("-").append(month).append("-").append(day);
-        return builder.toString();
-    }
-
-    private String getTimeString(String time) {
-        String hour = time.substring(0,2);
-        String minute = time.substring(2);
-        StringBuilder builder = new StringBuilder();
-        builder.append(hour).append(":").append(minute);
-        return builder.toString();
-    }
 }

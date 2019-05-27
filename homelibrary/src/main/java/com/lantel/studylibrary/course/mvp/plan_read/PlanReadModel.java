@@ -1,7 +1,15 @@
 package com.lantel.studylibrary.course.mvp.plan_read;
 
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.studylibrary.course.api.CourseBean;
+import com.lantel.studylibrary.course.api.CourseService;
 import androidx.lifecycle.ViewModel;
+import io.reactivex.Observable;
 
 public class PlanReadModel extends ViewModel {
-
+    public Observable<CourseBean> loadData(String page, String pageSize) {
+        CourseService service = Http.getInstance().createRequest(CourseService.class);
+        return service.getCourseReading(String.valueOf(2),page,pageSize).compose(RxHelper.io_main());
+    }
 }

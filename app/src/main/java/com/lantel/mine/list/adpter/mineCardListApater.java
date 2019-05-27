@@ -12,7 +12,7 @@ import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
 
-public class mineCardListApater extends BaseRecyclerViewAdapter<BaseModel> {
+public class mineCardListApater extends BaseRecyclerViewAdapter<CardModel> {
     private String[] titles;
 
     /**
@@ -25,7 +25,7 @@ public class mineCardListApater extends BaseRecyclerViewAdapter<BaseModel> {
         this.titles = titles;
     }
 
-    public mineCardListApater(Context context, List<BaseModel> datas) {
+    public mineCardListApater(Context context, List<CardModel> datas) {
         super(context, datas);
     }
 
@@ -45,16 +45,14 @@ public class mineCardListApater extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
+    protected void bindViewHolder(BaseViewHolder holder, CardModel data, int position, int viewType) {
         CardHolder cardHolder = (CardHolder) holder;
         if(null != titles){
             setText(titles[position],cardHolder.title);
         }else {
             setText(datas.get(position).getTitle(),cardHolder.title);
         }
-
-        CardModel cardModel = (CardModel) data;
-        String value = null == data ? "0":cardModel.getValue();
+        String value = null == data ? "0":data.getValue();
         setText(value,"0",cardHolder.value);
     }
 }

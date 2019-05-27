@@ -1,57 +1,58 @@
 package com.lantel.studylibrary.classes.mvp;
 
 import android.os.Bundle;
-
-import com.lantel.homelibrary.R;
 import com.lantel.studylibrary.classes.api.ClassBean;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
-import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ClassesPresenter extends ClassesContract.Presenter {
+    private int mCurrentPage = 1;
+
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("onStart: ");
-        initMenu();
+        refreshData(null);
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("onCrete: ");
+
     }
 
-    public void initMenu() {
-        mModel.loadData()
+    public void refreshData(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(1),String.valueOf(10),false,refreshLayout);
+    }
+
+    private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
+        mModel.loadData(page,pageSize)
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<ClassBean>() {
                     @Override
@@ -80,7 +81,19 @@ public class ClassesPresenter extends ClassesContract.Presenter {
                                 menu.add(model);
                                 menu.add(model);
                             }
-                            mView.setData(menu);
+                            if(!isLoadMore){
+                                mView.refreshData(menu);
+                                if(null!=refreshLayout)
+                                refreshLayout.finishRefresh();
+                                mCurrentPage = 1;
+                            }
+                            else {
+                                mView.setLoadMoreData(menu);
+                                if(null!=refreshLayout)
+                                refreshLayout.finishLoadMore();
+                                mCurrentPage++;
+                            }
+
                         }else {
                             onFailure(new Throwable(data.getMessage()));
                         }
@@ -88,9 +101,18 @@ public class ClassesPresenter extends ClassesContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                            mView.showFail();
+                        if(null!=refreshLayout){
+                            if(!isLoadMore)
+                                refreshLayout.finishRefresh();
+                            else
+                                refreshLayout.finishLoadMore();
+                        }
+                            mView.showEmpty();
                     }
                 });
     }
 
+    public void onLoadMore(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(mCurrentPage+1),String.valueOf(10),true, refreshLayout);
+    }
 }

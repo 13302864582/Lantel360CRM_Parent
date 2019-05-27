@@ -1,7 +1,7 @@
 package com.xiao360.baselibrary.mvp;
 
 public interface BaseView {
-    void showFail();
+    void showEmpty();
     void showLoading();
     void showNetWorkError();
 }

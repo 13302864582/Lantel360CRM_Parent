@@ -24,9 +24,6 @@ public class Config {
     public static final int STATE_LEAVE = 1;
     public static final int STATE_ABSENCE = 2;
 
-    public static final int TAG_READING = 0;
-    public static final int TAG_HAS_READ = 1;
-    public static final int TAG_READ_PLAN = 2;
 
     public static final int TYPE_WRAP = 0;
     public static final int TYPE_SQUARE = 1;
@@ -51,4 +48,5 @@ public class Config {
     public static final String BIND_WEIXIN = "BIND_WEIXIN";
     public static final int VIDEO = 1;
     public static final int PHOTO = 0;
+    public static final String SID = "SID";
 }

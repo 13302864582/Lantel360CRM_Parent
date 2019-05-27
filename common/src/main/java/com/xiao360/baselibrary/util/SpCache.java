@@ -7,6 +7,7 @@ import android.util.Log;
 import java.lang.ref.SoftReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class SpCache {
@@ -22,6 +23,7 @@ public class SpCache {
      */
     public SpCache(Context mContext,String mPrefFileName) {
         this.mContext = mContext.getApplicationContext();
+        mCache = new ConcurrentHashMap<>();
         if(mPrefFileName !=null && !mPrefFileName.isEmpty()){
             this.mPrefFileName = mPrefFileName;
         }

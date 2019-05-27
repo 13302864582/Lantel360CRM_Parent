@@ -50,4 +50,7 @@ dependencies {
     api 'github.hellocsl:GalleryLayoutManager:1.0.6'
     implementation 'com.alexvasilkov:gesture-views:2.5.2'
     implementation 'com.devbrackets.android:exomedia:4.3.0'
+ /*   implementation ('com.thoughtworks.xstream:xstream:1.4.7') {
+        exclude group: 'xmlpull', module: 'xmlpull'
+    }*/
 }

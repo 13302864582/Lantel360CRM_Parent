@@ -6,11 +6,17 @@ import android.os.Bundle;
 
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
+import com.lantel.mine.api.MineCardBean;
 import com.lantel.mine.list.model.CardModel;
+import com.lantel.studylibrary.classes.api.ClassBean;
+import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.lifecycle.LifecycleObserver;
 
@@ -28,13 +34,9 @@ public class MinePresenter extends MineContract.Presenter{
 
     @Override
     public void onStart() {
-        LogUtils.d("===onStart: ");
-      /*  ArrayList<BaseModel> values = new ArrayList<>();
-        values.add(new CardModel("5698"));
-        values.add(new CardModel("20"));
-        values.add(new CardModel("7"));
-        values.add(new CardModel("13"));
-        mView.notifyCardData(values);*/
+        initCardList();
+        initMenuList();
+        loadData();
     }
 
     @Override
@@ -59,6 +61,26 @@ public class MinePresenter extends MineContract.Presenter{
 
     public void initCardList() {
         mView.initCardData(context.getResources().getStringArray(R.array.mine_card_item_title));
+    }
+
+    private void loadData() {
+        mModel.loadData("10028")
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<MineCardBean>() {
+                    @Override
+                    public void onSuccess(MineCardBean data) {
+                        if(data.getError()==0){
+                                mView.notifyCardData(data);
+                        }else {
+                            onFailure(new Throwable(data.getMessage()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        mView.LoadCardFail();
+                    }
+                });
     }
 
     public void initMenuList() {

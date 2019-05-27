@@ -4,5 +4,5 @@
     android:layout_height="match_parent">
 <include layout="@layout/common_toolbar"/>
 
-    <include layout="@layout/common_list_layout"/>
+    <include layout="@layout/attence_content"/>
 </LinearLayout>

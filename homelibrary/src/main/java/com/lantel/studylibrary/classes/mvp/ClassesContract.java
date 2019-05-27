@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 public interface ClassesContract {
     interface View extends BaseView {
-        void setData(ArrayList<ClassesCardModel> menu);
+        void refreshData(ArrayList<ClassesCardModel> menu);
+
+        void setLoadMoreData(ArrayList<ClassesCardModel> menu);
     }
 
     abstract class Presenter extends BaseFragmentPresenter<View, ClassesModel> {

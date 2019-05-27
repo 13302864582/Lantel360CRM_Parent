@@ -1,5 +1,6 @@
 package com.lantel.studylibrary.course;
 
+import com.lantel.studylibrary.course.fragment.BaseCourseFragment;
 import java.util.List;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class CourseFragmentPagerAdapter extends FragmentPagerAdapter {
     private String []titles;
-    private List<Fragment> fragments;
+    private List<BaseCourseFragment> fragments;
 
     public CourseFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -16,7 +17,7 @@ public class CourseFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        return fragments.get(i);
+      return fragments.get(i);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CourseFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     //自定义一个添加title和fragment的方法，供Activity使用
-    public void addTitlesAndFragments(String []titles, List<Fragment> fragments) {
+    public void addTitlesAndFragments(String []titles, List<BaseCourseFragment> fragments) {
         this.titles = titles;
         this.fragments = fragments;
     }

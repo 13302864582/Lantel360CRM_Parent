@@ -1,9 +1,7 @@
 package com.lantel.studylibrary.classes;
 
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
@@ -13,7 +11,6 @@ import com.lantel.studylibrary.classes.mvp.ClassesContract;
 import com.lantel.studylibrary.classes.mvp.ClassesModel;
 import com.lantel.studylibrary.classes.mvp.ClassesPresenter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.api.ScrollBoundaryDecider;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import java.util.ArrayList;
@@ -113,10 +110,18 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
     }
 
     @Override
-    public void setData(ArrayList<ClassesCardModel> menu) {
+    public void refreshData(ArrayList<ClassesCardModel> menu) {
         stateLayout.showContentView();
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<ClassesCardModel> menu) {
+        int start = mAdapter.getDatas().size();
+        mAdapter.getDatas().addAll(menu);
+        mAdapter.notifyItemRangeInserted(start,menu.size());
+        mAdapter.notifyItemRangeChanged(start,menu.size());
     }
 
     @OnClick({R2.id.back})
@@ -129,16 +134,16 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        mPresenter.onLoadMore(refreshLayout);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPresenter.initMenu();
+        mPresenter.refreshData(refreshLayout);
     }
 
     @Override
-    public void showFail() {
+    public void showEmpty() {
         stateLayout.showFailView();
     }
 

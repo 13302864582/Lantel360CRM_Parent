@@ -15,17 +15,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:src="@mipmap/loading"
                 android:id="@+id/loading_img"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="@dimen/state_img_width"
+                android:layout_height="@dimen/state_img_height"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.524"
-                app:layout_constraintVertical_bias="0.350"
+                app:layout_constraintVertical_bias="0.44"
                 />
 
             <TextView
-                android:text="暂无消息"
+                android:text="@string/loading"
                 android:id="@+id/loading_text"
                 style="@style/state_text"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -40,16 +42,19 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/fail_img"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:src="@mipmap/fail"
+                android:layout_width="@dimen/state_img_width"
+                android:layout_height="@dimen/state_img_height"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.524"
-                app:layout_constraintVertical_bias="0.350"
+                app:layout_constraintVertical_bias="0.44"
                 />
 
             <TextView
                 android:id="@+id/fail_text"
+                android:text="@string/fail_str"
                 style="@style/state_text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -62,15 +67,18 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/empty_img"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:src="@mipmap/empty"
+                android:layout_width="@dimen/state_img_width"
+                android:layout_height="@dimen/state_img_height"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.524"
-                app:layout_constraintVertical_bias="0.350"
+                app:layout_constraintVertical_bias="0.44"
                 />
 
             <TextView
+                android:text="@string/empty"
                 android:id="@+id/empty_text"
                 style="@style/state_text"
                 app:layout_constraintLeft_toLeftOf="parent"

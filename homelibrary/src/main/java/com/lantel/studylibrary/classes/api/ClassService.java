@@ -9,8 +9,8 @@ public interface ClassService {
     @Headers({
             "x-sid:21",
             "x-sub-host:base",
-            "x-token:bdbd550ab300b1212498ce2c7b358aee"
+            "x-token:x-token:9d7243e052cde8c3bbecff760b212e29"
     })
     @GET("classes")
-    Observable<ClassBean> getTask(@Query("page") String page, @Query("pagesize")String pagesize);
+    Observable<ClassBean> getClassData(@Query("page") String page, @Query("pagesize")String pagesize);
 }

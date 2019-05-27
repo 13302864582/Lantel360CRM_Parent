@@ -4,14 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.lantel.homelibrary.R;
 import com.lantel.studylibrary.course.list.holder.CourseCardHolder;
 import com.lantel.studylibrary.course.list.model.CourseCardModel;
-import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
-
 import java.util.List;
 
 public class CourseAdapter extends BaseRecyclerViewAdapter<CourseCardModel> {
@@ -29,7 +26,7 @@ public class CourseAdapter extends BaseRecyclerViewAdapter<CourseCardModel> {
     protected void bindViewHolder(BaseViewHolder holder, CourseCardModel data, int position, int viewType) {
         CourseCardHolder classesHolder = (CourseCardHolder) holder;
         setText(data.getCourse_name(),classesHolder.course_name);
-        setText(data.getCourse_end_date(),classesHolder.course_start_date);
+        setText(data.getCourse_end_date(),classesHolder.course_end_date);
         setText(data.getCourse_start_date(),classesHolder.course_start_date);
         String percent = String.valueOf(data.getPercent());
         String total = String.valueOf(data.getTotal());

@@ -5,23 +5,22 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.notify.NotifyDetailActivity;
 import com.lantel.homelibrary.notify.list.holder.NotifyHolder;
-import com.xiao360.baselibrary.base.BaseModel;
+import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
 
-public class NotifyAdapter extends BaseRecyclerViewAdapter<BaseModel> {
+public class NotifyAdapter extends BaseRecyclerViewAdapter<NotifyItemModel> {
     /**
      * 适配器构造
      *
      * @param context
      * @param datas
      */
-    public NotifyAdapter(Context context, List<BaseModel> datas) {
+    public NotifyAdapter(Context context, List<NotifyItemModel> datas) {
         super(context, datas);
     }
 
@@ -31,9 +30,10 @@ public class NotifyAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
+    protected void bindViewHolder(BaseViewHolder holder, NotifyItemModel data, int position, int viewType) {
         holder.itemView.setOnClickListener((View view)-> {
             Intent intent = new Intent(context, NotifyDetailActivity.class);
+            intent.putExtra("desc",data.getContent());
             context.startActivity(intent);
         });
     }

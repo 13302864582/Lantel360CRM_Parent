@@ -1,24 +1,34 @@
 package com.lantel.mine;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
+import com.lantel.homelibrary.app.Config;
+import com.lantel.mine.api.MineCardBean;
 import com.lantel.mine.list.adpter.mineCardListApater;
 import com.lantel.mine.list.adpter.mineMenuListApater;
+import com.lantel.mine.list.model.CardModel;
 import com.lantel.mine.mvp.MineContract;
 import com.lantel.mine.mvp.MineModel;
 import com.lantel.mine.mvp.MinePresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,23 +70,45 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
+    private List<MineCardBean.DataBean.ListBean> mCardList;
+    private String sid;
 
     @Override
-    public void notifyCardData(ArrayList<BaseModel> list) {
-        mCardListApater.setDatas(list);
-        mCardListApater.notifyDataSetChanged();
+    public void notifyCardData(MineCardBean cardBean) {
+        mCardList = cardBean.getData().getList();
+        for(MineCardBean.DataBean.ListBean bean : mCardList){
+            if(bean.getSid().equals(sid)){
+                mineName.setText(bean.getStudent_name());
+                mineCall.setText(bean.getNick_name());
+                GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg);
+                try {
+                    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(bean.getBirth_time());
+                    mineAge.setText(DisplayUtil.getAge(date,getContext()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                mineStudentId.setText(bean.getSno());
+                mineCardId.setText(bean.getCard_no());
+                String total = bean.getStudent_lesson_hours();
+                String remain = bean.getStudent_lesson_remain_hours();
+                String use = (Float.valueOf(total) - Float.valueOf(remain))+"";
+                ArrayList<CardModel> cardList = new ArrayList<>();
+                CardModel credit = new CardModel(bean.getCredit());
+                CardModel totaltime = new CardModel(total);
+                CardModel remaintime = new CardModel(remain);
+                CardModel usetime = new CardModel(use);
+                cardList.add(credit);
+                cardList.add(totaltime);
+                cardList.add(remaintime);
+                cardList.add(usetime);
+                mCardListApater.setDatas(cardList);
+                mCardListApater.notifyDataSetChanged();
+            }
+        }
+
     }
 
-    @Override
-    public void notifyMenuData(ArrayList<SimpleMenuModel> list) {
-        mMenuListApater.setDatas(list);
-        mMenuListApater.notifyDataSetChanged();
-    }
 
-    @Override
-    public void loadCircleHeadImage(String url) {
-        GlideUtils.loadCircle(getContext(),url,mineHeadImg,R.mipmap.circle_default);
-    }
 
     @Override
     public void initCardData(String[] titles) {
@@ -86,20 +118,19 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
         mineCardList.setAdapter(mCardListApater);
     }
 
-    @Override
-    public void initCardData(ArrayList<BaseModel> list) {
-        mineCardList.setLayoutManager(new GridLayoutManager(getContext(),4));
-        //添加Card默认数据
-        mCardListApater = new mineCardListApater(getContext(),list);
-        mineCardList.setAdapter(mCardListApater);
-    }
 
     @Override
     public void initMenuData(ArrayList<SimpleMenuModel> list) {
+        sid = SpCache.getString(Config.SID,"21");
         mineMenuList.setLayoutManager(new LinearLayoutManager(getContext()));
         mMenuListApater = new mineMenuListApater(getContext(),list);
         mMenuListApater.setListener(this);
         mineMenuList.setAdapter(mMenuListApater);
+    }
+
+    @Override
+    public void LoadCardFail() {
+
     }
 
     @Override
@@ -156,9 +187,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     protected void initView() {
         stateLayout.showContentView();
         initToolbar();
-        mPresenter.initCardList();
-        mPresenter.initMenuList();
-
     }
 
     private void initToolbar() {
@@ -170,7 +198,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     @Override
     public void navigationPath(String path) {
-        LogUtils.d("onViewClicked===navigationPath======="+path);
         ARouter.getInstance().build(path).navigation();
     }
 
@@ -180,27 +207,32 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
         if (id == R.id.top_img_right) {
             ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
         }else if(id == R.id.mine_change){
-            LogUtils.d("onViewClicked===mine_change");
+            int count = mCardListApater.getItemCount();
+            if(count!=0){
+                Intent intent = new Intent(getContext(),ChangeAccountActivity.class);
+                Gson gson =new Gson();
+                LogUtils.d("onViewClicked====="+gson.toJson(mCardListApater.getDatas()));
+                startActivity(intent);
+            }
         }else if(id == R.id.mine_head_img){
-            LogUtils.d("onViewClicked===mine_head_img");
+
         }else if(id == R.id.add_account){
             ARouter.getInstance().build("/lantelhome/360/ChangeAccount").navigation();
-            LogUtils.d("onViewClicked===add_account");
         }
     }
 
     @Override
-    public void showFail() {
-
+    public void showEmpty() {
+        stateLayout.showEmptyView();
     }
 
     @Override
     public void showLoading() {
-
+        stateLayout.showLoadingView();
     }
 
     @Override
     public void showNetWorkError() {
-
+        stateLayout.showFailView();
     }
 }

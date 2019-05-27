@@ -38,4 +38,6 @@
     <dimen name="back_height">23dp</dimen>
     <dimen name="toolbar_lr_margin">30dp</dimen>
     <dimen name="toolbar_title">18sp</dimen>
+    <dimen name="state_img_width">129dp</dimen>
+    <dimen name="state_img_height">143dp</dimen>
 </resources>

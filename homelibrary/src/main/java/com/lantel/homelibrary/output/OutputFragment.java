@@ -10,6 +10,7 @@ import com.lantel.homelibrary.output.list.adpter.OutputAdapter;
 import com.lantel.homelibrary.output.mvp.OutputContract;
 import com.lantel.homelibrary.output.mvp.OutputModel;
 import com.lantel.homelibrary.output.mvp.OutputPresenter;
+import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.xiao360.baselibrary.base.BaseModel;
 
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
@@ -104,6 +105,16 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void refreshData(ArrayList<ClassesCardModel> menu) {
+
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<ClassesCardModel> menu) {
+
+    }
+
     @OnClick(R2.id.back)
     public void onViewClicked(View view) {
         int id = view.getId();
@@ -112,17 +123,17 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
     }
 
     @Override
-    public void showFail() {
-
+    public void showEmpty() {
+        stateLayout.showEmptyView();
     }
 
     @Override
     public void showLoading() {
-
+        stateLayout.showLoadingView();
     }
 
     @Override
     public void showNetWorkError() {
-
+        stateLayout.showFailView();
     }
 }

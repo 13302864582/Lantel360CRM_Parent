@@ -1,10 +1,12 @@
 package com.lantel.studylibrary.course.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.studylibrary.course.list.adpter.CourseAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 
@@ -13,10 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T,E> {
-    @BindView(R2.id.classes_list)
-    protected RecyclerView classes_list;
+public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T, E> {
     protected CourseAdapter mAdapter;
+    @BindView(R2.id.refreshlayout)
+    SmartRefreshLayout refreshlayout;
+    @BindView(R2.id.classes_list)
+    RecyclerView classes_list;
+    @BindView(R2.id.empty_img)
+    ImageView emptyImg;
 
     @Override
     protected int getContainerLayoutID() {
@@ -61,13 +67,10 @@ public abstract class BaseCourseFragment<T extends BaseFragmentPresenter, E exte
     @Override
     protected void initView() {
         stateLayout.showContentView();
+        emptyImg.setImageResource(R.mipmap.empty_course);
+        classes_list = rootView.findViewById(R.id.classes_list);
         classes_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new CourseAdapter(getContext(),null);
+        mAdapter = new CourseAdapter(getContext(), null);
         classes_list.setAdapter(mAdapter);
-        PresenterSetTag();
     }
-
-    protected abstract void PresenterSetTag();
-
-    protected abstract int getFragmentTag();
 }

@@ -92,7 +92,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     }
 
     @Override
-    public void showFail() {
+    public void showEmpty() {
 
     }
 

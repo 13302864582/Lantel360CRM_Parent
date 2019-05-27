@@ -90,7 +90,7 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
     }
 
     @Override
-    public void showFail() {
+    public void showEmpty() {
 
     }
 

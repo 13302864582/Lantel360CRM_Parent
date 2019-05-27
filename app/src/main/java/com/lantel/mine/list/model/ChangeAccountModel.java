@@ -3,15 +3,15 @@ package com.lantel.mine.list.model;
 import com.xiao360.baselibrary.base.BaseModel;
 
 public class ChangeAccountModel extends BaseModel {
-    private long id;
+    private String sid;
     private Object head_img;
 
-    public long getId() {
-        return id;
+    public String getSid() {
+        return sid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public Object getHead_img() {

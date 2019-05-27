@@ -16,37 +16,6 @@ import butterknife.OnClick;
 
 @Route(path = "/lantel/360/output/detail")
 public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,OutputDetailModel> implements OutputDetailContract.View {
-    /*@BindView(R2.id.back)
-    ImageView back;
-    @BindView(R2.id.title)
-    TextView title;
-    @BindView(R2.id.share)
-    TextView share;
-    @BindView(R2.id.remark)
-    TextView remark;
-    @BindView(R2.id.support)
-    TextView support;
-    @BindView(R2.id.head_img)
-    ImageView headImg;
-    @BindView(R2.id.name)
-    TextView name;
-    @BindView(R2.id.text_classes)
-    TextView textClasses;
-    @BindView(R2.id.text_adress)
-    TextView textAdress;
-    @BindView(R2.id.content)
-    TextView content;
-    @BindView(R2.id.img_list)
-    RecyclerView imgList;
-    @BindView(R2.id.time)
-    TextView time;
-    @BindView(R2.id.btm_list)
-    RecyclerView btmList;
-    @BindView(R2.id.card_ConstraintLayout)
-    ConstraintLayout card_ConstraintLayout;*/
-
-
-
     @Override
     protected BarHide hideBar() {
         return BarHide.FLAG_SHOW_BAR;
@@ -122,7 +91,7 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
     }
 
     @Override
-    public void showFail() {
+    public void showEmpty() {
 
     }
 

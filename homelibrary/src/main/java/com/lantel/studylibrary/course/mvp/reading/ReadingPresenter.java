@@ -1,18 +1,22 @@
 package com.lantel.studylibrary.course.mvp.reading;
 
 import android.os.Bundle;
+
+import com.lantel.studylibrary.classes.api.ClassBean;
+import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
+import com.lantel.studylibrary.course.api.CourseBean;
 import com.lantel.studylibrary.course.list.model.CourseCardModel;
-import com.xiao360.baselibrary.base.BaseModel;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.util.DisplayUtil;
+import com.xiao360.baselibrary.util.LogUtils;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class ReadingPresenter extends ReadingContract.Presenter {
-    public void setTag(int tag) {
-        this.tag = tag;
-    }
+    private int mCurrentPage = 0;
 
-    private int tag;
     @Override
     public void onCrete() {
 
@@ -20,7 +24,7 @@ public class ReadingPresenter extends ReadingContract.Presenter {
 
     @Override
     public void onStart() {
-
+        refreshData(null);
     }
 
     @Override
@@ -48,15 +52,65 @@ public class ReadingPresenter extends ReadingContract.Presenter {
 
     }
 
-    public void initData() {
-        //添加菜单数据
-        ArrayList<CourseCardModel> menu = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            CourseCardModel model = new CourseCardModel("fz1","2019-05-25","2019-05-26",1,9);
-            CourseCardModel mode2 = new CourseCardModel("fz2","2019-05-26","2019-05-29",2,8);
-            menu.add(model);
-            menu.add(mode2);
-        }
-        mView.initData(menu);
+    public void refreshData(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(1), String.valueOf(10), false, refreshLayout);
+    }
+
+    public void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
+        mModel.loadData(page, pageSize)
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<CourseBean>() {
+                    @Override
+                    public void onSuccess(CourseBean data) {
+                        if (data.getError() == 0) {
+                            List<CourseBean.DataBean.ListBean> listBean = data.getData().getList();
+                            if (listBean.size() == 0) {
+                                mView.showEmpty();
+                                if (null != refreshLayout)
+                                    refreshLayout.finishRefresh();
+                            } else {
+                                //添加菜单数据
+                                ArrayList<CourseCardModel> menu = new ArrayList<>();
+                                for (CourseBean.DataBean.ListBean bean : listBean) {
+                                    CourseCardModel model = new CourseCardModel();
+                                    model.setCourse_name(bean.getLesson().getLesson_name());
+                                    model.setCourse_start_date(DisplayUtil.getDateString(bean.getStart_int_day() + ""));
+                                    model.setPercent(Float.valueOf(bean.getUse_lesson_hours()));
+                                    model.setTotal(Float.valueOf(bean.getOrigin_lesson_hours()));
+                                    model.setRemain(Float.valueOf(bean.getRemain_lesson_hours()));
+                                    menu.add(model);
+                                }
+                                if (!isLoadMore) {
+                                    mView.refreshData(menu);
+                                    if (null != refreshLayout)
+                                        refreshLayout.finishRefresh();
+                                    mCurrentPage = 1;
+                                } else {
+                                    mView.setLoadMoreData(menu);
+                                    if (null != refreshLayout)
+                                        refreshLayout.finishLoadMore();
+                                    mCurrentPage++;
+                                }
+                            }
+                        } else {
+                            onFailure(new Throwable(data.getMessage()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        if (null != refreshLayout) {
+                            if (!isLoadMore)
+                                refreshLayout.finishRefresh();
+                            else
+                                refreshLayout.finishLoadMore();
+                        }
+                        mView.showEmpty();
+                    }
+                });
+    }
+
+    public void onLoadMore(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(mCurrentPage + 1), String.valueOf(10), true, refreshLayout);
     }
 }

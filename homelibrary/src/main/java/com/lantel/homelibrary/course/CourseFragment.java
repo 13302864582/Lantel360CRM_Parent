@@ -179,17 +179,17 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     }
 
     @Override
-    public void showFail() {
-
+    public void showEmpty() {
+        stateLayout.showEmptyView();
     }
 
     @Override
     public void showLoading() {
-
+        stateLayout.showLoadingView();
     }
 
     @Override
     public void showNetWorkError() {
-
+        stateLayout.showFailView();
     }
 }

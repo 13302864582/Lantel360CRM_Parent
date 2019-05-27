@@ -24,8 +24,8 @@ public class EqulizerSeekBar extends View {
     Bitmap targetColorBit = null;
     private int centerX = 0;
     private int realH = 0;
-    private int progress = 0;
-    private int Maxprogress = 100;
+    private float progress = 0;
+    private float Maxprogress = 100;
     private int realW;
     private Paint mTextPaint;
 
@@ -39,7 +39,7 @@ public class EqulizerSeekBar extends View {
         init();
     }
 
-    public void setMaxprogress(int maxprogress) {
+    public void setMaxprogress(float maxprogress) {
         Maxprogress = maxprogress;
     }
 
@@ -61,7 +61,6 @@ public class EqulizerSeekBar extends View {
         realW = getWidth()-getPaddingLeft()-getPaddingRight();
         perWidth = realW * 1.0f / Maxprogress;
         rectF.right = getPaddingLeft() + progress * perWidth;
-        LogUtils.d("perWidth===rectF.right:"+perWidth);
     }
 
     private void initBitmap() {
@@ -75,9 +74,7 @@ public class EqulizerSeekBar extends View {
                 colorBg.getHeight(), matrix, false);
         centerX = (getWidth() - targetColorBit.getWidth())/2;
         bg.recycle();
-        bg = null;
         colorBg.recycle();
-        colorBg = null;
     }
 
     @Override
@@ -100,7 +97,7 @@ public class EqulizerSeekBar extends View {
     }
 
     //设置 预设值
-    public void setProgress(int progress){
+    public void setProgress(float progress){
         this.progress = progress;
         invalidate();
     }
