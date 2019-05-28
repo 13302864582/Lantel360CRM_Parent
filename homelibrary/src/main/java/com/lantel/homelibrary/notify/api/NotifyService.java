@@ -9,7 +9,7 @@ public interface NotifyService {
     @Headers({
             "x-sid:21",
             "x-sub-host:base",
-            "x-token:x-token:9d7243e052cde8c3bbecff760b212e29"
+            "x-token:9d7243e052cde8c3bbecff760b212e29"
     })
     @GET("broadcasts")
     Observable<NotifyBean> getNotifyData(@Query("page") String page, @Query("pagesize") String pagesize);

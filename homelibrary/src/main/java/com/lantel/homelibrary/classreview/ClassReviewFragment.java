@@ -7,14 +7,18 @@ import com.lantel.homelibrary.classreview.list.model.ClassReviewCardModel;
 import com.lantel.homelibrary.classreview.mvp.ClassReviewContract;
 import com.lantel.homelibrary.classreview.mvp.ClassReviewModel;
 import com.lantel.homelibrary.classreview.mvp.ClassReviewPresenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.NormalListFragment;
 import java.util.ArrayList;
+import java.util.List;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter, ClassReviewModel> implements ClassReviewContract.View{
+public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter, ClassReviewModel> implements ClassReviewContract.View, OnRefreshLoadMoreListener {
     @Override
     protected void InitView() {
-
+        refreshLayout.setOnRefreshLoadMoreListener(this);
     }
 
     @Override
@@ -53,12 +57,6 @@ public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter
     }
 
     @Override
-    public void initAttenceData(ArrayList<ClassReviewCardModel> menu) {
-        ((ClassReviewAdapter)mAdapter).setDatas(menu);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void showEmpty() {
         stateLayout.showEmptyView();
     }
@@ -71,5 +69,31 @@ public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout);
+    }
+
+    @Override
+    public void refreshData(ArrayList<ClassReviewCardModel> menu) {
+        stateLayout.showContentView();
+        ((ClassReviewAdapter)mAdapter).setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<ClassReviewCardModel> menu) {
+        List<ClassReviewCardModel> list = ((ClassReviewAdapter)mAdapter).getDatas();
+        int start = list.size();
+        list.addAll(menu);
+        mAdapter.notifyItemRangeInserted(start,menu.size());
+        mAdapter.notifyItemRangeChanged(start,menu.size());
     }
 }

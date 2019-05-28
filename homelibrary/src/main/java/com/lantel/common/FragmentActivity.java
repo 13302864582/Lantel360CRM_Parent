@@ -1,7 +1,5 @@
 package com.lantel.common;
 
-import com.gyf.immersionbar.BarHide;
-import com.gyf.immersionbar.ImmersionBar;
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.base.BaseActivity;
 import androidx.fragment.app.Fragment;

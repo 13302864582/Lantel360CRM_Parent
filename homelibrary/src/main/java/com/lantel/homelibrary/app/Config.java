@@ -41,6 +41,7 @@ public class Config {
 
     public static final int REQUEST_EDIT_TEXT = 100;
     public static final int REQUEST_BIND_ADD = 101;
+    public static final int REQUEST_CHANGE_ACCOUNT = 102;
 
     public static final String BIND_PHONE = "BIND_PHONE";
     public static final String BIND_WEIBO = "BIND_WEIBO";
@@ -49,4 +50,5 @@ public class Config {
     public static final int VIDEO = 1;
     public static final int PHOTO = 0;
     public static final String SID = "SID";
+    public static final String ACCOUNT_LIST = "ACCOUNT_LIST";
 }

@@ -21,10 +21,11 @@ public class AttenceCardModel extends BaseModel implements Comparable<AttenceCar
     }
 
     public long getTimeLong() {
-        if(time.indexOf(0)==0){
-            time.replaceAll("^(0+)", "").trim();
+        String timelong = time;
+        if(timelong.indexOf(0)==0){
+            timelong.replaceAll("^(0+)", "").trim();
         }
-        return Long.valueOf(time);
+        return Long.valueOf(timelong);
     }
 
     public void setTime(String time) {

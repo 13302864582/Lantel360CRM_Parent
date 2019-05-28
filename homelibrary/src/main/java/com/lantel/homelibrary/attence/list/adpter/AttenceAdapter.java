@@ -10,6 +10,7 @@ import com.lantel.homelibrary.attence.list.holder.AttenceHolder;
 import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import java.util.List;
 
 public class AttenceAdapter extends BaseRecyclerViewAdapter<AttenceCardModel> {
@@ -39,7 +40,8 @@ public class AttenceAdapter extends BaseRecyclerViewAdapter<AttenceCardModel> {
             attenceHolder.attence_date.setText(getDateString(data.getDate()));
         }else
             attenceHolder.attence_date.setVisibility(View.GONE);
-        attenceHolder.attence_time.setText(getTimeString(data.getTime()));
+        setText(data.getClassName(),attenceHolder.attence_class_name);
+        setText(getTimeString(data.getTime()),attenceHolder.attence_time);
         attenceHolder.attence_state.setImageResource(getStateImgRes(data.getState()));
 
     }

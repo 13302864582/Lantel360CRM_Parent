@@ -1,5 +1,10 @@
 package com.lantel.app;
 
+import android.app.Activity;
+import android.content.Intent;
+
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleBus;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
@@ -7,7 +12,11 @@ import com.lantel.app.mvp.AppContract;
 import com.lantel.app.mvp.AppModel;
 import com.lantel.app.mvp.AppPresenter;
 import com.lantel.crmparent.R;
+import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
+import com.xiao360.baselibrary.util.LogUtils;
+
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
@@ -64,16 +73,6 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
                 .init();
     }
 
-  /*  @ModuleEvent(coreClientClass = IBaseClient.class)
-    public void funfz(boolean FullScreen) {
-        int visable = bottomNavigation.getVisibility();
-        if(View.GONE == visable){
-            bottomNavigation.setVisibility(View.VISIBLE);
-        }else {
-            bottomNavigation.setVisibility(View.GONE);
-        }
-    }*/
-
     @Override
     public void navigate(int action_id) {
         if(action_id == mLastNavId)
@@ -102,5 +101,13 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
     @Override
     public void showNetWorkError() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == Config.REQUEST_CHANGE_ACCOUNT && resultCode == Activity.RESULT_OK){
+            ModuleBus.getInstance().post(IBaseClient.class,"refreshMineCard",data.getStringExtra(Config.SID));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

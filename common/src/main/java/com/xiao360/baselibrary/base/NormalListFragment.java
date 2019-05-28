@@ -4,6 +4,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.baselibrary.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class NormalListFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T, E> {
     protected RecyclerView.Adapter mAdapter;
     protected RecyclerView recyclerView;
+    protected SmartRefreshLayout refreshLayout;
+    private boolean hasLoadMore = false;
 
     @Override
     protected int getContainerLayoutID() {
@@ -50,10 +55,30 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
         initFailView();
         initToolBar();
         stateLayout.showContentView();
+        refreshLayout = rootView.findViewById(R.id.refreshlayout);
         recyclerView = rootView.findViewById(getListView());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(manager);
         mAdapter = getAdapter();
         recyclerView.setAdapter(mAdapter);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisible = manager.findLastVisibleItemPosition();
+                if(!hasLoadMore && lastVisible>=9){
+                    stateLayout.refreshLayout.setEnableLoadMore(true);
+                    hasLoadMore = true;
+                }
+            }
+        });
         InitView();
     }
 
@@ -61,7 +86,7 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
 
     protected abstract int getListView();
 
-    private void initFailView() {
+    protected void initFailView() {
         ImageView fail_img = rootView.findViewById(R.id.fail_img);
         TextView fail_text = rootView.findViewById(R.id.fail_text);
         fail_img.setImageResource(getFailImgID());
@@ -76,7 +101,7 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
         return R.mipmap.fail;
     }
 
-    private void initLoadingView() {
+    protected void initLoadingView() {
         ImageView loading_img = rootView.findViewById(R.id.loading_img);
         TextView loading_text = rootView.findViewById(R.id.loading_text);
         loading_img.setImageResource(getLoadingImgID());
@@ -91,7 +116,7 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
         return R.mipmap.loading;
     }
 
-    private void initEmptyView() {
+    protected void initEmptyView() {
         ImageView empty_img = rootView.findViewById(R.id.empty_img);
         TextView empty_text = rootView.findViewById(R.id.empty_text);
         empty_img.setImageResource(getEmptyImgID());
@@ -108,7 +133,7 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
 
     protected abstract RecyclerView.Adapter getAdapter();
 
-    private void initToolBar() {
+    protected void initToolBar() {
         TextView title = rootView.findViewById(R.id.title);
         title.setText(getString(getToolbarTitle()));
         ImageView back = rootView.findViewById(R.id.back);

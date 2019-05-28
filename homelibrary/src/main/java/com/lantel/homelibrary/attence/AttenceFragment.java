@@ -1,5 +1,6 @@
 package com.lantel.homelibrary.attence;
 
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,17 +14,24 @@ import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.lantel.homelibrary.attence.mvp.AttenceContract;
 import com.lantel.homelibrary.attence.mvp.AttenceModel;
 import com.lantel.homelibrary.attence.mvp.AttencePresenter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.util.LogUtils;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, AttenceModel> implements AttenceContract.View, OnTimeSelectListener {
+public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, AttenceModel> implements AttenceContract.View, OnTimeSelectListener, OnRefreshLoadMoreListener {
     @BindView(R2.id.back)
     ImageView back;
     @BindView(R2.id.title)
@@ -32,7 +40,12 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     ImageView filterDate;
     @BindView(R2.id.attence_list)
     RecyclerView attenceList;
+    @BindView(R2.id.refreshlayout)
+    SmartRefreshLayout refreshLayout;
+
     private AttenceAdapter mAdapter;
+    private boolean hasLoadMore = false;
+    private boolean isRangeMode = false;
 
     @Override
     protected int getContainerLayoutID() {
@@ -88,15 +101,30 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     @Override
     protected void initView() {
         stateLayout.showContentView();
-        attenceList.setLayoutManager(new LinearLayoutManager(getContext()));
+        filterDate.setVisibility(View.VISIBLE);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        attenceList.setLayoutManager(manager);
         mAdapter = new AttenceAdapter(getContext(),null);
         attenceList.setAdapter(mAdapter);
-    }
+        refreshLayout.setOnRefreshLoadMoreListener(this);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        attenceList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
 
-    @Override
-    public void initAttenceData(ArrayList<AttenceCardModel> menu) {
-        mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisible = manager.findLastVisibleItemPosition();
+                if(!hasLoadMore && lastVisible>=9){
+                    stateLayout.refreshLayout.setEnableLoadMore(true);
+                    hasLoadMore = true;
+                }
+            }
+        });
     }
 
     @OnClick({R2.id.back, R2.id.filter_date})
@@ -106,7 +134,7 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
             TimePickerView timePicker = getTimePickerView();
             timePicker.show();
         } else if(id == R.id.back){
-
+            getActivity().finish();
         }
     }
 
@@ -139,7 +167,8 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
 
     @Override
     public void onTimeSelect(Date date, View v) {
-        LogUtils.d("onTimeSelect==="+date.toString());
+        isRangeMode = true;
+        mPresenter.onTimeSelect(date);
     }
 
     @Override
@@ -155,5 +184,31 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    @Override
+    public void refreshData(ArrayList<AttenceCardModel> menu) {
+        stateLayout.showContentView();
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        mAdapter.setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<AttenceCardModel> menu) {
+        int start = mAdapter.getDatas().size();
+        mAdapter.getDatas().addAll(menu);
+        mAdapter.notifyItemRangeInserted(start,menu.size());
+        mAdapter.notifyItemRangeChanged(start,menu.size());
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout,isRangeMode);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout,isRangeMode);
     }
 }

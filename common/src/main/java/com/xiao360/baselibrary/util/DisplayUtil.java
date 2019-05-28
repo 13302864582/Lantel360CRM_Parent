@@ -296,10 +296,36 @@ public class DisplayUtil {
     }
 
     public static String getTimeString(String time) {
-        String hour = time.substring(0,2);
-        String minute = time.substring(2);
+        String hour = "";
+        String minute = "";
+        if(time.length() == 3){
+             hour = time.substring(0,1);
+             minute = time.substring(1);
+
+        }else {
+             hour = time.substring(0,2);
+             minute = time.substring(2);
+        }
         StringBuilder builder = new StringBuilder();
         builder.append(hour).append(":").append(minute);
         return builder.toString();
+    }
+
+    /**
+     * 根据提供的年月日获取该月份的第一天
+     * @Description: (这里用一句话描述这个方法的作用)
+     * @Author: gyz
+     * @Since: 2017-1-9下午2:26:57
+     * @param index 0,第一天，1，最后一天
+     * @return
+     */
+    public static Date getSupportBeginDayofMonth(Date date ,int index) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1);
+
+       if(index == 1)
+           cal.roll(Calendar.DATE, -1);
+        return cal.getTime();
     }
 }

@@ -3,25 +3,18 @@ package com.lantel.homelibrary.classreview.list.model;
 import com.xiao360.baselibrary.base.BaseModel;
 
 public class ClassReviewCardModel extends BaseModel {
-    private String date;
-    private String time;
+    private String teacherName;
     private String className;
-    private int state;
+    private String date;
+    private String content;
+    private Object headImg;
 
-    public String getDate() {
-        return date;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getClassName() {
@@ -32,12 +25,27 @@ public class ClassReviewCardModel extends BaseModel {
         this.className = className;
     }
 
-    public int getState() {
-        return state;
+    public String getDate() {
+        return date;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setDate(String date) {
+        this.date = date;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Object getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(Object headImg) {
+        this.headImg = headImg;
+    }
 }

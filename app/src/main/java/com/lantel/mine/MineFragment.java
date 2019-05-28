@@ -1,11 +1,14 @@
 package com.lantel.mine;
 
-import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleEvent;
 import com.google.gson.Gson;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
@@ -76,19 +79,23 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     @Override
     public void notifyCardData(MineCardBean cardBean) {
         mCardList = cardBean.getData().getList();
+        updateCard();
+    }
+
+    private void updateCard() {
         for(MineCardBean.DataBean.ListBean bean : mCardList){
             if(bean.getSid().equals(sid)){
                 mineName.setText(bean.getStudent_name());
                 mineCall.setText(bean.getNick_name());
-                GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg);
+                GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg,R.mipmap.circle_default);
                 try {
-                    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(bean.getBirth_time());
-                    mineAge.setText(DisplayUtil.getAge(date,getContext()));
+                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(bean.getBirth_time());
+                    mineAge.setText(DisplayUtil.getAge(date,getContext())+getString(R.string.year_old));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                mineStudentId.setText(bean.getSno());
-                mineCardId.setText(bean.getCard_no());
+                mineStudentId.setText(getString(R.string.sno)+bean.getSno());
+                mineCardId.setText(getString(R.string.card_sno)+bean.getCard_no());
                 String total = bean.getStudent_lesson_hours();
                 String remain = bean.getStudent_lesson_remain_hours();
                 String use = (Float.valueOf(total) - Float.valueOf(remain))+"";
@@ -105,9 +112,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
                 mCardListApater.notifyDataSetChanged();
             }
         }
-
     }
-
 
 
     @Override
@@ -187,9 +192,38 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     protected void initView() {
         stateLayout.showContentView();
         initToolbar();
+        initCardList();
+        initMenuList();
     }
 
-    private void initToolbar() {
+    public void initMenuList() {
+        //添加菜单数据
+        ArrayList<SimpleMenuModel> menu = new ArrayList<>();
+        Resources resources = getContext().getResources();
+        String[] titles = resources.getStringArray(R.array.mine_menu_title);
+        String[] router_paths = resources.getStringArray(R.array.mine_menu_router_path);
+        TypedArray icons = resources.obtainTypedArray(R.array.mine_menu_icon);
+        for (int i = 0; i < titles.length; i++) {
+            SimpleMenuModel menuModel = new SimpleMenuModel();
+            menuModel.setTitle(titles[i]);
+            menuModel.setImgRes(icons.getResourceId(i,0));
+            menuModel.setRouterpath(router_paths[i]);
+            menu.add(menuModel);
+        }
+        initMenuData(menu);
+    }
+
+    public void initCardList() {
+        initCardData(getContext().getResources().getStringArray(R.array.mine_card_item_title));
+    }
+
+    @ModuleEvent(coreClientClass = IBaseClient.class)
+    public void refreshMineCard(String sid) {
+        this.sid = sid;
+        updateCard();
+    }
+
+        private void initToolbar() {
         statebarView.setBackgroundColor(getResColor(R.color.white));
         toolbar.setBackgroundColor(getResColor(R.color.white));
         toolbarTitle.setText(getString(R.string.tabhost_mine));
@@ -206,18 +240,14 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
         int id = view.getId();
         if (id == R.id.top_img_right) {
             ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
-        }else if(id == R.id.mine_change){
-            int count = mCardListApater.getItemCount();
-            if(count!=0){
-                Intent intent = new Intent(getContext(),ChangeAccountActivity.class);
+        }else if(id == R.id.mine_change || id == R.id.add_account){
+            if(null != mCardList && mCardList.size()!=0){
                 Gson gson =new Gson();
-                LogUtils.d("onViewClicked====="+gson.toJson(mCardListApater.getDatas()));
-                startActivity(intent);
+                String accountListJson = gson.toJson(mCardList);
+                ARouter.getInstance().build("/lantelhome/360/ChangeAccount").withString(Config.ACCOUNT_LIST,accountListJson).withString(Config.SID,sid).navigation(getActivity(),Config.REQUEST_CHANGE_ACCOUNT);
             }
         }else if(id == R.id.mine_head_img){
 
-        }else if(id == R.id.add_account){
-            ARouter.getInstance().build("/lantelhome/360/ChangeAccount").navigation();
         }
     }
 
