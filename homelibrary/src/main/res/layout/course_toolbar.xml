@@ -4,9 +4,18 @@
     android:id="@+id/course_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_btt"/>
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/month"
+        android:textSize="@dimen/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
@@ -18,19 +27,18 @@
        >
 
         <com.haibin.calendarview.CalendarView
-            app:week_bar_view=""
             android:id="@+id/calendarView"
             app:select_mode="default_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-            app:day_text_size="13sp"
-            app:calendar_padding="10dp"
+            android:background="@color/white"
+            app:day_text_size="@dimen/day_text_size"
+            app:calendar_padding="@dimen/calendar_padding"
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#1d1d26"
 
-            app:current_day_lunar_text_color="#ffffff"
-            app:current_day_text_color="#ffffff"
+            app:current_day_lunar_text_color="@color/white"
+            app:current_day_text_color="@color/white"
 
             app:month_view="com.lantel.homelibrary.course.calendar.LantelMonthView"
             app:month_view_show_mode="mode_fix"
@@ -39,8 +47,8 @@
             app:scheme_text_color="#1d1d26"
             app:scheme_theme_color="@color/calendar_today"
 
-            app:selected_lunar_text_color="#ffffff"
-            app:selected_text_color="#ffffff"
+            app:selected_lunar_text_color="@color/white"
+            app:selected_text_color="@color/white"
             app:selected_theme_color="@color/calendar_today"
             />
     </com.haibin.calendarview.CalendarLayout>

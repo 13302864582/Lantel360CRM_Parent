@@ -14,21 +14,28 @@ import com.haibin.calendarview.CalendarView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.course.list.adpter.CurriculumAdapter;
+import com.lantel.homelibrary.course.list.model.CourseItemModel;
 import com.lantel.homelibrary.course.mvp.CourseContract;
 import com.lantel.homelibrary.course.mvp.CourseModel;
 import com.lantel.homelibrary.course.mvp.CoursePresenter;
-import com.xiao360.baselibrary.base.BaseModel;
-
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
+import com.xiao360.baselibrary.util.DisplayUtil;
+import com.xiao360.baselibrary.util.ToastUitl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
-public class CourseFragment extends ToolBarStateFragment<CoursePresenter, CourseModel> implements CourseContract.View , CalendarView.OnCalendarSelectListener {
+public class CourseFragment extends ToolBarStateFragment<CoursePresenter, CourseModel> implements CourseContract.View , CalendarView.OnCalendarSelectListener, OnRefreshLoadMoreListener {
     @BindView(R2.id.course_list)
     RecyclerView mCourseList;
     @BindView(R2.id.sick_leave)
@@ -39,6 +46,8 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     RadioGroup leaveRadioGroup;
     @BindView(R2.id.ok_btn)
     Button okBtn;
+    @BindView(R2.id.month)
+    TextView month;
     @BindView(R2.id.course_bottom_select)
     ConstraintLayout courseBottomSelect;
     @BindView(R2.id.statebarView)
@@ -53,8 +62,11 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     LinearLayout courseTop;
     @BindView(R2.id.calendarView)
     CalendarView calendarView;
-    private CurriculumAdapter mAdapter;
+
+    private CurriculumAdapter curriculumAdapter;
     private LinearLayoutManager mLineManager;
+    private boolean hasLoadMore = false;
+    private boolean isBeforeToday = false;
 
     @Override
     protected int getContainerLayoutID() {
@@ -111,6 +123,31 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
         stateLayout.showContentView();
         text_right.setText(R.string.leave);
         calendarView.setOnCalendarSelectListener(this);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mCourseList.setLayoutManager(manager);
+        curriculumAdapter = new CurriculumAdapter(getContext(),null);
+        mCourseList.setAdapter(curriculumAdapter);
+        stateLayout.refreshLayout.setOnRefreshLoadMoreListener(this);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTime(new Date(System.currentTimeMillis()));
+        month.setText(String.format(getString(R.string.month_format),calendar.get(java.util.Calendar.MONTH)+1));
+        mCourseList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisible = manager.findLastVisibleItemPosition();
+                if(!hasLoadMore && lastVisible>=9){
+                    stateLayout.refreshLayout.setEnableLoadMore(true);
+                    hasLoadMore = true;
+                }
+            }
+        });
     }
 
     @OnClick({R2.id.back, R2.id.text_right, R2.id.ok_btn})
@@ -119,14 +156,14 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
         if (id == R.id.back) {
             getActivity().finish();
         } else if (id == R.id.text_right) {
-            if (mAdapter != null) {
-                if (!mAdapter.isAnimation()) {
-                    boolean state = mAdapter.toogleEdit();
+            if (curriculumAdapter != null) {
+                if (!curriculumAdapter.isAnimation()) {
+                    boolean state = curriculumAdapter.toogleEdit();
                     toogleBottomMenu(state);
                 }
             }
         } else if (id == R.id.ok_btn) {
-
+            int checkID = leaveRadioGroup.getCheckedRadioButtonId();
         }
     }
 
@@ -161,21 +198,21 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     }
 
     @Override
-    public void initCourseData(ArrayList<BaseModel> menu) {
-        mLineManager = new LinearLayoutManager(getContext());
-        mCourseList.setLayoutManager(mLineManager);
-        mAdapter = new CurriculumAdapter(getContext(), menu);
-        mCourseList.setAdapter(mAdapter);
-    }
-
-    @Override
     public void onCalendarOutOfRange(Calendar calendar) {
 
     }
 
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
-
+        if(isClick){
+            int today = Integer.valueOf(DisplayUtil.praseformatIntDay(new Date(System.currentTimeMillis())));
+            int selectDay = Integer.valueOf(calendar.toString());
+            isBeforeToday = (selectDay-today)<0;
+            if(isBeforeToday)
+                text_right.setVisibility(View.GONE);
+        }
+        month.setText(String.format(getString(R.string.month_format),calendar.getMonth()));
+        mPresenter.onCalendarSelect(calendar,isClick);
     }
 
     @Override
@@ -191,5 +228,43 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    @Override
+    public void setSchemeDate(Map<String, Calendar> mSchemeDates) {
+        calendarView.setSchemeDate(mSchemeDates);
+    }
+
+    public void refreshData(ArrayList<CourseItemModel> menu) {
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+            curriculumAdapter.setmLastPosition(0);
+            if(!isBeforeToday)
+            text_right.setVisibility(View.VISIBLE);
+        } else{
+            stateLayout.showEmptyView();
+            text_right.setVisibility(View.GONE);
+        }
+
+        curriculumAdapter.setDatas(menu);
+        curriculumAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<CourseItemModel> menu) {
+        int start = curriculumAdapter.getDatas().size();
+        curriculumAdapter.getDatas().addAll(menu);
+        curriculumAdapter.notifyItemRangeInserted(start,menu.size());
+        curriculumAdapter.notifyItemRangeChanged(start,menu.size());
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout);
     }
 }

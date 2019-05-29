@@ -1,6 +1,7 @@
 package com.lantel.homelibrary.attence.mvp;
 
 import android.os.Bundle;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,6 +15,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+
 import okhttp3.ResponseBody;
 
 public class AttencePresenter extends AttenceContract.Presenter {
@@ -79,9 +82,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
                             JsonObject dataBean = new JsonParser().parse(data.string()).getAsJsonObject();
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
 
-                            if(dataBean.get("error").getAsInt()==0){
+                            if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
-                            }else {
+                            } else {
                                 onFailure(new Throwable(dataBean.get("message").getAsString()));
                             }
                         } catch (IOException e) {
@@ -103,8 +106,8 @@ public class AttencePresenter extends AttenceContract.Presenter {
                 });
     }
 
-    private void loadRangeData(String int_day,String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
-        mModel.loadRangeData(int_day,page, pageSize)
+    private void loadRangeData(String url, boolean isLoadMore, RefreshLayout refreshLayout) {
+        mModel.loadRangeData(url)
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<ResponseBody>() {
                     @Override
@@ -113,9 +116,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
                             JsonObject dataBean = new JsonParser().parse(data.string()).getAsJsonObject();
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
 
-                            if(dataBean.get("error").getAsInt()==0){
+                            if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
-                            }else {
+                            } else {
                                 onFailure(new Throwable(dataBean.get("message").getAsString()));
                             }
                         } catch (IOException e) {
@@ -148,9 +151,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
                 //使用GSON，直接转成Bean对象
                 AttenceBean userBean = gson.fromJson(user, AttenceBean.class);
                 AttenceCardModel attenceCardModel = new AttenceCardModel();
-                attenceCardModel.setDate(userBean.getInt_day()+"");
+                attenceCardModel.setDate(userBean.getInt_day() + "");
                 attenceCardModel.setClassName(userBean.getCourse_arrange().getCourse_name());
-                attenceCardModel.setTime(userBean.getInt_start_hour()+"");
+                attenceCardModel.setTime(userBean.getInt_start_hour() + "");
                 int attence = userBean.getIs_in();
                 int leave = userBean.getIs_leave();
                 attenceCardModel.setState(getStateInt(attence, leave));
@@ -158,30 +161,29 @@ public class AttencePresenter extends AttenceContract.Presenter {
             }
         }
 
-        if(!isLoadMore){
+        if (!isLoadMore) {
             mView.refreshData(userBeanList);
-            if(null!=refreshLayout)
+            if (null != refreshLayout)
                 refreshLayout.finishRefresh();
             mCurrentPage = 1;
-        }
-        else {
+        } else {
             mView.setLoadMoreData(userBeanList);
-            if(null!=refreshLayout)
+            if (null != refreshLayout)
                 refreshLayout.finishLoadMore();
             mCurrentPage++;
         }
     }
 
     private int getStateInt(int attence, int leave) {
-        if(attence == 1){
+        if (attence == 1) {
             //出勤
             return Config.STATE_NORMAL;
-        }else {
+        } else {
             //缺勤
-            if(leave == 0){
+            if (leave == 0) {
                 //未请假,缺勤
                 return Config.STATE_ABSENCE;
-            }else {
+            } else {
                 //请假
                 return Config.STATE_LEAVE;
             }
@@ -197,14 +199,15 @@ public class AttencePresenter extends AttenceContract.Presenter {
 
     public void onTimeSelect(Date date) {
         mCurrentPage = 0;
-        Date first = DisplayUtil.getSupportBeginDayofMonth(date,0);
-        Date last = DisplayUtil.getSupportBeginDayofMonth(date,1);
+        Date first = DisplayUtil.getSupportBeginDayofMonth(date, 0);
+        Date last = DisplayUtil.getSupportBeginDayofMonth(date, 1);
+        mCurrentDate = getUrl(first, last,String.valueOf(mCurrentPage + 1), String.valueOf(10));
+        loadRangeData(mCurrentDate, false, null);
+    }
+
+    public String getUrl(Date first, Date last,String page,String pageSize) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String sAgeFormat = context.getString(R.string.sAttenceDateFormat);
-        mCurrentDate = String.format(sAgeFormat, dateFormat.format(first),dateFormat.format(last));
-            loadRangeData(mCurrentDate,String.valueOf(mCurrentPage + 1), String.valueOf(10), false, null);
-            LogUtils.d("onTimeSelect==="+mCurrentDate);
-
-
+        return String.format(sAgeFormat, dateFormat.format(first), dateFormat.format(last))+"&page="+page+"&pagesize="+pageSize;
     }
 }

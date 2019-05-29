@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.xiao360.baselibrary.base.BaseApplication;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -327,5 +329,20 @@ public class DisplayUtil {
        if(index == 1)
            cal.roll(Calendar.DATE, -1);
         return cal.getTime();
+    }
+
+    public static Date formatIntDay(String intDate) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        try {
+            return format.parse(intDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String praseformatIntDay(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        return format.format(date);
     }
 }

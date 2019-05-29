@@ -37,11 +37,11 @@ public class AttenceAdapter extends BaseRecyclerViewAdapter<AttenceCardModel> {
 
         if(isFirst || isDifferentDate){
             attenceHolder.attence_date.setVisibility(View.VISIBLE);
-            attenceHolder.attence_date.setText(getDateString(data.getDate()));
+            attenceHolder.attence_date.setText(DisplayUtil.getDateString(data.getDate()));
         }else
             attenceHolder.attence_date.setVisibility(View.GONE);
         setText(data.getClassName(),attenceHolder.attence_class_name);
-        setText(getTimeString(data.getTime()),attenceHolder.attence_time);
+        setText(DisplayUtil.getTimeString(data.getTime()),attenceHolder.attence_time);
         attenceHolder.attence_state.setImageResource(getStateImgRes(data.getState()));
 
     }
@@ -60,22 +60,5 @@ public class AttenceAdapter extends BaseRecyclerViewAdapter<AttenceCardModel> {
                 break;
         }
         return res;
-    }
-
-    private String getDateString(String date) {
-        String year = date.substring(0,4);
-        String month = date.substring(4,6);
-        String day = date.substring(6);
-        StringBuilder builder = new StringBuilder();
-        builder.append(year).append("-").append(month).append("-").append(day);
-        return builder.toString();
-    }
-
-    private String getTimeString(String time) {
-        String hour = time.substring(0,2);
-        String minute = time.substring(2);
-        StringBuilder builder = new StringBuilder();
-        builder.append(hour).append(":").append(minute);
-        return builder.toString();
     }
 }

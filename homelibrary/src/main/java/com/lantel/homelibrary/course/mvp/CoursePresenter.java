@@ -2,17 +2,27 @@ package com.lantel.homelibrary.course.mvp;
 
 import android.os.Bundle;
 
-import com.lantel.studylibrary.classes.api.ClassBean;
-import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
+import com.haibin.calendarview.Calendar;
+import com.httpsdk.http.RxHelper;
+import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.course.api.CourseBean;
+import com.lantel.homelibrary.course.list.model.CourseAllBean;
+import com.lantel.homelibrary.course.list.model.CourseItemModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
-public class CoursePresenter extends CourseContract.Presenter{
+public class CoursePresenter extends CourseContract.Presenter {
+    private int mCurrentPage = 0;
+    private String mCurrentIntDay = "";
+
     @Override
     public void onCrete(Bundle savedInstanceState) {
         LogUtils.d("onCrete: ");
@@ -27,7 +37,9 @@ public class CoursePresenter extends CourseContract.Presenter{
     @Override
     public void onStart() {
         LogUtils.d("onStart: ");
-        initMenu();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        mCurrentIntDay = format.format(new Date(System.currentTimeMillis()));
+        refreshData(null);
     }
 
     @Override
@@ -50,87 +62,124 @@ public class CoursePresenter extends CourseContract.Presenter{
         LogUtils.d("onCrete: ");
     }
 
-    public void initMenu() {
-        //添加菜单数据
-        ArrayList<BaseModel> menu = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            BaseModel model = new BaseModel();
-            model.setType(0);
-            BaseModel mode2 = new BaseModel();
-            mode2.setType(1);
-            menu.add(model);
-            menu.add(mode2);
-        }
-        mView.initCourseData(menu);
-    }
-
-  /*  public void refreshData(RefreshLayout refreshLayout) {
-        loadData(String.valueOf(1),String.valueOf(10),false,refreshLayout);
+    public void refreshData(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(1), String.valueOf(10), false, refreshLayout);
     }
 
     private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
-        mModel.loadData(page,pageSize)
+        mModel.loadData(mCurrentIntDay, page, pageSize)
                 .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<ClassBean>() {
+                .subscribe(new BaseRxObserver<CourseAllBean>() {
                     @Override
-                    public void onSuccess(ClassBean data) {
-                        if(data.getError()==0){
-                            List<ClassBean.DataBean.ListBean> listBean = data.getData().getList();
-                            //添加菜单数据
-                            ArrayList<ClassesCardModel> menu = new ArrayList<>();
-                            for (ClassBean.DataBean.ListBean  bean : listBean) {
-                                ClassesCardModel model = new ClassesCardModel();
-                                ClassBean.DataBean.ListBean.TeacherBean teacher = bean.getTeacher();
-                                model.setHeaImg(teacher.getPhoto_url());
-                                model.setTeacher(teacher.getEname());
-                                model.setClassName(bean.getClass_name());
-                                model.setPlace(bean.getClassroom().getRoom_name());
-                                model.setTotal(bean.getArrange_times());
-                                model.setPercent(bean.getAttendance_times());
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                            }
-                            if(!isLoadMore){
-                                mView.refreshData(menu);
-                                if(null!=refreshLayout)
-                                    refreshLayout.finishRefresh();
-                                mCurrentPage = 1;
-                            }
-                            else {
-                                mView.setLoadMoreData(menu);
-                                if(null!=refreshLayout)
-                                    refreshLayout.finishLoadMore();
-                                mCurrentPage++;
-                            }
-
-                        }else {
-                            onFailure(new Throwable(data.getMessage()));
-                        }
+                    public void onSuccess(CourseAllBean courseAllBean) {
+                        setSchmeCalender(courseAllBean);
+                        int error = courseAllBean.getCourseError();
+                        List<CourseBean.DataBean.ListBean> listBean = courseAllBean.getListBeans();
+                        setCourseList(error, listBean, isLoadMore, refreshLayout);
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        if(null!=refreshLayout){
-                            if(!isLoadMore)
-                                refreshLayout.finishRefresh();
-                            else
-                                refreshLayout.finishLoadMore();
-                        }
+
+                    }
+                });
+    }
+
+    private void getCourse(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
+        mModel.getCourse(mCurrentIntDay, page, pageSize)
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<CourseBean>() {
+                    @Override
+                    public void onSuccess(CourseBean courseBean) {
+                        int error = courseBean.getError();
+                        List<CourseBean.DataBean.ListBean> listBean = courseBean.getData().getList();
+                        setCourseList(error, listBean, isLoadMore, refreshLayout);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
                         mView.showEmpty();
                     }
                 });
     }
 
-    public void onLoadMore(RefreshLayout refreshLayout) {
-        loadData(String.valueOf(mCurrentPage+1),String.valueOf(10),true, refreshLayout);
-    }*/
+    private void setCourseList(int errorCode, List<CourseBean.DataBean.ListBean> listBean, boolean isLoadMore, RefreshLayout refreshLayout) {
+        if (errorCode == 0) {
+            ArrayList<CourseItemModel> menu = new ArrayList<>();
 
+            for (CourseBean.DataBean.ListBean bean : listBean) {
+                CourseItemModel itemModel = new CourseItemModel();
+                if (null != bean.getLesson())
+                    itemModel.setCourseName(String.format(context.getString(R.string.course_formate), bean.getLesson().getLesson_name()));
+                if (null != bean.getTeacher())
+                    itemModel.setTeacher(bean.getTeacher().getEname());
+                if (null != bean.getTextbook_section() && null != bean.getTextbook()) {
+                    CourseBean.DataBean.ListBean.TextbookSectionBean sectionBean = bean.getTextbook_section();
+                    String tbName = bean.getTextbook().getTb_name();
+                    itemModel.setSection(tbName + String.format(context.getString(R.string.sectionFormat), sectionBean.getSort()) + sectionBean.getSection_title());
+                }
+                itemModel.setStartTime(DisplayUtil.getTimeString(bean.getInt_start_hour() + ""));
+                itemModel.setEndTime(DisplayUtil.getTimeString(bean.getInt_end_hour() + ""));
+                itemModel.setLeave(null == bean.getStudent_leave());
+                menu.add(itemModel);
+            }
+            if (!isLoadMore) {
+                mView.refreshData(menu);
+                if (null != refreshLayout)
+                    refreshLayout.finishRefresh();
+                mCurrentPage = 1;
+            } else {
+                if (menu.size() != 0) {
+                    mView.setLoadMoreData(menu);
+                    mCurrentPage++;
+                }
+                if (null != refreshLayout)
+                    refreshLayout.finishLoadMore();
+
+            }
+        } else {
+            if (!isLoadMore)
+                mView.showEmpty();
+            else {
+                if (null != refreshLayout)
+                    refreshLayout.finishLoadMore();
+            }
+        }
+    }
+
+    private Calendar getSchemeCalendar(int year, int month, int day) {
+        Calendar calendar = new Calendar();
+        calendar.setYear(year);
+        calendar.setMonth(month + 1);
+        calendar.setDay(day);
+        return calendar;
+    }
+
+    private void setSchmeCalender(CourseAllBean courseAllBean) {
+        if (courseAllBean.getSchmeError() == 0) {
+            HashMap<String, Calendar> map = new HashMap<>();
+            List<Integer> dateList = courseAllBean.getSchmeDays();
+
+            for (Integer int_day : dateList) {
+                Date date = DisplayUtil.formatIntDay(String.valueOf(int_day));
+                java.util.Calendar calendar = java.util.Calendar.getInstance();
+                calendar.setTime(date);
+                Calendar cal = getSchemeCalendar(calendar.get(java.util.Calendar.YEAR), calendar.get(java.util.Calendar.MONTH), calendar.get(java.util.Calendar.DAY_OF_MONTH));
+                map.put(cal.toString(), cal);
+            }
+            mView.setSchemeDate(map);
+        }
+    }
+
+    public void onLoadMore(RefreshLayout refreshLayout) {
+        loadData(String.valueOf(mCurrentPage + 1), String.valueOf(10), true, refreshLayout);
+    }
+
+    public void onCalendarSelect(Calendar calendar, boolean isClick) {
+        if (isClick) {
+            mCurrentIntDay = calendar.toString();
+            getCourse(String.valueOf(mCurrentPage), String.valueOf(10), false, null);
+        }
+    }
 }

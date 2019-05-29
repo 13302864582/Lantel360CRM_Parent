@@ -76,5 +76,8 @@
     <string name="class_review">课评</string>
     <string name="remark_title">老师对我的点评</string>
     <string name="notify">通知</string>
-    <string name="sAttenceDateFormat" >"Between&#044;%1$s&#044;%2$s"</string>
+    <string name="sAttenceDateFormat" >"student_attendances?int_day=[Between,%1$s,%2$s]"</string>
+    <string name="sectionFormat">第%1$d章</string>
+    <string name="course_formate" >《%1$s》</string>
+    <string name="month_format">%1$d月</string>
 </resources>

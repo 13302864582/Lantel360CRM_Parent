@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
-
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.MonthView;
 import com.lantel.homelibrary.R;
-
+import com.xiao360.baselibrary.util.DisplayUtil;
 
 public class LantelMonthView extends MonthView {
-
     private int mRadius;
     private Paint mTodayPaint;
     public LantelMonthView(Context context) {
@@ -60,8 +58,8 @@ public class LantelMonthView extends MonthView {
     @Override
     protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
         int cx = x + mItemWidth / 2;
-        int cy = y + mItemHeight / 2;
-        canvas.drawCircle(cx, cy, mRadius, mSchemePaint);
+        int cy = y + mItemHeight *4/5;
+        canvas.drawCircle(cx, cy, DisplayUtil.dip2px(2), mSchemePaint);
     }
 
     /**

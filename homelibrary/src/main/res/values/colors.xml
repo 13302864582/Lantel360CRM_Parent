@@ -70,4 +70,5 @@
     <color name="from_title">#181818</color>
     <color name="detail_text">#3d3d3d</color>
     <color name="circle">#e7e7e7</color>
+    <color name="month">#212121</color>
 </resources>

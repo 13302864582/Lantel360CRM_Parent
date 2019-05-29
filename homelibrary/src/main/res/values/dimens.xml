@@ -106,4 +106,7 @@
     <dimen name="from_title">11sp</dimen>
     <dimen name="detail_text">12sp</dimen>
     <dimen name="class_head_img">58dp</dimen>
+    <dimen name="month">16sp</dimen>
+    <dimen name="day_text_size">13sp</dimen>
+    <dimen name="calendar_padding">8dp</dimen>
 </resources>

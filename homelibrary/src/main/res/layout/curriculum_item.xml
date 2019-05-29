@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 app:imgSrc="@drawable/img_person"
                 app:layout_constraintBaseline_toBaselineOf="@+id/room"
-                app:layout_constraintHorizontal_bias="0.534"
+                app:layout_constraintHorizontal_bias="0.45"
                 app:layout_constraintLeft_toLeftOf="@+id/room"
                 app:layout_constraintRight_toRightOf="parent"
                 android:textColor="@color/image_text"

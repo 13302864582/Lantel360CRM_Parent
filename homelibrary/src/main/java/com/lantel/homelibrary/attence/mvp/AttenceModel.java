@@ -14,8 +14,8 @@ public class AttenceModel extends ViewModel {
         return service.getAttenceData(page,pageSize).compose(RxHelper.io_main());
     }
 
-    public Observable<ResponseBody> loadRangeData(String int_day,String page, String pageSize) {
+    public Observable<ResponseBody> loadRangeData(String url) {
         AttenceService service = Http.getInstance().createRequest(AttenceService.class);
-        return service.getAttenceDataRange(int_day,page,pageSize).compose(RxHelper.io_main());
+        return service.getAttenceDataRange(url).compose(RxHelper.io_main());
     }
 }
