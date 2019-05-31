@@ -158,4 +158,39 @@
         <item name="android:layout_marginTop">@dimen/list_margin</item>
     </style>
 
+    <style name="order_d_list_top" parent="wrap_wh">
+        <item name="android:textSize">@dimen/order_d_list_top</item>
+        <item name="android:textColor">@color/order_d_list_top</item>
+        <item name="android:layout_marginTop">@dimen/list_margin</item>
+    </style>
+
+    <style name="order_d_list_bottom_l" parent="wrap_wh">
+        <item name="android:textSize">@dimen/order_d_list_top</item>
+        <item name="android:textColor">@color/order_d_list_bottom_l</item>
+        <item name="android:layout_marginTop">@dimen/attence_item_margin</item>
+    </style>
+
+    <style name="order_d_list_bottom_r" parent="wrap_wh">
+        <item name="android:textSize">@dimen/order_d_list_top</item>
+        <item name="android:textColor">@color/attence_class_name</item>
+    </style>
+
+    <style name="order_d_top" parent="wrap_wh">
+        <item name="android:textSize">@dimen/order_d_top</item>
+        <item name="android:textColor">@color/order_d_top</item>
+        <item name="android:layout_marginTop">@dimen/line_margin_output</item>
+    </style>
+
+    <style name="bottom_pop_textview" parent="match_wrap">
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/setting_exit_bg</item>
+        <item name="android:textColor">@color/top_txt_right</item>
+        <item name="android:padding">@dimen/list_margin</item>
+    </style>
+
+    <dimen name="order_d_list_top">11sp</dimen>
+    <dimen name="order_d_top">9sp</dimen>
+    <color name="order_d_list_top">#8e8e8e</color>
+    <color name="order_d_list_bottom_l">#989797</color>
+    <color name="order_d_top">#515151</color>
 </resources>

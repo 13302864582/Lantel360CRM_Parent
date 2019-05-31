@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <!--//使用shape画出圆角矩形，边框为为灰色，背景为白色。颜色不要再线性布局中设置，也会掩盖圆角矩形。-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/popwindow_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/back_padding">
+        <!--宽不能设为match_parent,否则外层的圆角矩形会被遮盖。-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/takePhoto"
+            style="@style/bottom_pop_textview"
+            android:text="@string/takePhoto" />
+
+        <View
+            style="@style/line"
+            android:layout_width="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/openPhotos"
+            style="@style/bottom_pop_textview"
+            android:text="@string/openPhotos" />
+    </LinearLayout>
+    <!--//使用shape画出圆角矩形，边框为为灰色，背景为白色。-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/back_padding"
+        android:background="@drawable/popwindow_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/back_padding">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel"
+            style="@style/bottom_pop_textview"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

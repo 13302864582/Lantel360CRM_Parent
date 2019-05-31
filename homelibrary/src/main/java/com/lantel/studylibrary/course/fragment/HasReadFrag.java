@@ -43,8 +43,14 @@ public class HasReadFrag extends BaseCourseFragment<HasReadPresenter, HasReadMod
 
     @Override
     public void refreshData(ArrayList<CourseCardModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override

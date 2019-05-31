@@ -2,7 +2,6 @@ package com.lantel.mine.order;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lantel.common.FragmentActivity;
-
 import androidx.fragment.app.Fragment;
 
 @Route(path = "/lantel/360/order")

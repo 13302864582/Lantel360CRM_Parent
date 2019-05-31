@@ -40,6 +40,10 @@ public class GlideUtils {
             Glide.with(mContext).load(path).override(width, height).into(mImageView);
         }
 
+        public static void loadImageView(Context mContext, Object path, ImageView mImageView, int def) {
+        Glide.with(mContext).load(path).placeholder(def).error(def).into(mImageView);
+        }
+
         //设置加载中以及加载失败图片
         public static void loadImageViewLoding(Context mContext, String path, ImageView mImageView, int lodingImage, int errorImageView) {
             Glide.with(mContext).load(path).placeholder(lodingImage).error(errorImageView).into(mImageView);

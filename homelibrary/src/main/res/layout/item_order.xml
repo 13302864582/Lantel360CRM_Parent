@@ -22,7 +22,7 @@
         android:text="交易成功"
         app:layout_constraintBaseline_toBaselineOf="@id/order_date_time"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="@dimen/list_margin"
+        android:layout_marginRight="@dimen/confirm_btn_dilog_margin"
         android:textSize="@dimen/order_state"
         android:textColor="@color/order_state"
         android:layout_width="wrap_content"
@@ -52,7 +52,8 @@
         android:text="-3450"
         app:layout_constraintTop_toBottomOf="@id/order_state"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/order_state"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/confirm_btn_dilog_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/order_state"
@@ -70,7 +71,6 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/order_title"
-            android:text="下单"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/list_margin"
@@ -80,7 +80,6 @@
 
         <TextView
             android:id="@+id/order_course_count"
-            android:text="title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/order_course_count"

@@ -65,5 +65,7 @@
         <activity android:name=".notify.NotifyDetailActivity"/>
 
         <activity android:name=".preview.PreviewActivity"/>
+
+        <activity android:name="com.lantel.mine.order.OrderDetailActivity"/>
     </application>
 </manifest>

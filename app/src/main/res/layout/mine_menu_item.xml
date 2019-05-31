@@ -1,59 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/selectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/mine_menu_height">
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/mine_menu_icon"
-        android:layout_height="22dp"
-        android:layout_marginLeft="@dimen/mine_menu_item_margin"
-        android:layout_marginTop="8dp"
-        android:src="@mipmap/invite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
+        android:background="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mine_menu_height">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/mine_menu_icon"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/mine_menu_item_margin"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/invite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.411" />
 
 
 
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/mine_menu_item_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:src="@mipmap/mine_item_arrow" />
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mine_menu_item_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            android:src="@mipmap/mine_item_arrow" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.07"
-        android:textSize="@dimen/text_left"
-        android:textColor="@color/text_left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/arrow"
-        app:layout_constraintStart_toEndOf="@+id/icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0.07"
+            android:textSize="@dimen/text_left"
+            android:textColor="@color/text_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/arrow"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.508" />
 
-    <TextView
-        android:id="@+id/text_right"
+        <TextView
+            android:id="@+id/text_right"
+            android:visibility="gone"
+            android:textSize="@dimen/text_right"
+            android:textColor="@color/text_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/mine_menu_item_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
         android:visibility="gone"
-        android:textSize="@dimen/text_right"
-        android:textColor="@color/text_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/mine_menu_item_margin"
+        android:id="@+id/exit_count"
+        android:text="@string/exit_count"
+        android:background="@mipmap/setting_exit_bg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/exit_count_height"
+        android:textColor="@color/white"
+        android:textSize="@dimen/exit_count"
+        app:layout_constraintTop_toBottomOf="@id/top"
+        app:layout_constraintVertical_bias="0.180"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.84"
+        android:layout_marginTop="@dimen/confirm_btn_dilog_margin"
+        android:layout_marginBottom="@dimen/confirm_btn_dilog_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-         />
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

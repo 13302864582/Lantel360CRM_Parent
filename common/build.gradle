@@ -62,5 +62,7 @@ dependencies {
     api 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     api 'com.android.support:multidex:1.0.1'
+
+    api 'com.ldoublem.loadingview:loadingviewlib:1.0'
 }
 

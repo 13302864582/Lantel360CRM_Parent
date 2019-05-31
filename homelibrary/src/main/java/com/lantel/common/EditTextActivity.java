@@ -12,10 +12,8 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseActivity;
-
 import androidx.appcompat.widget.AppCompatButton;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = "/lantel/360/EditText")

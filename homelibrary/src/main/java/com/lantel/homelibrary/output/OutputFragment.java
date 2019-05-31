@@ -106,12 +106,19 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
     }
 
     @Override
-    public void refreshData(ArrayList<ClassesCardModel> menu) {
-
+    public void refreshData(ArrayList<BaseModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        mAdapter.setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override
-    public void setLoadMoreData(ArrayList<ClassesCardModel> menu) {
+    public void setLoadMoreData(ArrayList<BaseModel> menu) {
 
     }
 

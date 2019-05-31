@@ -6,7 +6,6 @@ import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.personal.list.model.SettingPersonItemModel;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
 
 public class SettingPersonPresenter extends SettingPersonContract.Presenter {

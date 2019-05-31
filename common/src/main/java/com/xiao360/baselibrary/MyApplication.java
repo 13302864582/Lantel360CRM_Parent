@@ -1,4 +1,4 @@
-package com.lantel.app;
+package com.xiao360.baselibrary;
 
 import com.httpsdk.http.CacheInterceptor;
 import com.httpsdk.http.Constans;
@@ -6,8 +6,10 @@ import com.httpsdk.http.Http;
 import com.httpsdk.http.LogInterceptor;
 import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.util.SpCache;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 

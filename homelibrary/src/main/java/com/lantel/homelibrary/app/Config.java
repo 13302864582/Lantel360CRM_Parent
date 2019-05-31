@@ -42,6 +42,9 @@ public class Config {
     public static final int REQUEST_EDIT_TEXT = 100;
     public static final int REQUEST_BIND_ADD = 101;
     public static final int REQUEST_CHANGE_ACCOUNT = 102;
+    public static final int REQUEST_TAKE_PHOTO = 103;
+    public static final int REQUEST_SELECT_PHOTO = 104;
+
 
     public static final String BIND_PHONE = "BIND_PHONE";
     public static final String BIND_WEIBO = "BIND_WEIBO";
@@ -52,5 +55,9 @@ public class Config {
     public static final String SID = "SID";
     public static final String ACCOUNT_LIST = "ACCOUNT_LIST";
     public static final String WALLLET_MONEY = "WALLLET_MONEY";
+    public static final String ORDER_DETAIL = "ORDER_DETAIL";
+    public static final int TYPE_ORDER_TOP = 0;
+    public static final int TYPE_ORDER_END = 1;
+    public static final int TYPE_ORDER_LIST= 2;
 
 }

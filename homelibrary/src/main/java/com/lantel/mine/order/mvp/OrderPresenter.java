@@ -1,7 +1,6 @@
 package com.lantel.mine.order.mvp;
 
 import android.os.Bundle;
-
 import com.google.gson.Gson;
 import com.lantel.homelibrary.R;
 import com.lantel.mine.order.api.OrderBean;
@@ -29,6 +28,7 @@ public class OrderPresenter extends OrderContract.Presenter{
     @Override
     public void onStart() {
         LogUtils.d("===onStart: ");
+        refreshData(null);
     }
 
     @Override
@@ -74,12 +74,21 @@ public class OrderPresenter extends OrderContract.Presenter{
                                 for (OrderBean.DataBean.ListBean bean : listBean) {
                                    OrderItemModel model = new OrderItemModel();
                                    model.setOrderItemJson(new Gson().toJson(bean));
-                                   model.setImg(bean.getOrder_items().get(0).getLesson().getLesson_cover_picture());
+                                   if(null!=bean.getOrder_items()){
+                                       int count = bean.getOrder_items().size();
+                                       model.setCount("x"+count);
+                                       if(count>0){
+                                           OrderBean.DataBean.ListBean.OrderItemsBean orderItemsBean = bean.getOrder_items().get(0);
+                                           model.setTitle(orderItemsBean.getItem_name());
+                                           if(null!=orderItemsBean.getLesson())
+                                           model.setImg(orderItemsBean.getLesson().getLesson_cover_picture());
+                                       }
+                                   }
+                                    LogUtils.d("getCreate_time===="+bean.getCreate_time());
                                    model.setDate_time(bean.getCreate_time());
                                    model.setOrder_state(getOrderState(bean.getPay_status()));
-                                   model.setCount("x"+bean.getOrder_items().size());
-                                   model.setTitle(bean.getOrder_items().get(0).getItem_name());
                                    model.setMoney_record(bean.getPaid_amount());
+                                   menu.add(model);
                                 }
                                 if (!isLoadMore) {
                                     mView.refreshData(menu);

@@ -7,11 +7,14 @@ import com.lantel.mine.order.list.model.OrderItemModel;
 import com.lantel.mine.order.mvp.OrderContract;
 import com.lantel.mine.order.mvp.OrderModel;
 import com.lantel.mine.order.mvp.OrderPresenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.NormalListFragment;
 import java.util.ArrayList;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel> implements OrderContract.View {
+public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel> implements OrderContract.View, OnRefreshLoadMoreListener {
     @Override
     protected void InitView() {
 
@@ -19,7 +22,7 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
 
     @Override
     protected int getListView() {
-        return R.id.recyclerView;
+        return R.id.attence_list;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
 
     @Override
     protected int getContentViewLayoutId() {
-        return R.layout.common_list_layout;
+        return R.layout.attence_content;
     }
 
     @Override
@@ -72,7 +75,11 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
         stateLayout.refreshLayout.setEnableLoadMore(false);
         ((OrderAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
-        stateLayout.showContentView();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override
@@ -82,5 +89,15 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
         adapter.getDatas().addAll(menu);
         mAdapter.notifyItemRangeInserted(start,menu.size());
         mAdapter.notifyItemRangeChanged(start,menu.size());
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout);
     }
 }

@@ -128,10 +128,17 @@ public class OrderBean {
                 private String discount_amount;
                 private String reduced_amount;
 
-                private String present_lesson_times;
                 private String present_lesson_hours;
-
+                private String expire_time;
                 private LessonBean lesson;
+
+                public String getExpire_time() {
+                    return expire_time;
+                }
+
+                public void setExpire_time(String expire_time) {
+                    this.expire_time = expire_time;
+                }
 
                 public LessonBean getLesson() {
                     return lesson;
@@ -187,14 +194,6 @@ public class OrderBean {
 
                 public void setReduced_amount(String reduced_amount) {
                     this.reduced_amount = reduced_amount;
-                }
-
-                public String getPresent_lesson_times() {
-                    return present_lesson_times;
-                }
-
-                public void setPresent_lesson_times(String present_lesson_times) {
-                    this.present_lesson_times = present_lesson_times;
                 }
 
                 public String getPresent_lesson_hours() {

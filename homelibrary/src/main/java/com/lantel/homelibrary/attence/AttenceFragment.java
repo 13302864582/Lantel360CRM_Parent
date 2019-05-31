@@ -14,6 +14,7 @@ import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.lantel.homelibrary.attence.mvp.AttenceContract;
 import com.lantel.homelibrary.attence.mvp.AttenceModel;
 import com.lantel.homelibrary.attence.mvp.AttencePresenter;
+import com.lantel.mine.order.list.adpter.OrderAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -185,10 +186,14 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
 
     @Override
     public void refreshData(ArrayList<AttenceCardModel> menu) {
-        stateLayout.showContentView();
         stateLayout.refreshLayout.setEnableLoadMore(false);
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override

@@ -34,7 +34,6 @@
         style="@style/setting_pesonal_value"
         android:text="haha"
         app:layout_constraintBaseline_toBaselineOf="@id/title"
-        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintLeft_toLeftOf="@id/title"
         app:layout_constraintRight_toLeftOf="@id/arrow" />
 

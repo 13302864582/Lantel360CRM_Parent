@@ -18,6 +18,7 @@ import com.lantel.homelibrary.course.list.model.CourseItemModel;
 import com.lantel.homelibrary.course.mvp.CourseContract;
 import com.lantel.homelibrary.course.mvp.CourseModel;
 import com.lantel.homelibrary.course.mvp.CoursePresenter;
+import com.lantel.mine.order.list.adpter.OrderAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
@@ -236,6 +237,10 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     }
 
     public void refreshData(ArrayList<CourseItemModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        curriculumAdapter.setDatas(menu);
+        curriculumAdapter.notifyDataSetChanged();
+
         if(menu.size()!=0){
             stateLayout.showContentView();
             curriculumAdapter.setmLastPosition(0);
@@ -246,8 +251,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
             text_right.setVisibility(View.GONE);
         }
 
-        curriculumAdapter.setDatas(menu);
-        curriculumAdapter.notifyDataSetChanged();
+
     }
 
     @Override

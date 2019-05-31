@@ -32,9 +32,14 @@ public class ReadingFrag extends BaseCourseFragment<ReadingPresenter, ReadingMod
 
     @Override
     public void refreshData(ArrayList<CourseCardModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
-        stateLayout.showContentView();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override

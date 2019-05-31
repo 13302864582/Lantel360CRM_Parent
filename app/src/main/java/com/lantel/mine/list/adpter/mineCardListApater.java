@@ -52,7 +52,7 @@ public class mineCardListApater extends BaseRecyclerViewAdapter<CardModel> {
         }else {
             setText(datas.get(position).getTitle(),cardHolder.title);
         }
-        String value = null == data ? "0":data.getValue();
-        setText(value,"0",cardHolder.value);
+        String value = null == data ? "0.00":data.getValue();
+        setText(value,"0.00",cardHolder.value);
     }
 }

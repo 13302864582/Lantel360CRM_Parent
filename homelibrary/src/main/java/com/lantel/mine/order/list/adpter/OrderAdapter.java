@@ -2,8 +2,12 @@ package com.lantel.mine.order.list.adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.mine.order.list.holder.OrderHolder;
 import com.lantel.mine.order.list.model.OrderItemModel;
 import com.xiao360.baselibrary.image.GlideUtils;
@@ -30,11 +34,14 @@ public class OrderAdapter extends BaseRecyclerViewAdapter<OrderItemModel> {
     @Override
     protected void bindViewHolder(BaseViewHolder holder, OrderItemModel data, int position, int viewType) {
         OrderHolder orderHolder = (OrderHolder) holder;
-       /* setText(data.getTitle(),orderHolder.order_title);
+        setText(data.getTitle(),orderHolder.order_title);
+        setText(data.getCount(),orderHolder.order_course_count);
         setText(data.getDate_time(),orderHolder.order_date_time);
         setText(data.getOrder_state(),orderHolder.order_state);
         setText(data.getMoney_record(),orderHolder.money_record);
-        setText(data.getUnit_count(),orderHolder.order_course_count);*/
-        GlideUtils.loadImageView(context,data.getImg(),orderHolder.order_img);
+        GlideUtils.loadImageView(context,data.getImg(),orderHolder.order_img,R.mipmap.ad);
+        orderHolder.itemView.setOnClickListener((View view)-> {
+            ARouter.getInstance().build("/lantel/360/order/detail").withString(Config.ORDER_DETAIL,data.getOrderItemJson()).navigation();
+        });
     }
 }

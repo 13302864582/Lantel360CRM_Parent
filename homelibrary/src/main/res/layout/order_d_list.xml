@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/list_img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/order_d_list_img"
+        android:layout_height="@dimen/order_d_list_img"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="@dimen/order_d_list_img_margin"
+        android:layout_marginTop="@dimen/order_d_list_img_margin"/>
+
+    <TextView
+        android:text="暑期素描培训班"
+        android:id="@+id/list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/order_d_list_title"
+        android:textColor="@color/attence_class_name"
+        app:layout_constraintLeft_toRightOf="@id/list_img"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/list_img"
+
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/course_time"
+        style="@style/order_d_list_top"
+        android:text="共30课时"
+        app:layout_constraintTop_toBottomOf="@id/list_title"
+        app:layout_constraintLeft_toLeftOf="@id/list_title"/>
+
+    <TextView
+        android:id="@+id/useful_date"
+        style="@style/order_d_list_top"
+        android:text="有效期至:--"
+        app:layout_constraintTop_toBottomOf="@id/course_time"
+        app:layout_constraintLeft_toLeftOf="@id/list_title"/>
+
+    <TextView
+        android:id="@+id/paid_money"
+        android:text="$200"
+        app:layout_constraintTop_toTopOf="@id/list_title"
+        app:layout_constraintBottom_toBottomOf="@id/useful_date"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/list_margin"
+        android:textColor="@color/paid_money"
+        android:textSize="@dimen/paid_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:text="@string/origin_price"
+        android:id="@+id/origin_price"
+        style="@style/order_d_list_bottom_l"
+        app:layout_constraintTop_toBottomOf="@id/list_img"
+        android:layout_marginTop="@dimen/original_money_marginTop"
+        app:layout_constraintLeft_toLeftOf="@id/list_img"/>
+
+    <TextView
+        android:text="@string/price"
+        android:id="@+id/price"
+        style="@style/order_d_list_bottom_l"
+        app:layout_constraintTop_toBottomOf="@id/origin_price"
+        app:layout_constraintLeft_toLeftOf="@id/list_img"/>
+
+    <TextView
+        android:text="@string/discount_amount"
+        android:id="@+id/discount_amount"
+        style="@style/order_d_list_bottom_l"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        app:layout_constraintLeft_toLeftOf="@id/list_img"/>
+
+    <TextView
+        android:text="@string/reduced_amount"
+        android:id="@+id/reduced_amount"
+        style="@style/order_d_list_bottom_l"
+        app:layout_constraintTop_toBottomOf="@id/discount_amount"
+        app:layout_constraintLeft_toLeftOf="@id/list_img"/>
+
+    <TextView
+        android:text="@string/present_times"
+        android:id="@+id/present_times"
+        style="@style/order_d_list_bottom_l"
+        app:layout_constraintTop_toBottomOf="@id/reduced_amount"
+        app:layout_constraintLeft_toLeftOf="@id/list_img"/>
+
+
+
+    <TextView
+        android:text="$200"
+        android:id="@+id/origin_price_value"
+        style="@style/order_d_list_bottom_r"
+        app:layout_constraintBaseline_toBaselineOf="@id/origin_price"
+        app:layout_constraintRight_toRightOf="@id/paid_money"/>
+
+    <TextView
+        android:text="$200"
+        android:id="@+id/price_value"
+        style="@style/order_d_list_bottom_r"
+        app:layout_constraintBaseline_toBaselineOf="@id/price"
+        app:layout_constraintRight_toRightOf="@id/paid_money"/>
+
+    <TextView
+        android:text="$200"
+        android:id="@+id/discount_amount_value"
+        style="@style/order_d_list_bottom_r"
+        app:layout_constraintBaseline_toBaselineOf="@id/discount_amount"
+        app:layout_constraintRight_toRightOf="@id/paid_money"/>
+
+    <TextView
+        android:text="$200"
+        android:id="@+id/reduced_amount_value"
+        style="@style/order_d_list_bottom_r"
+        app:layout_constraintBaseline_toBaselineOf="@id/reduced_amount"
+        app:layout_constraintRight_toRightOf="@id/paid_money"/>
+
+    <TextView
+        android:text="0.00"
+        android:id="@+id/present_times_value"
+        style="@style/order_d_list_bottom_r"
+        app:layout_constraintBaseline_toBaselineOf="@id/present_times"
+        app:layout_constraintRight_toRightOf="@id/paid_money"/>
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/present_times"
+        android:layout_marginTop="@dimen/list_margin"
+        style="@style/line"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

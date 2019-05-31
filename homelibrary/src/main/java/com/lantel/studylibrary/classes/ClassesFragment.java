@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
+import com.lantel.mine.order.list.adpter.OrderAdapter;
 import com.lantel.studylibrary.classes.list.adpter.ClassesAdapter;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.classes.mvp.ClassesContract;
@@ -111,9 +112,14 @@ public class ClassesFragment extends ToolBarStateFragment<ClassesPresenter, Clas
 
     @Override
     public void refreshData(ArrayList<ClassesCardModel> menu) {
-        stateLayout.showContentView();
+        stateLayout.refreshLayout.setEnableLoadMore(false);
         mAdapter.setDatas(menu);
         mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override

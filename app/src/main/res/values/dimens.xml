@@ -66,6 +66,5 @@
     <dimen name="card_list_height">100dp</dimen>
     <dimen name="card_add_img">42dp</dimen>
     <dimen name="chang_count_title">14sp</dimen>
-
-
+    <dimen name="exit_count_height">40dp</dimen>
 </resources>

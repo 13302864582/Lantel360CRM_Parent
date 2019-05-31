@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/order_end_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/order_end_money"
+        android:textColor="@color/order_end_money"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        android:layout_marginTop="@dimen/list_margin"
+        android:layout_marginBottom="@dimen/list_margin"
+        android:text="$400"/>
+
+<TextView
+    android:id="@+id/order_end_title"
+    android:text="@string/order_end_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/attence_class_name"
+    android:textSize="@dimen/state_btn"
+    app:layout_constraintRight_toLeftOf="@id/order_end_money"
+    app:layout_constraintBaseline_toBaselineOf="@id/order_end_money"
+    android:layout_marginRight="@dimen/mine_menu_item_margin"/>
+
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.64"
+        style="@style/line"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
 import com.lantel.homelibrary.notify.mvp.NotifyContract;
 import com.lantel.homelibrary.notify.mvp.NotifyModel;
 import com.lantel.homelibrary.notify.mvp.NotifyPresenter;
+import com.lantel.mine.order.list.adpter.OrderAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import java.util.ArrayList;
@@ -117,8 +118,14 @@ public class NotifyFragment extends ToolBarStateFragment<NotifyPresenter, Notify
 
     @Override
     public void refreshData(ArrayList<NotifyItemModel> menu) {
-       /* mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();*/
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        mAdapter.setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
     }
 
     @Override

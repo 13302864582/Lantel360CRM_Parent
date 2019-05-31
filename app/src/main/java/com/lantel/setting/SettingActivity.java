@@ -59,16 +59,12 @@ public class SettingActivity extends BaseActivity {
         settingList.setAdapter(mAdapter);
     }
 
-    @OnClick({R.id.back, R.id.exit_count})
+    @OnClick({R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
-                LogUtils.d("onViewClicked====back");
-                break;
-            case R.id.exit_count:
-                LogUtils.d("onViewClicked====exit_count");
-
-                break;
+                finish();
+          break;
         }
     }
 }

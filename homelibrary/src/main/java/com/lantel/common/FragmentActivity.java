@@ -1,7 +1,11 @@
 package com.lantel.common;
 
+import android.content.Intent;
+
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.base.BaseActivity;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,4 +31,10 @@ public abstract class FragmentActivity extends BaseActivity {
     protected abstract String getFragmentTag();
 
     protected abstract Fragment getFragment();
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        getFragment().onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

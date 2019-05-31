@@ -124,6 +124,7 @@ public class WalletPresenter extends WalletContract.Presenter{
                     String flag =  (Float.valueOf(after_amount)-Float.valueOf(before_amount))>0?"+":"-";
                     model.setMoney_record(flag+famount);
                 }
+
                 Date date = DisplayUtil.formatIntDay("yyyy-MM-dd HH:mm:ss",walletOrderBean.getCreate_time());
                 model.setDate(date);
                 model.setBusiness_type(walletOrderBean.getBusiness_type());

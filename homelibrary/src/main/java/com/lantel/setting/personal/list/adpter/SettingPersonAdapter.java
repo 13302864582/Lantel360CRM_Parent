@@ -1,31 +1,23 @@
 package com.lantel.setting.personal.list.adpter;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.personal.list.holder.SettingPersonHolder;
 import com.lantel.setting.personal.list.model.SettingPersonItemModel;
-import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
-
-import java.time.Year;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,8 +26,8 @@ import java.util.List;
 public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     private int mCurrentPosition = -1;
 
-    public NaviEditListener getListener() {
-        return listener;
+    public void setListener(NaviEditListener listener) {
+        this.listener = listener;
     }
 
     private NaviEditListener listener;

@@ -96,12 +96,9 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
                 mineName.setText(bean.getStudent_name());
                 mineCall.setText(bean.getNick_name());
                 GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg,R.mipmap.circle_default);
-                try {
-                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(bean.getBirth_time());
-                    mineAge.setText(DisplayUtil.getAge(date,getContext())+getString(R.string.year_old));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                Date date = DisplayUtil.formatIntDay("yyyy-MM-dd",bean.getBirth_time());
+                if(null!=date)
+                mineAge.setText(DisplayUtil.getAge(date,getContext())+getString(R.string.year_old));
                 mineStudentId.setText(getString(R.string.sno)+bean.getSno());
                 mineCardId.setText(getString(R.string.card_sno)+bean.getCard_no());
                 String total = bean.getStudent_lesson_hours();
@@ -249,7 +246,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
             String money = "0.00";
             if(mPosition!=-1){
                 String sMoney = mCardList.get(mPosition).getMoney();
-                money = DisplayUtil.formatNum(String.format("%.2f",Float.valueOf(sMoney)));
+                money = String.format("%.2f",Float.valueOf(sMoney));
             }
             return postcard.withString(Config.WALLLET_MONEY,money).withString(Config.SID,sid);
         }else

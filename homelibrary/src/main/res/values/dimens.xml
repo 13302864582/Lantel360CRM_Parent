@@ -110,4 +110,12 @@
     <dimen name="day_text_size">13sp</dimen>
     <dimen name="calendar_padding">8dp</dimen>
     <dimen name="date_img">20dp</dimen>
+    <dimen name="order_end_money">16sp</dimen>
+    <dimen name="order_d_list_img">82dp</dimen>
+    <dimen name="order_d_list_img_margin">18dp</dimen>
+    <dimen name="order_d_list_title">14sp</dimen>
+    <dimen name="paid_money">16sp</dimen>
+    <dimen name="original_money_marginTop">28dp</dimen>
+    <dimen name="order_top_card">120dp</dimen>
+    <dimen name="order_top_state">13sp</dimen>
 </resources>

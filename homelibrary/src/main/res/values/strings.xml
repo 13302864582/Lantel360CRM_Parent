@@ -79,6 +79,7 @@
     <string name="sAttenceDateFormat" >"student_attendances?int_day=[Between,%1$s,%2$s]"</string>
     <string name="sectionFormat">第%1$d章</string>
     <string name="course_formate" >《%1$s》</string>
+
     <string name="month_format">%1$d月</string>
     <string name="total_money">总资产(CNY)</string>
     <string name="bussinessType1">结账</string>
@@ -92,4 +93,20 @@
     <string name="un_pay">未付款</string>
     <string name="part_pay">部分付款</string>
     <string name="success_pay">交易成功</string>
+    <string name="order_end_title">共计金额:</string>
+    <string name="origin_price">商品原价</string>
+    <string name="price">商品折后价</string>
+    <string name="discount_amount">折扣金额</string>
+    <string name="reduced_amount">直减金额</string>
+    <string name="present_times">赠送课时</string>
+    <string name="order_success">交易成功!</string>
+    <string name="order_no_format">订单编号: %1$s</string>
+    <string name="join_time_format">报名日期: %1$s</string>
+    <string name="order_time_format">下单时间: %1$s</string>
+
+    <string name="course_time_formate">共%1$课时</string>
+    <string name="useful_date_formate">有效期至: %1$s</string>
+    <string name="money_formate">¥ %1$s</string>
+    <string name="takePhoto">拍照</string>
+    <string name="openPhotos">打开相册</string>
 </resources>

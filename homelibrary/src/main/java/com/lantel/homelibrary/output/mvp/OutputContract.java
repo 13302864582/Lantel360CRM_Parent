@@ -12,9 +12,9 @@ public interface OutputContract {
     interface View extends BaseView {
         void initCourseData(ArrayList<BaseModel> menu);
 
-        void refreshData(ArrayList<ClassesCardModel> menu);
+        void refreshData(ArrayList<BaseModel> menu);
 
-        void setLoadMoreData(ArrayList<ClassesCardModel> menu);
+        void setLoadMoreData(ArrayList<BaseModel> menu);
     }
 
     abstract class Presenter extends BaseFragmentPresenter<View, OutputModel> {
