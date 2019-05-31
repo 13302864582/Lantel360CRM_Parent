@@ -205,7 +205,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         if(isClick){
-            int today = Integer.valueOf(DisplayUtil.praseformatIntDay(new Date(System.currentTimeMillis())));
+            int today = Integer.valueOf(DisplayUtil.praseformatIntDay("yyyyMMdd",new Date(System.currentTimeMillis())));
             int selectDay = Integer.valueOf(calendar.toString());
             isBeforeToday = (selectDay-today)<0;
             if(isBeforeToday)

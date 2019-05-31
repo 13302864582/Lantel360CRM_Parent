@@ -1,6 +1,7 @@
 package com.lantel.homelibrary.attence.mvp;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -45,7 +46,7 @@ public class AttencePresenter extends AttenceContract.Presenter {
     @Override
     public void onStart() {
         LogUtils.d("onStart: ");
-        refreshData(null, false);
+        refreshData(null);
     }
 
     @Override
@@ -68,8 +69,11 @@ public class AttencePresenter extends AttenceContract.Presenter {
         LogUtils.d("onCrete: ");
     }
 
-    public void refreshData(RefreshLayout refreshLayout, boolean isRangeMode) {
+    public void refreshData(RefreshLayout refreshLayout) {
+        if(TextUtils.isEmpty(mCurrentDate))
         loadData(String.valueOf(1), String.valueOf(10), false, refreshLayout);
+        else
+            loadRangeData(mCurrentDate, false, refreshLayout);
     }
 
     private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
@@ -81,7 +85,6 @@ public class AttencePresenter extends AttenceContract.Presenter {
                         try {
                             JsonObject dataBean = new JsonParser().parse(data.string()).getAsJsonObject();
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
-
                             if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
                             } else {
@@ -129,13 +132,7 @@ public class AttencePresenter extends AttenceContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                        if (null != refreshLayout) {
-                            if (!isLoadMore)
-                                refreshLayout.finishRefresh();
-                            else
-                                refreshLayout.finishLoadMore();
-                        }
-                        mView.showEmpty();
+                        onFail(refreshLayout,isLoadMore);
                     }
                 });
     }
@@ -152,7 +149,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
                 AttenceBean userBean = gson.fromJson(user, AttenceBean.class);
                 AttenceCardModel attenceCardModel = new AttenceCardModel();
                 attenceCardModel.setDate(userBean.getInt_day() + "");
-                attenceCardModel.setClassName(userBean.getCourse_arrange().getCourse_name());
+                AttenceBean.CourseArrangeBean arrangeBean= userBean.getCourse_arrange();
+                if(null!=arrangeBean && null!=arrangeBean.getCourse_name())
+                attenceCardModel.setClassName(arrangeBean.getCourse_name());
                 attenceCardModel.setTime(userBean.getInt_start_hour() + "");
                 int attence = userBean.getIs_in();
                 int leave = userBean.getIs_leave();
@@ -190,24 +189,39 @@ public class AttencePresenter extends AttenceContract.Presenter {
         }
     }
 
-    public void onLoadMore(RefreshLayout refreshLayout, boolean isRangeMode) {
-        /*if(isRangeMode)
-            loadRangeData(,String.valueOf(mCurrentPage + 1), String.valueOf(10), true, refreshLayout);
-        else */
+    public void onLoadMore(RefreshLayout refreshLayout) {
+        if(TextUtils.isEmpty(mCurrentDate))
         loadData(String.valueOf(mCurrentPage + 1), String.valueOf(10), true, refreshLayout);
+        else
+            loadRangeData(getURL(mCurrentDate,String.valueOf(mCurrentPage+1), String.valueOf(10)), true, refreshLayout);
     }
 
     public void onTimeSelect(Date date) {
         mCurrentPage = 0;
         Date first = DisplayUtil.getSupportBeginDayofMonth(date, 0);
         Date last = DisplayUtil.getSupportBeginDayofMonth(date, 1);
-        mCurrentDate = getUrl(first, last,String.valueOf(mCurrentPage + 1), String.valueOf(10));
-        loadRangeData(mCurrentDate, false, null);
+        mCurrentDate = getCurrentDateStr(first, last);
+        loadRangeData(getURL(mCurrentDate,String.valueOf(1), String.valueOf(10)), false, null);
     }
 
-    public String getUrl(Date first, Date last,String page,String pageSize) {
+    public String getCurrentDateStr(Date first, Date last) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         String sAgeFormat = context.getString(R.string.sAttenceDateFormat);
-        return String.format(sAgeFormat, dateFormat.format(first), dateFormat.format(last))+"&page="+page+"&pagesize="+pageSize;
+        return String.format(sAgeFormat, dateFormat.format(first), dateFormat.format(last));
+    }
+
+    public String getURL(String date, String page,String pagesize) {
+        return date+"&page="+page+"&pagesize="+pagesize;
+    }
+
+    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
+        if (null != refreshLayout) {
+            if (!isLoadMore)
+                refreshLayout.finishRefresh();
+            else
+                refreshLayout.finishLoadMore();
+        }
+        if(!isLoadMore)
+            mView.showEmpty();
     }
 }

@@ -63,6 +63,15 @@ public class MineCardBean {
             private String credit;
             private String student_lesson_hours;
             private String student_lesson_remain_hours;
+            private String money;
+
+            public String getMoney() {
+                return money;
+            }
+
+            public void setMoney(String money) {
+                this.money = money;
+            }
 
             public String getSid() {
                 return sid;

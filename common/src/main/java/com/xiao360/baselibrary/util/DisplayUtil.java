@@ -331,18 +331,49 @@ public class DisplayUtil {
         return cal.getTime();
     }
 
-    public static Date formatIntDay(String intDate) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    public static Date formatIntDay(String format,String intDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         try {
-            return format.parse(intDate);
+            return dateFormat.parse(intDate);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String praseformatIntDay(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        return format.format(date);
+    public static String praseformatIntDay(String format,Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(date);
+    }
+
+    public static String formatNum(String str){
+        String newStr = "";
+        int count = 0;
+
+        if(str.indexOf(".")==-1){
+            for(int i=str.length()-1;i>=0;i--){
+                if(count % 3 == 0 && count != 0){
+                    newStr = str.charAt(i) + "," + newStr;
+                }else{
+                    newStr = str.charAt(i) + newStr;
+                }
+                count++;
+            }
+            str = newStr + ".00"; //自动补小数点后两位
+        }
+        else
+        {
+            for(int i = str.indexOf(".")-1;i>=0;i--){
+                if(count % 3 == 0 && count != 0){
+                    newStr = str.charAt(i) + "," + newStr;  //碰到3的倍数则加上“,”号
+                }else{
+                    newStr = str.charAt(i) + newStr; //逐个字符相接起来
+                }
+                count++;
+            }
+
+            str = newStr +str.substring(str.indexOf("."));
+        }
+        return str;
     }
 }

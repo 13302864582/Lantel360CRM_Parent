@@ -101,18 +101,23 @@ public class ClassesPresenter extends ClassesContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                        if(null!=refreshLayout){
-                            if(!isLoadMore)
-                                refreshLayout.finishRefresh();
-                            else
-                                refreshLayout.finishLoadMore();
-                        }
-                            mView.showEmpty();
+                       onFail(refreshLayout,isLoadMore);
                     }
                 });
     }
 
     public void onLoadMore(RefreshLayout refreshLayout) {
         loadData(String.valueOf(mCurrentPage+1),String.valueOf(10),true, refreshLayout);
+    }
+
+    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
+        if (null != refreshLayout) {
+            if (!isLoadMore)
+                refreshLayout.finishRefresh();
+            else
+                refreshLayout.finishLoadMore();
+        }
+        if(!isLoadMore)
+            mView.showEmpty();
     }
 }

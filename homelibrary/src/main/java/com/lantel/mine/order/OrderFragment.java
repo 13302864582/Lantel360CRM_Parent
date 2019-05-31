@@ -1,39 +1,20 @@
 package com.lantel.mine.order;
 
 import android.view.View;
-import android.widget.TextView;
-
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.lantel.homelibrary.R;
-import com.lantel.homelibrary.R2;
 import com.lantel.mine.order.list.adpter.OrderAdapter;
 import com.lantel.mine.order.list.model.OrderItemModel;
 import com.lantel.mine.order.mvp.OrderContract;
 import com.lantel.mine.order.mvp.OrderModel;
 import com.lantel.mine.order.mvp.OrderPresenter;
 import com.xiao360.baselibrary.base.NormalListFragment;
-import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel> implements OrderContract.View {
     @Override
     protected void InitView() {
-        ArrayList list = new ArrayList();
-        for(int i=0;i<20;i++){
-            list.add(new OrderItemModel());
-        }
-        OrderAdapter adapter = (OrderAdapter) mAdapter;
-        adapter.setDatas(list);
-        adapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -84,5 +65,22 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    @Override
+    public void refreshData(ArrayList<OrderItemModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        ((OrderAdapter)mAdapter).setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+        stateLayout.showContentView();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<OrderItemModel> menu) {
+        OrderAdapter adapter = ((OrderAdapter)mAdapter);
+        int start = adapter.getDatas().size();
+        adapter.getDatas().addAll(menu);
+        mAdapter.notifyItemRangeInserted(start,menu.size());
+        mAdapter.notifyItemRangeChanged(start,menu.size());
     }
 }

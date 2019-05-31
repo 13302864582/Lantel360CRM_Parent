@@ -51,4 +51,6 @@ public class Config {
     public static final int PHOTO = 0;
     public static final String SID = "SID";
     public static final String ACCOUNT_LIST = "ACCOUNT_LIST";
+    public static final String WALLLET_MONEY = "WALLLET_MONEY";
+
 }

@@ -1,8 +1,8 @@
 package com.lantel.mine.wallet;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -13,38 +13,44 @@ import com.lantel.mine.wallet.list.model.WalletItemModel;
 import com.lantel.mine.wallet.mvp.WalletContract;
 import com.lantel.mine.wallet.mvp.WalletModel;
 import com.lantel.mine.wallet.mvp.WalletPresenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.NormalListFragment;
-import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class WalletFragment extends NormalListFragment<WalletPresenter, WalletModel> implements WalletContract.View, OnTimeSelectListener {
+public class WalletFragment extends NormalListFragment<WalletPresenter, WalletModel> implements WalletContract.View, OnTimeSelectListener, OnRefreshLoadMoreListener {
     @BindView(R2.id.title)
     TextView title;
     @BindView(R2.id.money)
     TextView money;
-    @BindView(R2.id.date_title)
-    TextView dateTitle;
+   /* @BindView(R2.id.date_title)
+    TextView dateTitle;*/
+    @BindView(R2.id.filter_date)
+    ImageView filter_date;
 
     @Override
     protected void InitView() {
-        ArrayList list = new ArrayList();
-        for(int i=0;i<20;i++){
-            list.add(new WalletItemModel());
-        }
-        WalletAdapter adapter = (WalletAdapter) mAdapter;
-        adapter.setDatas(list);
-        adapter.notifyDataSetChanged();
+        WalletModel walletModel = ViewModelProviders.of(getActivity()).get(WalletModel.class);
+        money.setText(walletModel.getWalletMoney());
+        filter_date.setImageResource(R.mipmap.filter_date);
+        filter_date.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected int getToolBarLayoutID() {
+        return R.layout.wallet_toolbar;
     }
 
     @Override
     protected int getListView() {
-        return R.id.wallet_list;
+        return R.id.attence_list;
     }
 
     @Override
@@ -59,7 +65,7 @@ public class WalletFragment extends NormalListFragment<WalletPresenter, WalletMo
 
     @Override
     protected int getContentViewLayoutId() {
-        return R.layout.wallet;
+        return R.layout.attence_content;
     }
 
     @Override
@@ -77,7 +83,7 @@ public class WalletFragment extends NormalListFragment<WalletPresenter, WalletMo
         mPresenter.setVM(this, mModel);
     }
 
-    @OnClick(R2.id.pick_date)
+    @OnClick(R2.id.filter_date)
     public void onViewClicked(View v) {
         getTimePickerView().show();
     }
@@ -111,7 +117,7 @@ public class WalletFragment extends NormalListFragment<WalletPresenter, WalletMo
 
     @Override
     public void onTimeSelect(Date date, View v) {
-
+        mPresenter.onTimeSelect(date);
     }
 
     @Override
@@ -127,5 +133,37 @@ public class WalletFragment extends NormalListFragment<WalletPresenter, WalletMo
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    public void refreshData(ArrayList<WalletItemModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        WalletAdapter walletAdapter = (WalletAdapter) mAdapter;
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
+
+        walletAdapter.setDatas(menu);
+        walletAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<WalletItemModel> menu) {
+        WalletAdapter walletAdapter = (WalletAdapter) mAdapter;
+        int start = walletAdapter.getDatas().size();
+        walletAdapter.getDatas().addAll(menu);
+        walletAdapter.notifyItemRangeInserted(start,menu.size());
+        walletAdapter.notifyItemRangeChanged(start,menu.size());
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout);
     }
 }

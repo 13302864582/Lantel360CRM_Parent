@@ -101,14 +101,19 @@ public class HasReadPresenter extends HasReadContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                        if (null != refreshLayout) {
-                            if (!isLoadMore)
-                                refreshLayout.finishRefresh();
-                            else
-                                refreshLayout.finishLoadMore();
-                        }
-                        mView.showEmpty();
+                        onFail(refreshLayout,isLoadMore);
                     }
                 });
+    }
+
+    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
+        if (null != refreshLayout) {
+            if (!isLoadMore)
+                refreshLayout.finishRefresh();
+            else
+                refreshLayout.finishLoadMore();
+        }
+        if(!isLoadMore)
+            mView.showEmpty();
     }
 }

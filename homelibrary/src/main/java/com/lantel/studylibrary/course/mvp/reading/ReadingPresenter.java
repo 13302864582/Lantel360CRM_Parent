@@ -73,11 +73,15 @@ public class ReadingPresenter extends ReadingContract.Presenter {
                                 ArrayList<CourseCardModel> menu = new ArrayList<>();
                                 for (CourseBean.DataBean.ListBean bean : listBean) {
                                     CourseCardModel model = new CourseCardModel();
+                                    if(null!=bean.getLesson())
                                     model.setCourse_name(bean.getLesson().getLesson_name());
-                                    model.setCourse_start_date(DisplayUtil.getDateString(bean.getStart_int_day() + ""));
+                                    if(null!=bean.getUse_lesson_hours())
                                     model.setPercent(Float.valueOf(bean.getUse_lesson_hours()));
+                                    if(null!=bean.getOrigin_lesson_hours())
                                     model.setTotal(Float.valueOf(bean.getOrigin_lesson_hours()));
+                                    if(null!=bean.getRemain_lesson_hours())
                                     model.setRemain(Float.valueOf(bean.getRemain_lesson_hours()));
+                                    model.setCourse_start_date(DisplayUtil.getDateString(bean.getStart_int_day() + ""));
                                     menu.add(model);
                                 }
                                 if (!isLoadMore) {
@@ -99,18 +103,23 @@ public class ReadingPresenter extends ReadingContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                        if (null != refreshLayout) {
-                            if (!isLoadMore)
-                                refreshLayout.finishRefresh();
-                            else
-                                refreshLayout.finishLoadMore();
-                        }
-                        mView.showEmpty();
+                       onFail(refreshLayout,isLoadMore);
                     }
                 });
     }
 
     public void onLoadMore(RefreshLayout refreshLayout) {
         loadData(String.valueOf(mCurrentPage + 1), String.valueOf(10), true, refreshLayout);
+    }
+
+    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
+        if (null != refreshLayout) {
+            if (!isLoadMore)
+                refreshLayout.finishRefresh();
+            else
+                refreshLayout.finishLoadMore();
+        }
+        if(!isLoadMore)
+            mView.showEmpty();
     }
 }

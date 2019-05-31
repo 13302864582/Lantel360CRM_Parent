@@ -42,10 +42,8 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
     RecyclerView attenceList;
     @BindView(R2.id.refreshlayout)
     SmartRefreshLayout refreshLayout;
-
     private AttenceAdapter mAdapter;
     private boolean hasLoadMore = false;
-    private boolean isRangeMode = false;
 
     @Override
     protected int getContainerLayoutID() {
@@ -167,7 +165,6 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
 
     @Override
     public void onTimeSelect(Date date, View v) {
-        isRangeMode = true;
         mPresenter.onTimeSelect(date);
     }
 
@@ -204,11 +201,11 @@ public class AttenceFragment extends ToolBarStateFragment<AttencePresenter, Atte
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        mPresenter.onLoadMore(refreshLayout,isRangeMode);
+        mPresenter.onLoadMore(refreshLayout);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPresenter.refreshData(refreshLayout,isRangeMode);
+        mPresenter.refreshData(refreshLayout);
     }
 }

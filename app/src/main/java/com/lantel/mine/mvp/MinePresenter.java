@@ -19,7 +19,7 @@ public class MinePresenter extends MineContract.Presenter{
 
     @Override
     public void onStart() {
-
+        LogUtils.d("MinePresenter===onStart: ");
         loadData();
     }
 

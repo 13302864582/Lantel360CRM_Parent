@@ -3,18 +3,35 @@ package com.lantel.mine.order.list.model;
 import com.xiao360.baselibrary.base.BaseModel;
 
 public class OrderItemModel extends BaseModel {
-   private String unit_count;
+   private String count;
    private String order_state;
-    private String money_record;
+    private String totalMoney;
    private String date_time;
    private Object img;
+   private String orderItemJson;
 
-    public String getUnit_count() {
-        return unit_count;
+    public String getCount() {
+        return count;
     }
 
-    public void setUnit_count(String unit_count) {
-        this.unit_count = unit_count;
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(String totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public String getOrderItemJson() {
+        return orderItemJson;
+    }
+
+    public void setOrderItemJson(String orderItemJson) {
+        this.orderItemJson = orderItemJson;
     }
 
     public String getOrder_state() {
@@ -26,11 +43,11 @@ public class OrderItemModel extends BaseModel {
     }
 
     public String getMoney_record() {
-        return money_record;
+        return totalMoney;
     }
 
     public void setMoney_record(String money_record) {
-        this.money_record = money_record;
+        this.totalMoney = money_record;
     }
 
     public String getDate_time() {

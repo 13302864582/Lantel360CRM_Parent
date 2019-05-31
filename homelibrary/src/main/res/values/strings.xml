@@ -80,4 +80,16 @@
     <string name="sectionFormat">第%1$d章</string>
     <string name="course_formate" >《%1$s》</string>
     <string name="month_format">%1$d月</string>
+    <string name="total_money">总资产(CNY)</string>
+    <string name="bussinessType1">结账</string>
+    <string name="bussinessType2">退费</string>
+    <string name="bussinessType3">充值</string>
+    <string name="bussinessType4">下单</string>
+    <string name="bussinessType5">订单续费</string>
+    <string name="bussinessType10">导入</string>
+    <string name="bussinessType11">用户手动增加</string>
+    <string name="bussinessType12">手动减少</string>
+    <string name="un_pay">未付款</string>
+    <string name="part_pay">部分付款</string>
+    <string name="success_pay">交易成功</string>
 </resources>

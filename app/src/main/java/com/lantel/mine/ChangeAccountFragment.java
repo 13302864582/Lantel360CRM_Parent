@@ -33,7 +33,6 @@ public class ChangeAccountFragment extends NormalListFragment {
     @Override
     protected void initView() {
         stateLayout.showContentView();
-        refreshLayout = rootView.findViewById(com.example.baselibrary.R.id.refreshlayout);
         recyclerView = rootView.findViewById(getListView());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = getAdapter();
@@ -41,8 +40,8 @@ public class ChangeAccountFragment extends NormalListFragment {
         model = ViewModelProviders.of(getActivity()).get(ChangeAccountModel.class);
         changeAccountBeans = model.getChangeAccountBeans();
         sid = model.getSid();
-        refreshLayout.setEnableLoadMore(false);
-        refreshLayout.setEnableRefresh(false);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        stateLayout.refreshLayout.setEnableRefresh(false);
         ((ChangeAcountAdapter)mAdapter).setDatas(changeAccountBeans);
         ((ChangeAcountAdapter)mAdapter).setSid(sid);
         mAdapter.notifyDataSetChanged();

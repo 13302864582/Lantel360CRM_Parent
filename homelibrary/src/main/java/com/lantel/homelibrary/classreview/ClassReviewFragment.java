@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter, ClassReviewModel> implements ClassReviewContract.View, OnRefreshLoadMoreListener {
     @Override
     protected void InitView() {
-        refreshLayout.setOnRefreshLoadMoreListener(this);
+        stateLayout.refreshLayout.setOnRefreshLoadMoreListener(this);
     }
 
     @Override

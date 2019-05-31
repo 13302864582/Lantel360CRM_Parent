@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleEvent;
@@ -27,6 +29,9 @@ import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,6 +80,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     private mineMenuListApater mMenuListApater;
     private List<MineCardBean.DataBean.ListBean> mCardList;
     private String sid;
+    private int mPosition = -1;
 
     @Override
     public void notifyCardData(MineCardBean cardBean) {
@@ -83,8 +89,10 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     }
 
     private void updateCard() {
-        for(MineCardBean.DataBean.ListBean bean : mCardList){
+        for(int i = 0;i < mCardList.size();i++){
+            MineCardBean.DataBean.ListBean bean = mCardList.get(i);
             if(bean.getSid().equals(sid)){
+                mPosition = i;
                 mineName.setText(bean.getStudent_name());
                 mineCall.setText(bean.getNick_name());
                 GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg,R.mipmap.circle_default);
@@ -232,7 +240,20 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     @Override
     public void navigationPath(String path) {
-        ARouter.getInstance().build(path).navigation();
+        Postcard postcard = ARouter.getInstance().build(path);
+        postWithParam(postcard,path).navigation();
+    }
+
+    private Postcard postWithParam(Postcard postcard, String path) {
+        if(getString(R.string.mine_wallet_path).equals(path)) {
+            String money = "0.00";
+            if(mPosition!=-1){
+                String sMoney = mCardList.get(mPosition).getMoney();
+                money = DisplayUtil.formatNum(String.format("%.2f",Float.valueOf(sMoney)));
+            }
+            return postcard.withString(Config.WALLLET_MONEY,money).withString(Config.SID,sid);
+        }else
+            return postcard;
     }
 
     @OnClick({R.id.top_img_right, R.id.mine_change, R.id.mine_head_img,R.id.add_account})

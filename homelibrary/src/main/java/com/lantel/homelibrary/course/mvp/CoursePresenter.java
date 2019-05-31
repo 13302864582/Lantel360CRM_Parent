@@ -80,7 +80,7 @@ public class CoursePresenter extends CourseContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-
+                      onFail(refreshLayout,isLoadMore);
                     }
                 });
     }
@@ -99,7 +99,7 @@ public class CoursePresenter extends CourseContract.Presenter {
 
                     @Override
                     public void onFailure(Throwable e) {
-                        mView.showEmpty();
+                       onFail(refreshLayout,isLoadMore);
                     }
                 });
     }
@@ -139,12 +139,7 @@ public class CoursePresenter extends CourseContract.Presenter {
 
             }
         } else {
-            if (!isLoadMore)
-                mView.showEmpty();
-            else {
-                if (null != refreshLayout)
-                    refreshLayout.finishLoadMore();
-            }
+            onFail(refreshLayout,isLoadMore);
         }
     }
 
@@ -162,7 +157,7 @@ public class CoursePresenter extends CourseContract.Presenter {
             List<Integer> dateList = courseAllBean.getSchmeDays();
 
             for (Integer int_day : dateList) {
-                Date date = DisplayUtil.formatIntDay(String.valueOf(int_day));
+                Date date = DisplayUtil.formatIntDay("yyyyMMdd", String.valueOf(int_day));
                 java.util.Calendar calendar = java.util.Calendar.getInstance();
                 calendar.setTime(date);
                 Calendar cal = getSchemeCalendar(calendar.get(java.util.Calendar.YEAR), calendar.get(java.util.Calendar.MONTH), calendar.get(java.util.Calendar.DAY_OF_MONTH));
@@ -181,5 +176,16 @@ public class CoursePresenter extends CourseContract.Presenter {
             mCurrentIntDay = calendar.toString();
             getCourse(String.valueOf(mCurrentPage), String.valueOf(10), false, null);
         }
+    }
+
+    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
+        if (null != refreshLayout) {
+            if (!isLoadMore)
+                refreshLayout.finishRefresh();
+            else
+                refreshLayout.finishLoadMore();
+        }
+        if(!isLoadMore)
+            mView.showEmpty();
     }
 }

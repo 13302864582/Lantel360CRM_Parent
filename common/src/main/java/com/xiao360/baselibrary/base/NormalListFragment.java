@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.baselibrary.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-
+import com.xiao360.baselibrary.util.LogUtils;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class NormalListFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T, E> {
     protected RecyclerView.Adapter mAdapter;
     protected RecyclerView recyclerView;
-    protected SmartRefreshLayout refreshLayout;
     private boolean hasLoadMore = false;
 
     @Override
@@ -55,7 +54,6 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
         initFailView();
         initToolBar();
         stateLayout.showContentView();
-        refreshLayout = rootView.findViewById(R.id.refreshlayout);
         recyclerView = rootView.findViewById(getListView());
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
