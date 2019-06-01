@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name="com.lantel.app.AppMVPActivity">
+        <activity android:name="com.lantel.Splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,9 +28,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.lantel.app.AppMVPActivity"/>
+
         <activity android:name="com.lantel.setting.SettingActivity"/>
 
         <activity android:name="com.lantel.mine.ChangeAccountActivity"/>
+
+        <activity android:name="com.lantel.Login.LoginUserActivity"/>
     </application>
 
 </manifest>

@@ -67,4 +67,11 @@
     <string name="year_old">岁</string>
     <string name="sno">学号</string>
     <string name="card_sno">卡号</string>
+    <string name="jump">跳过</string>
+    <string name="jump_rightnow">立刻体验</string>
+    <string name="login">登录</string>
+    <string name="login_forgetPassWord">忘记密码</string>
+    <string name="login_edit_user">请输入学习管家账号</string>
+    <string name="login_edit_password">请输入密码</string>
+    <string name="empty_edit_login">账号或密码不能为空</string>
 </resources>

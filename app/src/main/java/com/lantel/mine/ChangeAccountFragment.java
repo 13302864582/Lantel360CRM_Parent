@@ -13,6 +13,7 @@ import com.lantel.mine.list.model.ChangeAccountBean;
 import com.lantel.mine.mvp.ChangeAccountModel;
 import com.xiao360.baselibrary.base.NormalListFragment;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.ArrayList;
 import androidx.lifecycle.ViewModel;
@@ -23,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ChangeAccountFragment extends NormalListFragment {
     private ChangeAccountModel model;
     private ArrayList<ChangeAccountBean> changeAccountBeans;
-    private String sid;
 
     @Override
     protected void InitView() {
@@ -39,19 +39,15 @@ public class ChangeAccountFragment extends NormalListFragment {
         recyclerView.setAdapter(mAdapter);
         model = ViewModelProviders.of(getActivity()).get(ChangeAccountModel.class);
         changeAccountBeans = model.getChangeAccountBeans();
-        sid = model.getSid();
         stateLayout.refreshLayout.setEnableLoadMore(false);
         stateLayout.refreshLayout.setEnableRefresh(false);
         ((ChangeAcountAdapter)mAdapter).setDatas(changeAccountBeans);
-        ((ChangeAcountAdapter)mAdapter).setSid(sid);
         mAdapter.notifyDataSetChanged();
         TextView title = rootView.findViewById(com.example.baselibrary.R.id.title);
         title.setText(getString(getToolbarTitle()));
         ImageView back = rootView.findViewById(com.example.baselibrary.R.id.back);
         back.setOnClickListener((View view)-> {
-            Intent result = new Intent();
-            result.putExtra(Config.SID,((ChangeAcountAdapter)mAdapter).getSelectSid());
-            getActivity().setResult(Activity.RESULT_OK,result);
+            getActivity().setResult(Activity.RESULT_OK);
             getActivity().finish();
         });
     }

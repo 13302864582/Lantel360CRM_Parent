@@ -28,10 +28,6 @@ public class WalletActivity extends FragmentActivity {
             String walletMoney = intent.getStringExtra(Config.WALLLET_MONEY);
             walletModel.setWalletMoney(walletMoney);
         }
-        if(null != intent.getStringExtra(Config.SID)){
-            String sid = intent.getStringExtra(Config.SID);
-            walletModel.setSid(sid);
-        }
         super.initView();
     }
 

@@ -39,7 +39,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ModuleBus.getInstance().register(this);
 
         mContext = this;
-//初始化状态栏
+        //初始化状态栏
         ImmersionBar.with(this)
                 .hideBar(BarHide.FLAG_SHOW_BAR)
                 .init();

@@ -79,7 +79,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
     private List<MineCardBean.DataBean.ListBean> mCardList;
-    private String sid;
     private int mPosition = -1;
 
     @Override
@@ -89,6 +88,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     }
 
     private void updateCard() {
+        String sid = SpCache.getString(Config.SID,"");
         for(int i = 0;i < mCardList.size();i++){
             MineCardBean.DataBean.ListBean bean = mCardList.get(i);
             if(bean.getSid().equals(sid)){
@@ -131,7 +131,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     @Override
     public void initMenuData(ArrayList<SimpleMenuModel> list) {
-        sid = SpCache.getString(Config.SID,"21");
         mineMenuList.setLayoutManager(new LinearLayoutManager(getContext()));
         mMenuListApater = new mineMenuListApater(getContext(),list);
         mMenuListApater.setListener(this);
@@ -223,8 +222,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     }
 
     @ModuleEvent(coreClientClass = IBaseClient.class)
-    public void refreshMineCard(String sid) {
-        this.sid = sid;
+    public void refreshCard(String s) {
         updateCard();
     }
 
@@ -248,7 +246,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
                 String sMoney = mCardList.get(mPosition).getMoney();
                 money = String.format("%.2f",Float.valueOf(sMoney));
             }
-            return postcard.withString(Config.WALLLET_MONEY,money).withString(Config.SID,sid);
+            return postcard.withString(Config.WALLLET_MONEY,money);
         }else
             return postcard;
     }
@@ -262,7 +260,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
             if(null != mCardList && mCardList.size()!=0){
                 Gson gson =new Gson();
                 String accountListJson = gson.toJson(mCardList);
-                ARouter.getInstance().build("/lantelhome/360/ChangeAccount").withString(Config.ACCOUNT_LIST,accountListJson).withString(Config.SID,sid).navigation(getActivity(),Config.REQUEST_CHANGE_ACCOUNT);
+                ARouter.getInstance().build("/lantelhome/360/ChangeAccount").withString(Config.ACCOUNT_LIST,accountListJson).navigation(getActivity(),Config.REQUEST_CHANGE_ACCOUNT);
             }
         }else if(id == R.id.mine_head_img){
 

@@ -67,4 +67,14 @@
     <dimen name="card_add_img">42dp</dimen>
     <dimen name="chang_count_title">14sp</dimen>
     <dimen name="exit_count_height">40dp</dimen>
+    <dimen name="jump_right">11dp</dimen>
+    <dimen name="jump_top">20dp</dimen>
+    <dimen name="jump_w">138dp</dimen>
+    <dimen name="jump_h">33dp</dimen>
+    <dimen name="jump_radius">16dp</dimen>
+    <dimen name="jump_rightnow">18sp</dimen>
+    <dimen name="jump_line">1dp</dimen>
+    <dimen name="login_img">90dp</dimen>
+    <dimen name="login_btn">45dp</dimen>
+    <dimen name="login_btn_text">18sp</dimen>
 </resources>

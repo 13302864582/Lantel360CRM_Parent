@@ -46,7 +46,7 @@ public class MinePresenter extends MineContract.Presenter{
 
 
     private void loadData() {
-        mModel.loadData("10028")
+        mModel.loadData()
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<MineCardBean>() {
                     @Override

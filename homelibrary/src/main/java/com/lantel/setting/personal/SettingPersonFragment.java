@@ -3,17 +3,11 @@ package com.lantel.setting.personal;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
-import com.cangwang.core.IBaseClient;
-import com.cangwang.core.ModuleBus;
 import com.lantel.common.PhotoSelectListener;
 import com.lantel.common.PopUtil;
 import com.lantel.homelibrary.R;
@@ -25,16 +19,10 @@ import com.lantel.setting.personal.mvp.SettingPersonModel;
 import com.lantel.setting.personal.mvp.SettingPersonPresenter;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.PhotoUtil;
-
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -47,11 +35,11 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     RecyclerView settingPersonalList;
     @BindView(R2.id.title)
     TextView title;
+    @BindView(R2.id.text_right)
+    TextView textRight;
 
     private SettingPersonAdapter mAdapter;
-    private String photoUrl;
-    private boolean isTakephoto;
-
+    private Uri photoUrl;
 
     @Override
     protected int getStateBarviewID() {
@@ -78,24 +66,23 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
 
     }
 
-    @OnClick({R2.id.headImg, R2.id.chageHead,R2.id.back, R2.id.text_right})
+    @OnClick({R2.id.headImg, R2.id.chageHead, R2.id.back, R2.id.text_right})
     public void onViewClicked(View view) {
         int id = view.getId();
-        if(id == R.id.headImg || id == R.id.chageHead){
+        if (id == R.id.headImg || id == R.id.chageHead) {
             PopUtil popUtil = new PopUtil();
-            popUtil.showPickPop(getActivity(),this);
-        }else if(id == R.id.back){
+            popUtil.showPickPop(this, this);
+        } else if (id == R.id.back) {
             getActivity().finish();
-        }else if(id == R.id.text_right){
+        } else if (id == R.id.text_right) {
 
         }
-
     }
 
     @Override
     public void initList(ArrayList<BaseModel> menu) {
         settingPersonalList.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new SettingPersonAdapter(getContext(),menu);
+        mAdapter = new SettingPersonAdapter(getContext(), menu);
         mAdapter.setListener(this);
         settingPersonalList.setAdapter(mAdapter);
     }
@@ -103,24 +90,29 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
-            switch (requestCode){
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
                 case Config.REQUEST_EDIT_TEXT:
                     mAdapter.notifyValue(data.getStringExtra(Config.EDIT_TEXT_RESULT));
                     break;
                 case Config.REQUEST_TAKE_PHOTO:
-                    photoUrl = data.getStringExtra("photoUrl");
-
-
-
-                    Bitmap photoBmp = null;
-                    if (mImageCaptureUri != null) {
-                        photoBmp = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), mImageCaptureUri);
+                    try {
+                        Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), photoUrl);
+                        headImg.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        LogUtils.d("REQUEST_TAKE_PHOTO===IOException==" + e.getMessage());
                     }
-                    headImg.setImageBitmap(bm);
                     break;
                 case Config.REQUEST_SELECT_PHOTO:
-                    LogUtils.d("REQUEST_SELECT_PHOTO=="+data.getData().toString());
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = PhotoUtil.getBitmapFormUri(getContext(), data.getData());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        LogUtils.d("REQUEST_SELECT_PHOTO==IOException==" + data.getData().toString());
+                    }
+                    headImg.setImageBitmap(bitmap);
                     break;
             }
         }
@@ -128,7 +120,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
 
     @Override
     public void editText(String editText) {
-        ARouter.getInstance().build("/lantel/360/EditText").withString(Config.EDIT_TEXT,editText).navigation(getActivity(),Config.TYPE_EDIT_TEXT);
+        ARouter.getInstance().build("/lantel/360/EditText").withString(Config.EDIT_TEXT, editText).navigation(getActivity(), Config.TYPE_EDIT_TEXT);
     }
 
     @Override
@@ -148,6 +140,12 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
 
     @Override
     public void onPhotoSelect(Uri uri) {
-        ModuleBus.getInstance().post(IBaseClient.class,"onPhotoSelect",PhotoUtil.getRealPathFromUri(getContext(),uri));
+        photoUrl = uri;
+        startActivityForResult(PhotoUtil.getTakePhotoIntent(uri), Config.REQUEST_TAKE_PHOTO);
+    }
+
+    @Override
+    public void onSelectAlbum() {
+        startActivityForResult(PhotoUtil.getPickIntent(), Config.REQUEST_SELECT_PHOTO);
     }
 }

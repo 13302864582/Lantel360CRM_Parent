@@ -137,4 +137,10 @@
         <item>@string/setting_AboutUs_path</item>
     </string-array>
 
+    <integer-array name="splash_img">
+        <item>@mipmap/splash_1</item>
+        <item>@mipmap/splash_2</item>
+        <item>@mipmap/splash_3</item>
+        <item>@mipmap/splash_4</item>
+    </integer-array>
 </resources>

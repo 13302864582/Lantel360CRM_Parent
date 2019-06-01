@@ -60,4 +60,13 @@ public class Config {
     public static final int TYPE_ORDER_END = 1;
     public static final int TYPE_ORDER_LIST= 2;
 
+    public static final String IS_FIRST = "IS_FIRST";
+    public static final String IS_LOGIN = "IS_LOGIN";
+
+    public static final String TOKEN = "TOKEN";
+    public static final String X_SUB_HOST = " x-sub-host";
+    public static final String UID = "UID";
+    public static final String BID = "BID";
+    public static final String ACCOUNT = "ACCOUNT";
+    public static final String PASSWORD = "PASSWORD";
 }

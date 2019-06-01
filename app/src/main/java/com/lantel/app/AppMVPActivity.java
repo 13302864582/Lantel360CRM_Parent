@@ -2,7 +2,7 @@ package com.lantel.app;
 
 import android.app.Activity;
 import android.content.Intent;
-
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,8 +14,6 @@ import com.lantel.app.mvp.AppPresenter;
 import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
-import com.xiao360.baselibrary.util.LogUtils;
-
 import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -25,12 +23,15 @@ import butterknife.BindView;
 /**
  * app启动activity
  * */
+
+@Route(path = "/lantelhome/360/app")
 public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> implements AppContract.View {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigation;
     private NavController mNavController;
     private NavHostFragment navHost;
     private int mLastNavId = -1;
+    private boolean updateCard = false;
 
     @Override
     protected BarHide hideBar() {
@@ -104,9 +105,18 @@ public class AppMVPActivity extends BaseMVPActivity<AppPresenter, AppModel> impl
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+      if(updateCard){
+          updateCard = false;
+          ModuleBus.getInstance().post(IBaseClient.class,"refreshCard","");
+      }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == Config.REQUEST_CHANGE_ACCOUNT && resultCode == Activity.RESULT_OK){
-            ModuleBus.getInstance().post(IBaseClient.class,"refreshMineCard",data.getStringExtra(Config.SID));
+            updateCard = true;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

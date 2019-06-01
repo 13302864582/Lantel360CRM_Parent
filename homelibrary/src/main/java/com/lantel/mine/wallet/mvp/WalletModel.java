@@ -2,23 +2,18 @@ package com.lantel.mine.wallet.mvp;
 
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.attence.api.AttenceService;
 import com.lantel.mine.wallet.api.WalletService;
+import com.xiao360.baselibrary.util.SpCache;
+
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
 public class WalletModel extends ViewModel {
     private String walletMoney;
-    private String sid;
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
 
     public String getWalletMoney() {
         return walletMoney;
@@ -28,13 +23,15 @@ public class WalletModel extends ViewModel {
         this.walletMoney = walletMoney;
     }
 
-    public Observable<ResponseBody> loadData(String sid,String page, String pageSize) {
+    public Observable<ResponseBody> loadData(String page, String pageSize) {
+        String sid = SpCache.getString(Config.SID,"");
         WalletService service = Http.getInstance().createRequest(WalletService.class);
-        return service.getWalletListData(sid,page,pageSize).compose(RxHelper.io_main());
+        return service.getWalletListData(HeaderUtil.getHeaderMap(),sid,page,pageSize).compose(RxHelper.io_main());
     }
 
-    public Observable<ResponseBody> loadMonthData(String sid,String month,String page, String pageSize) {
+    public Observable<ResponseBody> loadMonthData(String month,String page, String pageSize) {
+        String sid = SpCache.getString(Config.SID,"");
         WalletService service = Http.getInstance().createRequest(WalletService.class);
-        return service.getWalletMonthData(sid,month,page,pageSize).compose(RxHelper.io_main());
+        return service.getWalletMonthData(HeaderUtil.getHeaderMap(),sid,month,page,pageSize).compose(RxHelper.io_main());
     }
 }

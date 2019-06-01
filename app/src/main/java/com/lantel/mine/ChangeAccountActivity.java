@@ -1,5 +1,7 @@
 package com.lantel.mine;
 
+import android.app.Activity;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -10,6 +12,7 @@ import com.lantel.homelibrary.app.Config;
 import com.lantel.mine.list.model.ChangeAccountBean;
 import com.lantel.mine.mvp.ChangeAccountModel;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,6 @@ import androidx.lifecycle.ViewModelProviders;
 public class ChangeAccountActivity extends FragmentActivity {
     private String account_list_str;
     private ChangeAccountModel model;
-    private String sid;
 
     @Override
     protected String getFragmentTag() {
@@ -30,7 +32,6 @@ public class ChangeAccountActivity extends FragmentActivity {
     @Override
     public void initView() {
         account_list_str = getIntent().getStringExtra(Config.ACCOUNT_LIST);
-        sid = getIntent().getStringExtra(Config.SID);
         //Json的解析类对象
         JsonParser parser = new JsonParser();
         //将JSON的String 转成一个JsonArray对象
@@ -47,12 +48,18 @@ public class ChangeAccountActivity extends FragmentActivity {
         }
         model = ViewModelProviders.of(this).get(ChangeAccountModel.class);
         model.setChangeAccountBeans(changeAccountBeans);
-        model.setSid(sid);
         super.initView();
     }
 
     @Override
     protected Fragment getFragment() {
         return new ChangeAccountFragment();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 }

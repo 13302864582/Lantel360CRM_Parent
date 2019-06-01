@@ -2,6 +2,7 @@ package com.lantel.studylibrary.course.mvp.has_read;
 
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.studylibrary.course.api.CourseBean;
 import com.lantel.studylibrary.course.api.CourseService;
 
@@ -11,6 +12,6 @@ import io.reactivex.Observable;
 public class HasReadModel extends ViewModel {
     public Observable<CourseBean> loadData(String page, String pageSize) {
         CourseService service = Http.getInstance().createRequest(CourseService.class);
-        return service.getCourseReading(String.valueOf(1),page,pageSize).compose(RxHelper.io_main());
+        return service.getCourseReading(HeaderUtil.getHeaderMap(),String.valueOf(1),page,pageSize).compose(RxHelper.io_main());
     }
 }

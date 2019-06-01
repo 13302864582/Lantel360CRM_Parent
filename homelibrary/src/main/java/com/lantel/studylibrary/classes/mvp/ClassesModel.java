@@ -2,6 +2,7 @@ package com.lantel.studylibrary.classes.mvp;
 
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.homelibrary.course.api.CourseBean;
 import com.lantel.homelibrary.course.api.CourseService;
 import com.lantel.homelibrary.course.calendar.CalenderSchemBean;
@@ -18,6 +19,6 @@ import io.reactivex.Observable;
 public class ClassesModel extends ViewModel {
     public Observable<ClassBean> loadData(String page, String pageSize) {
         ClassService service = Http.getInstance().createRequest(ClassService.class);
-        return service.getClassData(page,pageSize).compose(RxHelper.io_main());
+        return service.getClassData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 }

@@ -46,4 +46,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.zxing
+    implementation 'com.bigkoo:convenientbanner:2.1.5'
 }

@@ -8,12 +8,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.mine.wallet.api.WalletOrderBean;
 import com.lantel.mine.wallet.list.model.WalletItemModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,8 +81,7 @@ public class WalletPresenter extends WalletContract.Presenter{
     }
 
     private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
-        WalletModel walletModel = ViewModelProviders.of(context.getActivity()).get(WalletModel.class);
-        mModel.loadData(walletModel.getSid(),page, pageSize)
+        mModel.loadData(page, pageSize)
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<ResponseBody>() {
                     @Override
@@ -151,8 +153,7 @@ public class WalletPresenter extends WalletContract.Presenter{
     }
 
     private void loadMonthData(String page, String pageSize,boolean isLoadMore, RefreshLayout refreshLayout) {
-        WalletModel walletModel = ViewModelProviders.of(context.getActivity()).get(WalletModel.class);
-        mModel.loadMonthData(walletModel.getSid(),mCurrentMonth,page,pageSize)
+        mModel.loadMonthData(mCurrentMonth,page,pageSize)
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<ResponseBody>() {
                     @Override

@@ -53,7 +53,7 @@
     <color name="unbind_student_text">#737373</color>
     <color name="classes_area_color">#797979</color>
     <color name="classes_room">#838383</color>
-    <color name="bind">#f7f6fb</color>
+    <color name="bind">#e8e8e8</color>
     <color name="dialog_content">#999999</color>
     <color name="black">#000000</color>
     <color name="bind_add_edit_hint">#c9c9c9</color>
