@@ -118,4 +118,5 @@
     <dimen name="original_money_marginTop">28dp</dimen>
     <dimen name="order_top_card">120dp</dimen>
     <dimen name="order_top_state">13sp</dimen>
+    <dimen name="preview_date_textsize">11sp</dimen>
 </resources>

@@ -26,6 +26,15 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/preview_date_size"
+                android:textSize="@dimen/preview_date_textsize"
+                app:layout_constraintBaseline_toBaselineOf="@id/course_name"
+                app:layout_constraintRight_toRightOf="@id/detail"/>
+
             <ImageView
                 android:id="@+id/time_img"
                 android:layout_marginTop="@dimen/list_margin"
@@ -81,8 +90,8 @@
                 android:textSize="@dimen/classes_place"
                 app:layout_constraintTop_toBottomOf="@id/location"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="@dimen/setting_pesonal_title_marginLeft"
-                android:layout_marginBottom="@dimen/course_progress_margin"
+                android:layout_marginTop="@dimen/edit_pass_item_Left"
+                android:layout_marginBottom="@dimen/setting_pesonal_title_marginLeft"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginEnd="@dimen/head_img_marginStart"
                 />
@@ -99,17 +108,17 @@
                 android:layout_height="@dimen/line"/>
 
             <TextView
+                android:text="djksajdjqwdjqd"
                 android:id="@+id/content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/remark_title"
-                android:textColor="@color/bind_student_name"
-                android:textSize="@dimen/output_name"
-                app:layout_constraintBaseline_toBaselineOf="@id/detail"
-                app:layout_constraintTop_toBottomOf="@id/head_img"
                 app:layout_constraintLeft_toLeftOf="@id/time_img"
-                android:maxEms="13"
-                android:ellipsize="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line"
+                app:layout_constraintRight_toLeftOf="@id/detail"
+                android:layout_marginRight="@dimen/list_margin"
+                android:textColor="@color/wallet_item_title"
+                android:textSize="@dimen/wallet_item_money_record"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

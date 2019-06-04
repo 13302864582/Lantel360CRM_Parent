@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.lantel.common.list.holder.PhotoHolder;
 import com.lantel.common.list.holder.VideoHolder;
 import com.lantel.common.list.model.PhotoModel;
@@ -64,15 +63,6 @@ public class DetailAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
     private void bindVideoViewHolder(VideoHolder holder, VideoModel data) {
-        //确保使用正确的VideoView进口
-       holder.jz_video.setOnPreparedListener(new OnPreparedListener() {
-           @Override
-           public void onPrepared() {
-               holder.jz_video.start();
-           }
-       });
-        holder.jz_video.setVideoURI(Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
-        //http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4
 
     }
 

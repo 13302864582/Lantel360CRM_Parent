@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.lantel.homelibrary.R;

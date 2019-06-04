@@ -1,6 +1,5 @@
 package com.xiao360.baselibrary.base;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -69,7 +68,7 @@ public abstract class BaseMVPActivity<T extends BaseActivityPresenter, E extends
 
         //绑定android生命周期
         if(mPresenter!=null)
-        getLifecycle().addObserver(mPresenter);
+            getLifecycle().addObserver(mPresenter);
 
         //初始化Presenter
         this.initPresenter();

@@ -1,12 +1,12 @@
-package com.lantel.homelibrary.preview.list.model;
+package com.lantel.studylibrary.preview.preview.list.model;
 
 import com.xiao360.baselibrary.base.BaseModel;
 
 public class PreviewItemModel extends BaseModel {
-    private String date;
     private String time;
-    private String className;
-    private int state;
+    private String date;
+    private String room;
+    private String content;
 
     public String getDate() {
         return date;
@@ -24,20 +24,19 @@ public class PreviewItemModel extends BaseModel {
         this.time = time;
     }
 
-    public String getClassName() {
-        return className;
+    public String getRoom() {
+        return room;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setRoom(String room) {
+        this.room = room;
     }
 
-    public int getState() {
-        return state;
+    public String getContent() {
+        return content;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setContent(String content) {
+        this.content = content;
     }
-
 }

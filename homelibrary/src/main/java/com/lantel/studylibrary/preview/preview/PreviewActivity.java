@@ -1,8 +1,9 @@
-package com.lantel.homelibrary.preview;
+package com.lantel.studylibrary.preview.preview;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lantel.common.FragmentActivity;
 import com.lantel.homelibrary.app.Config;
+
 import androidx.fragment.app.Fragment;
 
 @Route(path = "/lantel/360/preview")

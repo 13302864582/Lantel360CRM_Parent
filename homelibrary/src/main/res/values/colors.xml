@@ -73,4 +73,5 @@
     <color name="month">#212121</color>
     <color name="order_end_money">#e13030</color>
     <color name="paid_money">#e13030</color>
+    <color name="preview_date_size">#b6b6b6</color>
 </resources>

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lantel.common.GalleryDetailActivity;
-import com.lantel.common.GalleryDetailActivity2;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.output.list.holder.ImageHolder;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
@@ -45,7 +44,7 @@ public class ImagAdapter extends BaseRecyclerViewAdapter {
     protected void bindViewHolder(BaseViewHolder holder, Object data, int position, int viewType) {
         ImageHolder imageHolder = (ImageHolder) holder;
         imageHolder.img.setOnClickListener((View view)-> {
-            Intent intent = new Intent(context, GalleryDetailActivity2.class);
+            Intent intent = new Intent(context, GalleryDetailActivity.class);
             context.startActivity(intent);
         });
     }

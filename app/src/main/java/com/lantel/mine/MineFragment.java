@@ -73,9 +73,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     @BindView(R.id.empty_add_layout)
     RelativeLayout empty_add_layout;
 
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
-
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
     private List<MineCardBean.DataBean.ListBean> mCardList;
