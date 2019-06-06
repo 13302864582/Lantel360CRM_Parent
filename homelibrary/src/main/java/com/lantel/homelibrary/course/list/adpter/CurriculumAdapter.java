@@ -15,6 +15,7 @@ import com.lantel.homelibrary.course.list.model.CourseItemModel;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.xiao360.baselibrary.listview.listener.OnMenuClickListener;
 import com.xiao360.baselibrary.util.DisplayUtil;
 
 import java.util.List;
@@ -22,6 +23,11 @@ import java.util.List;
 public class CurriculumAdapter extends BaseRecyclerViewAdapter<CourseItemModel> {
     private boolean isEdit = false;
     private boolean isAnimation = false;
+    private OnClickDetailListener listener;
+
+    public void setListener(OnClickDetailListener listener) {
+        this.listener = listener;
+    }
 
     public int getmLastPosition() {
         return mLastPosition;
@@ -99,6 +105,8 @@ public class CurriculumAdapter extends BaseRecyclerViewAdapter<CourseItemModel> 
         card.check.setChecked(mLastPosition == position);
 
         card.itemView.setOnClickListener((View view) -> {
+            if(null != listener)
+                listener.navigateDetail(data.getCa_id());
             int lastPosition = mLastPosition;
             if (position != mLastPosition) {
                 mLastPosition = position;
@@ -108,6 +116,8 @@ public class CurriculumAdapter extends BaseRecyclerViewAdapter<CourseItemModel> 
             boolean state = card.check.isChecked();
             if (!state)
                 card.check.setChecked(true);
+
+
         });
 
     }
@@ -134,6 +144,6 @@ public class CurriculumAdapter extends BaseRecyclerViewAdapter<CourseItemModel> 
 
     @Override
     public int getItemViewType(int position) {
-        return ((BaseModel) datas.get(position)).getType();
+        return datas.get(position).getType();
     }
 }

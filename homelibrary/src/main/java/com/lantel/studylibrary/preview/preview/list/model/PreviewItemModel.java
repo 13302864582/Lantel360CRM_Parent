@@ -7,6 +7,15 @@ public class PreviewItemModel extends BaseModel {
     private String date;
     private String room;
     private String content;
+    private String ca_id;
+
+    public String getCa_id() {
+        return ca_id;
+    }
+
+    public void setCa_id(String ca_id) {
+        this.ca_id = ca_id;
+    }
 
     public String getDate() {
         return date;

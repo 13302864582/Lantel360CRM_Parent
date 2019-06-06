@@ -1,15 +1,25 @@
 package com.lantel.homelibrary.output.list.model;
 
 import com.xiao360.baselibrary.base.BaseModel;
+import java.util.ArrayList;
 
 public class CardOutputModel extends BaseModel{
     private String headImg;
     private String name;
     private String content;
-    private String[] imgs;
+    private ArrayList<BaseModel> imgs;
+    private ArrayList<BaseModel> files;
     private String classes;
     private String adress;
     private boolean isSupport;
+
+    public ArrayList<BaseModel> getFiles() {
+        return files;
+    }
+
+    public void setFiles(ArrayList<BaseModel> files) {
+        this.files = files;
+    }
 
     public boolean isSupport() {
         return isSupport;
@@ -43,11 +53,11 @@ public class CardOutputModel extends BaseModel{
         this.content = content;
     }
 
-    public String[] getImgs() {
+    public ArrayList<BaseModel> getImgs() {
         return imgs;
     }
 
-    public void setImgs(String[] imgs) {
+    public void setImgs(ArrayList<BaseModel> imgs) {
         this.imgs = imgs;
     }
 

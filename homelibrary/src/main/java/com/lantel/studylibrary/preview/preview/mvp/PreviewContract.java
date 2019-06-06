@@ -1,9 +1,7 @@
 package com.lantel.studylibrary.preview.preview.mvp;
 
 import com.lantel.common.RefreshListFragmentPresenter;
-import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.preview.preview.list.model.PreviewItemModel;
-import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.mvp.BaseView;
 import java.util.ArrayList;
 

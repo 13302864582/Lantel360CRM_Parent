@@ -188,9 +188,27 @@
         <item name="android:padding">@dimen/list_margin</item>
     </style>
 
-    <dimen name="order_d_list_top">11sp</dimen>
-    <dimen name="order_d_top">9sp</dimen>
-    <color name="order_d_list_top">#8e8e8e</color>
-    <color name="order_d_list_bottom_l">#989797</color>
-    <color name="order_d_top">#515151</color>
+    <style name="preview_title" parent="wrap_wh">
+        <item name="android:textColor">@color/preview_title</item>
+        <item name="android:textSize">@dimen/preview_title</item>
+    </style>
+
+    <style name="preview_text" parent="wrap_wh">
+        <item name="android:textColor">@color/preview_text</item>
+        <item name="android:textSize">@dimen/preview_text</item>
+    </style>
+
+    <style name="preview_text_margin" parent="preview_text">
+        <item name="android:layout_marginTop">@dimen/list_margin</item>
+    </style>
+
+    <style name="album_file_list">
+        <item name="android:layout_marginTop">@dimen/line_margin_output</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <color name="preview_text">#3d3d3d</color>
+    <dimen name="preview_text">12sp</dimen>
 </resources>

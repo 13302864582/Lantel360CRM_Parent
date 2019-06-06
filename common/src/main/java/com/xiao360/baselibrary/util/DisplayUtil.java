@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -346,6 +347,11 @@ public class DisplayUtil {
         return dateFormat.format(date);
     }
 
+    public static String getFilePath(String url) {
+        int index = url.lastIndexOf("/");
+        return Environment.getExternalStorageDirectory().getPath() + "//360_parentCRM/Download/"+url.substring(index+1);
+    }
+
     public static String formatNum(String str){
         String newStr = "";
         int count = 0;
@@ -375,5 +381,23 @@ public class DisplayUtil {
             str = newStr +str.substring(str.indexOf("."));
         }
         return str;
+    }
+
+    //将字节数转化为MB
+    public static String byteToMB(long size){
+        long kb = 1024;
+        long mb = kb*1024;
+        long gb = mb*1024;
+        if (size >= gb){
+            return String.format("%.1f G",(float)size/gb);
+        }else if (size >= mb){
+            float f = (float) size/mb;
+            return String.format(f > 100 ?"%.0f M":"%.1f M",f);
+        }else if (size > kb){
+            float f = (float) size / kb;
+            return String.format(f>100?"%.0f K":"%.1f K",f);
+        }else {
+            return String.format("%d B",size);
+        }
     }
 }

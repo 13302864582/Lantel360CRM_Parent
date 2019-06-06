@@ -41,7 +41,7 @@ public class OutputDetailPresenter extends OutputDetailContract.Presenter{
     public void initMenu() {
         //添加菜单数据
         BaseModel model = new CardOutputModel();
-        ((CardOutputModel)model).setImgs(new String[]{"1","2","2","2"});
+       /* ((CardOutputModel)model).setImgs(new String[]{"1","2","2","2"});*/
         ((CardOutputModel)model).setSupport(true);
         mView.initCourseData(model);
     }

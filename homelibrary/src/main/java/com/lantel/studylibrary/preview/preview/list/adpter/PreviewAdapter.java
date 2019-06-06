@@ -1,15 +1,19 @@
 package com.lantel.studylibrary.preview.preview.list.adpter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.studylibrary.preview.preview.list.holder.PreviewHolder;
 import com.lantel.studylibrary.preview.preview.list.model.PreviewItemModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.zzhoujay.richtext.RichText;
 import java.util.List;
 
 public class PreviewAdapter extends BaseRecyclerViewAdapter<PreviewItemModel> {
@@ -29,9 +33,12 @@ public class PreviewAdapter extends BaseRecyclerViewAdapter<PreviewItemModel> {
         setText(data.getTitle(),previewHolder.course_name);
         setText(data.getTime(),previewHolder.time);
         setText(data.getDate(),previewHolder.date);
-        //setText(,previewHolder.detail);
+        String content = data.getContent();
+        if(!TextUtils.isEmpty(content))
+        RichText.fromHtml(content).into(previewHolder.content);
         previewHolder.detail.setOnClickListener((View view)-> {
-            LogUtils.d("==="+data.getContent());
+            if(!TextUtils.isEmpty(data.getCa_id()))
+            ARouter.getInstance().build("/lantel/360/preview/detail").withString(Config.CA_ID,data.getCa_id()).navigation();
         });
     }
 }

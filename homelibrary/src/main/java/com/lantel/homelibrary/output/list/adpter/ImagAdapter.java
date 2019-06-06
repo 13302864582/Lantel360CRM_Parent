@@ -6,26 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
 import com.lantel.common.GalleryDetailActivity;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.ImageHolder;
+import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class ImagAdapter extends BaseRecyclerViewAdapter {
-    private RecyclerView.LayoutManager manager;
+public class ImagAdapter extends BaseRecyclerViewAdapter<BaseModel> {
+    private boolean isDetail = false;
 
     /**
      * 适配器构造
      * @param context
      * @param datas
-     * @param manager
+     * @param isDetail
      */
-    public ImagAdapter(Context context, List datas, RecyclerView.LayoutManager manager) {
+    public ImagAdapter(Context context, List datas, boolean isDetail) {
         super(context, datas);
-        this.manager = manager;
+        this.isDetail = isDetail;
     }
 
     @Override
@@ -41,11 +45,38 @@ public class ImagAdapter extends BaseRecyclerViewAdapter {
     }
 
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, Object data, int position, int viewType) {
+    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
         ImageHolder imageHolder = (ImageHolder) holder;
+        String imgUrl = "";
+        if(viewType == Config.VIDEO){
+
+        }else if(viewType == Config.PHOTO){
+
+        }
+
+        if(null != datas && position == 8 && datas.size()>9 && !isDetail){
+            imageHolder.more.setVisibility(View.VISIBLE);
+        }else {
+            imageHolder.play.setVisibility(viewType == Config.VIDEO?View.VISIBLE:View.GONE);
+        }
+        GlideUtils.loadImageView(context,imgUrl,imageHolder.img,R.mipmap.ad);
         imageHolder.img.setOnClickListener((View view)-> {
-            Intent intent = new Intent(context, GalleryDetailActivity.class);
-            context.startActivity(intent);
+            Gson gson = new Gson();
+            ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(datas)).withInt(Config.POSITION,position).navigation();
         });
+    }
+
+    @Override
+    public int getItemCount() {
+        if(isDetail)
+        return super.getItemCount();
+        else {
+            return null == datas ? 0 : (datas.size()>9?9:datas.size());
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return datas.get(position).getType();
     }
 }

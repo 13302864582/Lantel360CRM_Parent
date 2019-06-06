@@ -9,11 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.course.list.adpter.CurriculumAdapter;
+import com.lantel.homelibrary.course.list.adpter.OnClickDetailListener;
 import com.lantel.homelibrary.course.list.model.CourseItemModel;
 import com.lantel.homelibrary.course.mvp.CourseContract;
 import com.lantel.homelibrary.course.mvp.CourseModel;
@@ -36,7 +40,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.internal.Util;
 
-public class CourseFragment extends ToolBarStateFragment<CoursePresenter, CourseModel> implements CourseContract.View , CalendarView.OnCalendarSelectListener, OnRefreshLoadMoreListener {
+public class CourseFragment extends ToolBarStateFragment<CoursePresenter, CourseModel> implements CourseContract.View , CalendarView.OnCalendarSelectListener, OnRefreshLoadMoreListener, OnClickDetailListener {
     @BindView(R2.id.course_list)
     RecyclerView mCourseList;
     @BindView(R2.id.sick_leave)
@@ -65,7 +69,6 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     CalendarView calendarView;
 
     private CurriculumAdapter curriculumAdapter;
-    private LinearLayoutManager mLineManager;
     private boolean hasLoadMore = false;
     private boolean isBeforeToday = false;
 
@@ -127,6 +130,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mCourseList.setLayoutManager(manager);
         curriculumAdapter = new CurriculumAdapter(getContext(),null);
+        curriculumAdapter.setListener(this);
         mCourseList.setAdapter(curriculumAdapter);
         stateLayout.refreshLayout.setOnRefreshLoadMoreListener(this);
         stateLayout.refreshLayout.setEnableLoadMore(false);
@@ -270,5 +274,10 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         mPresenter.refreshData(refreshLayout);
+    }
+
+    @Override
+    public void navigateDetail(String id) {
+        ARouter.getInstance().build("/lantel/360/preview/detail").withString(Config.CA_ID,id).navigation();
     }
 }

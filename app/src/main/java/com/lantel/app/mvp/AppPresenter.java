@@ -2,7 +2,15 @@ package com.lantel.app.mvp;
 
 import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lantel.MyApplication;
+import com.lantel.app.api.AllBean;
+import com.lantel.common.ClassRoom;
 import com.lantel.crmparent.R;
+import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.util.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 
@@ -15,7 +23,41 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
     }
 
     @Override
-    public void onStart() { }
+    public void onStart() {
+        mModel.loadData()
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<AllBean>() {
+                    @Override
+                    public void onSuccess(AllBean allBean) {
+                        int errorCode  = allBean.getError();
+                        if(errorCode == 0){
+                            AllBean.DataBean dataBean = allBean.getData();
+                            if(null != dataBean){
+                                List<AllBean.DataBean.ClassroomsBean> classroomsBeans = dataBean.getClassrooms();
+                                if(null != classroomsBeans && classroomsBeans.size()>0){
+                                    List<ClassRoom> classRoom = new ArrayList<>();
+                                    for(AllBean.DataBean.ClassroomsBean classroomsBean : classroomsBeans){
+                                        ClassRoom room = new ClassRoom();
+                                        room.setCr_id(classroomsBean.getCr_id());
+                                        room.setRoom_name(classroomsBean.getRoom_name());
+                                        classRoom.add(room);
+                                    }
+                                    MyApplication application = (MyApplication) context.getApplication();
+                                    application.setClassRoom(classRoom);
+                                }
+                            }
+                        }else {
+                            onFailure(new Throwable(allBean.getMessage()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e.printStackTrace();
+                        LogUtils.d("GlobleAll===="+e.getMessage());
+                    }
+                });
+    }
 
     @Override
     public void onResume() {

@@ -10,7 +10,7 @@ public class PreviewHolder extends BaseViewHolder {
     public TextView time;
     public TextView location;
     public TextView detail;
-
+    public TextView content;
     public TextView date;
 
     public PreviewHolder(View view) {
@@ -19,7 +19,7 @@ public class PreviewHolder extends BaseViewHolder {
         time = getView(R.id.time);
         location = getView(R.id.location);
         detail = getView(R.id.detail);
-       // content = getView(R.id.content);
+        content = getView(R.id.content);
         date = getView(R.id.date);
     }
 }

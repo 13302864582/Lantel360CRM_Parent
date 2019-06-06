@@ -3,21 +3,15 @@ package com.lantel.homelibrary.output;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.output.list.adpter.OutputAdapter;
+import com.lantel.homelibrary.output.list.model.CardOutputModel;
 import com.lantel.homelibrary.output.mvp.OutputContract;
 import com.lantel.homelibrary.output.mvp.OutputModel;
 import com.lantel.homelibrary.output.mvp.OutputPresenter;
-import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
-import com.xiao360.baselibrary.base.BaseModel;
-
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
-import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -99,34 +93,13 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
         title.setText(getString(R.string.output));
     }
 
-    @Override
-    public void initCourseData(ArrayList<BaseModel> menu) {
-        mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void refreshData(ArrayList<BaseModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
-        mAdapter.setDatas(menu);
-        mAdapter.notifyDataSetChanged();
-        if(menu.size()!=0){
-            stateLayout.showContentView();
-        } else{
-            stateLayout.showEmptyView();
-        }
-    }
-
-    @Override
-    public void setLoadMoreData(ArrayList<BaseModel> menu) {
-
-    }
 
     @OnClick(R2.id.back)
     public void onViewClicked(View view) {
         int id = view.getId();
-        if(id == R.id.back)
-        LogUtils.d("=====onViewClicked:back");
+        if(id == R.id.back){
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -142,5 +115,25 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
     @Override
     public void showNetWorkError() {
         stateLayout.showFailView();
+    }
+
+    @Override
+    public void refreshData(ArrayList<CardOutputModel> menu) {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        mAdapter.setDatas(menu);
+        mAdapter.notifyDataSetChanged();
+        if(menu.size()!=0){
+            stateLayout.showContentView();
+        } else{
+            stateLayout.showEmptyView();
+        }
+    }
+
+    @Override
+    public void setLoadMoreData(ArrayList<CardOutputModel> menu) {
+        int start = mAdapter.getDatas().size();
+        mAdapter.getDatas().addAll(menu);
+        mAdapter.notifyItemRangeInserted(start,menu.size());
+        mAdapter.notifyItemRangeChanged(start,menu.size());
     }
 }

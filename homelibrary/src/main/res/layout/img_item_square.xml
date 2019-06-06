@@ -4,8 +4,23 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/img"
-        android:src="@mipmap/ad"
         android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/play"
+        android:src="@mipmap/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:visibility="gone"
+       android:scaleType="fitXY"
+        android:id="@+id/more"
+        android:src="@mipmap/more"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </com.lantel.homelibrary.output.list.SquareLayout>

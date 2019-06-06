@@ -10,7 +10,16 @@ public class CourseItemModel extends BaseModel {
     private String classes;
     private String courseName;
     private String section;
+    private String ca_id;
     private boolean isLeave;
+
+    public String getCa_id() {
+        return ca_id;
+    }
+
+    public void setCa_id(String ca_id) {
+        this.ca_id = ca_id;
+    }
 
     public String getStartTime() {
         return startTime;

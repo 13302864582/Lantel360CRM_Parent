@@ -110,4 +110,14 @@
     <string name="takePhoto">拍照</string>
     <string name="openPhotos">打开相册</string>
     <string name="preview">预习</string>
+    <string name="preview_content">备课内容</string>
+    <string name="preview_file">备课附件</string>
+    <string name="preview_detail">查看详情</string>
+
+    <string name="preview_time_format">上课时间: %1$s</string>
+    <string name="preview_class_format">备课班级: %1$s</string>
+    <string name="preview_teacher_format">备课老师: %1$s</string>
+    <string name="preview_desc_format">课程简介: %1$s</string>
+    <string name="unknown">未知</string>
+    <string name="progress">%1$s %</string>
 </resources>

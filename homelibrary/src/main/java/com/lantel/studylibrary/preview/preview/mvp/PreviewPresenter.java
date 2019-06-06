@@ -59,6 +59,7 @@ public class PreviewPresenter extends PreviewContract.Presenter<PreviewBean,Prev
             String end_hour = DisplayUtil.getTimeString(bean.getInt_end_hour()+"");
             model.setTime(start_hour+"-"+end_hour);
             model.setContent(bean.getContent());
+            model.setCa_id(bean.getCa_id()+"");
             list.add(model);
         }
 

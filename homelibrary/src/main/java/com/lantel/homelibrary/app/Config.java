@@ -50,8 +50,10 @@ public class Config {
     public static final String BIND_WEIBO = "BIND_WEIBO";
     public static final String BIND_QQ = "BIND_QQ";
     public static final String BIND_WEIXIN = "BIND_WEIXIN";
+
     public static final int VIDEO = 1;
     public static final int PHOTO = 0;
+
     public static final String SID = "SID";
     public static final String ACCOUNT_LIST = "ACCOUNT_LIST";
     public static final String WALLLET_MONEY = "WALLLET_MONEY";
@@ -69,4 +71,11 @@ public class Config {
     public static final String BID = "BID";
     public static final String ACCOUNT = "ACCOUNT";
     public static final String PASSWORD = "PASSWORD";
+    public static final String CA_ID = "CA_ID";
+    public static final String MEDIA_IMG = "image";
+    public static final String MEDIA_VIDEO = "video";
+    public static final String MEDIA_RECORD = "voice";
+    public static final String MEDIA_FILE = "file";
+    public static final String JSON_IMG_VIDEO = "JSON_IMG_VIDEO";
+    public static final String POSITION = "POSITION";
 }

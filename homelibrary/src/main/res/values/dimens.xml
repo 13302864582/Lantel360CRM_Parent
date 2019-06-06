@@ -119,4 +119,13 @@
     <dimen name="order_top_card">120dp</dimen>
     <dimen name="order_top_state">13sp</dimen>
     <dimen name="preview_date_textsize">11sp</dimen>
+    <dimen name="order_d_list_top">11sp</dimen>
+    <dimen name="order_d_top">9sp</dimen>
+    <dimen name="preview_title">16sp</dimen>
+    <dimen name="preview_conetnt">12sp</dimen>
+    <dimen name="attach_file_w">130dp</dimen>
+    <dimen name="attach_file_h">99dp</dimen>
+    <dimen name="file_size">8sp</dimen>
+    <dimen name="file_name">10sp</dimen>
+    <dimen name="progress">21sp</dimen>
 </resources>

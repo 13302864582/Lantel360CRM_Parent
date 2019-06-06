@@ -74,4 +74,14 @@
     <color name="order_end_money">#e13030</color>
     <color name="paid_money">#e13030</color>
     <color name="preview_date_size">#b6b6b6</color>
+    <color name="preview_title">#1d1d1d</color>
+    <color name="order_d_list_top">#8e8e8e</color>
+    <color name="order_d_list_bottom_l">#989797</color>
+    <color name="order_d_top">#515151</color>
+    <color name="preview_conetnt">#585858</color>
+    <color name="attach_file_bg">#f5f5f5</color>
+    <color name="file_size">#898989</color>
+    <color name="file_name">#585858</color>
+
+    <color name="trans_black">#7F000000</color>
 </resources>

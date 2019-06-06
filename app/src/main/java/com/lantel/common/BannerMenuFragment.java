@@ -102,6 +102,8 @@ public abstract class BannerMenuFragment extends ToolBarStateFragment implements
 
     @Override
     protected void initView() {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        stateLayout.refreshLayout.setEnableRefresh(false);
         stateLayout.showContentView();
         title = rootView.findViewById(R.id.title);
         studyMenuList = rootView.findViewById(R.id.study_menu_list);

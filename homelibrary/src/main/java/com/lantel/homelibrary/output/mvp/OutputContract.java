@@ -1,6 +1,8 @@
 package com.lantel.homelibrary.output.mvp;
 
 
+import com.lantel.common.RefreshListFragmentPresenter;
+import com.lantel.homelibrary.output.list.model.CardOutputModel;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.base.BaseModel;
@@ -10,14 +12,12 @@ import java.util.ArrayList;
 
 public interface OutputContract {
     interface View extends BaseView {
-        void initCourseData(ArrayList<BaseModel> menu);
+        void refreshData(ArrayList<CardOutputModel> menu);
 
-        void refreshData(ArrayList<BaseModel> menu);
-
-        void setLoadMoreData(ArrayList<BaseModel> menu);
+        void setLoadMoreData(ArrayList<CardOutputModel> menu);
     }
 
-    abstract class Presenter extends BaseFragmentPresenter<View, OutputModel> {
+    abstract class Presenter<T,E> extends RefreshListFragmentPresenter<T,E,View, OutputModel> {
 
     }
 }

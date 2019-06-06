@@ -1,5 +1,6 @@
 package com.lantel.common;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lantel.common.list.adapter.DetailAdapter2;
 import com.lantel.common.list.model.PhotoModel;
 import com.lantel.common.list.model.VideoModel;
@@ -7,12 +8,11 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseModel;
-
 import java.util.ArrayList;
-
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
+@Route(path = "/lantel/360/galleyDetail")
 public class GalleryDetailActivity extends BaseActivity {
     @BindView(R2.id.viewpager)
     ViewPager viewpager;

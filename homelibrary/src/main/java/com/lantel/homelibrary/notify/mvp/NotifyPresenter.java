@@ -1,7 +1,7 @@
 package com.lantel.homelibrary.notify.mvp;
 
 import android.os.Bundle;
-import com.lantel.common.XmlParser;
+
 import com.lantel.homelibrary.notify.api.NotifyBean;
 import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -67,7 +67,7 @@ public class NotifyPresenter extends NotifyContract.Presenter{
                             ArrayList<NotifyItemModel> menu = new ArrayList<>();
                             for (NotifyBean.DataBean.ListBean  bean : listBean) {
                                 NotifyItemModel model = new NotifyItemModel();
-                                model.setContent(XmlParser.xml2json(bean.getDesc()));
+                                //model.setContent(XmlParser.xml2json(bean.getDesc()));
                                 model.setTime(bean.getCreate_time());
                                 model.setTitle(bean.getTitle());
                             }

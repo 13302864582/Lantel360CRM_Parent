@@ -62,8 +62,8 @@ public class OutputDetailActivity extends BaseMVPActivity<OutputDetailPresenter,
 
     @Override
     public void initCourseData(BaseModel menu) {
-        CardOutputModel model = (CardOutputModel) menu;
-        bindImageList(model.getImgs());
+      /*  OutputDetailModel model = (OutputDetailModel) menu;
+        bindImageList(model.getImgs());*/
     }
 
     private void bindImageList(String[] images) {

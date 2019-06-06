@@ -119,6 +119,7 @@ public class CoursePresenter extends CourseContract.Presenter {
                     String tbName = bean.getTextbook().getTb_name();
                     itemModel.setSection(tbName + String.format(context.getString(R.string.sectionFormat), sectionBean.getSort()) + sectionBean.getSection_title());
                 }
+                itemModel.setCa_id(bean.getCa_id()+"");
                 itemModel.setStartTime(DisplayUtil.getTimeString(bean.getInt_start_hour() + ""));
                 itemModel.setEndTime(DisplayUtil.getTimeString(bean.getInt_end_hour() + ""));
                 itemModel.setLeave(null == bean.getStudent_leave());

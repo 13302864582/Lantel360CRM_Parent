@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/toolbar_btt"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/list_margin"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/list_margin">
+
+                    <TextView
+                        android:id="@+id/course_title"
+                        style="@style/preview_title"
+                        android:text="德语的发音练习技巧"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        style="@style/preview_text"
+                        android:text="2019-22-31"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        style="@style/preview_text_margin"
+                        android:text="上课时间：7点到9点"
+                        app:layout_constraintLeft_toLeftOf="@id/course_title"
+                        app:layout_constraintTop_toBottomOf="@id/course_title" />
+
+                    <TextView
+                        android:id="@+id/classes"
+                        style="@style/preview_text_margin"
+                        android:text="上课时间：7点到9点"
+                        app:layout_constraintLeft_toLeftOf="@id/time"
+                        app:layout_constraintTop_toBottomOf="@id/time" />
+
+                    <TextView
+                        android:id="@+id/teacher"
+                        style="@style/preview_text_margin"
+                        android:text="上课时间：7点到9点"
+                        app:layout_constraintLeft_toLeftOf="@id/classes"
+                        app:layout_constraintTop_toBottomOf="@id/classes" />
+
+                    <TextView
+                        android:id="@+id/detail"
+                        style="@style/preview_text_margin"
+                        android:text="上课时间：7点到9点"
+                        app:layout_constraintLeft_toLeftOf="@id/teacher"
+                        app:layout_constraintTop_toBottomOf="@id/teacher" />
+
+                    <View
+                        android:id="@+id/line1"
+                        style="@style/line"
+                        android:layout_marginTop="@dimen/setting_pesonal_title_marginLeft"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/detail" />
+
+
+                    <TextView
+                        android:id="@+id/content_title"
+                        style="@style/preview_title"
+                        android:layout_marginTop="@dimen/list_margin"
+                        android:text="@string/preview_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/back_padding"
+                        android:background="@drawable/preview_content"
+                        android:padding="10dp"
+                        android:text="dssajdajaioajdaijaaodjajdajoajdaooisj"
+                        android:textColor="@color/preview_conetnt"
+                        android:textSize="@dimen/preview_conetnt"
+                        app:layout_constraintTop_toBottomOf="@id/content_title" />
+
+                    <TextView
+                        android:id="@+id/preview_file"
+                        style="@style/preview_title"
+                        android:layout_marginTop="@dimen/list_margin"
+                        android:text="@string/preview_file"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/content" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/preview_file_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/back_padding"
+                        app:layout_constraintTop_toBottomOf="@id/preview_file">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+
+        <include
+            android:visibility="gone"
+            layout="@layout/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

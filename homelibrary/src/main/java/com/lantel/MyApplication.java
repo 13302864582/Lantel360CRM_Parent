@@ -1,21 +1,35 @@
-package com.xiao360.baselibrary;
+package com.lantel;
 
+import com.excellence.downloader.Downloader;
 import com.httpsdk.http.CacheInterceptor;
 import com.httpsdk.http.Constans;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.LogInterceptor;
+import com.lantel.common.ClassRoom;
 import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.util.SpCache;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
 public class MyApplication extends BaseApplication {
+    List<ClassRoom> classRoom;
+
+    public List<ClassRoom> getClassRoom() {
+        return classRoom;
+    }
+
+    public void setClassRoom(List<ClassRoom> classRoom) {
+        this.classRoom = classRoom;
+    }
+
     @Override
     protected void onCreateSelf() {
+        Downloader.init(this);
         File cacheDir = new File(getAppContext().getCacheDir(), "response");
         //缓存的最大尺寸10m
         Cache cache = new Cache(cacheDir, 1024 * 1024 * 10);

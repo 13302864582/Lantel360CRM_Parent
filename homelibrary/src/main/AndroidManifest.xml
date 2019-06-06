@@ -65,5 +65,7 @@
         <activity android:name="com.lantel.studylibrary.preview.preview.PreviewActivity"/>
 
         <activity android:name="com.lantel.mine.order.OrderDetailActivity"/>
+
+        <activity android:name="com.lantel.studylibrary.preview.preview.PreviewDetailActivity"/>
     </application>
 </manifest>

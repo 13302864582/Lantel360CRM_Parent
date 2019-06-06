@@ -1,14 +1,11 @@
 package com.lantel.homelibrary.output.list.holder;
 
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.output.list.AlbumFileView;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
-import com.xiao360.baselibrary.view.ImageText;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,14 +14,15 @@ public class CardOutputHolder extends BaseViewHolder {
     public TextView name;
     public TextView time;
     public TextView content;
-    public RecyclerView img_list;
-
+   /* public RecyclerView img_list;
+    public RecyclerView file_list;*/
     public TextView text_classes;
     public TextView text_adress;
     public ImageView share_img;
     public ImageView support_img;
     public ImageView remark_img;
     public ConstraintLayout card_ConstraintLayout;
+    public AlbumFileView album_file_list;
 
     public CardOutputHolder(View view) {
         super(view);
@@ -32,7 +30,9 @@ public class CardOutputHolder extends BaseViewHolder {
         name = getView(R.id.name);
         time = getView(R.id.time);
         content = getView(R.id.content);
-        img_list = getView(R.id.img_list);
+       /* img_list = getView(R.id.img_list);
+        file_list = getView(R.id.file_list);*/
+        album_file_list = getView(R.id.album_file_list);
         text_classes = getView(R.id.text_classes);
         text_adress = getView(R.id.text_adress);
         share_img = getView(R.id.share_img);

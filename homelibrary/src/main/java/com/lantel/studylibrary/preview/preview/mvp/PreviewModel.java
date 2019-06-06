@@ -6,11 +6,13 @@ import com.lantel.common.HeaderUtil;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.studylibrary.classes.api.ClassBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewBean;
+import com.lantel.studylibrary.preview.preview.api.PreviewDetailBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewService;
 import com.xiao360.baselibrary.util.SpCache;
 
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 
 public class PreviewModel extends ViewModel {
     public Observable<PreviewBean> loadData(String page, String pageSize) {

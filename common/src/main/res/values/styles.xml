@@ -67,6 +67,10 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="CenterH_wrap_wh" parent="wrap_wh">
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
     <!--包裹纵向布局-->
     <style name="centerH_wrap_wh" parent="wrap_wh">
         <item name="android:layout_gravity">center_horizontal</item>
