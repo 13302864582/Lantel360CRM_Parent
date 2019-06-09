@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.lantel.common.list.model.MediaModel;
@@ -11,7 +12,6 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.CardOutputHolder;
 import com.lantel.homelibrary.output.list.model.CardOutputModel;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
@@ -19,9 +19,9 @@ import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel> {
+public class OutputDetailAdapter extends BaseRecyclerViewAdapter<CardOutputModel> {
 
-    public OutputAdapter(Context context, List<CardOutputModel> datas) {
+    public OutputDetailAdapter(Context context, List<CardOutputModel> datas) {
         super(context, datas);
     }
 

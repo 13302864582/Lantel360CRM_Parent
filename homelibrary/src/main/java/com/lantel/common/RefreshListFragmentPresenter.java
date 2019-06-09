@@ -3,17 +3,19 @@ package com.lantel.common;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.base.BaseRxObserver;
-
 import java.util.ArrayList;
-
 import io.reactivex.Observable;
 
 public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragmentPresenter<V, M> {
     protected int mCurrentPage = 0;
 
     public void refreshData(RefreshLayout refreshLayout) {
+        if(null == refreshLayout)
+            showLoading();
         loadData(getObserver(false), false, refreshLayout);
     }
+
+    protected abstract void showLoading();
 
     private void loadData(Observable<T> observable, boolean isLoadMore, RefreshLayout refreshLayout) {
         observable.compose(context.bindToLifecycle())

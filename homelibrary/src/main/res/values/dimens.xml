@@ -36,7 +36,7 @@
     <dimen name="output_time">11sp</dimen>
     <dimen name="output_content">13sp</dimen>
     <dimen name="output_classes">10sp</dimen>
-    <dimen name="output_btm_img">40dp</dimen>
+    <dimen name="output_btm_img">50dp</dimen>
     <dimen name="output_detail_inside_text">14sp</dimen>
     <dimen name="output_detail_inside_text_marginLeft">5dp</dimen>
     <dimen name="setting_headImg">14dp</dimen>
@@ -128,4 +128,12 @@
     <dimen name="file_size">8sp</dimen>
     <dimen name="file_name">10sp</dimen>
     <dimen name="progress">21sp</dimen>
+    <dimen name="attach_icon_w">14dp</dimen>
+    <dimen name="attach_icon_h">20dp</dimen>
+    <dimen name="attach_title">13sp</dimen>
+
+    <dimen name="remark_img">45dp</dimen>
+    <dimen name="remark_name">12sp</dimen>
+    <dimen name="remark_time">10sp</dimen>
+    <dimen name="remark_content">13sp</dimen>
 </resources>

@@ -62,7 +62,6 @@ public class PreviewPresenter extends PreviewContract.Presenter<PreviewBean,Prev
             model.setCa_id(bean.getCa_id()+"");
             list.add(model);
         }
-
     }
 
     @Override
@@ -81,6 +80,11 @@ public class PreviewPresenter extends PreviewContract.Presenter<PreviewBean,Prev
             return mModel.loadData(String.valueOf(1),String.valueOf(10));
             else
             return mModel.loadData(String.valueOf(mCurrentPage+1),String.valueOf(10));
+    }
+
+    @Override
+    protected void showLoading() {
+        mView.showLoading();
     }
 
     @Override

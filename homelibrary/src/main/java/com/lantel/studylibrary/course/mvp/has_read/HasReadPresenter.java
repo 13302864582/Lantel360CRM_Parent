@@ -52,7 +52,9 @@ public class HasReadPresenter extends HasReadContract.Presenter {
     }
 
     public void refreshData(RefreshLayout refreshLayout) {
+        if(null == refreshLayout)
         mView.showLoading();
+
         loadData(String.valueOf(1), String.valueOf(10), false, refreshLayout);
     }
 

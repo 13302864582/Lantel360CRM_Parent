@@ -84,4 +84,8 @@
     <color name="file_name">#585858</color>
 
     <color name="trans_black">#7F000000</color>
+    <color name="attach_title">#3d3d3d</color>
+    <color name="remark_name">#737373</color>
+    <color name="remark_time">#b6b6b6</color>
+    <color name="remark_content">#3d3d3d</color>
 </resources>

@@ -10,14 +10,17 @@ import com.lantel.homelibrary.output.list.model.CardOutputModel;
 import com.lantel.homelibrary.output.mvp.OutputContract;
 import com.lantel.homelibrary.output.mvp.OutputModel;
 import com.lantel.homelibrary.output.mvp.OutputPresenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import java.util.ArrayList;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class OutputFragment extends ToolBarStateFragment<OutputPresenter, OutputModel> implements OutputContract.View {
+public class OutputFragment extends ToolBarStateFragment<OutputPresenter, OutputModel> implements OutputContract.View, OnRefreshLoadMoreListener {
     @BindView(R2.id.output_listView)
     RecyclerView outputListView;
     @BindView(R2.id.statebarView)
@@ -82,11 +85,13 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
 
     @Override
     protected void initView() {
+        stateLayout.refreshLayout.setOnRefreshLoadMoreListener(this);
         initToolBar();
         stateLayout.showContentView();
         outputListView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new OutputAdapter(getContext(), null);
         outputListView.setAdapter(mAdapter);
+        mPresenter.refreshData(null);
     }
 
     private void initToolBar() {
@@ -135,5 +140,15 @@ public class OutputFragment extends ToolBarStateFragment<OutputPresenter, Output
         mAdapter.getDatas().addAll(menu);
         mAdapter.notifyItemRangeInserted(start,menu.size());
         mAdapter.notifyItemRangeChanged(start,menu.size());
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.onLoadMore(refreshLayout);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        mPresenter.refreshData(refreshLayout);
     }
 }

@@ -5,6 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lantel.MyApplication;
 import com.lantel.app.api.AllBean;
 import com.lantel.common.ClassRoom;
+import com.lantel.common.SchoolArea;
 import com.lantel.crmparent.R;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
@@ -33,6 +34,7 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                         if(errorCode == 0){
                             AllBean.DataBean dataBean = allBean.getData();
                             if(null != dataBean){
+                                MyApplication application = (MyApplication) context.getApplication();
                                 List<AllBean.DataBean.ClassroomsBean> classroomsBeans = dataBean.getClassrooms();
                                 if(null != classroomsBeans && classroomsBeans.size()>0){
                                     List<ClassRoom> classRoom = new ArrayList<>();
@@ -42,8 +44,19 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                                         room.setRoom_name(classroomsBean.getRoom_name());
                                         classRoom.add(room);
                                     }
-                                    MyApplication application = (MyApplication) context.getApplication();
                                     application.setClassRoom(classRoom);
+                                }
+
+                                List<AllBean.DataBean.PublicSchoolsBean> schoolsBeans = dataBean.getPublic_schools();
+                                if(null != schoolsBeans && schoolsBeans.size()>0){
+                                    List<SchoolArea> schoolAreas = new ArrayList<>();
+                                    for(AllBean.DataBean.PublicSchoolsBean schoolsBean : schoolsBeans){
+                                        SchoolArea schoolArea = new SchoolArea();
+                                        schoolArea.setBid(schoolsBean.getBid());
+                                        schoolArea.setSchool_name(schoolsBean.getSchool_name());
+                                        schoolAreas.add(schoolArea);
+                                    }
+                                    application.setSchoolAreas(schoolAreas);
                                 }
                             }
                         }else {

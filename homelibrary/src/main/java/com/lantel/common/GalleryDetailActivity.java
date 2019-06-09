@@ -1,14 +1,22 @@
 package com.lantel.common;
 
+import android.os.Bundle;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.lantel.common.list.adapter.DetailAdapter2;
-import com.lantel.common.list.model.PhotoModel;
-import com.lantel.common.list.model.VideoModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lantel.common.list.adapter.DetailAdapter;
+import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
+import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.util.LogUtils;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
@@ -24,14 +32,12 @@ public class GalleryDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ArrayList<BaseModel> menu = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            BaseModel menuModel1 = new VideoModel();
-            BaseModel menuModel2 = new PhotoModel();
-            menu.add(menuModel1);
-            menu.add(menuModel2);
-        }
-        viewpager.setAdapter(new DetailAdapter2(this,menu));
+        String jsonData =getIntent().getStringExtra(Config.JSON_IMG_VIDEO);
+        int position =getIntent().getIntExtra(Config.POSITION,0);
+        Gson gson = new Gson();
+        List<MediaModel> mediaModelList = gson.fromJson(jsonData,new TypeToken<List<MediaModel>>(){}.getType());
+        viewpager.setAdapter(new DetailAdapter(this,mediaModelList));
+        viewpager.setCurrentItem(position);
     }
 
 }

@@ -3,6 +3,7 @@ package com.lantel.common;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.adpter.BannerMenuListApater;
@@ -23,6 +24,7 @@ public abstract class BannerMenuFragment extends ToolBarStateFragment implements
     protected AdBanner banner;
     protected RecyclerView studyMenuList;
     protected BannerMenuListApater mStudyMenuAdapter;
+
 
     public void initMenuData() {
         //添加菜单数据
@@ -126,6 +128,7 @@ public abstract class BannerMenuFragment extends ToolBarStateFragment implements
     protected abstract int getBannerDefault();
 
     private void initToolbar() {
+        rootView.findViewById(R.id.back).setVisibility(View.GONE);
         title.setText(getString(getTitle()));
     }
 

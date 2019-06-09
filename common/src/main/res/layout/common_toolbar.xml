@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <ImageButton
+            android:padding="@dimen/imgText_icon"
             android:background="@null"
             android:id="@+id/back"
             android:layout_width="@dimen/back_width"

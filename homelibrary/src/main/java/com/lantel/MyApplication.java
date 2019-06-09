@@ -6,6 +6,7 @@ import com.httpsdk.http.Constans;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.LogInterceptor;
 import com.lantel.common.ClassRoom;
+import com.lantel.common.SchoolArea;
 import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.util.SpCache;
 
@@ -18,6 +19,15 @@ import okhttp3.OkHttpClient;
 
 public class MyApplication extends BaseApplication {
     List<ClassRoom> classRoom;
+    List<SchoolArea> schoolAreas;
+
+    public List<SchoolArea> getSchoolAreas() {
+        return schoolAreas;
+    }
+
+    public void setSchoolAreas(List<SchoolArea> schoolAreas) {
+        this.schoolAreas = schoolAreas;
+    }
 
     public List<ClassRoom> getClassRoom() {
         return classRoom;

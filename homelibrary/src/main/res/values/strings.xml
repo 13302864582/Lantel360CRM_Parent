@@ -120,4 +120,7 @@
     <string name="preview_desc_format">课程简介: %1$s</string>
     <string name="unknown">未知</string>
     <string name="progress">%1$s %</string>
+    <string name="attach_file">附件</string>
+    <string name="record">语音</string>
+    <string name="doc">文档</string>
 </resources>

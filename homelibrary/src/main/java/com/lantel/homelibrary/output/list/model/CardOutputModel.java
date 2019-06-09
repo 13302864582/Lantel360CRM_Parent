@@ -1,24 +1,33 @@
 package com.lantel.homelibrary.output.list.model;
 
+import com.lantel.common.list.model.MediaModel;
 import com.xiao360.baselibrary.base.BaseModel;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CardOutputModel extends BaseModel{
     private String headImg;
-    private String name;
     private String content;
-    private ArrayList<BaseModel> imgs;
-    private ArrayList<BaseModel> files;
+    private String time;
+    private Map<String,ArrayList<MediaModel>> map;
     private String classes;
     private String adress;
     private boolean isSupport;
 
-    public ArrayList<BaseModel> getFiles() {
-        return files;
+    public String getTime() {
+        return time;
     }
 
-    public void setFiles(ArrayList<BaseModel> files) {
-        this.files = files;
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Map<String, ArrayList<MediaModel>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, ArrayList<MediaModel>> map) {
+        this.map = map;
     }
 
     public boolean isSupport() {
@@ -37,28 +46,12 @@ public class CardOutputModel extends BaseModel{
         this.headImg = headImg;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public ArrayList<BaseModel> getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(ArrayList<BaseModel> imgs) {
-        this.imgs = imgs;
     }
 
     public String getClasses() {

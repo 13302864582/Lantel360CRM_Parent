@@ -14,8 +14,7 @@ public class OutputDetailPresenter extends OutputDetailContract.Presenter{
 
     @Override
     public void onStart() {
-        LogUtils.d("onStart: ");
-        initMenu();
+
     }
 
     @Override
@@ -37,13 +36,4 @@ public class OutputDetailPresenter extends OutputDetailContract.Presenter{
     public void onDestroy() {
         LogUtils.d("onCrete: ");
     }
-
-    public void initMenu() {
-        //添加菜单数据
-        BaseModel model = new CardOutputModel();
-       /* ((CardOutputModel)model).setImgs(new String[]{"1","2","2","2"});*/
-        ((CardOutputModel)model).setSupport(true);
-        mView.initCourseData(model);
-    }
-
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.lantel.common.GalleryDetailActivity;
+import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.ImageHolder;
@@ -18,7 +19,7 @@ import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
 
-public class ImagAdapter extends BaseRecyclerViewAdapter<BaseModel> {
+public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
     private boolean isDetail = false;
 
     /**
@@ -45,13 +46,13 @@ public class ImagAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
+    protected void bindViewHolder(BaseViewHolder holder, MediaModel data, int position, int viewType) {
         ImageHolder imageHolder = (ImageHolder) holder;
         String imgUrl = "";
         if(viewType == Config.VIDEO){
-
+             imgUrl = data.getFile_url()+"?vframe/jpg/offset/1";
         }else if(viewType == Config.PHOTO){
-
+            imgUrl = data.getFile_url();
         }
 
         if(null != datas && position == 8 && datas.size()>9 && !isDetail){

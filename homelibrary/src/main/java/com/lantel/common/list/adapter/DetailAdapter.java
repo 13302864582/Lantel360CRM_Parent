@@ -1,73 +1,103 @@
 package com.lantel.common.list.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import com.lantel.common.list.holder.PhotoHolder;
-import com.lantel.common.list.holder.VideoHolder;
-import com.lantel.common.list.model.PhotoModel;
-import com.lantel.common.list.model.VideoModel;
+import android.widget.ImageView;
+import com.alexvasilkov.gestures.views.GestureImageView;
+import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
-import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
-import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
+public class DetailAdapter extends PagerAdapter {
+    private LayoutInflater inflater;
+    private Context context;
+    private List<MediaModel> datas;
 
-
-public class DetailAdapter extends BaseRecyclerViewAdapter<BaseModel> {
-    /**
-     * 适配器构造
-     *
-     * @param context
-     * @param datas
-     */
-    public DetailAdapter(Context context, List datas) {
-        super(context, datas);
+    public DetailAdapter(Context context, List<MediaModel> datas) {
+        this.context = context;
+        this.datas = datas;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
-    protected BaseViewHolder CreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
-        if(viewType == Config.VIDEO){
-            return new VideoHolder(inflater.inflate(R.layout.item_video,parent,false));
-        }else {
-            return new PhotoHolder(inflater.inflate(R.layout.item_photo,parent,false));
+    public int getCount() {
+        return null == datas ? 0 : datas.size();
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        if (object instanceof ThumbnailHolder) {
+            return view == ((ThumbnailHolder) object).itemView;
         }
+        return view == object;
     }
 
+    @NonNull
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
-        if(viewType == Config.VIDEO){
-            bindVideoViewHolder((VideoHolder)holder,(VideoModel)data);
-        }else {
-            bindPhotoViewHolder((PhotoHolder)holder,(PhotoModel)data);
-        }
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        int viewType = getItemViewType(position);
+         if (viewType == Config.PHOTO) {
+            View v = inflater.inflate(R.layout.item_photo,null);
+            PhotoViewHolder vh = new PhotoViewHolder(v);
+            container.addView(vh.itemView);
+            onBindPhotoViewHolder(vh, position);
+            return vh;
+        }else if(viewType == Config.VIDEO){
+
+         }
+        return null;
     }
 
-    private void bindPhotoViewHolder(PhotoHolder holder, PhotoModel data) {
-          holder.detail_photo.getController().getSettings()
-                .setMinZoom(0.05f)
-                .setMaxZoom(5f)
-                .enableGestures()
-                .setPanEnabled(true)
-                .setZoomEnabled(true)
-                .setDoubleTapEnabled(true)
-                .setRotationEnabled(true)
-                .setRestrictRotation(true)
-                .setFillViewport(true);
-
-        GlideUtils.loadImageView(context,R.mipmap.ad,holder.detail_photo);
+    private void onBindPhotoViewHolder(PhotoViewHolder vh, int position) {
+        MediaModel photoModel = datas.get(position);
+        GlideUtils.loadImageView(context,photoModel.getFile_url(),vh.thumbnail);
     }
 
-    private void bindVideoViewHolder(VideoHolder holder, VideoModel data) {
-
-    }
-
-    @Override
-    public int getItemViewType(int position) {
+    private int getItemViewType(int position) {
         return datas.get(position).getType();
+    }
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        int viewType = getItemViewType(position);
+        if (viewType == Config.PHOTO) {
+            if (object instanceof PhotoViewHolder) {
+                PhotoViewHolder photoViewHolder = (PhotoViewHolder) object;
+                container.removeView(photoViewHolder.itemView);
+            }
+        }
+    }
+
+    private abstract class ThumbnailHolder {
+        final View itemView;
+        ImageView thumbnail;
+
+        public ThumbnailHolder(@NonNull View itemView) {
+            this.itemView = itemView;
+        }
+    }
+
+    private class PhotoViewHolder extends ThumbnailHolder {
+        public PhotoViewHolder(View itemView) {
+            super(itemView);
+            thumbnail = itemView.findViewById(R.id.detail_photo);
+            ((GestureImageView) thumbnail).getController().getSettings()
+                    .setMinZoom(0.05f)
+                    .setMaxZoom(5f)
+                    .enableGestures()
+                    .setPanEnabled(true)
+                    .setZoomEnabled(true)
+                    .setDoubleTapEnabled(true)
+                    .setRotationEnabled(true)
+                    .setRestrictRotation(true)
+                    .setFillViewport(true);
+            thumbnail.setBackgroundColor(context.getResources().getColor(R.color.black));
+        }
     }
 }

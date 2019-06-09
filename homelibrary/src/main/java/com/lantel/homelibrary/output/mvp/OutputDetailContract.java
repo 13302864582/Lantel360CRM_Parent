@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface OutputDetailContract {
     interface View extends BaseView {
-        void initCourseData(BaseModel menu);
+
     }
 
     abstract class Presenter extends BaseActivityPresenter<View, OutputDetailModel> {

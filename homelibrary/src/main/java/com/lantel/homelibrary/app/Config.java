@@ -51,6 +51,9 @@ public class Config {
     public static final String BIND_QQ = "BIND_QQ";
     public static final String BIND_WEIXIN = "BIND_WEIXIN";
 
+    public static final int TITLE = 4;
+    public static final int FILE = 3;
+    public static final int RECORD = 2;
     public static final int VIDEO = 1;
     public static final int PHOTO = 0;
 
@@ -78,4 +81,7 @@ public class Config {
     public static final String MEDIA_FILE = "file";
     public static final String JSON_IMG_VIDEO = "JSON_IMG_VIDEO";
     public static final String POSITION = "POSITION";
+    public static final String IMG_LIST = "IMG_LIST";
+    public static final String FILE_LIST = "FILE_LIST" ;
+    public static final String RECORD_LIST = "RECORD_LIST" ;
 }

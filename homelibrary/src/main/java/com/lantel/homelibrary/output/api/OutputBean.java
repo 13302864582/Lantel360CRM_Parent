@@ -1,5 +1,6 @@
 package com.lantel.homelibrary.output.api;
 
+import com.lantel.studylibrary.preview.preview.api.PreviewDetailBean;
 
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class OutputBean {
             private String art_name;
             private String art_desc;
             private String create_time;
+
             private List<StudentArtworkAttachmentBean> student_artwork_attachment;
 
             public int getSid() {
@@ -194,6 +196,402 @@ public class OutputBean {
 
                 public void setCreate_uid(int create_uid) {
                     this.create_uid = create_uid;
+                }
+            }
+
+            public static class OneClassBean {
+                /**
+                 * cid : 2
+                 * og_id : 0
+                 * bid : 1
+                 * parent_cid : 0
+                 * class_name : 数学001班
+                 * class_no : SX001
+                 * class_type : 0
+                 * lid : 1
+                 * sj_id : 1
+                 * grade : 0
+                 * sg_id : 0
+                 * unit_price : 0.00
+                 * per_lesson_hour_minutes : 0
+                 * consume_source_type : 1
+                 * consume_lesson_hour : 0.00
+                 * subject_grade : 0
+                 * teach_eid : 10002
+                 * second_eid : 0
+                 * second_eids :
+                 * edu_eid : 0
+                 * cr_id : 1
+                 * plan_student_nums : 20
+                 * student_nums : 4
+                 * nums_rate : 0.20
+                 * lesson_times : 200
+                 * lesson_index : 0
+                 * arrange_times : 38
+                 * attendance_times : 2
+                 * year : 2018
+                 * season : A
+                 * start_lesson_time : 2018-01-01
+                 * end_lesson_time : 2019-05-27
+                 * status : 1
+                 * ext_id :
+                 * is_demo : 0
+                 * is_online : 0
+                 * create_uid : 1
+                 * int_start_hour : 0
+                 * int_end_hour : 0
+                 */
+
+                private int cid;
+                private int og_id;
+                private int bid;
+                private int parent_cid;
+                private String class_name;
+                private String class_no;
+                private int class_type;
+                private int lid;
+                private int sj_id;
+                private int grade;
+                private int sg_id;
+                private String unit_price;
+                private int per_lesson_hour_minutes;
+                private int consume_source_type;
+                private String consume_lesson_hour;
+                private int subject_grade;
+                private int teach_eid;
+                private int second_eid;
+                private String second_eids;
+                private int edu_eid;
+                private int cr_id;
+                private int plan_student_nums;
+                private int student_nums;
+                private String nums_rate;
+                private int lesson_times;
+                private int lesson_index;
+                private int arrange_times;
+                private int attendance_times;
+                private int year;
+                private String season;
+                private String start_lesson_time;
+                private String end_lesson_time;
+                private int status;
+                private String ext_id;
+                private int is_demo;
+                private int is_online;
+                private int create_uid;
+                private String int_start_hour;
+                private String int_end_hour;
+
+                public int getCid() {
+                    return cid;
+                }
+
+                public void setCid(int cid) {
+                    this.cid = cid;
+                }
+
+                public int getOg_id() {
+                    return og_id;
+                }
+
+                public void setOg_id(int og_id) {
+                    this.og_id = og_id;
+                }
+
+                public int getBid() {
+                    return bid;
+                }
+
+                public void setBid(int bid) {
+                    this.bid = bid;
+                }
+
+                public int getParent_cid() {
+                    return parent_cid;
+                }
+
+                public void setParent_cid(int parent_cid) {
+                    this.parent_cid = parent_cid;
+                }
+
+                public String getClass_name() {
+                    return class_name;
+                }
+
+                public void setClass_name(String class_name) {
+                    this.class_name = class_name;
+                }
+
+                public String getClass_no() {
+                    return class_no;
+                }
+
+                public void setClass_no(String class_no) {
+                    this.class_no = class_no;
+                }
+
+                public int getClass_type() {
+                    return class_type;
+                }
+
+                public void setClass_type(int class_type) {
+                    this.class_type = class_type;
+                }
+
+                public int getLid() {
+                    return lid;
+                }
+
+                public void setLid(int lid) {
+                    this.lid = lid;
+                }
+
+                public int getSj_id() {
+                    return sj_id;
+                }
+
+                public void setSj_id(int sj_id) {
+                    this.sj_id = sj_id;
+                }
+
+                public int getGrade() {
+                    return grade;
+                }
+
+                public void setGrade(int grade) {
+                    this.grade = grade;
+                }
+
+                public int getSg_id() {
+                    return sg_id;
+                }
+
+                public void setSg_id(int sg_id) {
+                    this.sg_id = sg_id;
+                }
+
+                public String getUnit_price() {
+                    return unit_price;
+                }
+
+                public void setUnit_price(String unit_price) {
+                    this.unit_price = unit_price;
+                }
+
+                public int getPer_lesson_hour_minutes() {
+                    return per_lesson_hour_minutes;
+                }
+
+                public void setPer_lesson_hour_minutes(int per_lesson_hour_minutes) {
+                    this.per_lesson_hour_minutes = per_lesson_hour_minutes;
+                }
+
+                public int getConsume_source_type() {
+                    return consume_source_type;
+                }
+
+                public void setConsume_source_type(int consume_source_type) {
+                    this.consume_source_type = consume_source_type;
+                }
+
+                public String getConsume_lesson_hour() {
+                    return consume_lesson_hour;
+                }
+
+                public void setConsume_lesson_hour(String consume_lesson_hour) {
+                    this.consume_lesson_hour = consume_lesson_hour;
+                }
+
+                public int getSubject_grade() {
+                    return subject_grade;
+                }
+
+                public void setSubject_grade(int subject_grade) {
+                    this.subject_grade = subject_grade;
+                }
+
+                public int getTeach_eid() {
+                    return teach_eid;
+                }
+
+                public void setTeach_eid(int teach_eid) {
+                    this.teach_eid = teach_eid;
+                }
+
+                public int getSecond_eid() {
+                    return second_eid;
+                }
+
+                public void setSecond_eid(int second_eid) {
+                    this.second_eid = second_eid;
+                }
+
+                public String getSecond_eids() {
+                    return second_eids;
+                }
+
+                public void setSecond_eids(String second_eids) {
+                    this.second_eids = second_eids;
+                }
+
+                public int getEdu_eid() {
+                    return edu_eid;
+                }
+
+                public void setEdu_eid(int edu_eid) {
+                    this.edu_eid = edu_eid;
+                }
+
+                public int getCr_id() {
+                    return cr_id;
+                }
+
+                public void setCr_id(int cr_id) {
+                    this.cr_id = cr_id;
+                }
+
+                public int getPlan_student_nums() {
+                    return plan_student_nums;
+                }
+
+                public void setPlan_student_nums(int plan_student_nums) {
+                    this.plan_student_nums = plan_student_nums;
+                }
+
+                public int getStudent_nums() {
+                    return student_nums;
+                }
+
+                public void setStudent_nums(int student_nums) {
+                    this.student_nums = student_nums;
+                }
+
+                public String getNums_rate() {
+                    return nums_rate;
+                }
+
+                public void setNums_rate(String nums_rate) {
+                    this.nums_rate = nums_rate;
+                }
+
+                public int getLesson_times() {
+                    return lesson_times;
+                }
+
+                public void setLesson_times(int lesson_times) {
+                    this.lesson_times = lesson_times;
+                }
+
+                public int getLesson_index() {
+                    return lesson_index;
+                }
+
+                public void setLesson_index(int lesson_index) {
+                    this.lesson_index = lesson_index;
+                }
+
+                public int getArrange_times() {
+                    return arrange_times;
+                }
+
+                public void setArrange_times(int arrange_times) {
+                    this.arrange_times = arrange_times;
+                }
+
+                public int getAttendance_times() {
+                    return attendance_times;
+                }
+
+                public void setAttendance_times(int attendance_times) {
+                    this.attendance_times = attendance_times;
+                }
+
+                public int getYear() {
+                    return year;
+                }
+
+                public void setYear(int year) {
+                    this.year = year;
+                }
+
+                public String getSeason() {
+                    return season;
+                }
+
+                public void setSeason(String season) {
+                    this.season = season;
+                }
+
+                public String getStart_lesson_time() {
+                    return start_lesson_time;
+                }
+
+                public void setStart_lesson_time(String start_lesson_time) {
+                    this.start_lesson_time = start_lesson_time;
+                }
+
+                public String getEnd_lesson_time() {
+                    return end_lesson_time;
+                }
+
+                public void setEnd_lesson_time(String end_lesson_time) {
+                    this.end_lesson_time = end_lesson_time;
+                }
+
+                public int getStatus() {
+                    return status;
+                }
+
+                public void setStatus(int status) {
+                    this.status = status;
+                }
+
+                public String getExt_id() {
+                    return ext_id;
+                }
+
+                public void setExt_id(String ext_id) {
+                    this.ext_id = ext_id;
+                }
+
+                public int getIs_demo() {
+                    return is_demo;
+                }
+
+                public void setIs_demo(int is_demo) {
+                    this.is_demo = is_demo;
+                }
+
+                public int getIs_online() {
+                    return is_online;
+                }
+
+                public void setIs_online(int is_online) {
+                    this.is_online = is_online;
+                }
+
+                public int getCreate_uid() {
+                    return create_uid;
+                }
+
+                public void setCreate_uid(int create_uid) {
+                    this.create_uid = create_uid;
+                }
+
+                public String getInt_start_hour() {
+                    return int_start_hour;
+                }
+
+                public void setInt_start_hour(String int_start_hour) {
+                    this.int_start_hour = int_start_hour;
+                }
+
+                public String getInt_end_hour() {
+                    return int_end_hour;
+                }
+
+                public void setInt_end_hour(String int_end_hour) {
+                    this.int_end_hour = int_end_hour;
                 }
             }
         }

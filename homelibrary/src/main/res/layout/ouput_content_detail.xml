@@ -72,130 +72,120 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/btm_img_layout"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/btm_list"
-            android:layout_marginLeft="@dimen/line_margin"
-            android:layout_marginRight="@dimen/line_margin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/line1">
-        </androidx.recyclerview.widget.RecyclerView>
-       <!-- <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/card_ConstraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <ImageView
-                android:id="@+id/head_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/line_margin_output"
-                android:src="@mipmap/ic_launcher"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line"
-                android:layout_marginTop="@dimen/line_margin_output"
-                android:background="@color/line"
-                app:layout_constraintTop_toBottomOf="@+id/head_img" />
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="阳光哦"
-                android:textColor="@color/output_name"
-                android:textSize="@dimen/output_name"
-                app:layout_constraintHorizontal_bias="0.050"
-                app:layout_constraintLeft_toRightOf="@id/head_img"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/head_img" />
-
-            <ImageView
-                android:id="@+id/img_classes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@mipmap/classes_img"
-                app:layout_constraintBottom_toBottomOf="@id/name"
-                app:layout_constraintLeft_toRightOf="@id/name" />
-
-            <TextView
-                android:id="@+id/text_classes"
-                style="@style/output_img_text"
-                android:text="水彩一班"
-                app:layout_constraintBottom_toBottomOf="@id/img_classes"
-                app:layout_constraintLeft_toRightOf="@id/img_classes"
-                tools:layout_editor_absoluteY="22dp" />
-
-            <ImageView
-                android:id="@+id/img_adress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/adress_img"
-                app:layout_constraintBottom_toBottomOf="@+id/head_img"
-                app:layout_constraintLeft_toLeftOf="@id/name"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                app:layout_constraintVertical_bias="0.80" />
-
-            <TextView
-                android:id="@+id/text_adress"
-                style="@style/output_img_text"
-                android:text="深圳市龙湖区"
-                app:layout_constraintBottom_toBottomOf="@+id/img_adress"
-                app:layout_constraintLeft_toRightOf="@id/img_adress" />
-
-            <TextView
-                android:id="@+id/content"
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_ConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/line_margin_output"
-                android:clickable="false"
-                android:inputType="textMultiLine"
-                android:text="13minutedwjdaddjdajdoapadkaokaodkaopdkpkokdokadaopkdadkdkdaokdopdakdaookdkdakdkadkaopakdodpkaokdawkdapkddakapodka"
-                android:textColor="@color/output_content"
-                android:textSize="@dimen/output_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/img_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/line_margin_output"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/content"
-                app:layout_constraintWidth_percent="1">
+                <ImageView
+                    android:id="@+id/head_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/line_margin_output"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line"
+                    android:layout_marginTop="@dimen/line_margin_output"
+                    android:background="@color/line"
+                    app:layout_constraintTop_toBottomOf="@+id/head_img" />
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/line_margin_output"
-                android:text="13minute"
-                android:textColor="@color/output_time"
-                android:textSize="@dimen/output_time"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_list" />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阳光哦"
+                    android:textColor="@color/output_name"
+                    android:textSize="@dimen/output_name"
+                    app:layout_constraintHorizontal_bias="0.050"
+                    app:layout_constraintLeft_toRightOf="@id/head_img"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/head_img" />
 
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line"
-                android:layout_marginTop="@dimen/line_margin_output"
-                android:background="@color/line"
-                app:layout_constraintTop_toBottomOf="@id/time" />
+                <ImageView
+                    android:id="@+id/img_classes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@mipmap/classes_img"
+                    app:layout_constraintBottom_toBottomOf="@id/name"
+                    app:layout_constraintLeft_toRightOf="@id/name" />
+
+                <TextView
+                    android:id="@+id/text_classes"
+                    style="@style/output_img_text"
+                    android:text="水彩一班"
+                    app:layout_constraintBottom_toBottomOf="@id/img_classes"
+                    app:layout_constraintLeft_toRightOf="@id/img_classes"
+                    tools:layout_editor_absoluteY="22dp" />
+
+                <ImageView
+                    android:id="@+id/img_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/adress_img"
+                    app:layout_constraintBottom_toBottomOf="@+id/head_img"
+                    app:layout_constraintLeft_toLeftOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintVertical_bias="0.80" />
+
+                <TextView
+                    android:id="@+id/text_adress"
+                    style="@style/output_img_text"
+                    android:text="深圳市龙湖区"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_adress"
+                    app:layout_constraintLeft_toRightOf="@id/img_adress" />
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/line_margin_output"
+                    android:clickable="false"
+                    android:inputType="textMultiLine"
+                    android:text="13minutedwjdaddjdajdoapadkaokaodkaopdkpkokdokadaopkdadkdkdaokdopdakdaookdkdakdkadkaopakdodpkaokdawkdapkddakapodka"
+                    android:textColor="@color/output_content"
+                    android:textSize="@dimen/output_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line" />
+
+                <com.lantel.homelibrary.output.list.AlbumFileView
+                    android:id="@+id/AlbumFileView"
+                    app:isDetail="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/line_margin_output"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/content"
+                    app:layout_constraintWidth_percent="0.95">
+
+                </com.lantel.homelibrary.output.list.AlbumFileView>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/back_padding"
+                    android:text="13minute"
+                    android:textColor="@color/output_time"
+                    android:textSize="@dimen/output_time"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
