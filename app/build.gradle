@@ -10,7 +10,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.lantel.crmparent"
+        applicationId "com.lantel.lh01.test"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode

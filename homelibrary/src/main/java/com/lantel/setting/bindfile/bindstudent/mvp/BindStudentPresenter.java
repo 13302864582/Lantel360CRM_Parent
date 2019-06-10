@@ -4,9 +4,13 @@ import android.os.Bundle;
 
 import com.lantel.homelibrary.R;
 import com.lantel.setting.bindfile.bindstudent.list.model.BindStudentListModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 
 public class BindStudentPresenter extends BindStudentContract.Presenter{
     @Override

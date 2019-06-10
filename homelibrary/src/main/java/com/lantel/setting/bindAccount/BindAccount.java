@@ -7,18 +7,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
-import com.lantel.common.list.model.SimpleMenuModel;
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
+import com.lantel.common.VerificationCountDownTimer;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.setting.bindAccount.api.BindAccountBean;
+import com.lantel.setting.bindAccount.api.BindAccountService;
+import com.lantel.setting.bindAccount.api.BindPhoneBean;
+import com.lantel.setting.bindAccount.api.BindPhoneReqBean;
+import com.lantel.setting.bindAccount.api.SmsBean;
+import com.lantel.setting.bindAccount.api.SmsRequest;
 import com.lantel.setting.bindAccount.list.adapter.BindAccountAdapter;
 import com.lantel.setting.bindAccount.list.model.BindAccountModel;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
 
 import java.util.ArrayList;
-
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +36,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = "/lantel/360/Setting/BindAccount")
-public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.onClickBindListener {
+public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.onClickBindListener,BindPhoneListener {
     @BindView(R2.id.statebarView)
     View statebarView;
     @BindView(R2.id.back)
@@ -76,17 +86,21 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
         String[] titles = resources.getStringArray(R.array.bindaccount_menu_title);
         String[] bind_flag = resources.getStringArray(R.array.bindaccount_menu_flag);
         TypedArray icons = resources.obtainTypedArray(R.array.bindaccount_menu_icon);
+
         for (int i = 0; i < titles.length; i++) {
             BindAccountModel menuModel = new BindAccountModel();
             menuModel.setTitle(titles[i]);
             menuModel.setImage_path(icons.getResourceId(i,0));
-            menuModel.setState(false);
             menuModel.setRoute_flag(bind_flag[i]);
             menu.add(menuModel);
         }
         mAdapter = new BindAccountAdapter(this,menu);
         mAdapter.setListener(this);
         bindAccountList.setAdapter(mAdapter);
+    }
+
+    private void notifyBindPhone() {
+        mAdapter.notifyItemChanged(0);
     }
 
 
@@ -103,6 +117,7 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
         switch (flag){
             case Config.BIND_PHONE:
                 bindPhone = new BindAccountDialog(this);
+                bindPhone.setListener(this);
                 bindPhone.show();
                 break;
             case Config.BIND_WEIBO:
@@ -115,5 +130,65 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
 
                 break;
         }
+    }
+
+    @Override
+    public void sendVerifyCode(String phone) {
+        BindAccountService service = Http.getInstance().createRequest(BindAccountService.class);
+        SmsRequest request = new SmsRequest();
+        request.setMobile(phone);
+        service.sendVerifyCode(request)
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<SmsBean>() {
+                    @Override
+                    public void onSuccess(SmsBean smsBean) {
+                        if(smsBean.getError()==0){
+                            ToastUitl.showShort(R.string.success_sms);
+                        }else
+                            ToastUitl.showShort(smsBean.getMessage());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(R.string.fail_sms);
+                    }
+                });
+    }
+
+    @Override
+    public void bind(String phone, String verifyCode) {
+        BindAccountService service = Http.getInstance().createRequest(BindAccountService.class);
+        BindPhoneReqBean bindPhoneReqBean = new BindPhoneReqBean();
+        bindPhoneReqBean.setMobile(phone);
+        bindPhoneReqBean.setVcode(verifyCode);
+        service.bindPhoto(HeaderUtil.getHeaderMap(),bindPhoneReqBean)
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<BindPhoneBean>() {
+                    @Override
+                    public void onSuccess(BindPhoneBean bindPhoneBean) {
+                        if(bindPhoneBean.getError()==0){
+                            SpCache.putBoolean(Config.BIND_PHONE,true);
+                            SpCache.putString(Config.PNONE_NUMBER,phone);
+                            if(null != bindPhone)
+                                bindPhone.dismiss();
+                            notifyBindPhone();
+                        }
+                        ToastUitl.showShort(bindPhoneBean.getMessage());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(R.string.fail_bind);
+                    }
+                });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(null != bindPhone)
+            bindPhone.dismiss();
     }
 }

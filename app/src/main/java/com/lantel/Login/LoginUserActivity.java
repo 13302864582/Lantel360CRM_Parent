@@ -112,6 +112,13 @@ public class LoginUserActivity extends BaseActivity {
                                         //保存校区标识参数bid
                                         SpCache.putString(Config.BID, dataBean.getBid()+"");
 
+                                        String mobile = dataBean.getMobile();
+
+                                        if(!TextUtils.isEmpty(mobile))
+                                            SpCache.putBoolean(Config.BIND_PHONE,true);
+
+                                        SpCache.putString(Config.PNONE_NUMBER,mobile);
+
                                         List<LoginBean.DataBean.StudentsBean> studentsBean =  dataBean.getStudents();
                                         if(null != studentsBean && studentsBean.size()>0)
                                             SpCache.putString(Config.SID,studentsBean.get(0).getSid()+"");

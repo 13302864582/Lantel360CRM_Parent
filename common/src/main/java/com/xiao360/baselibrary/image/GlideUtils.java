@@ -158,6 +158,10 @@ public class GlideUtils {
         loadCircle(context,path,0,0,view,false,-1);
     }
 
+    public static void loadCircle(Context context, Object path,int color,ImageView view) {
+        loadCircle(context,path,0,0,view,true,color);
+    }
+
     public static void loadCircle(Context context, Object path,ImageView view,int defaultRes) {
         loadCircle(context,path,defaultRes,defaultRes,view,false,-1);
     }

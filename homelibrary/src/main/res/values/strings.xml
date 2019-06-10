@@ -78,7 +78,7 @@
     <string name="notify">通知</string>
     <string name="sAttenceDateFormat" >"student_attendances?int_day=[Between,%1$s,%2$s]"</string>
     <string name="sectionFormat">第%1$d章</string>
-    <string name="course_formate" >《%1$s》</string>
+    <string name="course_formate" >%1$s</string>
 
     <string name="month_format">%1$d月</string>
     <string name="total_money">总资产(CNY)</string>
@@ -123,4 +123,8 @@
     <string name="attach_file">附件</string>
     <string name="record">语音</string>
     <string name="doc">文档</string>
+    <string name="order_detail">订单详情</string>
+    <string name="empty_phone">请填写手机号</string>
+    <string name="empty_sms">请填写验证码</string>
+    <string name="second_format">%d秒</string>
 </resources>

@@ -295,6 +295,8 @@ public class DisplayUtil {
                 age--;
             }
         }
+        if(age<0)
+            age = 0;
         return age;
     }
 

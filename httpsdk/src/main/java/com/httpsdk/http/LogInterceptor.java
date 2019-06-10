@@ -13,18 +13,7 @@ public class LogInterceptor implements Interceptor {
 
     @Override
     public okhttp3.Response intercept(Chain chain) throws IOException {
-        Request request = chain.request()
-              /*  .newBuilder()
-                .addHeader("Domain-Name","dev_360")
-                .build();*/
-//                .newBuilder()
-//                .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-//                .addHeader("Accept-Encoding", "gzip, deflate")
-//                .addHeader("Connection", "keep-alive")
-//                .addHeader("Accept", "*/*")
-//                .addHeader("Cookie", "add cookies here")
-//                .build()
-                ;
+        Request request = chain.request();
 
         Log.e(TAG,"request:" + request.toString());
         long t1 = System.nanoTime();

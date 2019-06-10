@@ -41,6 +41,7 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        title.setText(getString(R.string.order_detail));
         String orderDetail = getIntent().getStringExtra(Config.ORDER_DETAIL);
         OrderDetailBean detailBean = new Gson().fromJson(orderDetail,OrderDetailBean.class);
         ArrayList<BaseModel> list = new ArrayList<>();
@@ -67,11 +68,11 @@ public class OrderDetailActivity extends BaseActivity {
             model.setList_title(orderItemsBean.getItem_name());
             model.setCourse_time(getFormatString(R.string.course_formate,orderItemsBean.getNums(),"0"));
             model.setUseful_date(getFormatString(R.string.useful_date_formate,orderItemsBean.getExpire_time(),"-"));
-            model.setPaid_money(getFormatString(R.string.money_formate,getMoney(orderItemsBean.getSubtotal()),"0.00"));
-            model.setOrigin_price(getFormatString(R.string.money_formate,getMoney(orderItemsBean.getOrigin_price()),"0.00"));
-            model.setPrice(getFormatString(R.string.money_formate,getMoney(orderItemsBean.getPrice()),"0.00"));
-            model.setDiscount_amount(getFormatString(R.string.money_formate,getMoney(orderItemsBean.getDiscount_amount()),"0.00"));
-            model.setReduced_amount(getFormatString(R.string.money_formate,getMoney(orderItemsBean.getReduced_amount()),"0.00"));
+            model.setPaid_money(getMoney(orderItemsBean.getSubtotal()));
+            model.setOrigin_price(getMoney(orderItemsBean.getOrigin_price()));
+            model.setPrice(getMoney(orderItemsBean.getPrice()));
+            model.setDiscount_amount(getMoney(orderItemsBean.getDiscount_amount()));
+            model.setReduced_amount(getMoney(orderItemsBean.getReduced_amount()));
             model.setPresent_times(orderItemsBean.getPresent_lesson_hours());
             list.add(model);
         }

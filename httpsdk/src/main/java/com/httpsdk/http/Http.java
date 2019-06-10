@@ -1,6 +1,8 @@
 package com.httpsdk.http;
 
 import java.util.concurrent.TimeUnit;
+
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -18,10 +20,12 @@ public class Http {
      * 构造方法
      */
     public Http(OkHttpClient.Builder client,String baseUrl) {
+
         if(client==null){
             client=initOkHttp();
         }
-        OkHttpClient okHttpClient=client.build();
+        // 构建 OkHttpClient 时,将 OkHttpClient.Builder() 传入 with() 方法,进行初始化配置
+        OkHttpClient okHttpClient=/*client.build()*/RetrofitUrlManager.getInstance().with(client).build();
         retrofit = initRetrofit(okHttpClient,baseUrl);
     }
 

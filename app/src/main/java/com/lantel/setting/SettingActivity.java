@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 @Route(path = "/lantelhome/360/SettingActivity")
 public class SettingActivity extends BaseActivity {
@@ -32,6 +33,8 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        // 可在 App 运行时,随时切换 BaseUrl (指定了 Domain-Name header 的接口)
+        RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com");
         title.setText(R.string.setting);
         initMenuList();
     }

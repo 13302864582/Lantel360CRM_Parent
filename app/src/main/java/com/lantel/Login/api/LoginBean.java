@@ -3,24 +3,21 @@ package com.lantel.Login.api;
 import java.util.List;
 
 public class LoginBean {
-
-
     /**
      * error : 0
      * message : login success
      * data : {"uid":10028,"og_id":0,"account":"13434798799","mobile":"13434798799","email":"","name":"JK","sex":"0","user_type":2,"salt":"IStV2E","password":"ac63bf842f0e4fabc4558ccdf111e3d0","avatar":"","openid":"","default_sid":23,"is_mobile_bind":0,"is_email_bind":0,"is_weixin_bind":0,"last_login_time":"2019-06-01 15:40:44","last_login_ip":"113.102.167.205","login_times":123,"status":1,"is_main":0,"is_admin":0,"is_ext":0,"ext_password":null,"create_uid":1,"reset_time":null,"reset_token":null,"students":[{"sid":21,"og_id":0,"bid":1,"student_name":"test02","pinyin":"","pinyin_abbr":"","nick_name":"","sex":"1","photo_url":"http://s10.xiao360.com/qms/student_avatar/1/19/05/18/ef14abe724b4fd874d9986158d70774e.png","birth_time":"2019-05-02","birth_year":0,"birth_month":0,"birth_day":0,"school_grade":3,"grade_update_int_ym":0,"school_class":"3","school_id":2,"first_tel":"13434798799","first_family_name":"JK","first_family_rel":4,"first_uid":10028,"second_family_name":"","second_family_rel":0,"second_tel":"","second_uid":0,"eid":0,"sno":"No123456","card_no":"001002","money":"0.000000","credit":"0.00","credit2":"0.00","vip_level":-1,"service_level":0,"last_attendance_time":"2019-05-28 15:59:03","is_lost":0,"status":1,"mc_id":0,"quit_reason":"","student_type":1,"option_fields":"[]","student_lesson_times":0,"student_lesson_remain_times":0,"student_lesson_hours":"243.00","student_lesson_remain_hours":"237.00","is_demo":0,"is_demo_transfered":1,"is_face_input":0,"face_id":"","referer_sid":0,"in_time":1558022400,"create_time":"2019-05-17 12:32:34","ext_id":"","from_did":0,"school_id_text":"0"},{"sid":23,"og_id":0,"bid":1,"student_name":"test01","pinyin":"test01","pinyin_abbr":"t","nick_name":"","sex":"1","photo_url":"","birth_time":"2012-05-09","birth_year":2012,"birth_month":5,"birth_day":9,"school_grade":0,"grade_update_int_ym":0,"school_class":"0","school_id":0,"first_tel":"13434798799","first_family_name":"","first_family_rel":4,"first_uid":10028,"second_family_name":"","second_family_rel":0,"second_tel":"","second_uid":0,"eid":0,"sno":"999999","card_no":"888888","money":"220.000000","credit":"0.00","credit2":"0.00","vip_level":-1,"service_level":0,"last_attendance_time":"1970-01-01 08:00:00","is_lost":0,"status":1,"mc_id":0,"quit_reason":"","student_type":1,"option_fields":"[]","student_lesson_times":0,"student_lesson_remain_times":0,"student_lesson_hours":"0.00","student_lesson_remain_hours":"0.00","is_demo":0,"is_demo_transfered":0,"is_face_input":0,"face_id":"","referer_sid":0,"in_time":0,"create_time":"2019-05-17 12:35:23","ext_id":"","from_did":0,"school_id_text":""}],"token":"79340798e54f49138cef440ae0f20f2d","bid":0,"pers":[],"navs":[],"login_server_time":1559375814,"expired":7200,"client":{"cid":1,"parent_cid":0,"og_id":0,"client_type":0,"client_name":"开发账号","contact":"开发","address":"深圳","tel":"18316777868","email":"","host":"base","bind_domain":"","auth":"2,3,4,5,1","expire_day":20200901,"init_account_num_limit":1000000,"init_student_num_limit":1000000,"init_branch_num_limit":1000000,"account_num_limit":1000000,"student_num_limit":1000000,"branch_num_limit":1000000,"is_student_limit":0,"is_account_limit":0,"is_branch_limit":0,"current_version":"0.5.1","is_frozen":0,"is_db_install":0,"sign_contract_time":0,"init_amount":"0.00","init_renew_amount":"0.00","init_month_num":0,"init_present_month_num":0,"add_renew_amount":"0.00","edu_amount":"0.00","account_price":"0.00","student_price":"0.00","branch_price":"0.00","is_init_pay":1,"is_org_open":1,"allow_sub_org_type":0,"head_support_open":0,"sub_limit_field":"","sub_renew_amount":"0.00","sub_student_price":"0.00","sub_branch_price":"0.00","sub_account_price":"0.00","eid":0,"service_eid":0,"remark":"","params":{"pc":{"theme":"default","url":"","system_name":"校360管理软件","copyright":"Copyright  2006-2017 浪腾软件 版权所有","login_img":"http://s10.xiao360.com/qms//1/18/09/07/b324b37f74b4e6b4991656125bbd5411.jpg","big_logo":"http://s10.xiao360.com/qms//1/18/09/07/b4acdf16aa13ddbfbbbd2e43cd57e0b7.jpg","small_logo":"http://s10.xiao360.com/qms//1/18/09/07/a1dd86ed052579ef4ab5e80a9ede14ad.jpg","loading_img":"http://sp1.xiao360.com/static/ui/pc/boot-loading.gif"},"mobile":{"url":"","system_name":"学习管家","copyright":"","logo":"http://s10.xiao360.com/qms//1/18/09/07/28807d8854611979d25456404e867726.png"},"fc":{"system_name":"校360","copyright":"Copyright © 2006-2019 浪腾软件 版权所有","login_img":"http://sp1.xiao360.com/fms/login-bg.c197ea48.png","big_logo":"http://s10.xiao360.com/qms//1/19/05/13/9e3904d590ecb464c5ea8c16d3551e79.png","small_logo":"http://s10.xiao360.com/qms//1/19/05/13/8660e12aec8798d218f3650cd09b3799.png"},"cppt":{"login_bg":"http://sp1.xiao360.com/cppt/login-banner.png","ppt_logo_small":"http://sp1.xiao360.com/cppt/logo-small.png","top_logo":"http://sp1.xiao360.com/cppt/index-logo.png","ppt_bg":"http://sp1.xiao360.com/cppt/bg.jpg","ppt_logo":"http://sp1.xiao360.com/cppt/logo.png","man_avatar":"http://sp1.xiao360.com/cppt/default-head-1.png","woman_avatar":"http://sp1.xiao360.com/cppt/default-head-2.png","company_name":"","short_name":"","email":"","host":"","address":""}},"func_sdb_open":1,"last_login_time":1559210765,"last_login_account":"admin","last_login_ip":"183.11.68.15","login_times":191,"create_time":null,"create_uid":null,"update_time":null,"delete_time":null,"is_delete":0,"delete_uid":null,"frozen_int_day":0,"is_expire":false,"is_warn":false,"expire_message":"","domain":"base","subdomain":""},"x_sub_host":"base","base_url":"http://dev.xiao360.com","product_url":"http://dev.xiao360.com"}
      */
-
-    private int error;
+    private int code;
     private String message;
     private DataBean data;
 
-    public int getError() {
-        return error;
+    public int getCode() {
+        return code;
     }
 
-    public void setError(int error) {
-        this.error = error;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMessage() {
@@ -47,7 +44,16 @@ public class LoginBean {
         private int uid;
         private int bid;
         private String base_url;
+        private String mobile;
         private List<StudentsBean> students;
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
 
         public int getBid() {
             return bid;

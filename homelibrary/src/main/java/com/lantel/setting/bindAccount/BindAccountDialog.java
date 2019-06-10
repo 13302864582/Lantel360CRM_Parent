@@ -2,14 +2,17 @@ package com.lantel.setting.bindAccount;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BaseDialog;
+import com.lantel.common.VerificationCountDownTimer;
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.ToastUitl;
 import androidx.appcompat.widget.AppCompatButton;
 
 public class BindAccountDialog extends BaseDialog {
@@ -18,6 +21,11 @@ public class BindAccountDialog extends BaseDialog {
     private EditText edit_sms;
     private TextView send_sms;
     private AppCompatButton confirm_btn;
+    private BindPhoneListener listener;
+
+    public void setListener(BindPhoneListener listener) {
+        this.listener = listener;
+    }
 
     public BindAccountDialog(Context context) {
         super(context);
@@ -40,18 +48,33 @@ public class BindAccountDialog extends BaseDialog {
     @Override
     public void setUiBeforShow() {
         close.setOnClickListener((View view)-> {
-            LogUtils.d("setUiBeforShow=====close");
             dismiss();
         });
 
         send_sms.setOnClickListener((View view)-> {
-            LogUtils.d("setUiBeforShow=====send_sms");
-            dismiss();
+            String phoneNumber = edit_phone.getText().toString();
+            if(TextUtils.isEmpty(phoneNumber)){
+                ToastUitl.showShort(R.string.empty_phone);
+            } else{
+                new VerificationCountDownTimer(getContext(),send_sms);
+                if(null != listener)
+                    listener.sendVerifyCode(phoneNumber);
+            }
         });
 
         confirm_btn.setOnClickListener((View view)-> {
-            LogUtils.d("setUiBeforShow=====confirm_btn");
-            dismiss();
+            String phoneNumber = edit_phone.getText().toString();
+            String verifyCode = edit_sms.getText().toString();
+            if(TextUtils.isEmpty(phoneNumber))
+                ToastUitl.showShort(R.string.empty_phone);
+            else if(TextUtils.isEmpty(verifyCode))
+                ToastUitl.showShort(R.string.empty_sms);
+            else{
+                if(null != listener)
+                    listener.bind(phoneNumber,verifyCode);
+            }
         });
     }
+
+
 }

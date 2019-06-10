@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.bindAccount.list.holder.BindAccountHolder;
 import com.lantel.setting.bindAccount.list.model.BindAccountModel;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.xiao360.baselibrary.util.SpCache;
+
 import java.util.List;
 
 public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
@@ -47,13 +50,18 @@ public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         BindAccountModel accountModel = (BindAccountModel) data;
         GlideUtils.loadImageView(context,accountModel.getImage_path(),((BindAccountHolder) holder).icon);
         setText(accountModel.getTitle(),accountHolder.title);
-        if(!TextUtils.isEmpty(accountModel.getValue())){
-            accountHolder.value.setVisibility(View.VISIBLE);
-            setText(accountModel.getValue(),accountHolder.value);
-        }else {
-            accountHolder.value.setVisibility(View.GONE);
+
+        if(accountModel.getRoute_flag().equals(Config.BIND_PHONE)){
+            String phone = SpCache.getString(Config.PNONE_NUMBER,"");
+            if(!TextUtils.isEmpty(phone)){
+                accountHolder.value.setVisibility(View.VISIBLE);
+                setText(phone,accountHolder.value);
+            }
         }
-        if(accountModel.isState()){
+        accountHolder.value.setVisibility(View.GONE);
+
+        boolean isBind = SpCache.getBoolean(accountModel.getRoute_flag(),false);
+        if(isBind){
             setText(getString(R.string.bind),accountHolder.state_btn);
             accountHolder.state_btn.setEnabled(false);
         }else {

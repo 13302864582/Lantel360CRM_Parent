@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
@@ -43,6 +44,7 @@ public class MyApplication extends BaseApplication {
         File cacheDir = new File(getAppContext().getCacheDir(), "response");
         //缓存的最大尺寸10m
         Cache cache = new Cache(cacheDir, 1024 * 1024 * 10);
+
         OkHttpClient.Builder builder =  new OkHttpClient.Builder()
                .cache(cache).readTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS)//设置读取超时时间
                 .connectTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS)//设置请求超时时间

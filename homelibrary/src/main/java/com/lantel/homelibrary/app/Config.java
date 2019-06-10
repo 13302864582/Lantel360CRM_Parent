@@ -84,4 +84,6 @@ public class Config {
     public static final String IMG_LIST = "IMG_LIST";
     public static final String FILE_LIST = "FILE_LIST" ;
     public static final String RECORD_LIST = "RECORD_LIST" ;
+
+    public static final String PNONE_NUMBER = "PNONE_NUMBER";
 }

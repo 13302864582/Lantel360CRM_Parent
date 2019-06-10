@@ -51,8 +51,8 @@ dependencies {
 
     api 'com.alexvasilkov:gesture-views:2.5.2'
 
-    //完整版引入
-    //implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+    api 'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
+
     api 'com.zzhoujay.richtext:richtext:3.0.8'
     api 'com.excellence:downloader:1.2.0'
     api 'com.ldoublem.loadingview:loadingviewlib:1.0'

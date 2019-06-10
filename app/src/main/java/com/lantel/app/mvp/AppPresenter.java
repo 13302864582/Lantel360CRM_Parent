@@ -9,18 +9,14 @@ import com.lantel.common.SchoolArea;
 import com.lantel.crmparent.R;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 
 public class AppPresenter extends AppContract.Presenter implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG1 = "APresenter";
-
     @Override
     public void onCrete() {
-       // Log.d(TAG1, "onCrete: ");
+
     }
 
     @Override
@@ -101,9 +97,9 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
             case R.id.item_study:
                 mView.navigate(R.id.action_study);
                 break;
-            case R.id.item_growup:
+           /* case R.id.item_growup:
                 mView.navigate(R.id.action_growup);
-                break;
+                break;*/
             case R.id.item_mine:
                 mView.navigate(R.id.action_mine);
                 break;
