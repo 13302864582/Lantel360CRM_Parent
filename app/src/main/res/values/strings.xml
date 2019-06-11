@@ -74,4 +74,5 @@
     <string name="login_edit_user">请输入学习管家账号</string>
     <string name="login_edit_password">请输入密码</string>
     <string name="empty_edit_login">账号或密码不能为空</string>
+    <string name="set_password_hint">设置密码(至少8位,英文数字组合)</string>
 </resources>

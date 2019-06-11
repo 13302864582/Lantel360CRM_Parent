@@ -69,6 +69,11 @@ public class SplashActivity extends BaseActivity {
 
 
     @Override
+    protected int getStateBarviewID() {
+        return -1;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.splash;
     }

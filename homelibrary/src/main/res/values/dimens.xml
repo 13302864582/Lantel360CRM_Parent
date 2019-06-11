@@ -136,4 +136,6 @@
     <dimen name="remark_name">12sp</dimen>
     <dimen name="remark_time">10sp</dimen>
     <dimen name="remark_content">13sp</dimen>
+    <dimen name="edit_pass">15sp</dimen>
+    <dimen name="leave_list_height">90dp</dimen>
 </resources>

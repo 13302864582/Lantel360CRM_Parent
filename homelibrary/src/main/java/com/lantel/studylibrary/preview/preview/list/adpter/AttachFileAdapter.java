@@ -2,10 +2,14 @@ package com.lantel.studylibrary.preview.preview.list.adpter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
+import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.studylibrary.preview.preview.list.AttachFileListener;
@@ -15,8 +19,8 @@ import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
@@ -43,38 +47,46 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
 
     @Override
     protected void bindViewHolder(BaseViewHolder holder, AttachFile data, int position, int viewType) {
-        String filePath = DisplayUtil.getFilePath(data.getFile_url());
-        File f = new File(filePath);
+        AttachFileHolder attachFileHolder=(AttachFileHolder)holder;
+        String fileName = DisplayUtil.getFilePath(data.getFile_url());
+
+        File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),fileName);
         boolean exist = f.exists();
+        String filePath = f.getPath();
         if(viewType == 0){
-            bindImg((AttachFileHolder)holder,data,position,exist,filePath);
+            bindImg(attachFileHolder,data,position,exist,filePath);
         }else if(viewType == 1){
-            bindVideo((AttachFileHolder)holder,data,position,exist,filePath);
+            bindVideo(attachFileHolder,data,exist);
         }else if(viewType == 2){
-            bindAudio((AttachFileHolder)holder,data,position,exist,filePath);
+            bindAudio(attachFileHolder,data,position,exist,filePath);
         }else if(viewType == 3){
-            bindFile((AttachFileHolder)holder,data,position,exist,filePath);
+            bindFile(attachFileHolder,data,position,exist,filePath);
         }
 
-        holder.itemView.setOnClickListener((View view)-> {
-            if(!exist){
-                if(null != listener)
+        if(!exist){
+            holder.itemView.setOnClickListener((View view)-> {
+                if(listener!=null)
                     listener.downLoadFile(f,data.getFile_url(),position);
-            }else {
-                if(null != listener)
-                    listener.OpenFile(data.getFile_type(),f);
-            }
-        });
+            });
+        }
     }
 
     private void bindFile(AttachFileHolder holder, AttachFile data, int position, boolean exist, String filePath) {
         notifyFile(holder, data);
         holder.icon.setImageResource(exist?R.mipmap.file:R.mipmap.download);
+        holder.itemView.setOnClickListener((View view)-> {
+            if(exist){
+                ARouter.getInstance().build("/lantel/360/WebView").withString(Config.FILE_URL,data.getFile_url()).navigation();
+            }
+        });
     }
 
     private void bindAudio(AttachFileHolder holder, AttachFile data, int position, boolean exist, String filePath) {
        notifyFile(holder,data);
         holder.icon.setImageResource(exist?R.mipmap.record:R.mipmap.download);
+        if(exist){
+
+        }
     }
 
     private void notifyFile(AttachFileHolder holder, AttachFile data) {
@@ -85,7 +97,7 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
         setText(DisplayUtil.byteToMB(data.getFile_size()),holder.fileSize);
     }
 
-    private void bindVideo(AttachFileHolder holder, AttachFile data, int position, boolean exist, String filePath) {
+    private void bindVideo(AttachFileHolder holder, AttachFile data,boolean exist) {
         if(exist){
             holder.file_img.setVisibility(View.VISIBLE);
             String imgUrl = data.getFile_url()+"?vframe/jpg/offset/1";
@@ -100,6 +112,18 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
             setText(TextUtils.isEmpty(data.getTitle())?getString(R.string.unknown):data.getTitle(),holder.fileName);
             setText(DisplayUtil.byteToMB(data.getFile_size()),holder.fileSize);
         }
+        holder.file_img.setOnClickListener((View view)-> {
+            if(exist){
+                List<MediaModel> mediaModelList = new ArrayList<>();
+                MediaModel mediaModel = new MediaModel();
+                mediaModel.setType(Config.PHOTO);
+                mediaModel.setFile_url(data.getFile_url());
+                mediaModel.setFile_name(data.getTitle());
+                mediaModelList.add(mediaModel);
+                Gson gson = new Gson();
+                ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(mediaModelList)).withInt(Config.POSITION,0).navigation();
+            }
+        });
     }
 
     private void bindImg(AttachFileHolder holder, AttachFile data, int position, boolean exist, String filePath) {
@@ -114,6 +138,19 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
             setText(TextUtils.isEmpty(data.getTitle())?getString(R.string.unknown):data.getTitle(),holder.fileName);
             setText(DisplayUtil.byteToMB(data.getFile_size()),holder.fileSize);
         }
+        holder.file_img.setOnClickListener((View view)-> {
+            if(exist){
+                List<MediaModel> mediaModelList = new ArrayList<>();
+                MediaModel mediaModel = new MediaModel();
+                mediaModel.setType(Config.PHOTO);
+                mediaModel.setFile_url(data.getFile_url());
+                mediaModel.setFile_name(data.getTitle());
+                mediaModelList.add(mediaModel);
+                Gson gson = new Gson();
+                ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(mediaModelList)).withInt(Config.POSITION,0).navigation();
+            }
+        });
+
     }
 
     @Override

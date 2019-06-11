@@ -35,6 +35,11 @@ public class CourseActivity extends BaseActivity implements TabLayout.OnTabSelec
     private String[] titles;
 
     @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_course;
     }

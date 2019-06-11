@@ -46,7 +46,7 @@
     <string name="confirmTitle">确认密码</string>
     <string name="confirmTitle_hint">请再次输入新密码</string>
     <string name="pass_tip">密码必须至少8个字符，而且同时包含字母和数字</string>
-    <string name="forget_pass">忘记旧密码</string>
+    <string name="forget_pass">忘记密码</string>
     <string name="bind_account">账号绑定</string>
     <string name="bind">已绑定</string>
     <string name="unbind">绑定</string>
@@ -127,4 +127,11 @@
     <string name="empty_phone">请填写手机号</string>
     <string name="empty_sms">请填写验证码</string>
     <string name="second_format">%d秒</string>
+    <string name="finish">完成</string>
+
+    <string name="password_unsame">2次密码不一致</string>
+    <string name="bind_phone_first">请先绑定手机号码</string>
+    <string name="verify_hint">请输入验证码</string>
+    <string name="open_file_fail">不支持此类型文件</string>
+    <string name="leave_dec_time">当前请假需要正常扣除课时</string>
 </resources>

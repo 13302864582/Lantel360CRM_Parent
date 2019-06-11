@@ -1,6 +1,7 @@
 package com.lantel.setting.feedback;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -10,13 +11,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
+import com.lantel.homelibrary.app.Config;
+import com.lantel.setting.feedback.api.FeedBackBean;
+import com.lantel.setting.feedback.api.FeedBackReqBean;
+import com.lantel.setting.feedback.api.FeedBackService;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
+import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModel;
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.http.HeaderMap;
 
 @Route(path = "/lantel/360/feedback")
 public class FeedBackActivity extends BaseMVPActivity {
@@ -93,7 +106,30 @@ public class FeedBackActivity extends BaseMVPActivity {
         if (id == R.id.back) {
             finish();
         }else if(id == R.id.exit_commit){
+            String content = editText.getText().toString().trim();
+            FeedBackService feedBackService = Http.getInstance().createRequest(FeedBackService.class);
+            FeedBackReqBean reqBean = new FeedBackReqBean();
+            reqBean.setSid(SpCache.getString(Config.SID,""));
+            reqBean.setBid(SpCache.getString(Config.BID,""));
+            if(!TextUtils.isEmpty(content))
+            reqBean.setContent(content);
+            feedBackService.feedback(HeaderUtil.getHeaderMap(),reqBean)
+                    .compose(RxHelper.io_main())
+                    .compose(bindToLifecycle())
+                    .subscribe(new BaseRxObserver<FeedBackBean>() {
+                        @Override
+                        public void onSuccess(FeedBackBean data) {
+                            ToastUitl.showShort(data.getMessage());
+                            if(data.getError()==0){
+                                finish();
+                            }
+                        }
 
+                        @Override
+                        public void onFailure(Throwable e) {
+                            ToastUitl.showShort(e.getMessage());
+                        }
+                    });
         }
     }
 }

@@ -22,6 +22,11 @@ public class NotifyDetailActivity extends BaseActivity {
     private NotifyDetailAdapter mAdapter;
 
     @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.notify_detail_layout;
     }

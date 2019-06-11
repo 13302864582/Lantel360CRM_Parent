@@ -4,17 +4,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.excellence.downloader.Downloader;
-import com.excellence.downloader.FileDownloader;
 import com.excellence.downloader.exception.DownloadError;
 import com.excellence.downloader.utils.IListener;
+import com.google.gson.Gson;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.MyApplication;
 import com.lantel.common.ClassRoom;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
@@ -30,11 +31,9 @@ import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.zzhoujay.richtext.RichText;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,6 +82,11 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     }
 
     @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.preview_detail;
     }
@@ -102,6 +106,9 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
                             int total = bean.getData().getTotal();
                             if (total != 0) {
                                 PreviewDetailBean.DataBean.ListBean listBean = bean.getData().getList().get(0);
+                                PreviewDetailBean.DataBean.ListBean.StudentLeaveBean student_leave = listBean.getStudent_leave();
+                                boolean canLeave = listBean.getCan_leave() == 1 && null == student_leave;
+                                textRight.setVisibility(canLeave?View.VISIBLE:View.GONE);
                                 PreviewDetailModel detailModel = new PreviewDetailModel();
                                 PreviewDetailBean.DataBean.ListBean.OneClassBean oneClassBean = listBean.getOne_class();
                                 PreviewDetailBean.DataBean.ListBean.LessonBean lessonBean = listBean.getLesson();
@@ -121,6 +128,7 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
                                     detailModel.setClasses(roomName);
                                 } else
                                     detailModel.setClasses("-");
+
                                 detailModel.setTeacher(teacherBean.getEname());
                                 detailModel.setDate(DisplayUtil.getDateString(date));
                                 detailModel.setTime(start + "-" + end);
@@ -175,6 +183,7 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     private String getClassRoomName(int cr_id) {
         MyApplication application = (MyApplication) getApplication();
         List<ClassRoom> classRoomList = application.getClassRoom();
+        if(null != classRoomList)
         for (ClassRoom classRoom : classRoomList) {
             if (classRoom.getCr_id() == cr_id)
                 return classRoom.getRoom_name();
@@ -252,10 +261,5 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     @Override
     public void downLoadFile(File file, String url, int position) {
         downLoad(file, url, position);
-    }
-
-    @Override
-    public void OpenFile(String fileType, File File) {
-        LogUtils.d("downLoad===OpenFile:" + File.getAbsolutePath());
     }
 }

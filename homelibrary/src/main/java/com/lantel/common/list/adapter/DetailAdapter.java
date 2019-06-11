@@ -75,7 +75,7 @@ public class DetailAdapter extends PagerAdapter {
         String videoImgUrl = videoModel.getFile_url()+"?vframe/jpg/offset/1";
 
         vh.mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // IjkPlayer or MediaPlayer
-        vh.mNiceVideoPlayer.setUp(videoModel.getFile_url(),null);
+        vh.mNiceVideoPlayer.setUp(/*videoModel.getFile_url()*/"http://s10.xiao360.com/qms/1/0/n2etB1wWU5dhr3OxrNiSxmkQx0kHiNNt.m4a",null);
         TxVideoPlayerController controller = new TxVideoPlayerController(context);
         controller.setTitle(videoModel.getFile_name());
         Glide.with(context)

@@ -28,6 +28,11 @@ public class EditTextActivity extends BaseActivity {
     private String edit_str;
 
     @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.edit_text;
     }

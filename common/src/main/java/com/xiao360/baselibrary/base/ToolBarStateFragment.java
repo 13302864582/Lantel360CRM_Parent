@@ -1,6 +1,7 @@
 package com.xiao360.baselibrary.base;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,9 @@ public abstract class ToolBarStateFragment<T extends BaseFragmentPresenter, E ex
         LinearLayout linearLayout = (LinearLayout) super.rootView;
         //添加toolbar容器
         if(getToolBarLayoutID()!=-1){
+            View toolbar = getInflate(getToolBarLayoutID(),inflater, container);
             LinearLayout.LayoutParams params0 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            linearLayout.addView(getInflate(getToolBarLayoutID(),inflater, container),params0);
+            linearLayout.addView(toolbar,params0);
         }
 
 

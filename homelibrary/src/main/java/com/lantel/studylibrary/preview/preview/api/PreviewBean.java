@@ -52,29 +52,6 @@ public class PreviewBean {
         }
 
         public static class ListBean {
-            /**
-             * cp_id : 1
-             * og_id : 0
-             * bid : 1
-             * int_day : 20190527
-             * int_start_hour : 1400
-             * int_end_hour : 1500
-             * teach_eid : 10001
-             * lesson_type : 1
-             * cid : 0
-             * sid : 21
-             * sids : [""]
-             * title : 英语
-             * content : <p><span style="color: rgb(14, 23, 38); font-family: &quot;PingFang SC&quot;, -apple-system, system-ui, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Source Han Sans&quot;, &quot;Noto Sans CJK Sc&quot;, &quot;Microsoft YaHei&quot;, &quot;Microsoft Jhenghei&quot;, sans-serif; font-size: 14px; background-color: rgb(244, 247, 253);">德语拼读其实和汉语的拼读很相似。虽然德语字母表除了多出的四个字母 ä ö ü ß 之外长得和英语字母表一模一样，但是千万千万千万不要用读英语字母的方式读德语！</span></p>
-             * lid : 2
-             * sj_id : 1
-             * ca_id : 92
-             * is_push : 1
-             * push_time : 1558692678
-             * create_uid : 1
-             * one_class : null
-             */
-
             private int cp_id;
             private int og_id;
             private int bid;

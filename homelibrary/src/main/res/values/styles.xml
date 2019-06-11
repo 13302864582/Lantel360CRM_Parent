@@ -18,7 +18,7 @@
         <!--屏蔽默认的按钮图标-->
         <item name="android:button">@null</item>
         <!--设置自己在按钮图标-->
-        <item name="android:drawableLeft">@drawable/check</item>
+        <item name="android:drawableRight">@drawable/check</item>
        <!-- 图标的内边距-->
         <item name="android:drawablePadding">8dp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -26,6 +26,8 @@
         <item name="android:textSize">@dimen/sick_leave</item>
         <item name="android:textColor">@color/sick_leave</item>
     </style>
+
+
 
     <style name="tab_top">
         <item name="android:textSize">12sp</item>

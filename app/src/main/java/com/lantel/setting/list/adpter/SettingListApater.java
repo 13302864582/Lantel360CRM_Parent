@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.list.holder.SimpleMenuHolder;
 import com.lantel.crmparent.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.list.holder.SettingHolder;
 import com.lantel.setting.list.model.SettingModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.util.AppManager;
+import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.List;
 
@@ -39,7 +41,8 @@ public class SettingListApater extends BaseRecyclerViewAdapter<SettingModel> {
         setText(data.getTitle(),menuHolder.title);
         menuHolder.exit_count.setVisibility(position==getItemCount()-1?View.VISIBLE:View.GONE);
         menuHolder.exit_count.setOnClickListener((View view)-> {
-            ARouter.getInstance().build("/lantel/360/curriculum").navigation();
+            SpCache.putBoolean(Config.IS_LOGIN,false);
+            ARouter.getInstance().build("/lantelhome/360/login").navigation();
             AppManager.getAppManager().finishAllActivity();
         });
         if(!TextUtils.isEmpty(data.getVersion())){

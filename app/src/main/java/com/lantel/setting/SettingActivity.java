@@ -10,7 +10,6 @@ import com.lantel.crmparent.R;
 import com.lantel.setting.list.adpter.SettingListApater;
 import com.lantel.setting.list.model.SettingModel;
 import com.xiao360.baselibrary.base.BaseActivity;
-import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +24,11 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.setting_list)
     RecyclerView settingList;
     private SettingListApater mAdapter;
+
+    @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
 
     @Override
     public int getLayoutId() {

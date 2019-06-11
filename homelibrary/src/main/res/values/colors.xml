@@ -88,4 +88,5 @@
     <color name="remark_name">#737373</color>
     <color name="remark_time">#b6b6b6</color>
     <color name="remark_content">#3d3d3d</color>
+    <color name="edit_pass">#d1d1d1</color>
 </resources>

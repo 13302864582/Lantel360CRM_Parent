@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -32,6 +34,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         //ButterKnife绑定注入
         ButterKnife.bind(this);
 
+        if(getStateBarviewID()!=-1)
+            findViewById(getStateBarviewID()).setVisibility(Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT? View.GONE:View.VISIBLE);
+
+
         //模块路由绑定注入
         ARouter.getInstance().inject(this);
 
@@ -45,6 +51,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                 .init();
         this.initView();
     }
+
+    protected abstract int getStateBarviewID();
 
 
     /**

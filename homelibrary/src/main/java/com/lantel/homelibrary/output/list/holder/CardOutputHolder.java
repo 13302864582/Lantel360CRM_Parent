@@ -14,8 +14,8 @@ public class CardOutputHolder extends BaseViewHolder {
     public TextView name;
     public TextView time;
     public TextView content;
-    public TextView text_classes;
-    public TextView text_adress;
+   /* public TextView text_classes;
+    public TextView text_adress;*/
     public ImageView share_img;
     public ImageView support_img;
     public ImageView remark_img;
@@ -29,8 +29,8 @@ public class CardOutputHolder extends BaseViewHolder {
         time = getView(R.id.time);
         content = getView(R.id.content);
         album_file_list = getView(R.id.album_file_list);
-        text_classes = getView(R.id.text_classes);
-        text_adress = getView(R.id.text_adress);
+     /*   text_classes = getView(R.id.text_classes);
+        text_adress = getView(R.id.text_adress);*/
         share_img = getView(R.id.share_img);
         support_img = getView(R.id.support_img);
         remark_img = getView(R.id.remark_img);

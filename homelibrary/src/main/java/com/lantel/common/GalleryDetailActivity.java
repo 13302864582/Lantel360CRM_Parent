@@ -24,6 +24,11 @@ public class GalleryDetailActivity extends BaseActivity {
     ViewPager viewpager;
 
     @Override
+    protected int getStateBarviewID() {
+        return -1;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.gallery_detail2;
     }

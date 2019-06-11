@@ -100,15 +100,238 @@ public class PreviewDetailBean {
             private int tbs_id;
             private int create_uid;
             private LessonBean lesson;
-
             private TeacherBean teacher;
             private OneClassBean one_class;
             private CoursePrepareBean course_prepare;
             private String course_name;
             private int leave_times;
             private int allow_leave;
-            private Object student_leave;
+            private StudentLeaveBean student_leave;
             private int can_leave;
+
+            public StudentLeaveBean getStudent_leave() {
+                return student_leave;
+            }
+
+            public void setStudent_leave(StudentLeaveBean student_leave) {
+                this.student_leave = student_leave;
+            }
+
+            public static class StudentLeaveBean {
+                /**
+                 * slv_id : 19
+                 * og_id : 0
+                 * bid : 1
+                 * sid : 21
+                 * lid : 2
+                 * sj_id : 1
+                 * grade : 0
+                 * cid : 0
+                 * sl_id : 47
+                 * lesson_type : 1
+                 * ca_id : 101
+                 * int_day : 20190603
+                 * int_start_hour : 800
+                 * int_end_hour : 1000
+                 * reason : null
+                 * leave_type : 116
+                 * leave_way : 1
+                 * satt_id : 0
+                 * ma_id : 0
+                 * is_consume : 0
+                 * create_time : 2019-05-30 12:08:02
+                 */
+
+                private int slv_id;
+                private int og_id;
+                private int bid;
+                private int sid;
+                private int lid;
+                private int sj_id;
+                private int grade;
+                private int cid;
+                private int sl_id;
+                private int lesson_type;
+                private int ca_id;
+                private int int_day;
+                private int int_start_hour;
+                private int int_end_hour;
+                private Object reason;
+                private int leave_type;
+                private int leave_way;
+                private int satt_id;
+                private int ma_id;
+                private int is_consume;
+                private String create_time;
+
+                public int getSlv_id() {
+                    return slv_id;
+                }
+
+                public void setSlv_id(int slv_id) {
+                    this.slv_id = slv_id;
+                }
+
+                public int getOg_id() {
+                    return og_id;
+                }
+
+                public void setOg_id(int og_id) {
+                    this.og_id = og_id;
+                }
+
+                public int getBid() {
+                    return bid;
+                }
+
+                public void setBid(int bid) {
+                    this.bid = bid;
+                }
+
+                public int getSid() {
+                    return sid;
+                }
+
+                public void setSid(int sid) {
+                    this.sid = sid;
+                }
+
+                public int getLid() {
+                    return lid;
+                }
+
+                public void setLid(int lid) {
+                    this.lid = lid;
+                }
+
+                public int getSj_id() {
+                    return sj_id;
+                }
+
+                public void setSj_id(int sj_id) {
+                    this.sj_id = sj_id;
+                }
+
+                public int getGrade() {
+                    return grade;
+                }
+
+                public void setGrade(int grade) {
+                    this.grade = grade;
+                }
+
+                public int getCid() {
+                    return cid;
+                }
+
+                public void setCid(int cid) {
+                    this.cid = cid;
+                }
+
+                public int getSl_id() {
+                    return sl_id;
+                }
+
+                public void setSl_id(int sl_id) {
+                    this.sl_id = sl_id;
+                }
+
+                public int getLesson_type() {
+                    return lesson_type;
+                }
+
+                public void setLesson_type(int lesson_type) {
+                    this.lesson_type = lesson_type;
+                }
+
+                public int getCa_id() {
+                    return ca_id;
+                }
+
+                public void setCa_id(int ca_id) {
+                    this.ca_id = ca_id;
+                }
+
+                public int getInt_day() {
+                    return int_day;
+                }
+
+                public void setInt_day(int int_day) {
+                    this.int_day = int_day;
+                }
+
+                public int getInt_start_hour() {
+                    return int_start_hour;
+                }
+
+                public void setInt_start_hour(int int_start_hour) {
+                    this.int_start_hour = int_start_hour;
+                }
+
+                public int getInt_end_hour() {
+                    return int_end_hour;
+                }
+
+                public void setInt_end_hour(int int_end_hour) {
+                    this.int_end_hour = int_end_hour;
+                }
+
+                public Object getReason() {
+                    return reason;
+                }
+
+                public void setReason(Object reason) {
+                    this.reason = reason;
+                }
+
+                public int getLeave_type() {
+                    return leave_type;
+                }
+
+                public void setLeave_type(int leave_type) {
+                    this.leave_type = leave_type;
+                }
+
+                public int getLeave_way() {
+                    return leave_way;
+                }
+
+                public void setLeave_way(int leave_way) {
+                    this.leave_way = leave_way;
+                }
+
+                public int getSatt_id() {
+                    return satt_id;
+                }
+
+                public void setSatt_id(int satt_id) {
+                    this.satt_id = satt_id;
+                }
+
+                public int getMa_id() {
+                    return ma_id;
+                }
+
+                public void setMa_id(int ma_id) {
+                    this.ma_id = ma_id;
+                }
+
+                public int getIs_consume() {
+                    return is_consume;
+                }
+
+                public void setIs_consume(int is_consume) {
+                    this.is_consume = is_consume;
+                }
+
+                public String getCreate_time() {
+                    return create_time;
+                }
+
+                public void setCreate_time(String create_time) {
+                    this.create_time = create_time;
+                }
+            }
 
             public CoursePrepareBean getCourse_prepare() {
                 return course_prepare;
@@ -532,14 +755,6 @@ public class PreviewDetailBean {
 
             public void setAllow_leave(int allow_leave) {
                 this.allow_leave = allow_leave;
-            }
-
-            public Object getStudent_leave() {
-                return student_leave;
-            }
-
-            public void setStudent_leave(Object student_leave) {
-                this.student_leave = student_leave;
             }
 
             public int getCan_leave() {

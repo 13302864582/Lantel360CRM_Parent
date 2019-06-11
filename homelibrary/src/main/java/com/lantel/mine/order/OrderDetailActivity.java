@@ -35,6 +35,11 @@ public class OrderDetailActivity extends BaseActivity {
     private OrderDetailAdapter mAdapter;
 
     @Override
+    protected int getStateBarviewID() {
+        return R.id.statebarView;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.notify_layout;
     }

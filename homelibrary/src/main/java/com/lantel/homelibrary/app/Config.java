@@ -86,4 +86,5 @@ public class Config {
     public static final String RECORD_LIST = "RECORD_LIST" ;
 
     public static final String PNONE_NUMBER = "PNONE_NUMBER";
+    public static final String FILE_URL = "FILE_URL";
 }

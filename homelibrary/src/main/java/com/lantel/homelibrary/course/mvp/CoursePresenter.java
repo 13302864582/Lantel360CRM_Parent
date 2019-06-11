@@ -26,6 +26,8 @@ public class CoursePresenter extends CourseContract.Presenter {
     @Override
     public void onCrete(Bundle savedInstanceState) {
         LogUtils.d("onCrete: ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        mCurrentIntDay = format.format(new Date(System.currentTimeMillis()));
     }
 
     //onActivityCreated
@@ -37,9 +39,6 @@ public class CoursePresenter extends CourseContract.Presenter {
     @Override
     public void onStart() {
         LogUtils.d("onStart: ");
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        mCurrentIntDay = format.format(new Date(System.currentTimeMillis()));
-        refreshData(null);
     }
 
     @Override

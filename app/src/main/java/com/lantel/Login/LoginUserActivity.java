@@ -27,6 +27,7 @@ import java.util.List;
 import androidx.appcompat.widget.AppCompatButton;
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 @Route(path = "/lantelhome/360/login")
 public class LoginUserActivity extends BaseActivity {
@@ -42,6 +43,11 @@ public class LoginUserActivity extends BaseActivity {
     TextView loginForgetPassWord;
 
     private boolean isOpenEye = false;
+
+    @Override
+    protected int getStateBarviewID() {
+        return com.lantel.homelibrary.R.id.statebarView;
+    }
 
     @Override
     public int getLayoutId() {
@@ -83,6 +89,8 @@ public class LoginUserActivity extends BaseActivity {
                 if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
                     ToastUitl.showShort(R.string.empty_edit_login);
                 } else {
+                    // 可在 App 运行时,随时切换 BaseUrl (指定了 Domain-Name header 的接口)
+                    RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com");
                     LoginService loginService = Http.getInstance().createRequest(LoginService.class);
                     String url = "signin?account="+account+"&password="+password;
                     loginService.login(url)
@@ -91,7 +99,7 @@ public class LoginUserActivity extends BaseActivity {
                             .subscribe(new BaseRxObserver<LoginBean>() {
                                 @Override
                                 public void onSuccess(LoginBean bean) {
-                                    int errorCode = bean.getError();
+                                    int errorCode = bean.getCode();
                                     if (errorCode == 0) {
                                         SpCache.putBoolean(Config.IS_LOGIN,true);
                                         LoginBean.DataBean dataBean = bean.getData();

@@ -3,6 +3,7 @@
     package="com.lantel.homelibrary">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
@@ -66,5 +67,7 @@
         <activity android:name="com.lantel.mine.order.OrderDetailActivity"/>
 
         <activity android:name="com.lantel.studylibrary.preview.preview.PreviewDetailActivity"/>
+
+        <activity android:name="com.lantel.common.WebViewActivity"/>
     </application>
 </manifest>

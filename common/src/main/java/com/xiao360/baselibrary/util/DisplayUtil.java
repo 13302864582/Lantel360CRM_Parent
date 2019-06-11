@@ -350,8 +350,7 @@ public class DisplayUtil {
     }
 
     public static String getFilePath(String url) {
-        int index = url.lastIndexOf("/");
-        return Environment.getExternalStorageDirectory().getPath() + "//360_parentCRM/Download/"+url.substring(index+1);
+        return /*Environment.getExternalStorageDirectory().getPath() + "//360_parentCRM/Download/"+*/url.substring(url.lastIndexOf("/")+1);
     }
 
     public static String formatNum(String str){

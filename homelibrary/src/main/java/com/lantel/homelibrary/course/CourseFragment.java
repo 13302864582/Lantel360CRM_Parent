@@ -29,6 +29,7 @@ import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.ToastUitl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -153,6 +154,7 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
                 }
             }
         });
+       mPresenter.refreshData(null);
     }
 
     @OnClick({R2.id.back, R2.id.text_right, R2.id.ok_btn})

@@ -11,6 +11,11 @@ public abstract class FragmentActivity extends BaseActivity {
     protected Fragment mFragment;
 
     @Override
+    protected int getStateBarviewID() {
+        return -1;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_fragment;
     }
