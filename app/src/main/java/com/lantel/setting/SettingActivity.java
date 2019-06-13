@@ -16,7 +16,6 @@ import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.list.adpter.SettingListApater;
 import com.lantel.setting.list.model.SettingModel;
-import com.lantel.studylibrary.classes.api.ClassBean;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.AppManager;
@@ -28,7 +27,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 @Route(path = "/lantelhome/360/SettingActivity")
 public class SettingActivity extends BaseActivity implements LogoutListener{
@@ -109,5 +107,15 @@ public class SettingActivity extends BaseActivity implements LogoutListener{
                     }
                 });
 
+    }
+
+    @Override
+    public void navigatePerson() {
+        String json = getIntent().getStringExtra(Config.JSON_PERSON);
+        if(null != json){
+            ARouter.getInstance().build("/lantel/360/SetPersonal").withString(Config.JSON_PERSON,json).navigation();
+        }else {
+            ToastUitl.showShort(R.string.emoty_person);
+        }
     }
 }

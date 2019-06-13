@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.gson.Gson;
 import com.lantel.common.PhotoSelectListener;
 import com.lantel.common.PopUtil;
 import com.lantel.homelibrary.R;
@@ -19,9 +20,11 @@ import com.lantel.setting.personal.mvp.SettingPersonModel;
 import com.lantel.setting.personal.mvp.SettingPersonPresenter;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.PhotoUtil;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +67,15 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     @Override
     protected void initView() {
         textRight.setText(R.string.finish);
+        if(null != getArguments()){
+            String json = getArguments().getString(Config.JSON_PERSON);
+            if(null != json){
+                Gson gson = new Gson();
+                PersonBean personBean = gson.fromJson(json,PersonBean.class);
+                mPresenter.initMenu(personBean);
+                GlideUtils.loadCircle(getContext(),personBean.getHeadImg(),headImg);
+            }
+        }
     }
 
     @OnClick({R2.id.headImg, R2.id.chageHead, R2.id.back, R2.id.text_right})
@@ -100,13 +112,8 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
                     mAdapter.notifyValue(data.getStringExtra(Config.EDIT_TEXT_RESULT));
                     break;
                 case Config.REQUEST_TAKE_PHOTO:
-                    try {
-                        Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), photoUrl);
-                        headImg.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        LogUtils.d("REQUEST_TAKE_PHOTO===IOException==" + e.getMessage());
-                    }
+                    upDateHeadImg();
+                    setHeadImg(photoUrl);
                     break;
                 case Config.REQUEST_SELECT_PHOTO:
                     Bitmap bitmap = null;
@@ -119,6 +126,21 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
                     headImg.setImageBitmap(bitmap);
                     break;
             }
+        }
+    }
+
+    //上传头像
+    private void upDateHeadImg() {
+
+    }
+
+    private void setHeadImg(Uri uri) {
+        try {
+            Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), uri);
+            headImg.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+            LogUtils.d("REQUEST_TAKE_PHOTO===IOException==" + e.getMessage());
         }
     }
 

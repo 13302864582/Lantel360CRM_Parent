@@ -1,4 +1,6 @@
 package com.lantel.setting.personal;
+import android.os.Bundle;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lantel.common.FragmentActivity;
 import com.lantel.homelibrary.app.Config;
@@ -13,6 +15,10 @@ public class SettingPersonal extends FragmentActivity {
 
     @Override
     protected Fragment getFragment() {
-        return new SettingPersonFragment();
+        SettingPersonFragment fragment = new SettingPersonFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Config.JSON_PERSON,getIntent().getStringExtra(Config.JSON_PERSON));
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

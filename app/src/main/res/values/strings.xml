@@ -78,4 +78,5 @@
     <string name="regsist_now">立即注册</string>
     <string name="reset_pwd">修改密码</string>
     <string name="net_error">网络请求失败</string>
+    <string name="emoty_person">获取不到个人资料</string>
 </resources>

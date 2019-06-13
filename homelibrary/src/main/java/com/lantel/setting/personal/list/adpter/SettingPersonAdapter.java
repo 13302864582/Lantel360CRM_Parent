@@ -53,7 +53,7 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         setText(model.getTitle(),settingPersonHolder.title);
 
         if(viewType == Config.TYPE_SELECT_DATE){
-            String date = getDateString(model.getValue());
+            String date = model.getValue();
             setText(date,settingPersonHolder.value);
         }else if(viewType == Config.TYPE_EDIT_TEXT){
             settingPersonHolder.arrow.setVisibility(View.INVISIBLE);
@@ -94,15 +94,6 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         return datas.get(position).getType();
     }
 
-    private String getDateString(String date) {
-        String year = date.substring(0,4);
-        String month = date.substring(4,6);
-        String day = date.substring(6);
-        StringBuilder builder = new StringBuilder();
-        builder.append(year).append("-").append(month).append("-").append(day);
-        return builder.toString();
-    }
-
     private TimePickerView getTimePickerView() {
         //时间选择器
         Calendar calendar = Calendar.getInstance();
@@ -114,7 +105,7 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         endDate.set(2020,11,31);
         return new TimePickerBuilder(context,(Date date, View v)-> {
             // 格式化日期
-            String value = (String) DateFormat.format("yyyyMMdd", date);
+            String value = (String) DateFormat.format("yyyy-MM-dd", date);
             notifyValue(value);
         })
                 .setType(new boolean[]{true, true, true,false,false,false})//分别对应年月日时分秒，默认全部显示

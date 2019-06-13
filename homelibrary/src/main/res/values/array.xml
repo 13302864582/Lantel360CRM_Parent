@@ -9,8 +9,8 @@
     </string-array>
 
     <string-array name="sex">
-        <item>@string/male</item>
         <item>@string/female</item>
+        <item>@string/male</item>
     </string-array>
 
     <string-array name="bindfile_menu_title">

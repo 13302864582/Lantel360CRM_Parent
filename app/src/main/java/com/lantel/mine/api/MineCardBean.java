@@ -59,11 +59,20 @@ public class MineCardBean {
             private String photo_url;
             private String birth_time;
             private String sno;
+            private String sex;
             private String card_no;
             private String credit;
             private String student_lesson_hours;
             private String student_lesson_remain_hours;
             private String money;
+
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
 
             public String getMoney() {
                 return money;

@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cangwang.core.IBaseClient;
@@ -22,18 +21,12 @@ import com.lantel.mine.list.model.CardModel;
 import com.lantel.mine.mvp.MineContract;
 import com.lantel.mine.mvp.MineModel;
 import com.lantel.mine.mvp.MinePresenter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.lantel.setting.personal.PersonBean;
 import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,6 +68,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
+    private PersonBean personBean;
     private List<MineCardBean.DataBean.ListBean> mCardList;
     private int mPosition = -1;
 
@@ -89,13 +83,22 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
         for(int i = 0;i < mCardList.size();i++){
             MineCardBean.DataBean.ListBean bean = mCardList.get(i);
             if(bean.getSid().equals(sid)){
+
                 mPosition = i;
                 mineName.setText(bean.getStudent_name());
                 mineCall.setText(bean.getNick_name());
-                GlideUtils.loadCircle(getContext(),bean.getPhoto_url(),mineHeadImg,R.mipmap.circle_default);
+                String photoUrl = bean.getPhoto_url();
+                GlideUtils.loadCircle(getContext(),photoUrl,mineHeadImg,R.mipmap.circle_default);
                 Date date = DisplayUtil.formatIntDay("yyyy-MM-dd",bean.getBirth_time());
                 if(null!=date)
                 mineAge.setText(DisplayUtil.getAge(date,getContext())+getString(R.string.year_old));
+
+                personBean = new PersonBean();
+                personBean.setHeadImg(photoUrl);
+                personBean.setBirthDate(bean.getBirth_time());
+                personBean.setName(bean.getStudent_name());
+                personBean.setSex(bean.getSex());
+
                 mineStudentId.setText(getString(R.string.sno)+bean.getSno());
                 mineCardId.setText(getString(R.string.card_sno)+bean.getCard_no());
                 String total = bean.getStudent_lesson_hours();
@@ -252,7 +255,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.top_img_right) {
-            ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
+            ARouter.getInstance().build("/lantelhome/360/SettingActivity").withString(Config.JSON_PERSON,new Gson().toJson(personBean)).navigation();
         }else if(id == R.id.mine_change || id == R.id.add_account){
             if(null != mCardList && mCardList.size()!=0){
                 Gson gson =new Gson();

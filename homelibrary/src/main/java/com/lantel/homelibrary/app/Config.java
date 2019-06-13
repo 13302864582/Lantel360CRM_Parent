@@ -89,6 +89,7 @@ public class Config {
     public static final String PNONE_NUMBER = "PNONE_NUMBER";
     public static final String FILE_URL = "FILE_URL";
     public static final String JSON_NOTIFY = "JSON_NOTIFY";
+    public static final String JSON_PERSON= "JSON_PERSON";
     public static final String IS_REMARK = "IS_REMARK";
     public static final String FORGET_BUSSNESS_TYPE = "FORGET_BUSSNESS_TYPE";
 
