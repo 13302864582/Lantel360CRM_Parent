@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<ImageView
+    android:id="@+id/homewrok_img"
+    android:scaleType="fitXY"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintHorizontal_bias="0.07"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_margin="@dimen/list_margin"
+    android:layout_width="@dimen/homewrok_img"
+    android:layout_height="@dimen/homewrok_img" />
+
+    <TextView
+        android:id="@+id/homewrok_teacher"
+        android:text="fz老师"
+        app:layout_constraintLeft_toRightOf="@id/homewrok_img"
+        android:layout_marginLeft="@dimen/list_margin"
+        android:layout_marginTop="@dimen/back_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/homewrok_text_teacher"
+        android:textColor="@color/homewrok_text_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/img_classes"
+        android:text="@string/classtitle"
+        android:background="@drawable/btn_homework_bg_unable"
+        android:textSize="@dimen/homewrok_text_classes"
+        android:textColor="@color/white"
+        android:padding="@dimen/homewrok_classes_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/homewrok_teacher"
+        app:layout_constraintLeft_toLeftOf="@id/homewrok_teacher"
+        android:layout_marginTop="@dimen/back_padding"/>
+
+    <TextView
+        android:id="@+id/homewrok_classes"
+        android:textColor="@color/homewrok_classes"
+        android:textSize="@dimen/homewrok_text_classes"
+        android:text="111"
+        app:layout_constraintLeft_toRightOf="@id/img_classes"
+        app:layout_constraintBaseline_toBaselineOf="@id/img_classes"
+        android:layout_marginLeft="@dimen/back_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/homework_finish"
+        android:text="@string/finish"
+        android:gravity="center"
+        android:textSize="@dimen/homewrok_text_finish"
+        app:layout_constraintBaseline_toBaselineOf="@id/img_classes"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/img_classes"
+        app:layout_constraintHorizontal_bias="0.95"
+        android:layout_marginRight="@dimen/list_margin"
+        android:textColor="@color/white"
+        android:background="@drawable/finish_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="发布时间：111-11-1"
+        android:id="@+id/homewrok_start_time"
+        style="@style/homewrok_time"
+        app:layout_constraintTop_toBottomOf="@id/img_classes"
+        android:layout_marginTop="@dimen/back_padding"
+        app:layout_constraintLeft_toLeftOf="@id/img_classes"
+         />
+
+    <TextView
+        android:text="结束时间：111-11-1"
+        android:id="@+id/homewrok_end_time"
+        app:layout_constraintLeft_toRightOf="@id/homewrok_start_time"
+        app:layout_constraintBaseline_toBaselineOf="@id/homewrok_start_time"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        style="@style/homewrok_time"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

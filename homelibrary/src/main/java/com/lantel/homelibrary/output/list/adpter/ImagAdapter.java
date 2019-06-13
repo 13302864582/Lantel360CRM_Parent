@@ -20,6 +20,7 @@ import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
 
 public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
+    private ClickMore clickMore;
     private boolean isDetail = false;
 
     /**
@@ -27,10 +28,12 @@ public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
      * @param context
      * @param datas
      * @param isDetail
+     * @param clickMore
      */
-    public ImagAdapter(Context context, List datas, boolean isDetail) {
+    public ImagAdapter(Context context, List datas, boolean isDetail, ClickMore clickMore) {
         super(context, datas);
         this.isDetail = isDetail;
+        this.clickMore = clickMore;
     }
 
     @Override
@@ -57,6 +60,10 @@ public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
 
         if(null != datas && position == 8 && datas.size()>9 && !isDetail){
             imageHolder.more.setVisibility(View.VISIBLE);
+            imageHolder.more.setOnClickListener((View view)-> {
+                if(null != clickMore)
+                    clickMore.GoDetail();
+            });
         }else {
             imageHolder.play.setVisibility(viewType == Config.VIDEO?View.VISIBLE:View.GONE);
         }

@@ -9,6 +9,8 @@ import com.lantel.homelibrary.notify.list.holder.NotifyHolder;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.zzhoujay.richtext.RichText;
+
 import java.util.List;
 
 public class NotifyDetailAdapter extends BaseRecyclerViewAdapter<BaseModel> {
@@ -20,6 +22,7 @@ public class NotifyDetailAdapter extends BaseRecyclerViewAdapter<BaseModel> {
      */
     public NotifyDetailAdapter(Context context, List<BaseModel> datas) {
         super(context, datas);
+
     }
 
     @Override

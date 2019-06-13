@@ -44,6 +44,7 @@ public class Config {
     public static final int REQUEST_CHANGE_ACCOUNT = 102;
     public static final int REQUEST_TAKE_PHOTO = 103;
     public static final int REQUEST_SELECT_PHOTO = 104;
+    public static final int REQUEST_PREVIEW_DETAIL = 105;
 
 
     public static final String BIND_PHONE = "BIND_PHONE";
@@ -87,4 +88,12 @@ public class Config {
 
     public static final String PNONE_NUMBER = "PNONE_NUMBER";
     public static final String FILE_URL = "FILE_URL";
+    public static final String JSON_NOTIFY = "JSON_NOTIFY";
+    public static final String IS_REMARK = "IS_REMARK";
+    public static final String FORGET_BUSSNESS_TYPE = "FORGET_BUSSNESS_TYPE";
+
+    //目前三种 signup(注册),resetpwd(忘记密码重设),user_resetpwd(用户修改密码)
+    public static final String SIGNUP = "signup";
+    public static final String RESETPWD = "resetpwd";
+    public static final String USER_RESETPWD = "user_resetpwd";
 }

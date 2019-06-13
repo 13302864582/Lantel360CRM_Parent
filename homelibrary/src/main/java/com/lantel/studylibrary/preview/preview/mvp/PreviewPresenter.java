@@ -50,17 +50,20 @@ public class PreviewPresenter extends PreviewContract.Presenter<PreviewBean,Prev
 
     @Override
     protected void setUpData(ArrayList<PreviewItemModel> list, PreviewBean data) {
-        List<PreviewBean.DataBean.ListBean> listBean = data.getData().getList();
-        for (PreviewBean.DataBean.ListBean bean : listBean){
-            PreviewItemModel model = new PreviewItemModel();
-            model.setTitle(bean.getTitle());
-            model.setDate(DisplayUtil.getDateString(bean.getInt_day()+""));
-            String start_hour = DisplayUtil.getTimeString(bean.getInt_start_hour()+"");
-            String end_hour = DisplayUtil.getTimeString(bean.getInt_end_hour()+"");
-            model.setTime(start_hour+"-"+end_hour);
-            model.setContent(bean.getContent());
-            model.setCa_id(bean.getCa_id()+"");
-            list.add(model);
+        PreviewBean.DataBean dataBean = data.getData();
+        if(null != dataBean){
+            List<PreviewBean.DataBean.ListBean> listBean = dataBean.getList();
+            for (PreviewBean.DataBean.ListBean bean : listBean){
+                PreviewItemModel model = new PreviewItemModel();
+                model.setTitle(bean.getTitle());
+                model.setDate(DisplayUtil.getDateString(bean.getInt_day()+""));
+                String start_hour = DisplayUtil.getTimeString(bean.getInt_start_hour()+"");
+                String end_hour = DisplayUtil.getTimeString(bean.getInt_end_hour()+"");
+                model.setTime(start_hour+"-"+end_hour);
+                model.setContent(bean.getContent());
+                model.setCa_id(bean.getCa_id()+"");
+                list.add(model);
+            }
         }
     }
 

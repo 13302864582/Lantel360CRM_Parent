@@ -19,17 +19,23 @@ import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.studylibrary.preview.preview.api.LeaveRespone;
+import com.lantel.studylibrary.preview.preview.api.PreviewBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewDetailBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewService;
 import com.lantel.studylibrary.preview.preview.list.AttachFileListener;
+import com.lantel.studylibrary.preview.preview.list.LeaveListener;
 import com.lantel.studylibrary.preview.preview.list.adpter.AttachFileAdapter;
 import com.lantel.studylibrary.preview.preview.list.model.AttachFile;
+import com.lantel.studylibrary.preview.preview.list.model.LeaveReqBean;
 import com.lantel.studylibrary.preview.preview.list.model.PreviewDetailModel;
 import com.ldoublem.loadingviewlib.view.LVFunnyBar;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
 import com.zzhoujay.richtext.RichText;
 import java.io.File;
 import java.util.ArrayList;
@@ -42,7 +48,7 @@ import butterknife.OnClick;
 import io.reactivex.Observable;
 
 @Route(path = "/lantel/360/preview/detail")
-public class PreviewDetailActivity extends BaseActivity implements AttachFileListener {
+public class PreviewDetailActivity extends BaseActivity implements AttachFileListener, LeaveListener {
     @BindView(R2.id.title)
     TextView title;
     @BindView(R2.id.course_title)
@@ -73,6 +79,9 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     ConstraintLayout progressLay;
 
     private AttachFileAdapter mAdapter;
+    private String ca_id = "";
+    private PreviewDetailModel previewDetailModel;
+    private LeaveDialog mDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +104,6 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     public void initView() {
         textRight.setText(R.string.leave);
         title.setText(R.string.preview_detail);
-        String ca_id = "";
         if (null != getIntent())
             ca_id = getIntent().getStringExtra(Config.CA_ID);
         if (!TextUtils.isEmpty(ca_id)) {
@@ -163,6 +171,7 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     }
 
     private void updateView(PreviewDetailModel previewDetailModel) {
+        this.previewDetailModel = previewDetailModel;
         courseTitle.setText(previewDetailModel.getCourseName());
         date.setText(previewDetailModel.getDate());
         time.setText(String.format(getString(R.string.preview_time_format), previewDetailModel.getTime()));
@@ -197,7 +206,18 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
         if (id == R.id.back) {
             finish();
         } else if (id == R.id.text_right) {
-
+            if(null != previewDetailModel){
+                MyApplication application = (MyApplication) getApplication();
+                LeaveDialogBean leaveDialogBean = new LeaveDialogBean();
+                leaveDialogBean.setLeaveType(application.getLeaveTypes());
+                leaveDialogBean.setTeacher(previewDetailModel.getTeacher());
+                String date = previewDetailModel.getDate();
+                String time = previewDetailModel.getTime();
+                leaveDialogBean.setTime(date+"  "+time);
+                mDialog = new LeaveDialog(this,leaveDialogBean);
+                mDialog.setLeaveListener(this);
+                mDialog.show();
+            }
         }
     }
 
@@ -261,5 +281,37 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     @Override
     public void downLoadFile(File file, String url, int position) {
         downLoad(file, url, position);
+    }
+
+    @Override
+    public void leave(int is_consume, int leave_type) {
+        String sid = SpCache.getString(Config.SID,"");
+        PreviewService service = Http.getInstance().createRequest(PreviewService.class);
+        LeaveReqBean leaveReqBean = new LeaveReqBean();
+        leaveReqBean.setCa_id(ca_id);
+        leaveReqBean.setSid(sid);
+        leaveReqBean.setIs_consume(is_consume+"");
+        leaveReqBean.setLeave_type(leave_type+"");
+        service.leave(HeaderUtil.getHeaderMap(),leaveReqBean)
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<LeaveRespone>() {
+                    @Override
+                    public void onSuccess(LeaveRespone demo) {
+                        if(demo.getError()==0){
+                            setResult(RESULT_OK);
+                            ToastUitl.showShort(R.string.success_leave);
+                        }else
+                        ToastUitl.showShort(demo.getMessage());
+
+                        LogUtils.d("PreviewDetailActivity1==="+demo.getMessage());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(e.getMessage());
+                        LogUtils.d("PreviewDetailActivity===2"+e.getMessage());
+                    }
+                });
     }
 }

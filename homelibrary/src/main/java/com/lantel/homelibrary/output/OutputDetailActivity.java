@@ -1,13 +1,18 @@
 package com.lantel.homelibrary.output;
 
+import android.content.DialogInterface;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.gson.Gson;
 import com.gyf.immersionbar.BarHide;
+import com.lantel.common.SoftKeyBoardListener;
 import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
@@ -18,6 +23,7 @@ import com.lantel.homelibrary.output.mvp.OutputDetailModel;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 
 import java.util.ArrayList;
@@ -28,7 +34,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 @Route(path = "/lantel/360/output/detail")
-public class OutputDetailActivity extends BaseMVPActivity implements OutputDetailContract.View {
+public class OutputDetailActivity extends BaseMVPActivity implements OutputDetailContract.View,RemarkListener {
     @BindView(R2.id.statebarView)
     View statebarView;
     @BindView(R2.id.back)
@@ -75,6 +81,7 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
     View line1;
     @BindView(R2.id.card_ConstraintLayout)
     ConstraintLayout cardConstraintLayout;
+    private RemarkDialog mDialog;
 
     @Override
     protected BarHide hideBar() {
@@ -103,7 +110,9 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
 
     @Override
     public void initView() {
+        title.setText(R.string.content_detail);
         String data = getIntent().getStringExtra("data");
+        boolean isRemark =  getIntent().getBooleanExtra(Config.IS_REMARK,false);
         if(!TextUtils.isEmpty(data)){
             CardOutputModel cardOutputModel = new Gson().fromJson(data, CardOutputModel.class);
             GlideUtils.loadImageView(this,cardOutputModel.getHeadImg(),headImg);
@@ -112,11 +121,21 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
             content.setText(cardOutputModel.getContent());
             textClasses.setText("未知");
             textAdress.setText("未知");
+            supportImg.setSelected(cardOutputModel.isSupport());
             Map<String, ArrayList<MediaModel>> map =  cardOutputModel.getMap();
             AlbumFileView.bindImageList(map.get(Config.IMG_LIST));
             AlbumFileView.bindFileList(map.get(Config.FILE_LIST),map.get(Config.RECORD_LIST));
-            //AlbumFileView.bindRemarkList();
         }
+
+        if(isRemark){
+            showRemark();
+        }
+    }
+
+    public void showRemark() {
+        mDialog = new RemarkDialog(this,this);
+        mDialog.showAtLocation(Gravity.BOTTOM,0,0);
+        DisplayUtil.dismissSofo(this,mDialog);
     }
 
     @OnClick({R2.id.back, R2.id.share_img, R2.id.share, R2.id.remark_img, R2.id.remark, R2.id.support_img, R2.id.support})
@@ -127,7 +146,7 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
         } else if (id == R.id.share_img || id == R.id.share) {
             LogUtils.d("onViewClicked===share_img");
         } else if (id == R.id.remark_img || id == R.id.remark) {
-            LogUtils.d("onViewClicked===baremark_imgck");
+            showRemark();
         } else if (id == R.id.support_img || id == R.id.support) {
             LogUtils.d("onViewClicked===basupport_imgck");
         }
@@ -146,6 +165,11 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
 
     @Override
     public void showNetWorkError() {
+
+    }
+
+    @Override
+    public void commitRemark(String content) {
 
     }
 }

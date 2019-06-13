@@ -59,7 +59,9 @@ public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
             }
         }
         accountHolder.value.setVisibility(View.GONE);
-
+        setText(getString(R.string.unbind),accountHolder.state_btn);
+        accountHolder.state_btn.setEnabled(true);
+        /*
         boolean isBind = SpCache.getBoolean(accountModel.getRoute_flag(),false);
         if(isBind){
             setText(getString(R.string.bind),accountHolder.state_btn);
@@ -67,8 +69,7 @@ public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         }else {
             setText(getString(R.string.unbind),accountHolder.state_btn);
             accountHolder.state_btn.setEnabled(true);
-        }
-
+        }*/
         accountHolder.state_btn.setOnClickListener((View view)-> {
             if(listener!=null)
                 listener.clickBind(accountModel.getRoute_flag());

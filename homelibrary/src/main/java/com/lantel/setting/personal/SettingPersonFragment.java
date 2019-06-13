@@ -63,7 +63,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
 
     @Override
     protected void initView() {
-
+        textRight.setText(R.string.finish);
     }
 
     @OnClick({R2.id.headImg, R2.id.chageHead, R2.id.back, R2.id.text_right})
@@ -75,8 +75,12 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
         } else if (id == R.id.back) {
             getActivity().finish();
         } else if (id == R.id.text_right) {
-
+            commitRequest();
         }
+    }
+
+    private void commitRequest() {
+
     }
 
     @Override

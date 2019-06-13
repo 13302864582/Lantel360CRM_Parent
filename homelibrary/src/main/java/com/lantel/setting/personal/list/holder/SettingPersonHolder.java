@@ -10,10 +10,13 @@ import com.xiao360.baselibrary.listview.BaseViewHolder;
 public class SettingPersonHolder extends BaseViewHolder {
     public TextView title;
     public TextView value;
+    public ImageView arrow;
+
 
     public SettingPersonHolder(View view) {
         super(view);
         title = getView(R.id.title);
         value = getView(R.id.value);
+        arrow = getView(R.id.arrow);
     }
 }

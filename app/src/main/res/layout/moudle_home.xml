@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/organ_marginLeft"
                     android:layout_marginTop="@dimen/organ_marginTop"
-                    android:text="新概念英语"
                     android:textColor="@color/organ"
                     android:textSize="@dimen/organ"
                     android:textStyle="bold"
@@ -65,7 +64,6 @@
                         android:paddingTop="8dp"
                         android:paddingRight="@dimen/phone_text_paddingRight"
                         android:paddingBottom="8dp"
-                        android:text="13029007685"
                         android:textSize="@dimen/phone_text" />
 
 
@@ -82,10 +80,11 @@
 
                 <RelativeLayout
                     android:id="@+id/location_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/organ_marginLeft"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/logo"
                     app:layout_constraintTop_toBottomOf="@id/phone_layout">
 
                     <ImageView
@@ -98,7 +97,6 @@
                         android:src="@mipmap/home_loacation" />
 
                     <TextView
-                        android:text="广东省深圳市龙华区龙华街道某个大楼17层"
                         android:id="@+id/location_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -117,7 +115,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/organ_marginLeft"
-                    android:text="龙华校区"
                     android:textColor="@color/school_area"
                     android:textSize="@dimen/school_area"
                     app:layout_constraintBaseline_toBaselineOf="@id/organ"
@@ -125,16 +122,17 @@
 
                 <ImageView
                     android:id="@+id/logo"
+                    android:scaleType="fitXY"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="@dimen/logo_marginRight"
                     android:src="@mipmap/home_area_default"
-                    app:layout_constraintBottom_toTopOf="@+id/location_layout"
-                    app:layout_constraintHeight_percent="0.48"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHeight_percent="0.6"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.258" />
+                    app:layout_constraintWidth_percent="0.3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

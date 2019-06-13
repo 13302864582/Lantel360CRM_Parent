@@ -7,6 +7,7 @@ import com.lantel.app.api.AllBean;
 import com.lantel.common.ClassRoom;
 import com.lantel.common.SchoolArea;
 import com.lantel.crmparent.R;
+import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
@@ -53,6 +54,20 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                                         schoolAreas.add(schoolArea);
                                     }
                                     application.setSchoolAreas(schoolAreas);
+                                }
+
+                                AllBean.DataBean.DictsBean dictsBean = dataBean.getDicts();
+
+                                if(null != dictsBean){
+                                    List<BaseModel> leaveTypes  = new ArrayList<>();
+                                        List<AllBean.DataBean.DictsBean.LeaveReasonBean> leave_reasons = dictsBean.getLeave_reason();
+                                        for(AllBean.DataBean.DictsBean.LeaveReasonBean leaveReasonBean : leave_reasons){
+                                            BaseModel model = new BaseModel();
+                                            model.setType(leaveReasonBean.getDid());
+                                            model.setTitle(leaveReasonBean.getTitle());
+                                            leaveTypes.add(model);
+                                    }
+                                    application.setLeaveTypes(leaveTypes);
                                 }
                             }
                         }else {

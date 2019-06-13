@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
-import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
-import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.ToastUitl;
 
 import androidx.lifecycle.ViewModel;
@@ -107,6 +109,27 @@ public class EditPassword extends BaseMVPActivity {
     }
 
     private void ChangePassWord(String oldpass, String newpass) {
+        ChangPwdService changPwdService = Http.getInstance().createRequest(ChangPwdService.class);
+        ChangpwdReq req = new ChangpwdReq();
+        req.setAction("resetpwd");
+        req.setOldpassword(oldpass);
+        req.setPassword(newpass);
+        req.setRepassword(newpass);
+        changPwdService.resetpwd(HeaderUtil.getHeaderMap(),req)
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<ChangPwdBean>() {
+                    @Override
+                    public void onSuccess(ChangPwdBean demo) {
+                        ToastUitl.showShort(demo.getMessage());
+                        if(demo.getError()==0)
+                            finish();
+                    }
 
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(R.string.net_error);
+                    }
+                });
     }
 }

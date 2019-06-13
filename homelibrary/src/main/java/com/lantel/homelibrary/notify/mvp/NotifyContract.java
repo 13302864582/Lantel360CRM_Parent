@@ -1,4 +1,5 @@
 package com.lantel.homelibrary.notify.mvp;
+import com.lantel.common.RefreshListFragmentPresenter;
 import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.mvp.BaseView;
@@ -12,7 +13,7 @@ public interface NotifyContract {
         void setLoadMoreData(ArrayList<NotifyItemModel> menu);
     }
 
-    abstract class Presenter extends BaseFragmentPresenter<View, NotifyModel> {
+    abstract class Presenter<T,E> extends RefreshListFragmentPresenter<T,E,View, NotifyModel> {
 
     }
 }

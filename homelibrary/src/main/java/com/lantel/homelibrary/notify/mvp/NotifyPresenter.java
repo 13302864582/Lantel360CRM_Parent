@@ -1,48 +1,75 @@
 package com.lantel.homelibrary.notify.mvp;
 
 import android.os.Bundle;
-
 import com.lantel.homelibrary.notify.api.NotifyBean;
 import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.xiao360.baselibrary.base.BaseRxObserver;
-import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifyPresenter extends NotifyContract.Presenter{
-    private int mCurrentPage = 0;
+import io.reactivex.Observable;
 
-    //onActivityCreated
+public class NotifyPresenter extends NotifyContract.Presenter<NotifyBean,NotifyItemModel>{
+
     @Override
-    public void onCrete() {
-        LogUtils.d("onActivityCreated: ");
+    protected void showLoading() {
+        mView.showLoading();
     }
 
     @Override
-    public void onStart() {
-        LogUtils.d("onStart: ");
-        refreshData(null);
+    protected void ViewSetLoadMoreData(ArrayList<NotifyItemModel> list) {
+        mView.setLoadMoreData(list);
     }
 
     @Override
-    public void onResume() {
-        LogUtils.d("onResume: ");
+    protected void ViewRefreshData(ArrayList<NotifyItemModel> list) {
+        mView.refreshData(list);
     }
 
     @Override
-    public void onPause() {
-        LogUtils.d("onPause: ");
+    protected void showEmpty() {
+        mView.showEmpty();
     }
 
     @Override
-    public void onStop() {
-        LogUtils.d("onStop: ");
+    protected int getTotal(NotifyBean data) {
+        List<NotifyBean.DataBean.ListBean> listBeans= data.getData().getList();
+        return null==listBeans?0:listBeans.size();
     }
 
     @Override
-    public void onDestroy() {
-        LogUtils.d("onCrete: ");
+    protected int getErrorCode(NotifyBean data) {
+        return data.getError();
+    }
+
+    @Override
+    protected void setUpData(ArrayList<NotifyItemModel> list, NotifyBean data) {
+        NotifyBean.DataBean dataBean = data.getData();
+        if(null != dataBean){
+            List<NotifyBean.DataBean.ListBean> listBeans = dataBean.getList();
+            if(null != listBeans){
+                for(NotifyBean.DataBean.ListBean listBean : listBeans){
+                    NotifyItemModel itemModel = new NotifyItemModel();
+                    itemModel.setTitle(listBean.getTitle());
+                    itemModel.setTime(listBean.getCreate_time());
+                    itemModel.setContent(listBean.getDesc());
+                    itemModel.setPush(null != listBean.getBroadcast_push());
+                    list.add(itemModel);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected String getErrorMessage(NotifyBean data) {
+        return data.getMessage();
+    }
+
+    @Override
+    protected Observable<NotifyBean> getObserver(boolean isMore) {
+        if(!isMore)
+            return mModel.loadData(String.valueOf(1),String.valueOf(10));
+        else
+            return mModel.loadData(String.valueOf(mCurrentPage+1),String.valueOf(10));
     }
 
     @Override
@@ -50,64 +77,33 @@ public class NotifyPresenter extends NotifyContract.Presenter{
 
     }
 
-    public void refreshData(RefreshLayout refreshLayout) {
-        loadData(String.valueOf(1),String.valueOf(10),false,refreshLayout);
+    @Override
+    public void onCrete() {
+
     }
 
-    private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
+    @Override
+    public void onStart() {
 
-        mModel.loadData(page,pageSize)
-                .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<NotifyBean>() {
-                    @Override
-                    public void onSuccess(NotifyBean data) {
-                        if(data.getError()==0){
-                            List<NotifyBean.DataBean.ListBean> listBean = data.getData().getList();
-                            //添加菜单数据
-                            ArrayList<NotifyItemModel> menu = new ArrayList<>();
-                            for (NotifyBean.DataBean.ListBean  bean : listBean) {
-                                NotifyItemModel model = new NotifyItemModel();
-                                //model.setContent(XmlParser.xml2json(bean.getDesc()));
-                                model.setTime(bean.getCreate_time());
-                                model.setTitle(bean.getTitle());
-                            }
-                            if(!isLoadMore){
-                                mView.refreshData(menu);
-                                if(null!=refreshLayout)
-                                    refreshLayout.finishRefresh();
-                                mCurrentPage = 1;
-                            }
-                            else {
-                                mView.setLoadMoreData(menu);
-                                if(null!=refreshLayout)
-                                    refreshLayout.finishLoadMore();
-                                mCurrentPage++;
-                            }
-
-                        }else {
-                            onFailure(new Throwable(data.getMessage()));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e) {
-                        onFail(refreshLayout,isLoadMore);
-                    }
-                });
     }
 
-    public void onLoadMore(RefreshLayout refreshLayout) {
-        loadData(String.valueOf(mCurrentPage+1),String.valueOf(10),true, refreshLayout);
+    @Override
+    public void onResume() {
+
     }
 
-    public void onFail(RefreshLayout refreshLayout, boolean isLoadMore) {
-        if (null != refreshLayout) {
-            if (!isLoadMore)
-                refreshLayout.finishRefresh();
-            else
-                refreshLayout.finishLoadMore();
-        }
-        if(!isLoadMore)
-            mView.showEmpty();
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 }

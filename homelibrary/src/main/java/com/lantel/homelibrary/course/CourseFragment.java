@@ -1,5 +1,7 @@
 package com.lantel.homelibrary.course;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -126,7 +128,6 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
     @Override
     protected void initView() {
         stateLayout.showContentView();
-        text_right.setText(R.string.leave);
         calendarView.setOnCalendarSelectListener(this);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mCourseList.setLayoutManager(manager);
@@ -157,19 +158,19 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
        mPresenter.refreshData(null);
     }
 
-    @OnClick({R2.id.back, R2.id.text_right, R2.id.ok_btn})
+    @OnClick({R2.id.back/*, R2.id.text_right*/, R2.id.ok_btn})
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.back) {
             getActivity().finish();
-        } else if (id == R.id.text_right) {
+        } /*else if (id == R.id.text_right) {
             if (curriculumAdapter != null) {
                 if (!curriculumAdapter.isAnimation()) {
                     boolean state = curriculumAdapter.toogleEdit();
                     toogleBottomMenu(state);
                 }
             }
-        } else if (id == R.id.ok_btn) {
+        }*/ else if (id == R.id.ok_btn) {
             int checkID = leaveRadioGroup.getCheckedRadioButtonId();
         }
     }
@@ -250,11 +251,11 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
         if(menu.size()!=0){
             stateLayout.showContentView();
             curriculumAdapter.setmLastPosition(0);
-            if(!isBeforeToday)
-            text_right.setVisibility(View.VISIBLE);
+          /*  if(!isBeforeToday)
+            text_right.setVisibility(View.VISIBLE);*/
         } else{
             stateLayout.showEmptyView();
-            text_right.setVisibility(View.GONE);
+            //text_right.setVisibility(View.GONE);
         }
 
 
@@ -280,6 +281,6 @@ public class CourseFragment extends ToolBarStateFragment<CoursePresenter, Course
 
     @Override
     public void navigateDetail(String id) {
-        ARouter.getInstance().build("/lantel/360/preview/detail").withString(Config.CA_ID,id).navigation();
+        ARouter.getInstance().build("/lantel/360/preview/detail").withString(Config.CA_ID,id).navigation(getActivity(),Config.REQUEST_PREVIEW_DETAIL);
     }
 }

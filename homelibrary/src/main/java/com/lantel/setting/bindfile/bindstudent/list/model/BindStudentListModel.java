@@ -9,7 +9,7 @@ public class BindStudentListModel extends BaseModel{
     private String class_area;
     private boolean isBind;
     private boolean sex;
-    private Object heaImg;
+    private String heaImg;
 
     public String getName() {
         return name;
@@ -59,11 +59,11 @@ public class BindStudentListModel extends BaseModel{
         this.sex = sex;
     }
 
-    public Object getHeaImg() {
+    public String getHeaImg() {
         return heaImg;
     }
 
-    public void setHeaImg(Object heaImg) {
+    public void setHeaImg(String heaImg) {
         this.heaImg = heaImg;
     }
 }

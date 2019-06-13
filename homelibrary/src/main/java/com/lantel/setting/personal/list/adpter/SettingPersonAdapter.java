@@ -55,6 +55,8 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         if(viewType == Config.TYPE_SELECT_DATE){
             String date = getDateString(model.getValue());
             setText(date,settingPersonHolder.value);
+        }else if(viewType == Config.TYPE_EDIT_TEXT){
+            settingPersonHolder.arrow.setVisibility(View.INVISIBLE);
         }else
         setText(model.getValue(),settingPersonHolder.value);
 
@@ -68,10 +70,10 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     private void navigateType(int viewType) {
         switch (viewType){
             case Config.TYPE_EDIT_TEXT:
-               if(listener!=null){
+             /*  if(listener!=null){
                    String editText = ((SettingPersonItemModel)datas.get(mCurrentPosition)).getValue();
                    listener.editText(editText);
-               }
+               }*/
                 break;
             case Config.TYPE_SELECT_TEXT:
                 if(mCurrentPosition!=-1){

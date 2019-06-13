@@ -138,4 +138,15 @@
     <dimen name="remark_content">13sp</dimen>
     <dimen name="edit_pass">15sp</dimen>
     <dimen name="leave_list_height">90dp</dimen>
+    <dimen name="leave_checkBox">15sp</dimen>
+    <dimen name="dialog_remark">140dp</dimen>
+    <dimen name="remark_commit">15sp</dimen>
+    <dimen name="remark_edit">14sp</dimen>
+
+    <dimen name="homewrok_img">60dp</dimen>
+    <dimen name="homewrok_text_teacher">14sp</dimen>
+    <dimen name="homewrok_text_classes">12sp</dimen>
+    <dimen name="homewrok_text_time">9sp</dimen>
+    <dimen name="homewrok_text_finish">13sp</dimen>
+    <dimen name="homewrok_classes_padding">2dp</dimen>
 </resources>

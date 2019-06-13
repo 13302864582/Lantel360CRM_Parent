@@ -10,11 +10,13 @@ import com.lantel.AppConfig;
 import com.lantel.common.GlideImageLoader;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
+import com.lantel.home.api.HomeTopModel;
 import com.lantel.home.list.adpter.HomeMenuListApater;
 import com.lantel.home.mvp.HomeContract;
 import com.lantel.home.mvp.HomeModel;
 import com.lantel.home.mvp.HomePresenter;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
+import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.youth.banner.Banner;
@@ -84,6 +86,15 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     }
 
     @Override
+    public void updateTopView(HomeTopModel homeTopModel) {
+        organ.setText(homeTopModel.getOrg_name());
+        phoneText.setText(homeTopModel.getBranch_tel());
+        schoolArea.setText(homeTopModel.getBranch_name());
+        locationText.setText(homeTopModel.getBranch_address());
+        GlideUtils.loadImageView(getContext(),homeTopModel.getRecommend_cover(),logo);
+    }
+
+    @Override
     protected int getStateBarviewID() {
         return R.id.statebarView;
     }
@@ -106,6 +117,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     @Override
     protected void initView() {
         mPresenter.initMenu();
+        mPresenter.laodHomeTop();
         initBanner();
     }
 

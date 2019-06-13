@@ -2,6 +2,7 @@ package com.lantel.studylibrary.course.mvp.plan_read;
 
 import android.os.Bundle;
 
+import com.lantel.homelibrary.R;
 import com.lantel.studylibrary.classes.api.ClassBean;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.lantel.studylibrary.course.api.CourseBean;
@@ -9,6 +10,7 @@ import com.lantel.studylibrary.course.list.model.CourseCardModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
+import com.xiao360.baselibrary.util.ToastUitl;
 
 import java.util.ArrayList;
 import java.util.List;

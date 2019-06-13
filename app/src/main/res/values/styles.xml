@@ -35,7 +35,7 @@
     </style>
 
     <style name="login_bt" parent="wrap_wh">
-        <item name="android:layout_marginTop">@dimen/back_padding</item>
+        <item name="android:layout_marginTop">@dimen/list_margin</item>
         <item name="android:padding">@dimen/account_value_margin</item>
         <item name="android:textSize">@dimen/login_bt</item>
         <item name="android:textColor">@color/login_bt</item>

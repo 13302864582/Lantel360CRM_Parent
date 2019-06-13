@@ -98,6 +98,14 @@
             android:text="@string/login_forgetPassWord"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_btn" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/login_regsist"
+            style="@style/login_bt"
+            android:text="@string/regsist_now"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout
 >
 

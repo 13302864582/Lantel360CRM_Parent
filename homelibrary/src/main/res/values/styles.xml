@@ -17,14 +17,21 @@
     <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <!--屏蔽默认的按钮图标-->
         <item name="android:button">@null</item>
-        <!--设置自己在按钮图标-->
-        <item name="android:drawableRight">@drawable/check</item>
        <!-- 图标的内边距-->
         <item name="android:drawablePadding">8dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/sick_leave</item>
         <item name="android:textColor">@color/sick_leave</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="checkbox_left" parent="checkbox">
+        <item name="android:drawableLeft">@drawable/check</item>
+    </style>
+
+    <style name="checkbox_right" parent="checkbox">
+        <item name="android:drawableRight">@drawable/check</item>
     </style>
 
 
@@ -208,6 +215,11 @@
         <item name="android:layout_marginTop">@dimen/line_margin_output</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="homewrok_time" parent="wrap_wh">
+        <item name="android:textSize">@dimen/homewrok_text_time</item>
+        <item name="android:textColor">@color/homewrok_text_time</item>
     </style>
 
 

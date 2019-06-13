@@ -15,6 +15,7 @@ import com.xiao360.baselibrary.util.DisplayUtil;
 import java.util.List;
 
 public class AttachFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
+    private ClickMore clickMore;
     private boolean isDetail = false;
 
     /**
@@ -22,10 +23,12 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
      * @param context
      * @param datas
      * @param isDetail
+     * @param clickMore
      */
-    public AttachFileAdapter(Context context, List datas, boolean isDetail) {
+    public AttachFileAdapter(Context context, List datas, boolean isDetail, ClickMore clickMore) {
         super(context, datas);
         this.isDetail = isDetail;
+        this.clickMore = clickMore;
     }
 
     @Override
@@ -63,8 +66,9 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
             holder.download_lay.setVisibility(View.GONE);
             holder.file_img.setImageResource(R.mipmap.more);
             holder.file_img.setVisibility(View.VISIBLE);
-            holder.itemView.setOnClickListener((View view)-> {
-
+            holder.file_img.setOnClickListener((View view)-> {
+                if(null != clickMore)
+                    clickMore.GoDetail();
             });
         }else {
             holder.file_img.setVisibility(View.GONE);

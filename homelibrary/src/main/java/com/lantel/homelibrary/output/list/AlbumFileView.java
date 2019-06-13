@@ -9,6 +9,7 @@ import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.adpter.AttachFileAdapter;
+import com.lantel.homelibrary.output.list.adpter.ClickMore;
 import com.lantel.homelibrary.output.list.adpter.FileTitleLoolUp;
 import com.lantel.homelibrary.output.list.adpter.ImagAdapter;
 import com.lantel.homelibrary.output.list.adpter.RemarkAdapter;
@@ -31,6 +32,11 @@ public class AlbumFileView extends LinearLayout {
     private RecyclerView img_list;
     private RecyclerView file_list;
     private ImagAdapter mImageAdapter;
+    private ClickMore clickMore;
+
+    public void setClickMore(ClickMore clickMore) {
+        this.clickMore = clickMore;
+    }
 
     public AlbumFileView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -43,11 +49,11 @@ public class AlbumFileView extends LinearLayout {
         img_list = findViewById(R.id.img_list);
         file_list = findViewById(R.id.file_list);
         remark_list = findViewById(R.id.remark_list);
-        mImageAdapter = new ImagAdapter(context,null,isDetail);
+        mImageAdapter = new ImagAdapter(context,null,isDetail,clickMore);
         img_list.setLayoutManager(new LinearLayoutManager(context));
         img_list.setAdapter(mImageAdapter);
 
-        mFileAdapter = new AttachFileAdapter(context, null,isDetail);
+        mFileAdapter = new AttachFileAdapter(context, null,isDetail,clickMore);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
         gridLayoutManager.setSpanSizeLookup(new FileTitleLoolUp(mFileAdapter));
         file_list.setLayoutManager(gridLayoutManager);

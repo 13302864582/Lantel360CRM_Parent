@@ -1,14 +1,19 @@
 package com.xiao360.baselibrary.util;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -400,5 +405,39 @@ public class DisplayUtil {
         }else {
             return String.format("%d B",size);
         }
+    }
+
+    /**
+     * 开启软键盘
+     */
+    public static void showSoft(final Activity context) {
+        Handler handle =new Handler();
+        handle.postDelayed(new Runnable() {
+        @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+         }, 100);
+    }
+
+    /**
+     * 关闭软键盘
+     *
+     * @param dialog
+     */
+    public static void dismissSofo(final Activity context, Dialog dialog) {
+        //针对dialog隐藏做一个监听  当dialog隐藏的时候 就关闭
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            InputMethodManager inputMgr = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            View v = context.getWindow().peekDecorView();
+            if (null != v) {
+                inputMgr.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+
+        }
+        });
     }
 }

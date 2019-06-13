@@ -137,21 +137,19 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
         BindAccountService service = Http.getInstance().createRequest(BindAccountService.class);
         SmsRequest request = new SmsRequest();
         request.setMobile(phone);
+        request.setType("change");
         service.sendVerifyCode(request)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
                 .subscribe(new BaseRxObserver<SmsBean>() {
                     @Override
                     public void onSuccess(SmsBean smsBean) {
-                        if(smsBean.getError()==0){
-                            ToastUitl.showShort(R.string.success_sms);
-                        }else
-                            ToastUitl.showShort(smsBean.getMessage());
+                        ToastUitl.showShort(smsBean.getData());
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
-                        ToastUitl.showShort(R.string.fail_sms);
+                        ToastUitl.showShort(R.string.net_error);
                     }
                 });
     }

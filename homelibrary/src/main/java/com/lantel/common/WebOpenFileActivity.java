@@ -27,7 +27,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 
 @Route(path = "/lantel/360/WebView")
-public class WebViewActivity extends BaseActivity implements TbsReaderView.ReaderCallback {
+public class WebOpenFileActivity extends BaseActivity implements TbsReaderView.ReaderCallback {
     private TbsReaderView mTbsReaderView;
     private ContentObserver mDownloadObserver;
     private DownloadManager mDownloadManager;

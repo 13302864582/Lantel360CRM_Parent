@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<TextView
+    android:padding="@dimen/back_padding"
+    android:gravity="center"
+    android:id="@+id/commit"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_margin="@dimen/list_margin"
+    android:text="@string/remark_commit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/remark_commit"
+    android:textColor="@color/remark_commit"/>
+
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/list_margin"
+        android:background="@drawable/btn_remark_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/commit"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintVertical_bias="1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dialog_remark">
+        <EditText
+            android:gravity="top"
+            android:hint="@string/write_remark"
+            android:background="@null"
+            android:id="@+id/remark_edit"
+            android:textSize="@dimen/remark_edit"
+            android:textColor="@color/black"
+            android:padding="@dimen/back_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

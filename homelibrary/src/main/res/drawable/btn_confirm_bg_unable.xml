@@ -2,7 +2,7 @@
 <shape xmlns:android = "http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <!--设置背景色-->
-    <solid android:color="#ff9c6b"/>
+    <solid android:color="@color/leave_btn_unselect"/>
     <!--设置圆角-->
     <corners android:radius="6dp"/>
 </shape>

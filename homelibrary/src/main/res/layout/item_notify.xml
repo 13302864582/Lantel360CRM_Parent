@@ -2,11 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
         android:id="@+id/title"
+        android:clickable="false"
         android:text="Title-1"
         style="@style/notify_title"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,6 +21,7 @@
         android:id="@+id/time"
         android:text="1分钟前"
         style="@style/notify_time"
+        android:clickable="false"
         app:layout_constraintBaseline_toBaselineOf="@id/title"
         app:layout_constraintLeft_toRightOf="@id/title"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,9 +30,7 @@
 
     <TextView
         android:id="@+id/content"
-        android:text="sssdsssssssssssssssssssssssssaadaaaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-        android:maxLines="2"
-        android:maxEms="12"
+        android:maxLines="3"
         android:ellipsize="end"
         android:textSize="@dimen/notify_content"
         android:textColor="@color/notify_content"

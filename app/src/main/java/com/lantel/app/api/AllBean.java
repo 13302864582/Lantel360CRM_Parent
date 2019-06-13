@@ -32,8 +32,17 @@ public class AllBean {
     }
 
     public static class DataBean {
-        List<ClassroomsBean> classrooms;
-        List<PublicSchoolsBean> public_schools;
+        private List<ClassroomsBean> classrooms;
+        private DictsBean dicts;
+        private List<PublicSchoolsBean> public_schools;
+
+        public DictsBean getDicts() {
+            return dicts;
+        }
+
+        public void setDicts(DictsBean dicts) {
+            this.dicts = dicts;
+        }
 
         public List<PublicSchoolsBean> getPublic_schools() {
             return public_schools;
@@ -90,6 +99,39 @@ public class AllBean {
 
             public void setSchool_name(String school_name) {
                 this.school_name = school_name;
+            }
+        }
+
+        public static class DictsBean {
+            private List<LeaveReasonBean> leave_reason;
+
+            public List<LeaveReasonBean> getLeave_reason() {
+                return leave_reason;
+            }
+
+            public void setLeave_reason(List<LeaveReasonBean> leave_reason) {
+                this.leave_reason = leave_reason;
+            }
+
+            public static class LeaveReasonBean {
+                private int did;
+                private String title;
+
+                public int getDid() {
+                    return did;
+                }
+
+                public void setDid(int did) {
+                    this.did = did;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
             }
         }
     }

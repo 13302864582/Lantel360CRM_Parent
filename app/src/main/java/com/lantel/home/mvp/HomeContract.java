@@ -1,6 +1,7 @@
 package com.lantel.home.mvp;
 
 import com.lantel.common.list.model.SimpleMenuModel;
+import com.lantel.home.api.HomeTopModel;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
 import com.xiao360.baselibrary.mvp.BaseView;
 
@@ -14,6 +15,7 @@ public interface HomeContract {
 
         void initMenuData(ArrayList<SimpleMenuModel> menu);
 
+        void updateTopView(HomeTopModel homeTopModel);
     }
 
     abstract class Presenter extends BaseFragmentPresenter<View, HomeModel> {

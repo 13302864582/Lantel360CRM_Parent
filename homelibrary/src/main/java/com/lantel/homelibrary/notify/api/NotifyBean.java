@@ -76,6 +76,15 @@ public class NotifyBean {
             private String title;
             private String desc;
             private String create_time;
+            private BroadcastPushBean broadcast_push;
+
+            public BroadcastPushBean getBroadcast_push() {
+                return broadcast_push;
+            }
+
+            public void setBroadcast_push(BroadcastPushBean broadcast_push) {
+                this.broadcast_push = broadcast_push;
+            }
 
             public String getTitle() {
                 return title;
@@ -99,6 +108,81 @@ public class NotifyBean {
 
             public void setCreate_time(String create_time) {
                 this.create_time = create_time;
+            }
+
+            public static class BroadcastPushBean {
+                private int bcp_id;
+                private int og_id;
+                private int bc_id;
+                private int eid;
+                private int sid;
+                private String read_time;
+                private String create_time;
+                private int create_uid;
+
+                public int getBcp_id() {
+                    return bcp_id;
+                }
+
+                public void setBcp_id(int bcp_id) {
+                    this.bcp_id = bcp_id;
+                }
+
+                public int getOg_id() {
+                    return og_id;
+                }
+
+                public void setOg_id(int og_id) {
+                    this.og_id = og_id;
+                }
+
+                public int getBc_id() {
+                    return bc_id;
+                }
+
+                public void setBc_id(int bc_id) {
+                    this.bc_id = bc_id;
+                }
+
+                public int getEid() {
+                    return eid;
+                }
+
+                public void setEid(int eid) {
+                    this.eid = eid;
+                }
+
+                public int getSid() {
+                    return sid;
+                }
+
+                public void setSid(int sid) {
+                    this.sid = sid;
+                }
+
+                public String getRead_time() {
+                    return read_time;
+                }
+
+                public void setRead_time(String read_time) {
+                    this.read_time = read_time;
+                }
+
+                public String getCreate_time() {
+                    return create_time;
+                }
+
+                public void setCreate_time(String create_time) {
+                    this.create_time = create_time;
+                }
+
+                public int getCreate_uid() {
+                    return create_uid;
+                }
+
+                public void setCreate_uid(int create_uid) {
+                    this.create_uid = create_uid;
+                }
             }
         }
     }

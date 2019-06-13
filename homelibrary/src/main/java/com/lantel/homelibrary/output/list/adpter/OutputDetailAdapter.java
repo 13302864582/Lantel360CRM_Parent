@@ -38,8 +38,6 @@ public class OutputDetailAdapter extends BaseRecyclerViewAdapter<CardOutputModel
         setText(model.getTitle(),cardOutputHolder.name);
         setText(model.getTime(),cardOutputHolder.time);
         setText(model.getContent(),cardOutputHolder.content);
-        setText(model.getClasses(),cardOutputHolder.text_classes);
-        setText(model.getAdress(),cardOutputHolder.text_adress);
         bindSupport(cardOutputHolder, model);
 
         if(null != model.getMap()){

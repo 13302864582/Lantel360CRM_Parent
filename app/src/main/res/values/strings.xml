@@ -75,4 +75,7 @@
     <string name="login_edit_password">请输入密码</string>
     <string name="empty_edit_login">账号或密码不能为空</string>
     <string name="set_password_hint">设置密码(至少8位,英文数字组合)</string>
+    <string name="regsist_now">立即注册</string>
+    <string name="reset_pwd">修改密码</string>
+    <string name="net_error">网络请求失败</string>
 </resources>

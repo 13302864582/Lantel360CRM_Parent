@@ -1,9 +1,9 @@
 package com.lantel.setting.bindAccount.api;
 
 public class SmsBean {
-    private String data;
     private int error;
     private String message;
+    private String data;
 
     public String getData() {
         return data;

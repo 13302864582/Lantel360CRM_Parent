@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.list.holder.SimpleMenuHolder;
 import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.setting.LogoutListener;
 import com.lantel.setting.list.holder.SettingHolder;
 import com.lantel.setting.list.model.SettingModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
@@ -19,14 +20,17 @@ import com.xiao360.baselibrary.util.SpCache;
 import java.util.List;
 
 public class SettingListApater extends BaseRecyclerViewAdapter<SettingModel> {
+    private LogoutListener listener;
+
     /**
      * 适配器构造
      *
      * @param context
      * @param datas
      */
-    public SettingListApater(Context context, List datas) {
+    public SettingListApater(Context context, List datas, LogoutListener logoutListener) {
         super(context, datas);
+        this.listener = logoutListener;
     }
 
     @Override
@@ -41,9 +45,8 @@ public class SettingListApater extends BaseRecyclerViewAdapter<SettingModel> {
         setText(data.getTitle(),menuHolder.title);
         menuHolder.exit_count.setVisibility(position==getItemCount()-1?View.VISIBLE:View.GONE);
         menuHolder.exit_count.setOnClickListener((View view)-> {
-            SpCache.putBoolean(Config.IS_LOGIN,false);
-            ARouter.getInstance().build("/lantelhome/360/login").navigation();
-            AppManager.getAppManager().finishAllActivity();
+            if(null != listener)
+                listener.logout();
         });
         if(!TextUtils.isEmpty(data.getVersion())){
             menuHolder.arrow.setVisibility(View.GONE);

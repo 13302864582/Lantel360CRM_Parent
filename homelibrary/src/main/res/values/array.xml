@@ -33,27 +33,24 @@
 
     <string-array name="bindaccount_menu_title">
         <item>@string/bind_phone</item>
-        <item>@string/bind_weibo</item>
+        <!--<item>@string/bind_weibo</item>
         <item>@string/bind_qq</item>
-        <item>@string/bind_weixin</item>
+        <item>@string/bind_weixin</item>-->
     </string-array>
 
     <string-array name="bindaccount_menu_flag">
         <item>BIND_PHONE</item>
-        <item>BIND_WEIBO</item>
+      <!--  <item>BIND_WEIBO</item>
         <item>BIND_QQ</item>
-        <item>BIND_WEIXIN</item>
+        <item>BIND_WEIXIN</item>-->
     </string-array>
 
     <integer-array name="bindaccount_menu_icon">
         <item>@mipmap/bind_phone</item>
-        <item>@mipmap/bind_weibo</item>
+      <!--  <item>@mipmap/bind_weibo</item>
         <item>@mipmap/bind_qq</item>
-        <item>@mipmap/bind_weixin</item>
+        <item>@mipmap/bind_weixin</item>-->
     </integer-array>
 
-    <string name="bind_phone">手机号</string>
-    <string name="bind_weibo">微博</string>
-    <string name="bind_qq">QQ</string>
-    <string name="bind_weixin">微信</string>
+
 </resources>

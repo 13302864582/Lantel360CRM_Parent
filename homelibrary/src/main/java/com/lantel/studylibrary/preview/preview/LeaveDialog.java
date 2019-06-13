@@ -2,18 +2,17 @@ package com.lantel.studylibrary.preview.preview;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BaseDialog;
-import com.lantel.common.VerificationCountDownTimer;
 import com.lantel.homelibrary.R;
-import com.lantel.setting.bindAccount.BindPhoneListener;
-import com.xiao360.baselibrary.util.ToastUitl;
+import com.lantel.studylibrary.preview.preview.list.LeaveListener;
+import com.lantel.studylibrary.preview.preview.list.adpter.LeaveAdapter;
+import com.xiao360.baselibrary.util.LogUtils;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +26,14 @@ public class LeaveDialog extends BaseDialog {
     private RecyclerView leave_list;
     private AppCompatButton confirm_btn;
     private CheckBox check;
+    private LeaveAdapter mLeaveAdapter;
+    private LeaveListener leaveListener;
 
-    public LeaveDialog(Context context,LeaveDialogBean bean) {
+    public void setLeaveListener(LeaveListener leaveListener) {
+        this.leaveListener = leaveListener;
+    }
+
+    public LeaveDialog(Context context, LeaveDialogBean bean) {
         super(context);
         this.context = context;
         this.data = bean;
@@ -51,19 +56,27 @@ public class LeaveDialog extends BaseDialog {
 
     @Override
     public void setUiBeforShow() {
+        teacher.setText(data.getTeacher());
+        time.setText(data.getTime());
+        leave_list.setLayoutManager(new LinearLayoutManager(context));
+        mLeaveAdapter = new LeaveAdapter(context,data.getLeaveType());
+        leave_list.setAdapter(mLeaveAdapter);
+
+        check.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b)-> {
+            confirm_btn.setEnabled(b);
+        });
+
         close.setOnClickListener((View view)-> {
             dismiss();
         });
 
         confirm_btn.setOnClickListener((View view)-> {
-            boolean isDecCourseTime = check.isChecked();
+            int is_consume = check.isChecked()?1:0;
+            int type = mLeaveAdapter.getType();
+            if(null != leaveListener){
+                leaveListener.leave(is_consume,type);
+            }
+            dismiss();
         });
-
-        teacher.setText(data.getTeacher());
-        time.setText(data.getTime());
-        leave_list.setLayoutManager(new LinearLayoutManager(context));
-        //leave_list.setAdapter();
     }
-
-
 }

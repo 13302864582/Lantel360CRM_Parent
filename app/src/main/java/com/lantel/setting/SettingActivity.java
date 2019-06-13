@@ -4,12 +4,25 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.Login.api.LoginService;
+import com.lantel.Login.api.LogoutBean;
+import com.lantel.common.HeaderUtil;
 import com.lantel.common.list.LineDecoration;
 import com.lantel.crmparent.BuildConfig;
 import com.lantel.crmparent.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.list.adpter.SettingListApater;
 import com.lantel.setting.list.model.SettingModel;
+import com.lantel.studylibrary.classes.api.ClassBean;
 import com.xiao360.baselibrary.base.BaseActivity;
+import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.util.AppManager;
+import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
+
 import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +31,7 @@ import butterknife.OnClick;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 @Route(path = "/lantelhome/360/SettingActivity")
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends BaseActivity implements LogoutListener{
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.setting_list)
@@ -37,8 +50,6 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        // 可在 App 运行时,随时切换 BaseUrl (指定了 Domain-Name header 的接口)
-        RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com");
         title.setText(R.string.setting);
         initMenuList();
     }
@@ -62,7 +73,7 @@ public class SettingActivity extends BaseActivity {
         menu.add(version);
         settingList.setLayoutManager(new LinearLayoutManager(this));
         settingList.addItemDecoration(new LineDecoration(this));
-        mAdapter = new SettingListApater(this,menu);
+        mAdapter = new SettingListApater(this,menu,this);
         settingList.setAdapter(mAdapter);
     }
 
@@ -73,5 +84,30 @@ public class SettingActivity extends BaseActivity {
                 finish();
           break;
         }
+    }
+
+    @Override
+    public void logout() {
+        LoginService loginService = Http.getInstance().createRequest(LoginService.class);
+        loginService.logout(HeaderUtil.getHeaderMap())
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<LogoutBean>() {
+                    @Override
+                    public void onSuccess(LogoutBean logoutBean) {
+                        ToastUitl.showShort(logoutBean.getMessage());
+                        if(logoutBean.getError()==0){
+                            SpCache.putBoolean(Config.IS_LOGIN,false);
+                            ARouter.getInstance().build("/lantelhome/360/login").navigation();
+                            AppManager.getAppManager().finishAllActivity();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(R.string.net_error);
+                    }
+                });
+
     }
 }

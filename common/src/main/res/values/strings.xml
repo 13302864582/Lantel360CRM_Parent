@@ -50,4 +50,5 @@
     <string name="fail_sms">发送失败</string>
     <string name="fail_bind">绑定失败</string>
     <string name="success_sms">发送成功</string>
+    <string name="success_leave">请假成功</string>
 </resources>

@@ -34,6 +34,10 @@
         <activity android:name="com.lantel.mine.ChangeAccountActivity"/>
 
         <activity android:name="com.lantel.Login.LoginUserActivity"/>
+
+        <activity android:name="com.lantel.Login.ForgetPassActivity"/>
+
+        <activity android:name="com.lantel.Login.api.ForgetPassActivitySpecial"/>
     </application>
 
 </manifest>

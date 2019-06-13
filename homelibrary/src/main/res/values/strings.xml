@@ -18,6 +18,8 @@
     <string name="output">作品</string>
     <string name="share">分享</string>
     <string name="remark">评论</string>
+    <string name="write_remark">写评论...</string>
+    <string name="empty_remark">请填写评论内容...</string>
     <string name="support">点赞</string>
     <string name="chageHead">更换头像</string>
     <string name="name">昵称</string>
@@ -93,6 +95,7 @@
     <string name="un_pay">未付款</string>
     <string name="part_pay">部分付款</string>
     <string name="success_pay">交易成功</string>
+    <string name="success_regsist">注册成功</string>
     <string name="order_end_title">共计金额:</string>
     <string name="origin_price">商品原价</string>
     <string name="price">商品折后价</string>
@@ -134,4 +137,17 @@
     <string name="verify_hint">请输入验证码</string>
     <string name="open_file_fail">不支持此类型文件</string>
     <string name="leave_dec_time">当前请假需要正常扣除课时</string>
+    <string name="remark_commit">发送</string>
+    <string name="content_detail">内容详情</string>
+    <string name="homework">作业</string>
+    <string name="classtitle">班</string>
+    <string name="unfinish">去完成</string>
+    <string name="finished">已上传</string>
+    <string name="net_error">网络请求失败</string>
+    <string name="success_setpass">密码修改成功</string>
+
+    <string name="bind_phone">手机号</string>
+    <string name="bind_weibo">微博</string>
+    <string name="bind_qq">QQ</string>
+    <string name="bind_weixin">微信</string>
 </resources>

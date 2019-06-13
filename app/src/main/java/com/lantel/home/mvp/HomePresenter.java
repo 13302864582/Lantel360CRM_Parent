@@ -4,9 +4,16 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
 import com.lantel.common.GlideImageLoader;
+import com.lantel.common.HeaderUtil;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
+import com.lantel.home.api.HomeBean;
+import com.lantel.home.api.HomeService;
+import com.lantel.home.api.HomeTopModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.youth.banner.Banner;
 
@@ -66,4 +73,33 @@ public class HomePresenter extends HomeContract.Presenter{
         mView.initMenuData(menu);
     }
 
+    public void laodHomeTop() {
+        HomeService homeService = Http.getInstance().createRequest(HomeService.class);
+        homeService.getHomeData(HeaderUtil.getHeaderMap())
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<HomeBean>() {
+                    @Override
+                    public void onSuccess(HomeBean homeBean) {
+                        int error = homeBean.getError();
+                        if(error == 0){
+                            HomeTopModel homeTopModel = new HomeTopModel();
+                            HomeBean.DataBean dataBean = homeBean.getData();
+                            if (null != dataBean) {
+                                homeTopModel.setOrg_name(dataBean.getOrg_name());
+                                homeTopModel.setBranch_address(dataBean.getBranch_address());
+                                homeTopModel.setBranch_name(dataBean.getBranch_name());
+                                homeTopModel.setBranch_tel(dataBean.getBranch_tel());
+                                homeTopModel.setRecommend_cover(dataBean.getRecommend_cover());
+                            }
+                            mView.updateTopView(homeTopModel);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
+    }
 }

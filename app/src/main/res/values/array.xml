@@ -122,7 +122,7 @@
     <!--模块：我的   菜单标题-->
     <string-array name="setting_menu_title">
         <item>@string/setting_Personal</item>
-        <item>@string/setting_BindFile</item>
+       <!-- <item>@string/setting_BindFile</item>-->
         <item>@string/setting_BindAccount</item>
         <item>@string/setting_EditPasswrod</item>
         <item>@string/setting_AboutUs</item>
@@ -131,7 +131,7 @@
     <!--模块：我的   菜单跳转的路径-->
     <string-array name="setting_menu_router_path">
         <item>@string/setting_Personal_path</item>
-        <item>@string/setting_BindFile_path</item>
+       <!-- <item>@string/setting_BindFile_path</item>-->
         <item>@string/setting_BindAccount_path</item>
         <item>@string/setting_EditPasswrod_path</item>
         <item>@string/setting_AboutUs_path</item>

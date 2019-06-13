@@ -19,7 +19,7 @@ import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel> {
+public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
 
     public OutputAdapter(Context context, List<CardOutputModel> datas) {
         super(context, datas);
@@ -38,12 +38,16 @@ public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel> {
         setText(model.getTitle(),cardOutputHolder.name);
         setText(model.getTime(),cardOutputHolder.time);
         setText(model.getContent(),cardOutputHolder.content);
-       /* setText(model.getClasses(),cardOutputHolder.text_classes);
-        setText(model.getAdress(),cardOutputHolder.text_adress);*/
         bindSupport(cardOutputHolder, model);
 
         if(null != model.getMap()){
             ArrayList<MediaModel> imgList = model.getMap().get(Config.IMG_LIST);
+            cardOutputHolder.album_file_list.setClickMore(new ClickMore() {
+                @Override
+                public void GoDetail() {
+                    gotoDetail(model,false);
+                }
+            });
             cardOutputHolder.album_file_list.bindImageList(imgList);
 
             ArrayList<MediaModel> fileList = model.getMap().get(Config.FILE_LIST);
@@ -52,9 +56,17 @@ public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel> {
         }
 
         cardOutputHolder.card_ConstraintLayout.setOnClickListener((view -> {
-            String json = new Gson().toJson(model);
-            ARouter.getInstance().build("/lantel/360/output/detail").withString("data",json).navigation();
+            gotoDetail(model,false);
         }));
+
+        cardOutputHolder.remark_img.setOnClickListener((View view)-> {
+            gotoDetail(model,true);
+        });
+    }
+
+    private void gotoDetail(CardOutputModel model,boolean isCkickRemark) {
+        String json = new Gson().toJson(model);
+        ARouter.getInstance().build("/lantel/360/output/detail").withString("data",json).withBoolean(Config.IS_REMARK,isCkickRemark).navigation();
     }
 
     private void bindSupport(CardOutputHolder cardOutputHolder, CardOutputModel model) {

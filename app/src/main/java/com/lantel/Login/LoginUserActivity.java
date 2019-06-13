@@ -18,7 +18,6 @@ import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseRxObserver;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
 
@@ -27,7 +26,6 @@ import java.util.List;
 import androidx.appcompat.widget.AppCompatButton;
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 @Route(path = "/lantelhome/360/login")
 public class LoginUserActivity extends BaseActivity {
@@ -46,7 +44,7 @@ public class LoginUserActivity extends BaseActivity {
 
     @Override
     protected int getStateBarviewID() {
-        return com.lantel.homelibrary.R.id.statebarView;
+        return -1;
     }
 
     @Override
@@ -67,7 +65,7 @@ public class LoginUserActivity extends BaseActivity {
         loginEditPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
     }
 
-    @OnClick({R.id.see, R.id.login_btn})
+    @OnClick({R.id.see, R.id.login_btn,R.id.login_forgetPassWord,R.id.login_regsist})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.see:
@@ -89,8 +87,6 @@ public class LoginUserActivity extends BaseActivity {
                 if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
                     ToastUitl.showShort(R.string.empty_edit_login);
                 } else {
-                    // 可在 App 运行时,随时切换 BaseUrl (指定了 Domain-Name header 的接口)
-                    RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com");
                     LoginService loginService = Http.getInstance().createRequest(LoginService.class);
                     String url = "signin?account="+account+"&password="+password;
                     loginService.login(url)
@@ -140,11 +136,18 @@ public class LoginUserActivity extends BaseActivity {
 
                                 @Override
                                 public void onFailure(Throwable e) {
-                                    LogUtils.e("login===" + e.getMessage());
                                     ToastUitl.showShort(R.string.fail_login);
                                 }
                             });
                 }
+                break;
+            case R.id.login_forgetPassWord:
+                //ARouter.getInstance().build("/lantelhome/360/forgetOrRegsist").withString(Config.FORGET_BUSSNESS_TYPE,Config.RESETPWD).navigation();
+                ARouter.getInstance().build("/lantelhome/360/forgetpwd").navigation();
+                break;
+
+            case R.id.login_regsist:
+                //ARouter.getInstance().build("/lantelhome/360/forgetOrRegsist").withString(Config.FORGET_BUSSNESS_TYPE,Config.SIGNUP).navigation();
                 break;
         }
     }
