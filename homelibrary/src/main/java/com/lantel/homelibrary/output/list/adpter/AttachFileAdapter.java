@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
@@ -79,6 +81,10 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
             setText(data.getFile_name(),holder.fileName);
             setText(DisplayUtil.byteToMB(data.getFile_size()),holder.fileSize);
             holder.download_lay.setVisibility(View.VISIBLE);
+            holder.itemView.setOnClickListener((View view)-> {
+                if(viewType == Config.FILE)
+                ARouter.getInstance().build("/lantel/360/WebView").withString(Config.FILE_URL,data.getFile_url()).navigation();
+            });
         }
     }
 

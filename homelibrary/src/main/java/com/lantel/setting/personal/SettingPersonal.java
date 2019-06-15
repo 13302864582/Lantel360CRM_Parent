@@ -16,9 +16,6 @@ public class SettingPersonal extends FragmentActivity {
     @Override
     protected Fragment getFragment() {
         SettingPersonFragment fragment = new SettingPersonFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(Config.JSON_PERSON,getIntent().getStringExtra(Config.JSON_PERSON));
-        fragment.setArguments(bundle);
         return fragment;
     }
 }

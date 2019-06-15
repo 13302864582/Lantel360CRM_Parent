@@ -1,25 +1,30 @@
 package com.lantel.homelibrary.homework.list.model;
 
-import com.lantel.studylibrary.preview.preview.list.model.AttachFile;
 import com.xiao360.baselibrary.base.BaseModel;
-
-import java.util.List;
 
 public class HomeWorkItemModel extends BaseModel {
     private String teacher;
     private String classes;
-    private boolean isFinish;
+    private int state;
     private String imgUrl;
     private String startTime;
     private String endTime;
-    private List<AttachFile> attachFiles;
+    private int ht_id;
 
-    public List<AttachFile> getAttachFiles() {
-        return attachFiles;
+    public int getHt_id() {
+        return ht_id;
     }
 
-    public void setAttachFiles(List<AttachFile> attachFiles) {
-        this.attachFiles = attachFiles;
+    public void setHt_id(int ht_id) {
+        this.ht_id = ht_id;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getTeacher() {
@@ -36,14 +41,6 @@ public class HomeWorkItemModel extends BaseModel {
 
     public void setClasses(String classes) {
         this.classes = classes;
-    }
-
-    public boolean isFinish() {
-        return isFinish;
-    }
-
-    public void setFinish(boolean finish) {
-        isFinish = finish;
     }
 
     public String getImgUrl() {

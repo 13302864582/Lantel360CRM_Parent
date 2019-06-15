@@ -51,9 +51,6 @@ public class SettingListApater extends BaseRecyclerViewAdapter<SettingModel> {
             setText(data.getVersion(),menuHolder.text_right);
         }else
         menuHolder.itemView.setOnClickListener((View view)->{
-            if(null != listener && position == 0){
-                listener.navigatePerson();
-            }else
             ARouter.getInstance().build(data.getRouterpath()).navigation();
         });
     }

@@ -149,4 +149,5 @@
     <dimen name="homewrok_text_time">9sp</dimen>
     <dimen name="homewrok_text_finish">13sp</dimen>
     <dimen name="homewrok_classes_padding">2dp</dimen>
+    <dimen name="homework_img">50dp</dimen>
 </resources>

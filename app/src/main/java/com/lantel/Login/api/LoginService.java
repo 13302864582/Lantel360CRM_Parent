@@ -12,6 +12,7 @@ import retrofit2.http.Url;
 public interface LoginService {
     @GET
     Observable<LoginBean> login(@Url String url);
+
     @GET("logout")
     Observable<LogoutBean> logout(@HeaderMap Map<String, String> headers);
 

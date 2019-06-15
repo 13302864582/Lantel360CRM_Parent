@@ -239,4 +239,6 @@ public class PhotoUtil {
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
         return bitmap;
     }
+
+
 }

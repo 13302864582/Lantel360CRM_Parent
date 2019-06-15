@@ -8,6 +8,7 @@ import com.httpsdk.http.Constans;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.LogInterceptor;
 import com.lantel.common.ClassRoom;
+import com.lantel.common.Lesson;
 import com.lantel.common.SchoolArea;
 import com.mob.MobSDK;
 import com.tencent.smtt.sdk.QbSdk;
@@ -25,9 +26,18 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
 public class MyApplication extends BaseApplication {
-    List<ClassRoom> classRoom;
-    List<SchoolArea> schoolAreas;
+    private List<ClassRoom> classRoom;
+    private List<SchoolArea> schoolAreas;
     private List<BaseModel> leaveTypes;
+    private List<Lesson> lessonList;
+
+    public List<Lesson> getLessonList() {
+        return lessonList;
+    }
+
+    public void setLessonList(List<Lesson> lessonList) {
+        this.lessonList = lessonList;
+    }
 
     public List<SchoolArea> getSchoolAreas() {
         return schoolAreas;

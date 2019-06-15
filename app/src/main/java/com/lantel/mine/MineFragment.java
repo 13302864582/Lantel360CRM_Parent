@@ -68,7 +68,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     private mineCardListApater mCardListApater;
     private mineMenuListApater mMenuListApater;
-    private PersonBean personBean;
     private List<MineCardBean.DataBean.ListBean> mCardList;
     private int mPosition = -1;
 
@@ -83,7 +82,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
         for(int i = 0;i < mCardList.size();i++){
             MineCardBean.DataBean.ListBean bean = mCardList.get(i);
             if(bean.getSid().equals(sid)){
-
                 mPosition = i;
                 mineName.setText(bean.getStudent_name());
                 mineCall.setText(bean.getNick_name());
@@ -92,12 +90,6 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
                 Date date = DisplayUtil.formatIntDay("yyyy-MM-dd",bean.getBirth_time());
                 if(null!=date)
                 mineAge.setText(DisplayUtil.getAge(date,getContext())+getString(R.string.year_old));
-
-                personBean = new PersonBean();
-                personBean.setHeadImg(photoUrl);
-                personBean.setBirthDate(bean.getBirth_time());
-                personBean.setName(bean.getStudent_name());
-                personBean.setSex(bean.getSex());
 
                 mineStudentId.setText(getString(R.string.sno)+bean.getSno());
                 mineCardId.setText(getString(R.string.card_sno)+bean.getCard_no());
@@ -255,7 +247,7 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.top_img_right) {
-            ARouter.getInstance().build("/lantelhome/360/SettingActivity").withString(Config.JSON_PERSON,new Gson().toJson(personBean)).navigation();
+            ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
         }else if(id == R.id.mine_change || id == R.id.add_account){
             if(null != mCardList && mCardList.size()!=0){
                 Gson gson =new Gson();

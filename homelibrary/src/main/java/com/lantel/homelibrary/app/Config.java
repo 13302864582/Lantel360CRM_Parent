@@ -97,4 +97,5 @@ public class Config {
     public static final String SIGNUP = "signup";
     public static final String RESETPWD = "resetpwd";
     public static final String USER_RESETPWD = "user_resetpwd";
+    public static final String BUSINESS_ID = "BUSINESS_ID";
 }

@@ -150,4 +150,11 @@
     <string name="bind_weibo">微博</string>
     <string name="bind_qq">QQ</string>
     <string name="bind_weixin">微信</string>
+    <string name="upload_error">上传失败</string>
+    <string name="upload_success">上传成功</string>
+
+    <string name="publish_time_format">发布时间: %1$s</string>
+    <string name="deadline_time_format">截止时间: %1$s</string>
+    <string name="homeworktitle">作</string>
+    <string name="title_homework_detail">作业详情</string>
 </resources>

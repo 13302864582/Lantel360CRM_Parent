@@ -14,7 +14,7 @@
         </RelativeLayout>
 
         <include layout="@layout/loading"
-            android:visibility="gone"/>
+            />
     </FrameLayout>
 </LinearLayout>
 

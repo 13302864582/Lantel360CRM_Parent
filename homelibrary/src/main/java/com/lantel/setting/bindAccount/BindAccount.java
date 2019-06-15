@@ -160,7 +160,7 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
         BindPhoneReqBean bindPhoneReqBean = new BindPhoneReqBean();
         bindPhoneReqBean.setMobile(phone);
         bindPhoneReqBean.setVcode(verifyCode);
-        service.bindPhoto(HeaderUtil.getHeaderMap(),bindPhoneReqBean)
+        service.bindPhoto(HeaderUtil.getJsonHeaderMap(),bindPhoneReqBean)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
                 .subscribe(new BaseRxObserver<BindPhoneBean>() {

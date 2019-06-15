@@ -48,7 +48,7 @@ public class SettingPersonPresenter extends SettingPersonContract.Presenter {
 
     public void initMenu(PersonBean personBean) {
         //添加菜单数据
-        ArrayList<BaseModel> menu = new ArrayList<>();
+        ArrayList<SettingPersonItemModel> menu = new ArrayList<>();
         SettingPersonItemModel model1 = new SettingPersonItemModel();
         model1.setType(Config.TYPE_EDIT_TEXT);
         model1.setTitle(context.getString(R.string.name));
@@ -58,7 +58,9 @@ public class SettingPersonPresenter extends SettingPersonContract.Presenter {
         SettingPersonItemModel model2 = new SettingPersonItemModel();
         model2.setType(Config.TYPE_SELECT_TEXT);
         model2.setTitle(context.getString(R.string.sex));
-        model2.setValue(sex[Integer.valueOf(personBean.getSex())]);
+        int index = Integer.valueOf(personBean.getSex())-1;
+        model2.setValue(sex[index]);
+        model2.setIndex(index);
         model2.setStrs(sex);
 
         SettingPersonItemModel model3 = new SettingPersonItemModel();

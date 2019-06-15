@@ -8,6 +8,24 @@ public class HomeTopModel extends BaseModel {
     private String branch_address;
     private String branch_tel;
     private String recommend_cover;
+    private String student_name;
+    private String student_img;
+
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
+    public String getStudent_img() {
+        return student_img;
+    }
+
+    public void setStudent_img(String student_img) {
+        this.student_img = student_img;
+    }
 
     public String getOrg_name() {
         return org_name;

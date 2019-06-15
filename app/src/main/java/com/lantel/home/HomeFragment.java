@@ -23,6 +23,7 @@ import com.youth.banner.Banner;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
+
 import java.util.ArrayList;
 import java.util.List;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,8 +31,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import ezy.ui.view.NoticeView;
 
-public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener {
+public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener{
     @BindView(R.id.statebarView)
     View statebarView;
     @BindView(R.id.top_img_left_user)
@@ -65,17 +67,11 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     @BindView(R.id.banner)
     Banner banner;
 
+    @BindView(R.id.notice)
+    NoticeView notice;
+
+
     private HomeMenuListApater mHomeMenuAdapter;
-
-    @Override
-    public void notifyMenuData(ArrayList<SimpleMenuModel> list) {
-
-    }
-
-    @Override
-    public void loadCircleHeadImage(String url) {
-
-    }
 
     @Override
     public void initMenuData(ArrayList<SimpleMenuModel> menu) {
@@ -91,7 +87,18 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         phoneText.setText(homeTopModel.getBranch_tel());
         schoolArea.setText(homeTopModel.getBranch_name());
         locationText.setText(homeTopModel.getBranch_address());
+        username.setText(homeTopModel.getStudent_name());
+        GlideUtils.loadCircle(getContext(),homeTopModel.getStudent_img(),topImgLeftUser);
         GlideUtils.loadImageView(getContext(),homeTopModel.getRecommend_cover(),logo);
+        LogUtils.d("getRecommend_cover===="+homeTopModel.getRecommend_cover());
+    }
+
+    @Override
+    public void setNotifyText(List<String> list) {
+        notice.start(list);
+        notice.setOnClickListener((View v)-> {
+                ARouter.getInstance().build("/lantel/360/notify").navigation();
+        });
     }
 
     @Override
@@ -118,6 +125,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     protected void initView() {
         mPresenter.initMenu();
         mPresenter.laodHomeTop();
+        mPresenter.laodNotifyText();
         initBanner();
     }
 
@@ -136,18 +144,15 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         ARouter.getInstance().build(path).navigation();
     }
 
-    @OnClick({R.id.top_img_left_user, R.id.username, R.id.arrow_user, R.id.top_img_right_notify, R.id.top_img_right_scan, R.id.phone_img, R.id.phone_text, R.id.home_arrow_ad, R.id.banner,R.id.home_more_ad})
+    @OnClick({R.id.top_img_left_user, R.id.username, R.id.arrow_user, R.id.top_img_right_notify, R.id.top_img_right_scan, R.id.phone_img, R.id.phone_text})
     public void onViewClicked(View view) {
         int id = view.getId();
         if(id == R.id.top_img_right_notify){
+            ARouter.getInstance().build("/lantel/360/message").navigation();
             LogUtils.d("onViewClicked===notify");
         }
         else if(id == R.id.top_img_right_scan){
-            LogUtils.d("onViewClicked===scan");
             navigateScan();
-        }
-        else if(id == R.id.home_arrow_ad || id == R.id.banner || id == R.id.home_more_ad){
-            LogUtils.d("onViewClicked===ad");
         }
         else if(id == R.id.phone_img || id == R.id.phone_text){
             LogUtils.d("onViewClicked===phone");

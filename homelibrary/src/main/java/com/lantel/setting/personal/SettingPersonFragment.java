@@ -4,28 +4,44 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.google.gson.Gson;
+
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.common.PhotoSelectListener;
 import com.lantel.common.PopUtil;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.setting.bindfile.bindstudent.api.BindStudentBean;
+import com.lantel.setting.bindfile.bindstudent.api.BindStudentService;
+import com.lantel.setting.personal.api.UploadBean;
+import com.lantel.setting.personal.api.UploadReq;
+import com.lantel.setting.personal.api.UploadResultBean;
+import com.lantel.setting.personal.api.UploadService;
 import com.lantel.setting.personal.list.adpter.SettingPersonAdapter;
+import com.lantel.setting.personal.list.model.SettingPersonItemModel;
 import com.lantel.setting.personal.mvp.SettingPersonContract;
 import com.lantel.setting.personal.mvp.SettingPersonModel;
 import com.lantel.setting.personal.mvp.SettingPersonPresenter;
+import com.ldoublem.loadingviewlib.view.LVFunnyBar;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UploadManager;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
-import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.image.GlideUtils;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.PhotoUtil;
-import java.io.IOException;
-import java.net.URI;
+import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
+import org.json.JSONObject;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -40,9 +56,17 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     TextView title;
     @BindView(R2.id.text_right)
     TextView textRight;
+    @BindView(R2.id.progress_bar)
+    LVFunnyBar progressBar;
+    @BindView(R2.id.progress_text)
+    TextView progressText;
+    @BindView(R2.id.progress_lay)
+    ConstraintLayout progressLay;
 
     private SettingPersonAdapter mAdapter;
     private Uri photoUrl;
+    private String photoPath;
+    private String studentName;
 
     @Override
     protected int getStateBarviewID() {
@@ -67,15 +91,40 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     @Override
     protected void initView() {
         textRight.setText(R.string.finish);
-        if(null != getArguments()){
-            String json = getArguments().getString(Config.JSON_PERSON);
-            if(null != json){
-                Gson gson = new Gson();
-                PersonBean personBean = gson.fromJson(json,PersonBean.class);
-                mPresenter.initMenu(personBean);
-                GlideUtils.loadCircle(getContext(),personBean.getHeadImg(),headImg);
-            }
-        }
+        BindStudentService service = Http.getInstance().createRequest(BindStudentService.class);
+        service.getAccountData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,""))
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<BindStudentBean>() {
+                    @Override
+                    public void onSuccess(BindStudentBean studentBean) {
+                        if(studentBean.getError()==0){
+                            BindStudentBean.DataBean dataBean = studentBean.getData();
+                            if(null != dataBean && null != dataBean.getList()){
+                                String sid = SpCache.getString(Config.SID,"");
+                                List<BindStudentBean.DataBean.ListBean> listBeans = dataBean.getList();
+                                for(int i = 0;i < listBeans.size();i++){
+                                    BindStudentBean.DataBean.ListBean bean = listBeans.get(i);
+                                    if(String.valueOf(bean.getSid()).equals(sid)){
+                                        photoPath = bean.getPhoto_url();
+                                        studentName = bean.getStudent_name();
+                                        GlideUtils.loadCircle(getContext(),photoPath, headImg);
+                                        PersonBean personBean = new PersonBean();
+                                        personBean.setBirthDate(bean.getBirth_time());
+                                        personBean.setName(studentName);
+                                        personBean.setSex(bean.getSex());
+                                        mPresenter.initMenu(personBean);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
     }
 
     @OnClick({R2.id.headImg, R2.id.chageHead, R2.id.back, R2.id.text_right})
@@ -87,16 +136,47 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
         } else if (id == R.id.back) {
             getActivity().finish();
         } else if (id == R.id.text_right) {
-            commitRequest();
+            upLoadHeadImg();
         }
     }
 
     private void commitRequest() {
+        if(!TextUtils.isEmpty(studentName)){
+            UploadService uploadService = Http.getInstance().createRequest(UploadService.class);
+            String sid = SpCache.getString(Config.SID,"");
+            List<SettingPersonItemModel> models = mAdapter.getDatas();
+            String sex = (models.get(1).getIndex()+1)+"";
+            String date = models.get(2).getValue()+"";
+            UploadReq uploadReq = new UploadReq();
+            uploadReq.setSex(sex);
+            uploadReq.setPhoto_url(photoPath);
+            uploadReq.setBirth_time(date);
+            uploadReq.setSid(Integer.valueOf(sid));
+            uploadReq.setStudent_name(studentName);
+            uploadService.commitUpload(HeaderUtil.getHeaderMap(),uploadReq)
+                    .compose(RxHelper.io_main())
+                    .compose(bindToLifecycle())
+                    .subscribe(new BaseRxObserver<UploadResultBean>() {
+                        @Override
+                        public void onSuccess(UploadResultBean resultBean) {
+                            progressBar.stopAnim();
+                            progressLay.setVisibility(View.GONE);
+                            ToastUitl.showShort(R.string.upload_success);
+                            getActivity().finish();
+                        }
 
+                        @Override
+                        public void onFailure(Throwable e) {
+                            progressBar.stopAnim();
+                            progressLay.setVisibility(View.GONE);
+                            ToastUitl.showShort(R.string.net_error);
+                        }
+                    });
+        }
     }
 
     @Override
-    public void initList(ArrayList<BaseModel> menu) {
+    public void initList(ArrayList<SettingPersonItemModel> menu) {
         settingPersonalList.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new SettingPersonAdapter(getContext(), menu);
         mAdapter.setListener(this);
@@ -109,44 +189,79 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case Config.REQUEST_EDIT_TEXT:
-                    mAdapter.notifyValue(data.getStringExtra(Config.EDIT_TEXT_RESULT));
+                    //mAdapter.notifyValue(data.getStringExtra(Config.EDIT_TEXT_RESULT), options1);
                     break;
                 case Config.REQUEST_TAKE_PHOTO:
-                    upDateHeadImg();
-                    setHeadImg(photoUrl);
+                    setupIMg(photoUrl);
                     break;
                 case Config.REQUEST_SELECT_PHOTO:
-                    Bitmap bitmap = null;
-                    try {
-                        bitmap = PhotoUtil.getBitmapFormUri(getContext(), data.getData());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        LogUtils.d("REQUEST_SELECT_PHOTO==IOException==" + data.getData().toString());
-                    }
-                    headImg.setImageBitmap(bitmap);
+                    photoUrl=data.getData();
+                    setupIMg(photoUrl);
                     break;
             }
         }
     }
 
-    //上传头像
-    private void upDateHeadImg() {
-
-    }
-
-    private void setHeadImg(Uri uri) {
+    private void setupIMg(Uri uri) {
         try {
             Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), uri);
             headImg.setImageBitmap(bitmap);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.d("REQUEST_TAKE_PHOTO===IOException==" + e.getMessage());
         }
     }
 
+    //上传头像
+    private void upLoadHeadImg() {
+        if (null != photoUrl) {
+            UploadService uploadService = Http.getInstance().createRequest(UploadService.class);
+            uploadService.getUploadData(HeaderUtil.getHeaderMap(), "http://dev.xiao360.com/api/upload")
+                    .compose(RxHelper.io_main())
+                    .compose(bindToLifecycle())
+                    .subscribe(new BaseRxObserver<UploadBean>() {
+                        @Override
+                        public void onSuccess(UploadBean uploadBean) {
+                            try {
+                                progressLay.setVisibility(View.VISIBLE);
+                                progressBar.startAnim();
+                                Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), photoUrl);
+                                String filePath = PhotoUtil.getRealPathFromUri(getContext(), photoUrl);
+                                String filekey = uploadBean.getPrefix() + filePath.substring(filePath.lastIndexOf("/") + 1);
+                                // 重用uploadManager。一般地，只需要创建一个uploadManager对象
+                                UploadManager uploadManager = new UploadManager();
+                                uploadManager.put(Bitmap2Bytes(bitmap), filekey, uploadBean.getUptoken(), (String key, ResponseInfo info, JSONObject response) -> {
+                                    if (info.isOK()) {
+                                        photoPath = uploadBean.getDomain() + key;
+                                    }
+                                    commitRequest();
+                                }, null);
+                            } catch (Exception e) {
+                                progressBar.stopAnim();
+                                progressLay.setVisibility(View.GONE);
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable e) {
+                            ToastUitl.showShort(R.string.net_error);
+                        }
+                    });
+        }else
+            commitRequest();
+    }
+
+    public byte[] Bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+
     @Override
     public void editText(String editText) {
-        ARouter.getInstance().build("/lantel/360/EditText").withString(Config.EDIT_TEXT, editText).navigation(getActivity(), Config.TYPE_EDIT_TEXT);
+       // ARouter.getInstance().build("/lantel/360/EditText").withString(Config.EDIT_TEXT, editText).navigation(getActivity(), Config.TYPE_EDIT_TEXT);
     }
 
     @Override

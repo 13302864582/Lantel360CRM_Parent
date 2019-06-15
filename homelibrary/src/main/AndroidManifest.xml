@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
+    <!--DownloadManager下载时不显示Notification-->
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <!--DownloadManager-->
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
 
     <application
         android:allowBackup="true"
@@ -81,5 +85,7 @@
         <activity android:name=".homework.HomeWorkDetailActivity"/>
 
         <activity android:name="com.lantel.common.WebActivity"/>
+
+        <activity android:name=".message.MessageActivity"/>
     </application>
 </manifest>

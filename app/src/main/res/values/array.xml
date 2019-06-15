@@ -40,7 +40,7 @@
         <item>@string/home_attence</item>
         <item>@string/home_homework</item>
         <item>@string/home_assessment</item>
-        <item>@string/home_book</item>
+        <item>@string/home_communicate</item>
         <item>@string/home_notify</item>
         <item>@string/home_output</item>
         <item>@string/home_credit</item>
@@ -52,7 +52,7 @@
         <item>@string/home_attence_path</item>
         <item>@string/home_homework_path</item>
         <item>@string/home_assessment_path</item>
-        <item>@string/home_book_path</item>
+        <item>@string/home_communicate_path</item>
         <item>@string/home_notify_path</item>
         <item>@string/home_output_path</item>
         <item>@string/home_credit_path</item>
@@ -64,7 +64,7 @@
         <item>@mipmap/attence</item>
         <item>@mipmap/homework</item>
         <item>@mipmap/assessment</item>
-        <item>@mipmap/book</item>
+        <item>@mipmap/home_commnicate</item>
         <item>@mipmap/notify</item>
         <item>@mipmap/output</item>
         <item>@mipmap/credit</item>
@@ -77,7 +77,7 @@
         <item>@string/study_course</item>
         <item>@string/study_class</item>
         <item>@string/study_preview</item>
-        <item>@string/study_appointment</item>
+        <!--<item>@string/study_appointment</item>-->
     </string-array>
 
     <!--模块：学习   菜单跳转的路径-->
@@ -85,7 +85,7 @@
         <item>@string/study_course_path</item>
         <item>@string/study_class_path</item>
         <item>@string/study_preview_path</item>
-        <item>@string/study_appointment_path</item>
+        <!--<item>@string/study_appointment_path</item>-->
     </string-array>
 
     <!--模块：学习   菜单图标-->
@@ -93,7 +93,7 @@
         <item>@mipmap/study_course</item>
         <item>@mipmap/study_class</item>
         <item>@mipmap/study_preview</item>
-        <item>@mipmap/study_appointment</item>
+      <!--  <item>@mipmap/study_appointment</item>-->
     </integer-array>
     <!--===========================================================成长================================================================-->
     <!--模块：成长   菜单标题-->
@@ -143,4 +143,5 @@
         <item>@mipmap/splash_3</item>
         <item>@mipmap/splash_4</item>
     </integer-array>
+
 </resources>

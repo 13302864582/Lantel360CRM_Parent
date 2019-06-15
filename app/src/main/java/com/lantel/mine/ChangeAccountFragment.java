@@ -1,18 +1,24 @@
 package com.lantel.mine;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
 import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.mine.api.ChangeAccountListener;
+import com.lantel.mine.api.MineCardBean;
+import com.lantel.mine.api.MineCardService;
 import com.lantel.mine.list.adpter.ChangeAcountAdapter;
 import com.lantel.mine.list.model.ChangeAccountBean;
 import com.lantel.mine.mvp.ChangeAccountModel;
+import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.base.NormalListFragment;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.ArrayList;
@@ -21,7 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ChangeAccountFragment extends NormalListFragment {
+public class ChangeAccountFragment extends NormalListFragment implements ChangeAccountListener {
     private ChangeAccountModel model;
     private ArrayList<ChangeAccountBean> changeAccountBeans;
 
@@ -60,7 +66,7 @@ public class ChangeAccountFragment extends NormalListFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new ChangeAcountAdapter(getContext(),null);
+        return new ChangeAcountAdapter(getContext(),null,this);
     }
 
     @Override
@@ -86,5 +92,24 @@ public class ChangeAccountFragment extends NormalListFragment {
     @Override
     public void initPresenter() {
 
+    }
+
+    @Override
+    public void changeAccount(String uid, String sid) {
+        MineCardService mineCardService = Http.getInstance().createRequest(MineCardService.class);
+        mineCardService.changeAccount(HeaderUtil.getHeaderMap(),uid,sid)
+                .compose(RxHelper.io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new BaseRxObserver<MineCardBean>() {
+                    @Override
+                    public void onSuccess(MineCardBean demo) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
     }
 }

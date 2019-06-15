@@ -59,8 +59,8 @@ public class LoginUserActivity extends BaseActivity {
         if(!TextUtils.isEmpty(account))
             loginEditUser.setText(account);
         String password = SpCache.getString(Config.PASSWORD, "");
-        if(!TextUtils.isEmpty(password))
-            loginEditPassword.setText(password);
+        /*if(!TextUtils.isEmpty(password))
+            loginEditPassword.setText(password);*/
         //设置密码不可见
         loginEditPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
     }

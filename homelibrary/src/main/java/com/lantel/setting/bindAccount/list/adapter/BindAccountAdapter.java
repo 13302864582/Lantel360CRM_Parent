@@ -13,6 +13,7 @@ import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.List;
@@ -57,8 +58,9 @@ public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
                 accountHolder.value.setVisibility(View.VISIBLE);
                 setText(phone,accountHolder.value);
             }
-        }
+        }else
         accountHolder.value.setVisibility(View.GONE);
+
         setText(getString(R.string.unbind),accountHolder.state_btn);
         accountHolder.state_btn.setEnabled(true);
         /*

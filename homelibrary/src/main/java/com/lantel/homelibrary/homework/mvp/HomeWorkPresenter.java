@@ -1,10 +1,16 @@
 package com.lantel.homelibrary.homework.mvp;
 
 import android.os.Bundle;
+
+import com.lantel.MyApplication;
+import com.lantel.common.Lesson;
+import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.homework.api.HomeWorkBean;
 import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import io.reactivex.Observable;
 
@@ -93,24 +99,42 @@ public class HomeWorkPresenter extends HomeWorkContract.Presenter<HomeWorkBean, 
             if(null != listBeans)
             for(HomeWorkBean.DataBean.ListBean listBean :listBeans){
                 HomeWorkItemModel model = new HomeWorkItemModel();
+                String stime = DisplayUtil.getFormateStr("yyyy-MM-dd HH:mm:ss","yyyy-MM-dd",listBean.getCreate_time());
+                String start_time = String.format(context.getString(R.string.publish_time_format),stime);
+
+                String etime = DisplayUtil.getFormateStr("yyyyMMdd","yyyy-MM-dd",listBean.getDeadline()+"");
+                String end_time = String.format(context.getString(R.string.deadline_time_format),etime);
+                model.setStartTime(start_time);
+                model.setEndTime(end_time);
+                model.setState(0);
+                model.setHt_id(listBean.getHt_id());
                 HomeWorkBean.DataBean.ListBean.EmployeeBean employeeBean = listBean.getEmployee();
                 if(null != employeeBean){
                     String imgUrl = employeeBean.getPhoto_url();
                     if(null != imgUrl)
                     model.setImgUrl(imgUrl);
-
-                    model.setFinish(null == imgUrl);
-
                     String teacher = employeeBean.getEname();
                     if(null != teacher)
                         model.setTeacher(teacher);
                 }
+
                 HomeWorkBean.DataBean.ListBean.OneClassBean oneClassBean = listBean.getOne_class();
                 if(null != oneClassBean){
                     String class_name = oneClassBean.getClass_name();
                     if(null != class_name)
                         model.setClasses(class_name);
+                }else {
+                    MyApplication application = (MyApplication) context.getActivity().getApplication();
+                    List<Lesson> lessonList = application.getLessonList();
+                    if(null != lessonList && lessonList.size()>0){
+                        for(Lesson lesson : lessonList){
+                            if(lesson.getLid() == listBean.getLid()){
+                                model.setClasses(lesson.getLesson_name());
+                            }
+                        }
+                    }
                 }
+                list.add(model);
             }
         }
     }

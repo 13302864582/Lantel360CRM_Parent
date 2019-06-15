@@ -3,21 +3,20 @@ package com.lantel.home.mvp;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
-import com.lantel.common.GlideImageLoader;
 import com.lantel.common.HeaderUtil;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
 import com.lantel.home.api.HomeBean;
 import com.lantel.home.api.HomeService;
 import com.lantel.home.api.HomeTopModel;
+import com.lantel.homelibrary.notify.api.NotifyBean;
+import com.lantel.homelibrary.notify.api.NotifyService;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
-import com.youth.banner.Banner;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomePresenter extends HomeContract.Presenter{
     @Override
@@ -75,7 +74,7 @@ public class HomePresenter extends HomeContract.Presenter{
 
     public void laodHomeTop() {
         HomeService homeService = Http.getInstance().createRequest(HomeService.class);
-        homeService.getHomeData(HeaderUtil.getHeaderMap())
+        homeService.getHomeData(HeaderUtil.getJsonHeaderMap())
                 .compose(RxHelper.io_main())
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<HomeBean>() {
@@ -91,9 +90,38 @@ public class HomePresenter extends HomeContract.Presenter{
                                 homeTopModel.setBranch_name(dataBean.getBranch_name());
                                 homeTopModel.setBranch_tel(dataBean.getBranch_tel());
                                 homeTopModel.setRecommend_cover(dataBean.getRecommend_cover());
+                                if(null != dataBean.getStudent()){
+                                    homeTopModel.setStudent_img(dataBean.getStudent().getPhoto_url());
+                                    homeTopModel.setStudent_name(dataBean.getStudent().getStudent_name());
+                                }
                             }
                             mView.updateTopView(homeTopModel);
                         }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
+    }
+
+    public void laodNotifyText() {
+        NotifyService notifyService = Http.getInstance().createRequest(NotifyService.class);
+        notifyService.getNotifyData(HeaderUtil.getHeaderMap(),String.valueOf(1),String.valueOf(10))
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<NotifyBean>() {
+                    @Override
+                    public void onSuccess(NotifyBean data) {
+                        List<String> list = new ArrayList<>();
+                        NotifyBean.DataBean dataBean = data.getData();
+                        if(null != dataBean && null != dataBean.getList()){
+                                for(NotifyBean.DataBean.ListBean listBean : dataBean.getList()){
+                                    list.add(listBean.getTitle());
+                                }
+                        }
+                        mView.setNotifyText(list);
                     }
 
                     @Override

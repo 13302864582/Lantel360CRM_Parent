@@ -15,7 +15,6 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.personal.list.holder.SettingPersonHolder;
 import com.lantel.setting.personal.list.model.SettingPersonItemModel;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.Arrays;
@@ -23,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
+public class SettingPersonAdapter extends BaseRecyclerViewAdapter<SettingPersonItemModel> {
     private int mCurrentPosition = -1;
 
     public void setListener(NaviEditListener listener) {
@@ -36,7 +35,7 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
 
-    public SettingPersonAdapter(Context context, List<BaseModel> datas) {
+    public SettingPersonAdapter(Context context, List<SettingPersonItemModel> datas) {
         super(context, datas);
     }
 
@@ -47,9 +46,8 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     }
 
     @Override
-    protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
+    protected void bindViewHolder(BaseViewHolder holder, SettingPersonItemModel model, int position, int viewType) {
         SettingPersonHolder settingPersonHolder = (SettingPersonHolder) holder;
-        SettingPersonItemModel model = (SettingPersonItemModel) data;
         setText(model.getTitle(),settingPersonHolder.title);
 
         if(viewType == Config.TYPE_SELECT_DATE){
@@ -106,7 +104,7 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         return new TimePickerBuilder(context,(Date date, View v)-> {
             // 格式化日期
             String value = (String) DateFormat.format("yyyy-MM-dd", date);
-            notifyValue(value);
+            notifyValue(value,0);
         })
                 .setType(new boolean[]{true, true, true,false,false,false})//分别对应年月日时分秒，默认全部显示
                 .setCancelText(getString(R.string.pickerview_cancel))//取消按钮文字
@@ -130,7 +128,7 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         //条件选择器
         OptionsPickerView pvOptions = new OptionsPickerBuilder(context,(int options1, int option2, int options3, View v)-> {
                 //返回的分别是三个级别的选中位置
-                notifyValue(options1Items.get(options1));
+                notifyValue(options1Items.get(options1),options1);
         })
                 .setCancelText(getString(R.string.pickerview_cancel))//取消按钮文字
                 .setCancelColor(resources.getColor(R.color.time_pick_btn))
@@ -144,9 +142,10 @@ public class SettingPersonAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         return pvOptions;
     }
 
-    public void notifyValue(String value) {
+    public void notifyValue(String value, int options1) {
         if(mCurrentPosition!=-1){
-            ((SettingPersonItemModel)datas.get(mCurrentPosition)).setValue(value);
+            datas.get(mCurrentPosition).setValue(value);
+            datas.get(mCurrentPosition).setIndex(options1);
             notifyItemChanged(mCurrentPosition);
         }
 

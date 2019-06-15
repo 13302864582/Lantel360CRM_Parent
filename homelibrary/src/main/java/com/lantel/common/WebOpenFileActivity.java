@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.excellence.downloader.Downloader;
+import com.excellence.downloader.exception.DownloadError;
+import com.excellence.downloader.utils.IListener;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
@@ -29,9 +32,6 @@ import butterknife.BindView;
 @Route(path = "/lantel/360/WebView")
 public class WebOpenFileActivity extends BaseActivity implements TbsReaderView.ReaderCallback {
     private TbsReaderView mTbsReaderView;
-    private ContentObserver mDownloadObserver;
-    private DownloadManager mDownloadManager;
-    private long mRequestId;
     private String mFileName;
     private String mFileUrl;
 
@@ -54,11 +54,18 @@ public class WebOpenFileActivity extends BaseActivity implements TbsReaderView.R
 
     @Override
     public void initView() {
+        // 注册
+        Downloader.register(this);
         mTbsReaderView = new TbsReaderView(this, this);
         RelativeLayout rootRl = findViewById(R.id.rl_root);
         rootRl.addView(mTbsReaderView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         mFileUrl = getIntent().getStringExtra(Config.FILE_URL);
         mFileName = parseName(mFileUrl);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         openFile();
     }
 
@@ -100,57 +107,11 @@ public class WebOpenFileActivity extends BaseActivity implements TbsReaderView.R
         return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), mFileName);
     }
 
-    private void startDownload() {
-        progressText.setText("0%");
-        progressLay.setVisibility(View.VISIBLE);
-        progressBar.startAnim();
-        mDownloadObserver = new DownloadObserver(new Handler());
-        Uri uri = Uri.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
-        LogUtils.d("startDownload==uri===="+uri.getPath());
-        getContentResolver().registerContentObserver(/*Uri.parse("content://downloads/my_downloads")*/uri, true, mDownloadObserver);
-
-        mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(mFileUrl));
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, mFileName);
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
-        mRequestId = mDownloadManager.enqueue(request);
-    }
-
-    private void queryDownloadStatus() {
-        DownloadManager.Query query = new DownloadManager.Query().setFilterById(mRequestId);
-        Cursor cursor = null;
-        try {
-            cursor = mDownloadManager.query(query);
-            if (cursor != null && cursor.moveToFirst()) {
-                //已经下载的字节数
-                int currentBytes = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
-                //总需下载的字节数
-                int totalBytes = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-                //状态所在的列索引
-                int status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                Log.i("downloadUpdate: ", currentBytes + " " + totalBytes + " " + status);
-
-                int progress = (int) ((float)currentBytes/totalBytes * 100);
-                progressText.setText(progress+"%");
-                if (DownloadManager.STATUS_SUCCESSFUL == status && progressLay.getVisibility() == View.VISIBLE) {
-                    openFile();
-                }
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
     private void openFile() {
-        LogUtils.d("LocalExist===="+isLocalExist());
         if (isLocalExist()) {
-            progressLay.setVisibility(View.GONE);
             displayFile();
         } else {
-            startDownload();
+            downLoad();
         }
     }
 
@@ -162,22 +123,51 @@ public class WebOpenFileActivity extends BaseActivity implements TbsReaderView.R
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 解绑
+        Downloader.unregister(this);
+        // 暂停所有下载任务，使用文件长度保存断点
+        Downloader.destroy();
         mTbsReaderView.onStop();
-        if (mDownloadObserver != null) {
-            getContentResolver().unregisterContentObserver(mDownloadObserver);
-        }
     }
 
-    private class DownloadObserver extends ContentObserver {
+    private void downLoad() {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),mFileName);
+        // 文件路径，下载链接，监听接口可以使用IListener接口，也可以使用Listener监听部分回调
+        Downloader.addTask(file, mFileUrl, new IListener() {
+            @Override
+            public void onPreExecute(long fileSize) {
+                progressLay.setVisibility(View.VISIBLE);
+                progressBar.startAnim();
+                progressText.setText("0%");
+            }
 
-        private DownloadObserver(Handler handler) {
-            super(handler);
-        }
+            @Override
+            public void onProgressChange(long fileSize, long downloadedSize) {
+                int progress = (int) ((float)downloadedSize/fileSize * 100);
+                progressText.setText(progress+"%");
+            }
 
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            Log.i("downloadUpdate: ", "onChange(boolean selfChange, Uri uri)");
-            queryDownloadStatus();
-        }
+            @Override
+            public void onProgressChange(long fileSize, long downloadedSize, long speed) {
+                int progress = (int) ((float)downloadedSize/fileSize * 100);
+                progressText.setText(progress+"%");
+            }
+
+            @Override
+            public void onCancel() {
+                progressLay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(DownloadError error) {
+                progressLay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onSuccess() {
+                progressLay.setVisibility(View.GONE);
+                openFile();
+            }
+        });
     }
 }

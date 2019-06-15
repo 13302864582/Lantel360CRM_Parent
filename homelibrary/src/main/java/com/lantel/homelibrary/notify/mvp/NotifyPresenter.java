@@ -52,7 +52,7 @@ public class NotifyPresenter extends NotifyContract.Presenter<NotifyBean,NotifyI
                     itemModel.setTitle(listBean.getTitle());
                     itemModel.setTime(listBean.getCreate_time());
                     itemModel.setContent(listBean.getDesc());
-                    itemModel.setPush(null != listBean.getBroadcast_push());
+                    itemModel.setPush(true);
                     list.add(itemModel);
                 }
             }

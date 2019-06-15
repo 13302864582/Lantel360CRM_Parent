@@ -5,6 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lantel.MyApplication;
 import com.lantel.app.api.AllBean;
 import com.lantel.common.ClassRoom;
+import com.lantel.common.Lesson;
 import com.lantel.common.SchoolArea;
 import com.lantel.crmparent.R;
 import com.xiao360.baselibrary.base.BaseModel;
@@ -57,7 +58,6 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                                 }
 
                                 AllBean.DataBean.DictsBean dictsBean = dataBean.getDicts();
-
                                 if(null != dictsBean){
                                     List<BaseModel> leaveTypes  = new ArrayList<>();
                                         List<AllBean.DataBean.DictsBean.LeaveReasonBean> leave_reasons = dictsBean.getLeave_reason();
@@ -68,6 +68,17 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                                             leaveTypes.add(model);
                                     }
                                     application.setLeaveTypes(leaveTypes);
+                                }
+                                List<AllBean.DataBean.LessonsBean> lessons = dataBean.getLessons();
+                                if(null != lessons && lessons.size()>0){
+                                    List<Lesson> lessonList = new ArrayList<>();
+                                    for(AllBean.DataBean.LessonsBean lessonsBean : lessons){
+                                        Lesson lesson = new Lesson();
+                                        lesson.setLid(lessonsBean.getLid());
+                                        lesson.setLesson_name(lessonsBean.getLesson_name());
+                                        lessonList.add(lesson);
+                                    }
+                                    application.setLessonList(lessonList);
                                 }
                             }
                         }else {

@@ -2,8 +2,12 @@ package com.lantel.homelibrary.homework.list.adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.homework.list.holder.HomeWorkHolder;
 import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
 import com.xiao360.baselibrary.image.GlideUtils;
@@ -34,8 +38,11 @@ public class HomeWrokAdapter extends BaseRecyclerViewAdapter<HomeWorkItemModel> 
         setText(data.getClasses(),homeWorkHolder.homewrok_classes);
         setText(data.getStartTime(),homeWorkHolder.homewrok_start_time);
         setText(data.getEndTime(),homeWorkHolder.homewrok_end_time);
-        boolean isFinish = data.isFinish();
+        boolean isFinish = data.getState()==0;
         setText(getString(isFinish?R.string.finished:R.string.unfinish),homeWorkHolder.homework_finish);
         GlideUtils.loadCircle(context,data.getImgUrl(),homeWorkHolder.homewrok_img);
+        homeWorkHolder.itemView.setOnClickListener((View view)-> {
+            ARouter.getInstance().build("/lantel/360/homework/detail").withInt(Config.BUSINESS_ID,data.getHt_id()).navigation();
+        });
     }
 }

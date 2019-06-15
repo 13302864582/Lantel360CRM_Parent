@@ -3,13 +3,19 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.mob.sdk'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'lantel2019'
+            keyPassword 'lantel2019'
+            storeFile file('C:/Users/fz/Documents/GitHub/Lantel360CRM_Parent/360parentKey.jks')
+            storePassword 'lantel2019'
+        }
+    }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     defaultConfig {
         applicationId "com.lantel.lh01.test"
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -22,9 +28,19 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME : project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
                 includeCompileClasspath = true
             }
+        }
+    }
+
+    // 签名配置
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'lantel2019'
+            storeFile file('C:/Users/fz/Documents/GitHub/Lantel360CRM_Parent/360parentKey.jks')
+            storePassword 'lantel2019'
         }
     }
 
@@ -32,6 +48,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -39,7 +56,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     if (rootProject.ext.isMoudle) {
-         implementation project(':common')
+        implementation project(':common')
     } else {
         implementation project(':homelibrary')
     }
@@ -49,4 +66,5 @@ dependencies {
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.zxing
     implementation 'com.bigkoo:convenientbanner:2.1.5'
+    implementation 'com.github.czy1121:noticeview:1.1.0'
 }

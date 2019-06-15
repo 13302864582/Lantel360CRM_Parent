@@ -9,4 +9,7 @@ import retrofit2.http.Query;
 public interface MineCardService {
     @GET("students")
     Observable<MineCardBean> getCardData(@HeaderMap Map<String, String> headers,@Query("uid") String uid);
+
+    @GET("users/switch_sid")
+    Observable<MineCardBean> changeAccount(@HeaderMap Map<String, String> headers,@Query("uid") String uid,@Query("sid") String sid);
 }

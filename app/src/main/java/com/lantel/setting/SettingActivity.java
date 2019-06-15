@@ -108,14 +108,4 @@ public class SettingActivity extends BaseActivity implements LogoutListener{
                 });
 
     }
-
-    @Override
-    public void navigatePerson() {
-        String json = getIntent().getStringExtra(Config.JSON_PERSON);
-        if(null != json){
-            ARouter.getInstance().build("/lantel/360/SetPersonal").withString(Config.JSON_PERSON,json).navigation();
-        }else {
-            ToastUitl.showShort(R.string.emoty_person);
-        }
-    }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
+import com.lantel.common.ShareUtil;
 import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
@@ -18,6 +19,8 @@ import com.xiao360.baselibrary.listview.BaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
 
@@ -61,6 +64,13 @@ public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
 
         cardOutputHolder.remark_img.setOnClickListener((View view)-> {
             gotoDetail(model,true);
+        });
+
+        cardOutputHolder.share_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareUtil.showShare(context,"fz","https://www.baidu.com","ahahah",null);
+            }
         });
     }
 

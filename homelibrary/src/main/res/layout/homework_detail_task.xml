@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_margin="@dimen/list_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_ConstraintLayout_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/list_margin"
+            android:layout_marginRight="@dimen/list_margin">
+            <ImageView
+                android:id="@+id/head_img_task"
+                android:layout_width="@dimen/homework_img"
+                android:layout_height="@dimen/homework_img"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:src="@mipmap/circle_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/name_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/homewrok_text_teacher"
+                android:textSize="@dimen/output_content"
+                app:layout_constraintHorizontal_bias="0.050"
+                app:layout_constraintLeft_toRightOf="@id/head_img_task"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/back_padding"/>
+
+            <TextView
+                android:id="@+id/img_classes_task"
+                android:text="@string/classtitle"
+                android:background="@drawable/btn_homework_bg_unable"
+                android:textSize="@dimen/homewrok_text_classes"
+                android:textColor="@color/white"
+                android:padding="@dimen/homewrok_classes_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/name_task"
+                app:layout_constraintLeft_toLeftOf="@id/name_task"
+                android:layout_marginTop="@dimen/back_padding"/>
+
+            <TextView
+                android:id="@+id/text_classes_task"
+                style="@style/output_img_text"
+                android:layout_marginLeft="@dimen/back_padding"
+                app:layout_constraintBaseline_toBaselineOf="@id/img_classes_task"
+                app:layout_constraintLeft_toRightOf="@id/img_classes_task"
+                />
+
+            <TextView
+                android:id="@+id/img_homework_task"
+                android:text="@string/homeworktitle"
+                android:background="@drawable/img_homework_bg"
+                android:textSize="@dimen/homewrok_text_classes"
+                android:textColor="@color/white"
+                android:padding="@dimen/homewrok_classes_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/text_classes_task"
+                app:layout_constraintBaseline_toBaselineOf="@id/text_classes_task"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                android:layout_marginTop="@dimen/back_padding"/>
+
+            <TextView
+                android:id="@+id/text_homework"
+                style="@style/output_img_text"
+                app:layout_constraintBaseline_toBaselineOf="@id/img_homework_task"
+                android:layout_marginLeft="@dimen/back_padding"
+                app:layout_constraintLeft_toRightOf="@id/img_homework_task" />
+
+            <TextView
+                android:layout_marginTop="@dimen/back_padding"
+                app:layout_constraintTop_toBottomOf="@id/img_classes_task"
+                app:layout_constraintLeft_toLeftOf="@id/img_classes_task"
+                android:id="@+id/homewrok_start_time_task"
+                style="@style/homewrok_time"
+                tools:layout_editor_absoluteX="64dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <TextView
+                android:id="@+id/homewrok_end_time_task"
+                app:layout_constraintLeft_toRightOf="@id/homewrok_start_time_task"
+                app:layout_constraintBaseline_toBaselineOf="@id/homewrok_start_time_task"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                style="@style/homewrok_time"/>
+
+            <View
+                android:id="@+id/line_task"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:background="@color/line"
+                app:layout_constraintTop_toBottomOf="@id/homewrok_start_time_task" />
+
+
+            <TextView
+                android:id="@+id/content_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/line_margin_output"
+                android:clickable="false"
+                android:inputType="textMultiLine"
+                android:textColor="@color/output_content"
+                android:textSize="@dimen/output_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_task" />
+
+            <com.lantel.homelibrary.output.list.AlbumFileView
+                android:id="@+id/AlbumFileView_task"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:isDetail="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/content_task"
+                app:layout_constraintWidth_percent="0.95">
+
+            </com.lantel.homelibrary.output.list.AlbumFileView>
+            <TextView
+                android:layout_margin="@dimen/back_padding"
+                android:id="@+id/date_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/back_padding"
+                android:textColor="@color/output_time"
+                android:textSize="@dimen/output_time"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</merge>

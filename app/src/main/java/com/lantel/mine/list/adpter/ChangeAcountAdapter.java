@@ -6,16 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.mine.api.ChangeAccountListener;
 import com.lantel.mine.list.holder.ChangeAccountHolder;
 import com.lantel.mine.list.model.ChangeAccountBean;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.util.SpCache;
-
 import java.util.List;
 
 public class ChangeAcountAdapter extends BaseRecyclerViewAdapter<ChangeAccountBean> {
+    private ChangeAccountListener listener;
     private int mSelectPosition = -1;
 
     /**
@@ -24,8 +25,9 @@ public class ChangeAcountAdapter extends BaseRecyclerViewAdapter<ChangeAccountBe
      * @param context
      * @param datas
      */
-    public ChangeAcountAdapter(Context context, List datas) {
+    public ChangeAcountAdapter(Context context, List datas, ChangeAccountListener listener) {
         super(context, datas);
+        this.listener = listener;
     }
 
     @Override
@@ -50,20 +52,13 @@ public class ChangeAcountAdapter extends BaseRecyclerViewAdapter<ChangeAccountBe
             if(!isSelect){
                 int lastPosition = mSelectPosition;
                 mSelectPosition = position;
-                SpCache.putString(Config.SID,data.getSid());
                 notifyItemChanged(lastPosition);
                 notifyItemChanged(mSelectPosition);
+                SpCache.putString(Config.SID,sid);
+                if(null != listener)
+                    listener.changeAccount(SpCache.getString(Config.UID,""),data.getSid());
+                //SpCache.putString(Config.SID,data.getSid());
             }
         });
     }
-
-    public String getSelectSid() {
-        if(mSelectPosition == -1){
-            return "";
-        }else {
-            return datas.get(mSelectPosition).getSid();
-        }
-    }
-
-
 }

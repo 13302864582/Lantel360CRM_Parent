@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
                 boolean isFirst = SpCache.getBoolean(Config.IS_FIRST, true);
                 if (isFirst) {
                     //第一次，进入引导页
-                    //SpCache.putBoolean(Config.IS_FIRST, false);
+                    SpCache.putBoolean(Config.IS_FIRST, false);
                     power.setVisibility(View.GONE);
                 } else {
                     NavigateApp();
@@ -87,7 +87,8 @@ public class SplashActivity extends BaseActivity {
                 .init();
 
         // 可在 App 运行时,随时切换 BaseUrl (指定了 Domain-Name header 的接口)
-        RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com");
+        RetrofitUrlManager.getInstance().putDomain("x360p_cetner_api", "http://api.dev.xiao360.com/");
+
         initBanner();
         //倒计2s
         handler.sendEmptyMessageDelayed(1, 1000);

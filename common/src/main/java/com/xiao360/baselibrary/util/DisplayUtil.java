@@ -440,4 +440,9 @@ public class DisplayUtil {
         }
         });
     }
+
+    public static String getFormateStr(String fromForMate,String toForMate,String str) {
+        Date date = formatIntDay(fromForMate,str);
+        return praseformatIntDay(toForMate,date);
+    }
 }

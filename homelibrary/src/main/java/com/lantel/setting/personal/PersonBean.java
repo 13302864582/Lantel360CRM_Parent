@@ -4,7 +4,6 @@ public class PersonBean {
     private String name;
     private String sex;
     private String birthDate;
-    private String headImg;
 
     public String getName() {
         return name;
@@ -30,11 +29,4 @@ public class PersonBean {
         this.birthDate = birthDate;
     }
 
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
-    }
 }

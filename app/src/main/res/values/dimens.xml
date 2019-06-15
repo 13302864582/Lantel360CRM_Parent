@@ -77,4 +77,5 @@
     <dimen name="login_img">90dp</dimen>
     <dimen name="login_btn">45dp</dimen>
     <dimen name="login_btn_text">18sp</dimen>
+    <dimen name="notice">30dp</dimen>
 </resources>

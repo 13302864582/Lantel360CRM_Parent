@@ -35,6 +35,15 @@ public class AllBean {
         private List<ClassroomsBean> classrooms;
         private DictsBean dicts;
         private List<PublicSchoolsBean> public_schools;
+        private List<LessonsBean> lessons;
+
+        public List<LessonsBean> getLessons() {
+            return lessons;
+        }
+
+        public void setLessons(List<LessonsBean> lessons) {
+            this.lessons = lessons;
+        }
 
         public DictsBean getDicts() {
             return dicts;
@@ -132,6 +141,27 @@ public class AllBean {
                 public void setTitle(String title) {
                     this.title = title;
                 }
+            }
+        }
+
+        public static class LessonsBean{
+            private int lid;
+            private String lesson_name;
+
+            public int getLid() {
+                return lid;
+            }
+
+            public void setLid(int lid) {
+                this.lid = lid;
+            }
+
+            public String getLesson_name() {
+                return lesson_name;
+            }
+
+            public void setLesson_name(String lesson_name) {
+                this.lesson_name = lesson_name;
             }
         }
     }

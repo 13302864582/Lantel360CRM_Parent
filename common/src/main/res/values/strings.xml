@@ -13,6 +13,7 @@
     <string name="home_homework_path" >/lantel/360/homework</string>
     <string name="home_assessment_path" >/lantel/360/classreview</string>
     <string name="home_book_path" >/lantel/360/book</string>
+    <string name="home_communicate_path">/lantel/360/communicate</string>
     <string name="home_notify_path" >/lantel/360/notify</string>
     <string name="home_output_path" >/lantel/360/output</string>
     <string name="home_credit_path" >/lantel/360/credit</string>
@@ -21,6 +22,7 @@
     <string name="study_class_path" >/lantel/360/class</string>
     <string name="study_preview_path" >/lantel/360/preview</string>
     <string name="study_appointment_path" >/lantel/360/appointment</string>
+
 
     <!--模块：我的   菜单跳转路径-->
     <string name="mine_invite_path" >/lantel/360/invite</string>
@@ -51,4 +53,5 @@
     <string name="fail_bind">绑定失败</string>
     <string name="success_sms">发送成功</string>
     <string name="success_leave">请假成功</string>
+    <string name="home_communicate">沟通</string>
 </resources>
