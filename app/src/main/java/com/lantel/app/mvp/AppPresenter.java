@@ -1,16 +1,24 @@
 package com.lantel.app.mvp;
 
+import android.provider.Settings;
 import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.httpsdk.http.Http;
+import com.httpsdk.http.RxHelper;
+import com.lantel.Login.api.LoginBean;
+import com.lantel.Login.api.LoginService;
 import com.lantel.MyApplication;
 import com.lantel.app.api.AllBean;
 import com.lantel.common.ClassRoom;
 import com.lantel.common.Lesson;
 import com.lantel.common.SchoolArea;
 import com.lantel.crmparent.R;
+import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
+
 import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
@@ -92,6 +100,23 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
                         LogUtils.d("GlobleAll===="+e.getMessage());
                     }
                 });
+
+        LoginService service = Http.getInstance().createRequest(LoginService.class);
+        String dev_id = Settings.System.getString(context.getContentResolver(), Settings.System.ANDROID_ID);
+        service.bindDevice(SpCache.getString(Config.UID,"0"),dev_id)
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<LoginBean>() {
+                    @Override
+                    public void onSuccess(LoginBean demo) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
     }
 
     @Override
@@ -123,9 +148,9 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
             case R.id.item_study:
                 mView.navigate(R.id.action_study);
                 break;
-           /* case R.id.item_growup:
-                mView.navigate(R.id.action_growup);
-                break;*/
+            case R.id.item_zhibo:
+                mView.navigateZhibo();
+                break;
             case R.id.item_mine:
                 mView.navigate(R.id.action_mine);
                 break;

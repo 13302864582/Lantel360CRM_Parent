@@ -150,4 +150,9 @@
     <dimen name="homewrok_text_finish">13sp</dimen>
     <dimen name="homewrok_classes_padding">2dp</dimen>
     <dimen name="homework_img">50dp</dimen>
+    <dimen name="communicate_img">45dp</dimen>
+    <dimen name="time_goutong">12sp</dimen>
+    <dimen name="goutong_chat">60dp</dimen>
+    <dimen name="chat_commit">14sp</dimen>
+    <dimen name="chat_commit_padding">10dp</dimen>
 </resources>

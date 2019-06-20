@@ -56,9 +56,8 @@ public class ChangeAccountActivity extends FragmentActivity {
         return new ChangeAccountFragment();
     }
 
-    @Override
+  @Override
     public void onBackPressed() {
-        super.onBackPressed();
         setResult(Activity.RESULT_OK);
         finish();
     }

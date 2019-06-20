@@ -6,8 +6,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleEvent;
+import com.google.gson.Gson;
 import com.lantel.AppConfig;
 import com.lantel.common.GlideImageLoader;
+import com.lantel.common.HomeClient;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
 import com.lantel.home.api.HomeTopModel;
@@ -15,6 +19,8 @@ import com.lantel.home.list.adpter.HomeMenuListApater;
 import com.lantel.home.mvp.HomeContract;
 import com.lantel.home.mvp.HomeModel;
 import com.lantel.home.mvp.HomePresenter;
+import com.lantel.homelibrary.app.Config;
+import com.lantel.mine.list.model.ChangeAccountBean;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
@@ -82,15 +88,15 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     }
 
     @Override
-    public void updateTopView(HomeTopModel homeTopModel) {
+    public void updateTopView(HomeTopModel homeTopModel, ArrayList<ChangeAccountBean> changeAccountBeans) {
         organ.setText(homeTopModel.getOrg_name());
         phoneText.setText(homeTopModel.getBranch_tel());
         schoolArea.setText(homeTopModel.getBranch_name());
         locationText.setText(homeTopModel.getBranch_address());
         username.setText(homeTopModel.getStudent_name());
+        mModel.setChangeAccountBeans(changeAccountBeans);
         GlideUtils.loadCircle(getContext(),homeTopModel.getStudent_img(),topImgLeftUser);
         GlideUtils.loadImageView(getContext(),homeTopModel.getRecommend_cover(),logo);
-        LogUtils.d("getRecommend_cover===="+homeTopModel.getRecommend_cover());
     }
 
     @Override
@@ -99,6 +105,11 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         notice.setOnClickListener((View v)-> {
                 ARouter.getInstance().build("/lantel/360/notify").navigation();
         });
+    }
+
+    @Override
+    public void setUpNotifyMessage(int today_num) {
+        topImgRightRedpoint.setVisibility(today_num>0?View.VISIBLE:View.INVISIBLE);
     }
 
     @Override
@@ -141,7 +152,12 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
 
     @Override
     public void navigationPath(String path) {
-        ARouter.getInstance().build(path).navigation();
+        if(path.equals(getString(R.string.home_credit_path))){
+            String url = "http://dev.xiao360.com/ui/cs";
+            ARouter.getInstance().build(getString(R.string.web_path)).withString(Config.WEB_URL,url).navigation();
+        }else {
+            ARouter.getInstance().build(path).navigation();
+        }
     }
 
     @OnClick({R.id.top_img_left_user, R.id.username, R.id.arrow_user, R.id.top_img_right_notify, R.id.top_img_right_scan, R.id.phone_img, R.id.phone_text})
@@ -158,8 +174,19 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
             LogUtils.d("onViewClicked===phone");
         }
         else if(id == R.id.top_img_left_user || id == R.id.username || id == R.id.arrow_user){
-            LogUtils.d("onViewClicked===user");
+            ArrayList<ChangeAccountBean> changeAccountBeans = mModel.getChangeAccountBeans();
+            if(null != changeAccountBeans){
+                Gson gson =new Gson();
+                String accountListJson = gson.toJson(changeAccountBeans);
+                ARouter.getInstance().build("/lantelhome/360/ChangeAccount").withString(Config.ACCOUNT_LIST,accountListJson).navigation(getActivity(),Config.REQUEST_CHANGE_BID);
+            }
         }
+    }
+
+    @ModuleEvent(coreClientClass = HomeClient.class)
+    public void refreshHomeTop(String s) {
+        LogUtils.d("REQUEST_CHANGE_BID===top");
+        mPresenter.laodHomeTop();
     }
 
     public void navigateScan() {

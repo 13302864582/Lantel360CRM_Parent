@@ -18,6 +18,7 @@ import com.lantel.mine.api.MineCardBean;
 import com.lantel.mine.list.adpter.mineCardListApater;
 import com.lantel.mine.list.adpter.mineMenuListApater;
 import com.lantel.mine.list.model.CardModel;
+import com.lantel.mine.list.model.ChangeAccountBean;
 import com.lantel.mine.mvp.MineContract;
 import com.lantel.mine.mvp.MineModel;
 import com.lantel.mine.mvp.MinePresenter;
@@ -186,6 +187,8 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     @Override
     protected void initView() {
+        stateLayout.refreshLayout.setEnableRefresh(false);
+        stateLayout.refreshLayout.setEnableLoadMore(false);
         stateLayout.showContentView();
         initToolbar();
         initCardList();
@@ -227,8 +230,13 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
 
     @Override
     public void navigationPath(String path) {
-        Postcard postcard = ARouter.getInstance().build(path);
-        postWithParam(postcard,path).navigation();
+        if(path.equals(getString(R.string.mine_invite_path))){
+            String url = "http://dev.xiao360.com/student#/apage?tk="+ SpCache.getString(Config.TOKEN,"") +"&path=recommend";
+            ARouter.getInstance().build(getString(R.string.web_path)).withString(Config.WEB_URL,url).navigation();
+        }else {
+            Postcard postcard = ARouter.getInstance().build(path);
+            postWithParam(postcard,path).navigation();
+        }
     }
 
     private Postcard postWithParam(Postcard postcard, String path) {
@@ -250,8 +258,16 @@ public class MineFragment extends ToolBarStateFragment<MinePresenter, MineModel>
             ARouter.getInstance().build("/lantelhome/360/SettingActivity").navigation();
         }else if(id == R.id.mine_change || id == R.id.add_account){
             if(null != mCardList && mCardList.size()!=0){
+                ArrayList<ChangeAccountBean> changeAccountBeans = new ArrayList<>();
+                for(MineCardBean.DataBean.ListBean listBean : mCardList){
+                    ChangeAccountBean accountBean = new ChangeAccountBean();
+                    accountBean.setSid(listBean.getSid());
+                    accountBean.setPhoto_url(listBean.getPhoto_url());
+                    accountBean.setStudent_name(listBean.getStudent_name());
+                    changeAccountBeans.add(accountBean);
+                }
                 Gson gson =new Gson();
-                String accountListJson = gson.toJson(mCardList);
+                String accountListJson = gson.toJson(changeAccountBeans);
                 ARouter.getInstance().build("/lantelhome/360/ChangeAccount").withString(Config.ACCOUNT_LIST,accountListJson).navigation(getActivity(),Config.REQUEST_CHANGE_ACCOUNT);
             }
         }else if(id == R.id.mine_head_img){

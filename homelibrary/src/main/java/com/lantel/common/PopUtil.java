@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -16,7 +15,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import com.lantel.homelibrary.R;
+import com.xiao360.baselibrary.util.AppConfig;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.MediaBean;
 import com.xiao360.baselibrary.util.PhotoUtil;
 import androidx.fragment.app.Fragment;
 
@@ -59,9 +60,9 @@ public class PopUtil {
         });
         popView.findViewById(R.id.takePhoto).setOnClickListener((View view) -> {
             try {
-                Uri uri = PhotoUtil.getPhotoUri(context);
-                if (null != listener) {
-                    listener.onPhotoSelect(uri);
+                MediaBean photoBean = PhotoUtil.getMediaUri(context, AppConfig.PHOTO);
+                if (null != listener && null != photoBean) {
+                    listener.onPhotoSelect(photoBean);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

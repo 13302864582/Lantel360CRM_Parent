@@ -13,49 +13,9 @@ public class ChangeAccountBean {
      * student_lesson_remain_hours : 118.00
      * student_name : test02
      */
-
-    private String birth_time;
-    private String card_no;
-    private String credit;
-    private String nick_name;
     private String photo_url;
     private String sid;
-    private String sno;
-    private String student_lesson_hours;
-    private String student_lesson_remain_hours;
     private String student_name;
-
-    public String getBirth_time() {
-        return birth_time;
-    }
-
-    public void setBirth_time(String birth_time) {
-        this.birth_time = birth_time;
-    }
-
-    public String getCard_no() {
-        return card_no;
-    }
-
-    public void setCard_no(String card_no) {
-        this.card_no = card_no;
-    }
-
-    public String getCredit() {
-        return credit;
-    }
-
-    public void setCredit(String credit) {
-        this.credit = credit;
-    }
-
-    public String getNick_name() {
-        return nick_name;
-    }
-
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
-    }
 
     public String getPhoto_url() {
         return photo_url;
@@ -71,30 +31,6 @@ public class ChangeAccountBean {
 
     public void setSid(String sid) {
         this.sid = sid;
-    }
-
-    public String getSno() {
-        return sno;
-    }
-
-    public void setSno(String sno) {
-        this.sno = sno;
-    }
-
-    public String getStudent_lesson_hours() {
-        return student_lesson_hours;
-    }
-
-    public void setStudent_lesson_hours(String student_lesson_hours) {
-        this.student_lesson_hours = student_lesson_hours;
-    }
-
-    public String getStudent_lesson_remain_hours() {
-        return student_lesson_remain_hours;
-    }
-
-    public void setStudent_lesson_remain_hours(String student_lesson_remain_hours) {
-        this.student_lesson_remain_hours = student_lesson_remain_hours;
     }
 
     public String getStudent_name() {

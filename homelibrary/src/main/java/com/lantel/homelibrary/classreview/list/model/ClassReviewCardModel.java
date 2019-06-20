@@ -8,6 +8,15 @@ public class ClassReviewCardModel extends BaseModel {
     private String date;
     private String content;
     private Object headImg;
+    private int rvw_id;
+
+    public int getRvw_id() {
+        return rvw_id;
+    }
+
+    public void setRvw_id(int rvw_id) {
+        this.rvw_id = rvw_id;
+    }
 
     public String getTeacherName() {
         return teacherName;

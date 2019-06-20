@@ -1,5 +1,7 @@
 package com.lantel.common.list.model;
 
+import android.net.Uri;
+
 import com.xiao360.baselibrary.base.BaseModel;
 
 public class MediaModel extends BaseModel {
@@ -9,6 +11,24 @@ public class MediaModel extends BaseModel {
     private long file_size;
     private String file_type;
     private String file_url;
+    private boolean isLocal;
+    private String file_uri;
+
+    public String getFile_uri() {
+        return file_uri;
+    }
+
+    public void setFile_uri(String file_uri) {
+        this.file_uri = file_uri;
+    }
+
+    public boolean isLocal() {
+        return isLocal;
+    }
+
+    public void setLocal(boolean local) {
+        isLocal = local;
+    }
 
     public String getDuration() {
         return duration;

@@ -22,7 +22,7 @@
     <string name="study_class_path" >/lantel/360/class</string>
     <string name="study_preview_path" >/lantel/360/preview</string>
     <string name="study_appointment_path" >/lantel/360/appointment</string>
-
+    <string name="web_path">/lantel/360/web</string>
 
     <!--模块：我的   菜单跳转路径-->
     <string name="mine_invite_path" >/lantel/360/invite</string>
@@ -48,6 +48,7 @@
     <string name="fail_login">登陆失败</string>
     <string name="fail_str">暂无网络</string>
     <string name="loading">加载中...</string>
+    <string name="uploading">上传中...</string>
     <string name="empty">暂无消息</string>
     <string name="fail_sms">发送失败</string>
     <string name="fail_bind">绑定失败</string>

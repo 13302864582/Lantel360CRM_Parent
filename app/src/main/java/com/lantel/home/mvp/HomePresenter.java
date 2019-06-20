@@ -9,10 +9,13 @@ import com.lantel.common.HeaderUtil;
 import com.lantel.common.list.model.SimpleMenuModel;
 import com.lantel.crmparent.R;
 import com.lantel.home.api.HomeBean;
+import com.lantel.home.api.HomeMessageBean;
 import com.lantel.home.api.HomeService;
 import com.lantel.home.api.HomeTopModel;
 import com.lantel.homelibrary.notify.api.NotifyBean;
 import com.lantel.homelibrary.notify.api.NotifyService;
+import com.lantel.mine.api.MineCardBean;
+import com.lantel.mine.list.model.ChangeAccountBean;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.LogUtils;
 import java.util.ArrayList;
@@ -84,6 +87,7 @@ public class HomePresenter extends HomeContract.Presenter{
                         if(error == 0){
                             HomeTopModel homeTopModel = new HomeTopModel();
                             HomeBean.DataBean dataBean = homeBean.getData();
+                            ArrayList<ChangeAccountBean> changeAccountBeans = new ArrayList<>();
                             if (null != dataBean) {
                                 homeTopModel.setOrg_name(dataBean.getOrg_name());
                                 homeTopModel.setBranch_address(dataBean.getBranch_address());
@@ -94,8 +98,41 @@ public class HomePresenter extends HomeContract.Presenter{
                                     homeTopModel.setStudent_img(dataBean.getStudent().getPhoto_url());
                                     homeTopModel.setStudent_name(dataBean.getStudent().getStudent_name());
                                 }
+
+                                if(null != dataBean.getStudents()){
+                                    List<HomeBean.DataBean.StudentsBean> studentsBean = dataBean.getStudents();
+
+                                    for(HomeBean.DataBean.StudentsBean listBean : studentsBean){
+                                        ChangeAccountBean accountBean = new ChangeAccountBean();
+                                        accountBean.setSid(listBean.getSid()+"");
+                                        accountBean.setPhoto_url(listBean.getPhoto_url());
+                                        accountBean.setStudent_name(listBean.getStudent_name());
+                                        changeAccountBeans.add(accountBean);
+                                    }
+                                }
                             }
-                            mView.updateTopView(homeTopModel);
+                            mView.updateTopView(homeTopModel,changeAccountBeans);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+
+                    }
+                });
+
+        homeService.getMessageData(HeaderUtil.getJsonHeaderMap())
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<HomeMessageBean>() {
+                    @Override
+                    public void onSuccess(HomeMessageBean bean) {
+                        if(bean.getError()==0){
+                            HomeMessageBean.DataBean dataBean =  bean.getData();
+                            if(null != dataBean){
+                                int today_num = dataBean.getToday_msg_num();
+                                mView.setUpNotifyMessage(today_num);
+                            }
                         }
                     }
 

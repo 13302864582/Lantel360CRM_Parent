@@ -1,5 +1,6 @@
 package com.lantel.Login;
 
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -143,7 +144,7 @@ public class LoginUserActivity extends BaseActivity {
                 break;
             case R.id.login_forgetPassWord:
                 //ARouter.getInstance().build("/lantelhome/360/forgetOrRegsist").withString(Config.FORGET_BUSSNESS_TYPE,Config.RESETPWD).navigation();
-                ARouter.getInstance().build("/lantelhome/360/forgetpwd").navigation();
+                ARouter.getInstance().build("/lantel/360/web").withString(Config.WEB_URL,"").navigation();
                 break;
 
             case R.id.login_regsist:

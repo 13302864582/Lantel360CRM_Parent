@@ -10,9 +10,9 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
 public class HomeWorkModel extends ViewModel {
-    public Observable<HomeWorkBean> loadData(String page, String pageSize) {
+    public Observable<HomeWorkBean> loadData(String sid,String page, String pageSize) {
         HomeWorkService studentService = Http.getInstance().createRequest(HomeWorkService.class);
-        Observable<HomeWorkBean> finish = studentService.getHomeWorkDateFinish(HeaderUtil.getHeaderMap(),page,pageSize);
+        Observable<HomeWorkBean> finish = studentService.getHomeWorkDate(HeaderUtil.getHeaderMap(),sid,page,pageSize);
         return finish.compose(RxHelper.io_main());
     }
 }

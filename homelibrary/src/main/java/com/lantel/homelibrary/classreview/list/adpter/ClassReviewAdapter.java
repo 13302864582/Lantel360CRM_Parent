@@ -4,13 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.classreview.list.holder.ClassReviewHolder;
 import com.lantel.homelibrary.classreview.list.model.ClassReviewCardModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.List;
 
@@ -34,7 +38,8 @@ public class ClassReviewAdapter extends BaseRecyclerViewAdapter<ClassReviewCardM
         setText(data.getContent(),classReviewHolder.review_content);
         GlideUtils.loadCircle(context,data.getHeadImg(),classReviewHolder.head_img,R.mipmap.circle_default);
         classReviewHolder.review_detail.setOnClickListener((View view)-> {
-            LogUtils.d("ClickListener=======review_detail");
+            String url = "http://dev.xiao360.com/student#/apage?tk="+ SpCache.getString(Config.TOKEN,"") +"&path=reviews/"+data.getRvw_id();
+            ARouter.getInstance().build(getString(R.string.web_path)).withString(Config.WEB_URL,url).navigation();
         });
     }
 }

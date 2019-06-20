@@ -31,7 +31,7 @@ android {
         }
 
         ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips",'arm64-v8a'
         }
     }
 
@@ -67,4 +67,8 @@ dependencies {
     api 'com.excellence:downloader:1.2.0'
     api 'com.ldoublem.loadingview:loadingviewlib:1.0'
     api 'com.lqr.audio:library:1.0.0'
+
+    api 'cn.jiguang.sdk:jpush:3.3.2'  // 此处以JPush 3.3.2 版本为例。
+    api 'cn.jiguang.sdk:jcore:2.0.1'  // 此处以JCore 2.0.1 版本为例。
+    api "me.leolin:ShortcutBadger:1.1.22@aar"
 }

@@ -1,7 +1,6 @@
 package com.xiao360.baselibrary.util;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,16 +22,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
-import androidx.fragment.app.Fragment;
-
 public class PhotoUtil {
     /**
      * 拍照获取
      *
      * @param context
      */
-    public static Uri getPhotoUri(Context context) throws IOException {
-        File imgFile = createImageFile(context);
+    public static MediaBean getMediaUri(Context context,int type) throws IOException {
+        File mediafile = createFile(context,type);
+        if(null == mediafile)
+            return null;
         Uri imgUri = null;
 
         //        if (Build.VERSION.SDK_INT >= 24) {//这里用这种传统的方法无法调起相机
@@ -51,15 +50,28 @@ public class PhotoUtil {
 
         if (Build.VERSION.SDK_INT < 24) {
             // 从文件中创建uri
-            imgUri = Uri.fromFile(imgFile);
+            imgUri = Uri.fromFile(mediafile);
         } else {
             //兼容android7.0 使用共享文件的形式
             ContentValues contentValues = new ContentValues(1);
-            contentValues.put(MediaStore.Images.Media.DATA, imgFile.getAbsolutePath());
-            imgUri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-
+            if(type == AppConfig.PHOTO){
+                contentValues.put(MediaStore.Images.Media.DATA, mediafile.getAbsolutePath());
+                imgUri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+            } else if(type == AppConfig.VIDEO){
+                contentValues.put(MediaStore.Video.Media.DATA, mediafile.getAbsolutePath());
+                imgUri = context.getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues);
+            }
         }
-        return imgUri;
+        return new MediaBean(mediafile,imgUri);
+    }
+
+    private static File createFile(Context context,int type) throws IOException{
+        if(type == AppConfig.PHOTO){
+            return createImageFile(context);
+        }else if(type == AppConfig.VIDEO){
+            return createVideoFile(context);
+        }else
+        return null;
     }
 
     public static Intent getPickIntent() {
@@ -81,6 +93,14 @@ public class PhotoUtil {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File stroageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", stroageDir);
+        return image;
+    }
+
+    public static File createVideoFile(Context context) throws IOException {
+        String timeStamp = DisplayUtil.praseformatIntDay("yyyyMMddHHmmss", new Date());
+        String imageFileName = "VID_" + timeStamp + "_";
+        File stroageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".mp4", stroageDir);
         return image;
     }
 

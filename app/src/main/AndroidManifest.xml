@@ -38,6 +38,19 @@
         <activity android:name="com.lantel.Login.ForgetPassActivity"/>
 
         <activity android:name="com.lantel.Login.api.ForgetPassActivitySpecial"/>
+
+        <activity android:name="com.lantel.homelibrary.communicate.CommunicateActivity"/>
+
+        <provider
+            android:name="com.lantel.common.AppProvider"
+            android:authorities="com.lantel.lh01.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <!--元数据-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

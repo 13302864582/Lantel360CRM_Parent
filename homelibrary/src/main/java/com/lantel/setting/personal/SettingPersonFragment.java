@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
@@ -34,6 +33,7 @@ import com.qiniu.android.storage.UploadManager;
 import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.image.GlideUtils;
+import com.xiao360.baselibrary.util.MediaBean;
 import com.xiao360.baselibrary.util.PhotoUtil;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
@@ -92,7 +92,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     protected void initView() {
         textRight.setText(R.string.finish);
         BindStudentService service = Http.getInstance().createRequest(BindStudentService.class);
-        service.getAccountData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,""))
+        service.getAccountData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,"0"))
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
                 .subscribe(new BaseRxObserver<BindStudentBean>() {
@@ -226,7 +226,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
                                 progressBar.startAnim();
                                 Bitmap bitmap = PhotoUtil.getBitmapFormUri(getContext(), photoUrl);
                                 String filePath = PhotoUtil.getRealPathFromUri(getContext(), photoUrl);
-                                String filekey = uploadBean.getPrefix() + filePath.substring(filePath.lastIndexOf("/") + 1);
+                                String filekey = uploadBean.getPrefix()+ "com.lantel.lh01/personalSet/" + filePath.substring(filePath.lastIndexOf("/") + 1);
                                 // 重用uploadManager。一般地，只需要创建一个uploadManager对象
                                 UploadManager uploadManager = new UploadManager();
                                 uploadManager.put(Bitmap2Bytes(bitmap), filekey, uploadBean.getUptoken(), (String key, ResponseInfo info, JSONObject response) -> {
@@ -280,9 +280,9 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     }
 
     @Override
-    public void onPhotoSelect(Uri uri) {
-        photoUrl = uri;
-        startActivityForResult(PhotoUtil.getTakePhotoIntent(uri), Config.REQUEST_TAKE_PHOTO);
+    public void onPhotoSelect(MediaBean photoBean) {
+        photoUrl = photoBean.getImgUri();
+        startActivityForResult(PhotoUtil.getTakePhotoIntent(photoUrl), Config.REQUEST_TAKE_PHOTO);
     }
 
     @Override

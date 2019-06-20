@@ -54,10 +54,9 @@ public class ChangeAcountAdapter extends BaseRecyclerViewAdapter<ChangeAccountBe
                 mSelectPosition = position;
                 notifyItemChanged(lastPosition);
                 notifyItemChanged(mSelectPosition);
-                SpCache.putString(Config.SID,sid);
+                SpCache.putString(Config.SID,data.getSid());
                 if(null != listener)
-                    listener.changeAccount(SpCache.getString(Config.UID,""),data.getSid());
-                //SpCache.putString(Config.SID,data.getSid());
+                    listener.changeAccount(SpCache.getString(Config.UID,"0"),data.getSid());
             }
         });
     }

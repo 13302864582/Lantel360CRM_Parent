@@ -53,7 +53,6 @@ public class ChangeAccountFragment extends NormalListFragment implements ChangeA
         title.setText(getString(getToolbarTitle()));
         ImageView back = rootView.findViewById(com.example.baselibrary.R.id.back);
         back.setOnClickListener((View view)-> {
-            getActivity().setResult(Activity.RESULT_OK);
             getActivity().finish();
         });
     }
@@ -103,7 +102,9 @@ public class ChangeAccountFragment extends NormalListFragment implements ChangeA
                 .subscribe(new BaseRxObserver<MineCardBean>() {
                     @Override
                     public void onSuccess(MineCardBean demo) {
-
+                        if(demo.getError()==0){
+                            SpCache.putString(Config.SID,sid);
+                        }
                     }
 
                     @Override

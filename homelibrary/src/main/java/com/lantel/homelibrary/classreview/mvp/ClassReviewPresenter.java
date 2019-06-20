@@ -75,6 +75,7 @@ public class ClassReviewPresenter extends ClassReviewContract.Presenter {
                                 model.setHeadImg(employeeBean.getPhoto_url());
                                 model.setDate(bean.getCreate_time());
                                 model.setContent(bean.getDetail());
+                                model.setRvw_id(bean.getRvw_id());
                                 menu.add(model);
                             }
                             if (!isLoadMore) {

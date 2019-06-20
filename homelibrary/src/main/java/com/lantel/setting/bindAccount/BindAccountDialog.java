@@ -58,7 +58,7 @@ public class BindAccountDialog extends BaseDialog {
             } else{
                 new VerificationCountDownTimer(getContext(),send_sms);
                 if(null != listener)
-                    listener.sendVerifyCode(phoneNumber);
+                    listener.sendVerifyCode(phoneNumber,this);
             }
         });
 

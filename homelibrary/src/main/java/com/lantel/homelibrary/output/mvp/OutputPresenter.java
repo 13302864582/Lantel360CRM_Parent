@@ -129,6 +129,7 @@ public class OutputPresenter extends OutputContract.Presenter<ZipOutputStudengtB
                         mediaModel.setDuration(attachmentBean.getDuration());
                         mediaModel.setFile_type(attachmentBean.getFile_type());
                         mediaModel.setFile_url(attachmentBean.getFile_url());
+                        mediaModel.setLocal(false);
                         if(mediaType==Config.PHOTO || mediaType==Config.VIDEO)
                             map.get(Config.IMG_LIST).add(mediaModel);
                         else if(mediaType==Config.FILE){

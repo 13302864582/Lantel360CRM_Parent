@@ -6,20 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.BarHide;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
-import com.lantel.common.VerificationCountDownTimer;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
-import com.lantel.setting.bindAccount.api.BindAccountBean;
 import com.lantel.setting.bindAccount.api.BindAccountService;
 import com.lantel.setting.bindAccount.api.BindPhoneBean;
 import com.lantel.setting.bindAccount.api.BindPhoneReqBean;
-import com.lantel.setting.bindAccount.api.SmsBean;
-import com.lantel.setting.bindAccount.api.SmsRequest;
 import com.lantel.setting.bindAccount.list.adapter.BindAccountAdapter;
 import com.lantel.setting.bindAccount.list.model.BindAccountModel;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
@@ -133,8 +130,10 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
     }
 
     @Override
-    public void sendVerifyCode(String phone) {
-        BindAccountService service = Http.getInstance().createRequest(BindAccountService.class);
+    public void sendVerifyCode(String phone, BindAccountDialog bindAccountDialog) {
+        bindAccountDialog.dismiss();
+        ARouter.getInstance().build("/lantel/360/web").withString(Config.WEB_URL,"").navigation();
+       /* BindAccountService service = Http.getInstance().createRequest(BindAccountService.class);
         SmsRequest request = new SmsRequest();
         request.setMobile(phone);
         request.setType("change");
@@ -151,7 +150,7 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
                     public void onFailure(Throwable e) {
                         ToastUitl.showShort(R.string.net_error);
                     }
-                });
+                });*/
     }
 
     @Override

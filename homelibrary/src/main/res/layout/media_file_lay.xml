@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lantel.homelibrary.output.list.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_margin="@dimen/account_value_margin"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/play"
+        android:src="@mipmap/video_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/back_padding"
+        android:id="@+id/duration"
+        android:textSize="@dimen/file_name"
+        android:textColor="@color/file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/play"/>
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/attach_delete"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="@dimen/setting_pesonal_title_marginLeft"
+        android:layout_height="@dimen/setting_pesonal_title_marginLeft" />
+</com.lantel.homelibrary.output.list.SquareLayout>

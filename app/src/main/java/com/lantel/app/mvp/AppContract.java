@@ -7,6 +7,8 @@ public interface AppContract {
     interface View extends BaseView {
 
         void navigate(int action_page);
+
+        void navigateZhibo();
     }
 
     abstract class Presenter extends BaseActivityPresenter<View, AppModel> {

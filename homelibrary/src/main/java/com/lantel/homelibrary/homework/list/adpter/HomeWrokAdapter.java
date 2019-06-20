@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
+import com.lantel.homelibrary.homework.list.ClickDetail;
 import com.lantel.homelibrary.homework.list.holder.HomeWorkHolder;
 import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
 import com.xiao360.baselibrary.image.GlideUtils;
@@ -15,7 +16,15 @@ import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+
 public class HomeWrokAdapter extends BaseRecyclerViewAdapter<HomeWorkItemModel> {
+    private ClickDetail clickDetail;
+
+    public void setClickDetail(ClickDetail clickDetail) {
+        this.clickDetail = clickDetail;
+    }
+
     /**
      * 适配器构造
      *
@@ -38,11 +47,14 @@ public class HomeWrokAdapter extends BaseRecyclerViewAdapter<HomeWorkItemModel> 
         setText(data.getClasses(),homeWorkHolder.homewrok_classes);
         setText(data.getStartTime(),homeWorkHolder.homewrok_start_time);
         setText(data.getEndTime(),homeWorkHolder.homewrok_end_time);
-        boolean isFinish = data.getState()==0;
+        boolean isFinish = data.isFinish();
         setText(getString(isFinish?R.string.finished:R.string.unfinish),homeWorkHolder.homework_finish);
+        homeWorkHolder.homework_finish.setSelected(isFinish);
         GlideUtils.loadCircle(context,data.getImgUrl(),homeWorkHolder.homewrok_img);
         homeWorkHolder.itemView.setOnClickListener((View view)-> {
-            ARouter.getInstance().build("/lantel/360/homework/detail").withInt(Config.BUSINESS_ID,data.getHt_id()).navigation();
+            if(  null != clickDetail && data.getHt_id()!=-1){
+                clickDetail.clickDetail(data.getHt_id(),isFinish);
+              }
         });
     }
 }

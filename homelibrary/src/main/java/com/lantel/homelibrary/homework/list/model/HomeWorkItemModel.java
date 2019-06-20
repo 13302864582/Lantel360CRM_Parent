@@ -5,7 +5,7 @@ import com.xiao360.baselibrary.base.BaseModel;
 public class HomeWorkItemModel extends BaseModel {
     private String teacher;
     private String classes;
-    private int state;
+    private boolean isFinish;
     private String imgUrl;
     private String startTime;
     private String endTime;
@@ -19,12 +19,12 @@ public class HomeWorkItemModel extends BaseModel {
         this.ht_id = ht_id;
     }
 
-    public int getState() {
-        return state;
+    public boolean isFinish() {
+        return isFinish;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setFinish(boolean finish) {
+        isFinish = finish;
     }
 
     public String getTeacher() {

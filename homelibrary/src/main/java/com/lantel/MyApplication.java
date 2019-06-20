@@ -8,12 +8,15 @@ import com.httpsdk.http.Constans;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.LogInterceptor;
 import com.lantel.common.ClassRoom;
+import com.lantel.common.ForegroundCallbacks;
 import com.lantel.common.Lesson;
 import com.lantel.common.SchoolArea;
+import com.lantel.homelibrary.app.Config;
 import com.mob.MobSDK;
 import com.tencent.smtt.sdk.QbSdk;
 import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.base.BaseModel;
+import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 import com.zzhoujay.richtext.RichText;
 
@@ -21,7 +24,9 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.jpush.android.api.JPushInterface;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
+import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
@@ -80,7 +85,8 @@ public class MyApplication extends BaseApplication {
         Http.init(builder, Constans.baseUrl);
         SpCache.init(this);
         MobSDK.init(this);
-
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         //初始化X5内核
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
@@ -91,6 +97,21 @@ public class MyApplication extends BaseApplication {
             public void onViewInitFinished(boolean b) {
                 //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
                 Log.e("@@","加载内核是否成功:"+b);
+            }
+        });
+
+        ForegroundCallbacks.init(this);
+
+        ForegroundCallbacks.get().addListener(new ForegroundCallbacks.Listener() {
+            @Override
+            public void onBecameForeground() {
+                LogUtils.d("当前程序切换到前台");
+                ShortcutBadger.removeCount(getAppContext()); //for 1.1.4+
+            }
+
+            @Override
+            public void onBecameBackground() {
+                LogUtils.d("当前程序切换到后台");
             }
         });
     }

@@ -1,19 +1,15 @@
 package com.lantel.homelibrary.output.list.adpter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
-import com.lantel.common.GalleryDetailActivity;
 import com.lantel.common.list.model.MediaModel;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.ImageHolder;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
@@ -53,25 +49,28 @@ public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
         ImageHolder imageHolder = (ImageHolder) holder;
         String imgUrl = "";
         if(viewType == Config.VIDEO){
-             imgUrl = data.getFile_url()+"?vframe/jpg/offset/1";
+            if(data.isLocal())
+                imgUrl = data.getFile_url();
+            else
+                 imgUrl = data.getFile_url()+"?vframe/jpg/offset/1";
         }else if(viewType == Config.PHOTO){
             imgUrl = data.getFile_url();
         }
 
         if(null != datas && position == 8 && datas.size()>9 && !isDetail){
-            imageHolder.more.setVisibility(View.VISIBLE);
-            imageHolder.more.setOnClickListener((View view)-> {
+            imageHolder.img.setImageResource(R.mipmap.more);
+            imageHolder.img.setOnClickListener((View view)-> {
                 if(null != clickMore)
                     clickMore.GoDetail();
             });
         }else {
             imageHolder.play.setVisibility(viewType == Config.VIDEO?View.VISIBLE:View.GONE);
+            GlideUtils.loadImageView(context,imgUrl,imageHolder.img);
+            imageHolder.img.setOnClickListener((View view)-> {
+                Gson gson = new Gson();
+                ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(datas)).withInt(Config.POSITION,position).navigation();
+            });
         }
-        GlideUtils.loadImageView(context,imgUrl,imageHolder.img,R.mipmap.ad);
-        imageHolder.img.setOnClickListener((View view)-> {
-            Gson gson = new Gson();
-            ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(datas)).withInt(Config.POSITION,position).navigation();
-        });
     }
 
     @Override

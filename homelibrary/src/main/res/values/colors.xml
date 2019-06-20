@@ -95,4 +95,8 @@
     <color name="homewrok_text_teacher">#333333</color>
     <color name="homewrok_classes">#777777</color>
     <color name="homewrok_text_time">#b6b6b6</color>
+    <color name="edit_commit_hint">#cacaca</color>
+    <color name="time_goutong">#999999</color>
+    <color name="chat_commit">#FF5400</color>
+    <color name="chat_commit_edit">#f9f9f9</color>
 </resources>

@@ -104,6 +104,15 @@ public class ClassReviewBean {
             private String detail;
             private String create_time;
             private EmployeeBean employee;
+            private int rvw_id;
+
+            public int getRvw_id() {
+                return rvw_id;
+            }
+
+            public void setRvw_id(int rvw_id) {
+                this.rvw_id = rvw_id;
+            }
 
             public String getDetail() {
                 return detail;

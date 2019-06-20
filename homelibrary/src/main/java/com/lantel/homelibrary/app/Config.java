@@ -45,7 +45,10 @@ public class Config {
     public static final int REQUEST_TAKE_PHOTO = 103;
     public static final int REQUEST_SELECT_PHOTO = 104;
     public static final int REQUEST_PREVIEW_DETAIL = 105;
-
+    public static final int REQUEST_TAKE_VIDEO = 106;
+    public static final int RECORD_AUDIO = 107;
+    public static final int REQUEST_CHANGE_BID = 108;
+    public static final int REQUEST_HOMEDETAIL = 109;
 
     public static final String BIND_PHONE = "BIND_PHONE";
     public static final String BIND_WEIBO = "BIND_WEIBO";
@@ -98,4 +101,12 @@ public class Config {
     public static final String RESETPWD = "resetpwd";
     public static final String USER_RESETPWD = "user_resetpwd";
     public static final String BUSINESS_ID = "BUSINESS_ID";
+    public static final String IS_FINISH = "IS_FINISH";
+
+    public static final int MINE = 0;
+    public static final int OTHER = 1;
+    public static final String WEB_URL = "WEB_URL";
+
+    public static final String COUNT_NOTIFY = "dev_id";
+
 }

@@ -9,18 +9,12 @@ import com.lantel.homelibrary.notify.list.model.NotifyItemModel;
 import com.lantel.homelibrary.notify.mvp.NotifyContract;
 import com.lantel.homelibrary.notify.mvp.NotifyModel;
 import com.lantel.homelibrary.notify.mvp.NotifyPresenter;
-import com.lantel.mine.order.list.adpter.OrderAdapter;
-import com.lantel.studylibrary.preview.preview.list.adpter.PreviewAdapter;
-import com.lantel.studylibrary.preview.preview.list.model.PreviewItemModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.NormalListFragment;
-import com.xiao360.baselibrary.base.ToolBarStateFragment;
 import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;

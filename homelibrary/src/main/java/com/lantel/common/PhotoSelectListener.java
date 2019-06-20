@@ -1,9 +1,9 @@
 package com.lantel.common;
 
-import android.net.Uri;
+import com.xiao360.baselibrary.util.MediaBean;
 
 public interface PhotoSelectListener {
-    void onPhotoSelect(Uri uri);
+    void onPhotoSelect(MediaBean photoBean);
 
     void onSelectAlbum();
 }

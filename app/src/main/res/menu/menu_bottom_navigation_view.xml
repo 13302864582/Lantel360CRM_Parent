@@ -15,12 +15,12 @@
             android:title="@string/tabhost_study"
             app:showAsAction="always" />
 
-       <!-- <item
-            android:id="@+id/item_growup"
+        <item
+            android:id="@+id/item_zhibo"
             android:enabled="true"
-            android:icon="@drawable/group_selector"
-            android:title="@string/tabhost_growup"
-            app:showAsAction="always" />-->
+            android:icon="@drawable/zhibo_selector"
+            android:title="@string/tabhost_zhibo"
+            app:showAsAction="always" />
 
         <item
             android:id="@+id/item_mine"

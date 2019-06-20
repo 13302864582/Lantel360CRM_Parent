@@ -17,7 +17,7 @@ public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragm
 
     protected abstract void showLoading();
 
-    private void loadData(Observable<T> observable, boolean isLoadMore, RefreshLayout refreshLayout) {
+    protected void loadData(Observable<T> observable, boolean isLoadMore, RefreshLayout refreshLayout) {
         observable.compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<T>() {
                     @Override
@@ -33,7 +33,7 @@ public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragm
                             else
                                 ViewSetLoadMoreData(list);
                             FinishRefreshLoadMore(isLoadMore, refreshLayout);
-                            setUpCurrentPage(isLoadMore, refreshLayout);
+                            setUpCurrentPage(isLoadMore);
                         } else {
                             onFailure(new Throwable(getErrorMessage(data)));
                         }
@@ -50,7 +50,7 @@ public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragm
 
     protected abstract void ViewRefreshData(ArrayList<E> list);
 
-    public void setUpCurrentPage(boolean isLoadMore, RefreshLayout refreshLayout) {
+    public void setUpCurrentPage(boolean isLoadMore) {
         if (!isLoadMore) {
             mCurrentPage = 1;
         } else {

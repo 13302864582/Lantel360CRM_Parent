@@ -72,16 +72,23 @@ public class DetailAdapter extends PagerAdapter {
 
     private void onBindVideoViewHolder(VideoViewHolder vh, int position) {
         MediaModel videoModel = datas.get(position);
-        String videoImgUrl = videoModel.getFile_url()+"?vframe/jpg/offset/1";
-
+        String videoImgUrl ="";
         vh.mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // IjkPlayer or MediaPlayer
-        vh.mNiceVideoPlayer.setUp(/*videoModel.getFile_url()*/"http://s10.xiao360.com/qms/1/0/n2etB1wWU5dhr3OxrNiSxmkQx0kHiNNt.m4a",null);
+        vh.mNiceVideoPlayer.setUp(videoModel.getFile_url(),null);
         TxVideoPlayerController controller = new TxVideoPlayerController(context);
         controller.setTitle(videoModel.getFile_name());
-        Glide.with(context)
-                .load(videoImgUrl)
-                .placeholder(R.drawable.img_default)
-                .into(controller.imageView());
+        if(videoModel.isLocal()){
+            Glide.with(context)
+                    .load(videoModel.getFile_url())
+                    .placeholder(R.drawable.img_default)
+                    .into(controller.imageView());
+        }else {
+             videoImgUrl = videoModel.getFile_url()+"?vframe/jpg/offset/1";
+             Glide.with(context)
+                    .load(videoImgUrl)
+                    .placeholder(R.drawable.img_default)
+                    .into(controller.imageView());
+        }
         vh.mNiceVideoPlayer.setController(controller);
     }
 

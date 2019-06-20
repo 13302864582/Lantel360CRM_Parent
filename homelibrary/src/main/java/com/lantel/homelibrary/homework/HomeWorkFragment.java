@@ -1,7 +1,14 @@
 package com.lantel.homelibrary.homework;
 
 import android.view.View;
+
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.cangwang.core.IBaseClient;
+import com.cangwang.core.ModuleBus;
+import com.cangwang.core.ModuleEvent;
 import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
+import com.lantel.homelibrary.homework.list.ClickDetail;
 import com.lantel.homelibrary.homework.list.adpter.HomeWrokAdapter;
 import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
 import com.lantel.homelibrary.homework.mvp.HomeWorkContract;
@@ -15,7 +22,8 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, HomeWorkModel> implements HomeWorkContract.View, OnRefreshLoadMoreListener {
+public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, HomeWorkModel> implements HomeWorkContract.View, OnRefreshLoadMoreListener, ClickDetail {
+
     @Override
     public void refreshData(ArrayList<HomeWorkItemModel> menu) {
         stateLayout.refreshLayout.setEnableLoadMore(false);
@@ -26,6 +34,11 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
         } else{
             stateLayout.showEmptyView();
         }
+    }
+
+    @ModuleEvent(coreClientClass = HomeWorkClient.class)
+    public void refreshHomework(String s) {
+       mPresenter.refreshData(null);
     }
 
     @Override
@@ -48,7 +61,9 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new HomeWrokAdapter(getContext(),null);
+        HomeWrokAdapter adapter = new HomeWrokAdapter(getContext(),null);
+        adapter.setClickDetail(this);
+        return adapter;
     }
 
     @Override
@@ -101,4 +116,11 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
     public void showNetWorkError() {
 
     }
+
+    @Override
+    public void clickDetail(int ht_id, boolean isFinish) {
+        ARouter.getInstance().build("/lantel/360/homework/detail").withInt(Config.BUSINESS_ID,ht_id).withBoolean(Config.IS_FINISH,isFinish).navigation(getActivity(),Config.REQUEST_HOMEDETAIL);
+    }
+
+
 }
