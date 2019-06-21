@@ -43,7 +43,7 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
 
     @Override
     public void setLoadMoreData(ArrayList<HomeWorkItemModel> menu) {
-        int start = ((NotifyAdapter)mAdapter).getDatas().size();
+        int start = ((HomeWrokAdapter)mAdapter).getDatas().size();
         ((HomeWrokAdapter)mAdapter).getDatas().addAll(menu);
         mAdapter.notifyItemRangeInserted(start,menu.size());
         mAdapter.notifyItemRangeChanged(start,menu.size());

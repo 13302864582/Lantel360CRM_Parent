@@ -155,4 +155,8 @@
     <dimen name="goutong_chat">60dp</dimen>
     <dimen name="chat_commit">14sp</dimen>
     <dimen name="chat_commit_padding">10dp</dimen>
+
+    <dimen name="preview_text">12sp</dimen>
+    <dimen name="title_goutong">15sp</dimen>
+    <dimen name="chat_text">15sp</dimen>
 </resources>

@@ -1,11 +1,24 @@
 package com.lantel.homelibrary.communicate.mvp;
 
 import android.os.Bundle;
+
+import com.httpsdk.http.RxHelper;
+import com.lantel.homelibrary.R;
+import com.lantel.homelibrary.app.Config;
+import com.lantel.homelibrary.communicate.api.CommitChatReq;
 import com.lantel.homelibrary.communicate.api.CommunicateBean;
 import com.lantel.homelibrary.communicate.list.model.ItemModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.xiao360.baselibrary.base.BaseRxObserver;
+import com.xiao360.baselibrary.image.GlideUtils;
+import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.xiao360.baselibrary.util.SpCache;
+import com.xiao360.baselibrary.util.ToastUitl;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 
 public class CommunicatePresenter extends CommunicateContract.Presenter<CommunicateBean, ItemModel> {
@@ -67,57 +80,81 @@ public class CommunicatePresenter extends CommunicateContract.Presenter<Communic
 
     @Override
     protected int getTotal(CommunicateBean data) {
-        return 10;
+        if(null == data.getData())
+            return 0;
+        return data.getData().getList().size();
     }
 
     @Override
     protected int getErrorCode(CommunicateBean data) {
-        return 0;
+        return data.getError();
+    }
+    @Override
+    protected String getErrorMessage(CommunicateBean data) {
+        return data.getMessage();
     }
 
     @Override
     protected void setUpData(ArrayList<ItemModel> list, CommunicateBean data) {
-
-    }
-
-    @Override
-    protected void loadData(Observable<CommunicateBean> observable, boolean isLoadMore, RefreshLayout refreshLayout) {
-            ArrayList<ItemModel> list = new ArrayList<>();
-            for(int i=0;i<1;i++){
-            ItemModel itemModel = new ItemModel();
-            list.add(itemModel);
+        List<CommunicateBean.DataBean.ListBean> listBeans = data.getData().getList();
+        if(null!=listBeans && listBeans.size()>0){
+            for(CommunicateBean.DataBean.ListBean listBean : listBeans){
+                ItemModel model = new ItemModel();
+                boolean isMine = listBean.getSend_type()==0;
+                model.setType(isMine?Config.MINE:Config.OTHER);
+                model.setContent(listBean.getMessage());
+                model.setTime(listBean.getCreate_time());
+                //设置名字，头像
+                if(isMine){
+                    CommunicateBean.DataBean.ListBean.StudentBean studentBean = listBean.getStudent();
+                    if(null != studentBean){
+                        model.setTitle(studentBean.getStudent_name());
+                        model.setHeadImg(studentBean.getPhoto_url());
+                    }
+                }else {
+                    CommunicateBean.DataBean.ListBean.EmployeeBean employeeBean = listBean.getEmployee();
+                    if(null != employeeBean){
+                        model.setTitle(employeeBean.getEname());
+                        model.setHeadImg(employeeBean.getPhoto_url());
+                    }
+                }
+                list.add(model);
             }
+        }
 
-            if (!isLoadMore)
-                ViewRefreshData(list);
-            else
-                ViewSetLoadMoreData(list);
-            FinishRefreshLoadMore(isLoadMore, refreshLayout);
-            setUpCurrentPage(isLoadMore);
-    }
-
-    @Override
-    protected String getErrorMessage(CommunicateBean data) {
-        return "";
     }
 
     @Override
     protected Observable<CommunicateBean> getObserver(boolean isMore) {
-        if(!isMore)
-        return mModel.loadData(String.valueOf(mCurrentPage),String.valueOf(10));
-        else
-            return mModel.loadData(String.valueOf(mCurrentPage),String.valueOf(10));
+        String timeUrl = mView.getTimeUrl(isMore);
+        return mModel.loadData(timeUrl);
     }
 
     @Override
     public void setUpCurrentPage(boolean isLoadMore) {
-        //total : 总数,pageSize : 每页显示数，totalPage : 共页数
-        int total = mView.getItemCount();
-        int pageSize = 10;
-        int totalPage = (total + pageSize - 1)/pageSize;
-        if(total>10){
-            mCurrentPage = totalPage;
-        }else
-            mCurrentPage=1;
+
+    }
+
+    public void commitMessage(String content) {
+        CommitChatReq req = new CommitChatReq();
+        req.setSid(Integer.valueOf(SpCache.getString(Config.SID,"0")));
+        req.setMessage(content);
+        req.setMessage_type(0);
+        req.setApp_client_id(2);
+        req.setSend_type(0);
+        mModel.commitData(req)
+                .compose(RxHelper.io_main())
+                .compose(context.bindToLifecycle())
+                .subscribe(new BaseRxObserver<CommunicateBean>() {
+                    @Override
+                    public void onSuccess(CommunicateBean demo) {
+                        onLoadMore(null);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        ToastUitl.showShort(R.string.mess_error);
+                    }
+                });
     }
 }

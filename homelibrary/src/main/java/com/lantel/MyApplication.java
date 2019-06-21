@@ -1,5 +1,6 @@
 package com.lantel;
 
+import android.Manifest;
 import android.util.Log;
 
 import com.excellence.downloader.Downloader;
@@ -18,6 +19,9 @@ import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 import com.zzhoujay.richtext.RichText;
 
 import java.io.File;
@@ -70,6 +74,11 @@ public class MyApplication extends BaseApplication {
 
     @Override
     protected void onCreateSelf() {
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.READ_EXTERNAL_STORAGE
+                        ,Permission.WRITE_EXTERNAL_STORAGE)
+                .start();
         Downloader.init(this);
         File cacheDir = new File(getAppContext().getCacheDir(), "response");
         //缓存的最大尺寸10m

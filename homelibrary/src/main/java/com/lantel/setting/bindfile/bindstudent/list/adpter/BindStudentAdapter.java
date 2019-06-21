@@ -70,6 +70,6 @@ public class BindStudentAdapter extends BaseRecyclerViewAdapter<BindStudentListM
             });
             unBindDialog.show();
         });
-        GlideUtils.loadImageView(context,data.getHeaImg(),classesHolder.head_img);
+        GlideUtils.loadImageView(context,data.getHeaImg(),classesHolder.head_img,R.mipmap.circle_default);
     }
 }

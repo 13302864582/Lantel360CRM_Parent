@@ -19,6 +19,9 @@ import com.xiao360.baselibrary.util.AppConfig;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.MediaBean;
 import com.xiao360.baselibrary.util.PhotoUtil;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
+
 import androidx.fragment.app.Fragment;
 
 public class PopUtil {

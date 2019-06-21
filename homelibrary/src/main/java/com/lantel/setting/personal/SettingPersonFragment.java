@@ -37,6 +37,10 @@ import com.xiao360.baselibrary.util.MediaBean;
 import com.xiao360.baselibrary.util.PhotoUtil;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
+
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -108,7 +112,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
                                     if(String.valueOf(bean.getSid()).equals(sid)){
                                         photoPath = bean.getPhoto_url();
                                         studentName = bean.getStudent_name();
-                                        GlideUtils.loadCircle(getContext(),photoPath, headImg);
+                                        GlideUtils.loadCircle(getContext(),photoPath, headImg,R.mipmap.circle_default);
                                         PersonBean personBean = new PersonBean();
                                         personBean.setBirthDate(bean.getBirth_time());
                                         personBean.setName(studentName);
@@ -131,8 +135,20 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     public void onViewClicked(View view) {
         int id = view.getId();
         if (id == R.id.headImg || id == R.id.chageHead) {
-            PopUtil popUtil = new PopUtil();
-            popUtil.showPickPop(this, this);
+            AndPermission.with(this)
+                    .runtime()
+                    .permission(
+                            Permission.CAMERA
+                            ,Permission.READ_EXTERNAL_STORAGE
+                            ,Permission.WRITE_EXTERNAL_STORAGE)
+                    .onGranted(new Action<List<String>>() {
+                        @Override
+                        public void onAction(List<String> data) {
+                            PopUtil popUtil = new PopUtil();
+                            popUtil.showPickPop(SettingPersonFragment.this, SettingPersonFragment.this);
+                        }
+                    })
+                    .start();
         } else if (id == R.id.back) {
             getActivity().finish();
         } else if (id == R.id.text_right) {

@@ -15,6 +15,8 @@ public interface CommunicateContract {
         void setLoadMoreData(ArrayList<ItemModel> menu);
 
         int getItemCount();
+
+        String getTimeUrl(boolean isMore);
     }
 
     abstract class Presenter<T,E> extends RefreshListFragmentPresenter<T,E,View, com.lantel.homelibrary.communicate.mvp.CommunicateModel> {

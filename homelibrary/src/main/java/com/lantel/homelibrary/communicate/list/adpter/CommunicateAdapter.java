@@ -43,7 +43,7 @@ public class CommunicateAdapter extends BaseRecyclerViewAdapter<ItemModel> {
         setText(model.getTitle(),communicateHolder.name);
         setText(model.getTime(),communicateHolder.time);
         setText(model.getContent(),communicateHolder.content);
-        GlideUtils.loadCircle(context,model.getHeadImg(),communicateHolder.head_img);
+        GlideUtils.loadCircle(context,model.getHeadImg(),communicateHolder.head_img,R.mipmap.circle_default);
     }
 
     @Override

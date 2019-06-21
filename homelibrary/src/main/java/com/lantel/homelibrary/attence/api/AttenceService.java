@@ -15,3 +15,6 @@ public interface AttenceService {
     @GET
     Observable<ResponseBody> getAttenceDataRange(@HeaderMap Map<String, String> headers,@Url String url);
 }
+/*
+http://dev.xiao360.com/sapi/student_attendances?int_day=[Between,20190801,20190831]&page=1&pagesize=10
+http://dev.xiao360.com/sapi/im_chats?create_time=[<,1561108595657]&page=1&pagesize=20*/

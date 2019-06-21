@@ -78,10 +78,11 @@
     <string name="class_review">课评</string>
     <string name="remark_title">老师对我的点评</string>
     <string name="notify">通知</string>
-    <string name="sAttenceDateFormat" >"student_attendances?int_day=[Between,%1$s,%2$s]"</string>
-    <string name="sectionFormat">第%1$d章</string>
+    <string name="sAttenceDateFormat">"student_attendances?int_day=[Between,%1$s,%2$s]"</string>
+    <string name="historyMessFormat">"im_chats?create_time=[lt,%1$s]"</string>
+    <string name="newMessFormat">"im_chats?create_time=[gt,%1$s]"</string>
     <string name="course_formate" >%1$s</string>
-
+    <string name="sectionFormat" >%1$d</string>
     <string name="month_format">%1$d月</string>
     <string name="total_money">总资产(CNY)</string>
     <string name="bussinessType1">结账</string>
@@ -164,4 +165,5 @@
     <string name="empty_homework">请输入作业内容</string>
     <string name="reply">回复</string>
     <string name="size_error">文件大小不能0</string>
+    <string name="mess_error">发送失败</string>
 </resources>

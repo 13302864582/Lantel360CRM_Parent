@@ -34,8 +34,7 @@
             android:id="@+id/content"
             android:background="@drawable/communicate_grey"
             android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/chat_text"
             />
     </RelativeLayout>
 

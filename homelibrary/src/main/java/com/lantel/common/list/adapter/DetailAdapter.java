@@ -100,7 +100,7 @@ public class DetailAdapter extends PagerAdapter {
 
     private void onBindPhotoViewHolder(PhotoViewHolder vh, int position) {
         MediaModel photoModel = datas.get(position);
-        GlideUtils.loadImageView(context,photoModel.getFile_url(),vh.thumbnail);
+        GlideUtils.loadImageView(context,photoModel.getFile_url(),vh.thumbnail,R.mipmap.img_load_fail);
     }
 
     private int getItemViewType(int position) {

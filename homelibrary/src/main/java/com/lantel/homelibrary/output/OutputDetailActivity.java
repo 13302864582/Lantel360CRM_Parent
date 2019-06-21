@@ -115,7 +115,7 @@ public class OutputDetailActivity extends BaseMVPActivity implements OutputDetai
         boolean isRemark =  getIntent().getBooleanExtra(Config.IS_REMARK,false);
         if(!TextUtils.isEmpty(data)){
             CardOutputModel cardOutputModel = new Gson().fromJson(data, CardOutputModel.class);
-            GlideUtils.loadImageView(this,cardOutputModel.getHeadImg(),headImg);
+            GlideUtils.loadImageView(this,cardOutputModel.getHeadImg(),headImg,R.mipmap.circle_default);
             name.setText(cardOutputModel.getTitle());
             time.setText(cardOutputModel.getTime());
             content.setText(cardOutputModel.getContent());

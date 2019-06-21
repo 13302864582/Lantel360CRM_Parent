@@ -14,8 +14,8 @@ public interface LoginService {
     @GET
     Observable<LoginBean> login(@Url String url);
 
-    @POST("users/{uid}/{dev_id}")
-    Observable<LoginBean> bindDevice(@Path("uid")String uid,@Path("dev_id")String dev_id);
+    @POST("users/{uid}/doapp_device_id")
+    Observable<LoginBean> bindDevice(@Path("uid")String uid,@Body DeviceBean dev_id);
 
     @GET("logout")
     Observable<LogoutBean> logout(@HeaderMap Map<String, String> headers);

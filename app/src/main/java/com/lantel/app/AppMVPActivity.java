@@ -23,12 +23,15 @@ import com.lantel.homelibrary.app.Config;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.ToastUitl;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;

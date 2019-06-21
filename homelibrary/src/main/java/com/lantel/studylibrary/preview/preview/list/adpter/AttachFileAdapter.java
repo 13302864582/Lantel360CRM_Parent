@@ -101,7 +101,7 @@ public class AttachFileAdapter extends BaseRecyclerViewAdapter<AttachFile> {
         if(exist){
             holder.file_img.setVisibility(View.VISIBLE);
             String imgUrl = data.getFile_url()+"?vframe/jpg/offset/1";
-            GlideUtils.loadImageView(context,imgUrl,holder.file_img);
+            GlideUtils.loadImageView(context,imgUrl,holder.file_img,R.mipmap.img_load_fail);
             holder.download_lay.setVisibility(View.GONE);
             holder.thumb.setVisibility(View.VISIBLE);
             holder.thumb.setImageResource(R.mipmap.play);

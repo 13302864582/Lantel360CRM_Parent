@@ -37,7 +37,7 @@ public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
     @Override
     protected void bindViewHolder(BaseViewHolder holder, CardOutputModel model, int position, int viewType) {
         CardOutputHolder cardOutputHolder = (CardOutputHolder) holder;
-        GlideUtils.loadImageView(context,model.getHeadImg(),cardOutputHolder.head_img);
+        GlideUtils.loadImageView(context,model.getHeadImg(),cardOutputHolder.head_img,R.mipmap.circle_default);
         setText(model.getTitle(),cardOutputHolder.name);
         setText(model.getTime(),cardOutputHolder.time);
         setText(model.getContent(),cardOutputHolder.content);

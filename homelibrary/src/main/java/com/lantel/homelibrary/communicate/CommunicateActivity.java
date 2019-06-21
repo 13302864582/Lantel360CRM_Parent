@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 public class CommunicateActivity extends FragmentActivity {
     @Override
     protected String getFragmentTag() {
-        return Config.OUTPUT_TAG;
+        return "";
     }
 
     @Override

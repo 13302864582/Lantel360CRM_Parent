@@ -124,7 +124,7 @@ public class AttencePresenter extends AttenceContract.Presenter {
                             } else {
                                 onFailure(new Throwable(dataBean.get("message").getAsString()));
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             onFailure(new Throwable(e.getMessage()));
                         }

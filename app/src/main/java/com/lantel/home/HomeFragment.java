@@ -95,8 +95,8 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         locationText.setText(homeTopModel.getBranch_address());
         username.setText(homeTopModel.getStudent_name());
         mModel.setChangeAccountBeans(changeAccountBeans);
-        GlideUtils.loadCircle(getContext(),homeTopModel.getStudent_img(),topImgLeftUser);
-        GlideUtils.loadImageView(getContext(),homeTopModel.getRecommend_cover(),logo);
+        GlideUtils.loadCircle(getContext(),homeTopModel.getStudent_img(),topImgLeftUser,R.mipmap.circle_default);
+        GlideUtils.loadImageView(getContext(),homeTopModel.getRecommend_cover(),logo,R.mipmap.logo);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     @Override
     public void navigationPath(String path) {
         if(path.equals(getString(R.string.home_credit_path))){
-            String url = "http://dev.xiao360.com/ui/cs";
+            String url = "http://hzs.xiao360.com/ui/cs";
             ARouter.getInstance().build(getString(R.string.web_path)).withString(Config.WEB_URL,url).navigation();
         }else {
             ARouter.getInstance().build(path).navigation();

@@ -6,8 +6,12 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface CommunicateService {
-    @GET("students")
-    Observable<CommunicateBean> getStudentData(@HeaderMap Map<String, String> headers, @Query("uid") String uid);
+    @GET
+    Observable<CommunicateBean> getChatData(@HeaderMap Map<String, String> headers,@Url String url);
+
+    @GET
+    Observable<CommunicateBean> commitChatData(@HeaderMap Map<String, String> headers,@Url CommitChatReq req);
 }

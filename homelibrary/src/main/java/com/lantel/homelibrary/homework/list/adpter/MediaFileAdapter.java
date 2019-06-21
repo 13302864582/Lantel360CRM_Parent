@@ -82,7 +82,7 @@ public class MediaFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
              photoUrl = data.getFile_url();
         }else
              photoUrl = data.getFile_url()+"?vframe/jpg/offset/1";
-        GlideUtils.loadImageView(context,photoUrl,mediaFileHolder.img);
+        GlideUtils.loadImageView(context,photoUrl,mediaFileHolder.img,R.mipmap.img_load_fail);
         mediaFileHolder.img.setOnClickListener((View view)-> {
             navigateGallery(data);
         });
@@ -107,7 +107,7 @@ public class MediaFileAdapter extends BaseRecyclerViewAdapter<MediaModel> {
         mediaFileHolder.delete.setVisibility(View.VISIBLE);
         mediaFileHolder.play.setVisibility(View.GONE);
         mediaFileHolder.duration.setVisibility(View.GONE);
-        GlideUtils.loadImageView(context,data.getFile_url(),mediaFileHolder.img);
+        GlideUtils.loadImageView(context,data.getFile_url(),mediaFileHolder.img,R.mipmap.img_load_fail);
         mediaFileHolder.img.setOnClickListener((View view)-> {
             navigateGallery(data);
         });

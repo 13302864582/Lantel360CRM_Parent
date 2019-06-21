@@ -49,7 +49,7 @@ public class BindAccountAdapter extends BaseRecyclerViewAdapter<BaseModel> {
     protected void bindViewHolder(BaseViewHolder holder, BaseModel data, int position, int viewType) {
         BindAccountHolder accountHolder = (BindAccountHolder) holder;
         BindAccountModel accountModel = (BindAccountModel) data;
-        GlideUtils.loadImageView(context,accountModel.getImage_path(),((BindAccountHolder) holder).icon);
+        GlideUtils.loadImageView(context,accountModel.getImage_path(),((BindAccountHolder) holder).icon,R.mipmap.img_load_fail);
         setText(accountModel.getTitle(),accountHolder.title);
 
         if(accountModel.getRoute_flag().equals(Config.BIND_PHONE)){

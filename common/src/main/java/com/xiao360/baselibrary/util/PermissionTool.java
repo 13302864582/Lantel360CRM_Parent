@@ -38,7 +38,7 @@ public class PermissionTool {
                         public void onAction(final List<String> data) {
                             if (AndPermission.hasAlwaysDeniedPermission(context, permissionGroup)) {
                                 //替换为自己的对话框
-                                new MaterialDialog.Builder(context)
+                                /*new MaterialDialog.Builder(context)
                                         .title("标题")
                                         .content("内容")
                                         .cancelable(false)
@@ -59,7 +59,7 @@ public class PermissionTool {
                                                     listener.onDenied(data);
                                             }
                                         })
-                                        .show();
+                                        .show();*/
                             } else {
                                 //拒绝后重复请求
                                 requestPermission(context, listener, permissionGroup);

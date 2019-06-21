@@ -228,9 +228,12 @@
 
     </style>
 
+    <style name="chat_text" parent="wrap_wh">
+        <item name="android:textSize">@dimen/chat_text</item>
+        <item name="android:textColor">@color/chat_text</item>
+    </style>
 
-    <color name="preview_text">#3d3d3d</color>
-    <color name="title_goutong">#585656</color>
-    <dimen name="preview_text">12sp</dimen>
-    <dimen name="title_goutong">15sp</dimen>
+
+
+
 </resources>

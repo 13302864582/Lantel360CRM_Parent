@@ -6,14 +6,14 @@ public class ItemModel extends BaseModel {
     private String headImg;
     private String content;
     private String time;
-    private int id;
+    private int sid;
 
     public int getId() {
-        return id;
+        return sid;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.sid = id;
     }
 
     public String getTime() {

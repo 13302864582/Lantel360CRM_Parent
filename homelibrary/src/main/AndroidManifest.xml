@@ -92,7 +92,8 @@
 
         <activity android:name=".message.MessageActivity"/>
 
-        <activity android:name=".communicate.CommunicateActivity"/>
+        <activity android:name=".communicate.CommunicateActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <activity android:name=".WebActivity"/>
 

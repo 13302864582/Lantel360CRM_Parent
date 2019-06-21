@@ -33,7 +33,7 @@ public class ClassesAdapter extends BaseRecyclerViewAdapter<ClassesCardModel> {
         setText(data.getClassName(),classesHolder.classes_name);
         setText(data.getTeacher(),classesHolder.classes_teacher);
         setText(data.getPercent()+"/"+data.getTotal(), classesHolder.classes_percent);
-        GlideUtils.loadCircle(context,data.getHeaImg(),R.color.circle,classesHolder.head_img);
+        GlideUtils.loadCircle(context,data.getHeaImg(),R.color.circle,R.mipmap.circle_default,classesHolder.head_img);
         if(data.getTotal() != 0)
         classesHolder.seekBar.setMaxprogress(data.getTotal());
         classesHolder.seekBar.setProgress(data.getPercent());

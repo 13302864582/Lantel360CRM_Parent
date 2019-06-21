@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.lantel.common.list.holder.SimpleMenuHolder;
 import com.lantel.common.list.model.SimpleMenuModel;
+import com.lantel.crmparent.R;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;

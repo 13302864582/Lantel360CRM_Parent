@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
+import com.lantel.Login.api.DeviceBean;
 import com.lantel.Login.api.LoginBean;
 import com.lantel.Login.api.LoginService;
 import com.lantel.MyApplication;
@@ -103,7 +104,9 @@ public class AppPresenter extends AppContract.Presenter implements BottomNavigat
 
         LoginService service = Http.getInstance().createRequest(LoginService.class);
         String dev_id = Settings.System.getString(context.getContentResolver(), Settings.System.ANDROID_ID);
-        service.bindDevice(SpCache.getString(Config.UID,"0"),dev_id)
+        DeviceBean deviceBean = new DeviceBean();
+        deviceBean.setDoapp_device_id(dev_id);
+        service.bindDevice(SpCache.getString(Config.UID,"0"),deviceBean)
                 .compose(RxHelper.io_main())
                 .compose(context.bindToLifecycle())
                 .subscribe(new BaseRxObserver<LoginBean>() {

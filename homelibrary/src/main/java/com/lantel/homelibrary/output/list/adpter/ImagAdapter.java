@@ -65,7 +65,7 @@ public class ImagAdapter extends BaseRecyclerViewAdapter<MediaModel> {
             });
         }else {
             imageHolder.play.setVisibility(viewType == Config.VIDEO?View.VISIBLE:View.GONE);
-            GlideUtils.loadImageView(context,imgUrl,imageHolder.img);
+            GlideUtils.loadImageView(context,imgUrl,imageHolder.img,R.mipmap.img_load_fail);
             imageHolder.img.setOnClickListener((View view)-> {
                 Gson gson = new Gson();
                 ARouter.getInstance().build("/lantel/360/galleyDetail").withString(Config.JSON_IMG_VIDEO,gson.toJson(datas)).withInt(Config.POSITION,position).navigation();

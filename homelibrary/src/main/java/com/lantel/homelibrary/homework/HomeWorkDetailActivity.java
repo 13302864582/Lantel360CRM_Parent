@@ -1,6 +1,7 @@
 package com.lantel.homelibrary.homework;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.transition.SidePropagation;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +39,7 @@ import com.lantel.homelibrary.homework.list.adpter.ClickAddListener;
 import com.lantel.homelibrary.homework.list.adpter.MediaFileAdapter;
 import com.lantel.homelibrary.output.list.AlbumFileView;
 import com.lantel.setting.bindAccount.api.BindAccountBean;
+import com.lantel.setting.personal.SettingPersonFragment;
 import com.lantel.setting.personal.api.UploadBean;
 import com.lantel.setting.personal.api.UploadService;
 import com.ldoublem.loadingviewlib.view.LVFunnyBar;
@@ -52,6 +55,9 @@ import com.xiao360.baselibrary.util.MediaBean;
 import com.xiao360.baselibrary.util.PhotoUtil;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 import com.zzhoujay.richtext.RichText;
 
 import org.json.JSONObject;
@@ -177,7 +183,9 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
     public void initView() {
         title.setText(R.string.title_homework_detail);
         textRight.setText(R.string.upload);
+        textRight.setVisibility(isFinish?View.GONE:View.VISIBLE);
         textRight.setOnClickListener((View view) -> {
+            closeInputMethod(commit_edit);
             upLoadHomeWork();
         });
         business_id = getIntent().getIntExtra(Config.BUSINESS_ID, -1);
@@ -199,26 +207,50 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
                 startActivityForResult(intent, Config.RECORD_AUDIO);
             });
             commit_img.setOnClickListener((View view) -> {
-                PopUtil popUtil = new PopUtil();
-                popUtil.showPickPop(this, this);
+                AndPermission.with(this)
+                        .runtime()
+                        .permission(
+                                Permission.CAMERA
+                                ,Permission.READ_EXTERNAL_STORAGE
+                                ,Permission.WRITE_EXTERNAL_STORAGE)
+                        .onGranted(new Action<List<String>>() {
+                            @Override
+                            public void onAction(List<String> data) {
+                                PopUtil popUtil = new PopUtil();
+                                popUtil.showPickPop(HomeWorkDetailActivity.this, HomeWorkDetailActivity.this);
+                            }
+                        })
+                        .start();
             });
             commit_video.setOnClickListener((View view) -> {
-                Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                try {
-                    // start the Video Capture Intent
-                    //限制时长s
-                    intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5 * 60);
-                    //限制大小
-                    //intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 10*1024*1024);
-                    //设置质量
-                    intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                    //设置输出位置
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "gridview" + File.separator + System.currentTimeMillis() + ".mp4"));
+                AndPermission.with(this)
+                        .runtime()
+                        .permission(
+                                Permission.CAMERA
+                                ,Permission.READ_EXTERNAL_STORAGE
+                                ,Permission.WRITE_EXTERNAL_STORAGE)
+                        .onGranted(new Action<List<String>>() {
+                            @Override
+                            public void onAction(List<String> data) {
+                                Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                                try {
+                                    // start the Video Capture Intent
+                                    //限制时长s
+                                    intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5 * 60);
+                                    //限制大小
+                                    //intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 10*1024*1024);
+                                    //设置质量
+                                    intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+                                    //设置输出位置
+                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "gridview" + File.separator + System.currentTimeMillis() + ".mp4"));
 
-                    startActivityForResult(intent, Config.REQUEST_TAKE_VIDEO);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                                    startActivityForResult(intent, Config.REQUEST_TAKE_VIDEO);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                } }
+                        })
+                        .start();
+
             });
             commit_cancel.setOnClickListener((View view) -> {
                 select_lay.setVisibility(View.INVISIBLE);
@@ -313,42 +345,40 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
                         Observable.create((ObservableOnSubscribe<UploadResponeBean>) emitter -> {
                             String filename =  UUID.randomUUID().toString() + "." + path.getFile_url().split("\\.")[1];
                             String key =  pre_fix+  "com.lantel.lh01/homework/" + filename;
-                            uploadManager.put(path.getFile_url(), key, token, (String reskey, ResponseInfo info, JSONObject response)-> {
-                                    if (info.isOK()) {
-                                        HomeWorkService service = Http.getInstance().createRequest(HomeWorkService.class);
-                                        UpLoadAttach attach = new UpLoadAttach();
-                                        attach.setFile_name(filename);
-                                        attach.setFile_url(domain+key);
-                                        String filetype = getFileExtensionName(path.getFile_url());
-                                        attach.setFile_type(filetype);
-                                        attach.setJs_upload(1);
-                                        try {
-                                            File f = new File(path.getFile_url());
-                                            long size = getFileSizes(f);
-                                            attach.setFile_size(size);
-                                            LogUtils.d("上传文件===="+filename+"===="+domain+key+"===="+size+"===="+filetype);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                        service.uploadAttachFile(HeaderUtil.getJsonHeaderMap(),"http://dev.xiao360.com/api/upload",attach)
-                                                .compose(RxHelper.io_main())
-                                                .subscribe(new BaseRxObserver<UploadResponeBean>() {
-                                                    @Override
-                                                    public void onSuccess(UploadResponeBean bean) {
-                                                        emitter.onNext(bean);
-                                                        emitter.onComplete();
-                                                    }
+                            ResponseInfo info = uploadManager.syncPut(path.getFile_url(), key, token,null);
+                            if (info.isOK()) {
+                                HomeWorkService service = Http.getInstance().createRequest(HomeWorkService.class);
+                                UpLoadAttach attach = new UpLoadAttach();
+                                attach.setFile_name(filename);
+                                attach.setFile_url(domain+key);
+                                String filetype = getFileExtensionName(path.getFile_url());
+                                attach.setFile_type(filetype);
+                                attach.setJs_upload(1);
+                                try {
+                                    File f = new File(path.getFile_url());
+                                    long size = getFileSizes(f);
+                                    attach.setFile_size(size);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                service.uploadAttachFile(HeaderUtil.getJsonHeaderMap(),"http://dev.xiao360.com/api/upload",attach)
+                                        .compose(RxHelper.io_main())
+                                        .subscribe(new BaseRxObserver<UploadResponeBean>() {
+                                            @Override
+                                            public void onSuccess(UploadResponeBean bean) {
+                                                emitter.onNext(bean);
+                                                emitter.onComplete();
+                                            }
 
-                                                    @Override
-                                                    public void onFailure(Throwable e) {
-                                                        emitter.onError(new IOException(info.error));
-                                                    }
-                                                });
-                                    } else {
-                                        // 上传失败，告辞
-                                        emitter.onError(new IOException(info.error));
-                                    }
-                            }, null);
+                                            @Override
+                                            public void onFailure(Throwable e) {
+                                                emitter.onError(new IOException(info.error));
+                                            }
+                                        });
+                            } else {
+                                // 上传失败，告辞
+                                emitter.onError(new IOException(info.error));
+                            }
                         }).subscribeOn(Schedulers.io())
                 )
                 // 线程切换
@@ -422,9 +452,9 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
             }
 
             Map<String, ArrayList<MediaModel>> map = getNewMap();
-            List<HomeWorkDetailFinishBean.DataBean.HomeworkCompleteBean.HomeworkAttachmentBean> attachmentBeans = completeBean.getHomework_attachment();
+            List<HomeWorkDetailFinishBean.DataBean.HomeworkCompleteBean.CompleteAttachmentBean> attachmentBeans = completeBean.getComplete_attachment();
             if (null != attachmentBeans && attachmentBeans.size() > 0) {
-                for (HomeWorkDetailFinishBean.DataBean.HomeworkCompleteBean.HomeworkAttachmentBean attachmentBean : attachmentBeans) {
+                for (HomeWorkDetailFinishBean.DataBean.HomeworkCompleteBean.CompleteAttachmentBean attachmentBean : attachmentBeans) {
                     int mediaType = getMediaType(attachmentBean.getMedia_type());
                     MediaModel mediaModel = new MediaModel();
                     mediaModel.setFile_name(attachmentBean.getFile_name());
@@ -446,7 +476,7 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
             if (!TextUtils.isEmpty(student_name)) {
                 name_respone.setText(student_name);
             }
-            GlideUtils.loadCircle(this, studentBean.getPhoto_url(), head_img_respone);
+            GlideUtils.loadCircle(this, studentBean.getPhoto_url(), head_img_respone,R.mipmap.circle_default);
         }
     }
 
@@ -550,7 +580,7 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
             nameTask.setText(name);
 
         if (!TextUtils.isEmpty(photo_url))
-            GlideUtils.loadCircle(HomeWorkDetailActivity.this, photo_url, headImgTask);
+            GlideUtils.loadCircle(HomeWorkDetailActivity.this, photo_url, headImgTask,R.mipmap.circle_default);
 
         setUpAttachFileTask(map);
     }
@@ -712,5 +742,18 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
             }
         }
         return filename;
+    }
+
+    /**
+     * 隐藏键盘
+     */
+//隐藏键盘
+    public void closeInputMethod(EditText tv_works_name) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        boolean isOpen = imm.isActive();
+        if(isOpen) {
+            imm.hideSoftInputFromWindow(tv_works_name.getWindowToken(), 0); //强制隐藏键盘
+            isOpen=false;
+        }
     }
 }

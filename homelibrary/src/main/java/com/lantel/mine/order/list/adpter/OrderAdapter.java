@@ -39,7 +39,7 @@ public class OrderAdapter extends BaseRecyclerViewAdapter<OrderItemModel> {
         setText(data.getDate_time(),orderHolder.order_date_time);
         setText(data.getOrder_state(),orderHolder.order_state);
         setText(data.getMoney_record(),orderHolder.money_record);
-        GlideUtils.loadImageView(context,data.getImg(),orderHolder.order_img,R.mipmap.ad);
+        GlideUtils.loadImageView(context,data.getImg(),orderHolder.order_img,R.mipmap.img_load_fail);
         orderHolder.itemView.setOnClickListener((View view)-> {
             ARouter.getInstance().build("/lantel/360/order/detail").withString(Config.ORDER_DETAIL,data.getOrderItemJson()).navigation();
         });

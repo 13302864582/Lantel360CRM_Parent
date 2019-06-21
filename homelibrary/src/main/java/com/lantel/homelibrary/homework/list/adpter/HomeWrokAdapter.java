@@ -50,7 +50,7 @@ public class HomeWrokAdapter extends BaseRecyclerViewAdapter<HomeWorkItemModel> 
         boolean isFinish = data.isFinish();
         setText(getString(isFinish?R.string.finished:R.string.unfinish),homeWorkHolder.homework_finish);
         homeWorkHolder.homework_finish.setSelected(isFinish);
-        GlideUtils.loadCircle(context,data.getImgUrl(),homeWorkHolder.homewrok_img);
+        GlideUtils.loadCircle(context,data.getImgUrl(),homeWorkHolder.homewrok_img,R.mipmap.circle_default);
         homeWorkHolder.itemView.setOnClickListener((View view)-> {
             if(  null != clickDetail && data.getHt_id()!=-1){
                 clickDetail.clickDetail(data.getHt_id(),isFinish);
