@@ -13,6 +13,6 @@ import io.reactivex.Observable;
 public class BindStudentModel extends ViewModel {
     public Observable<BindStudentBean> loadData() {
         BindStudentService service = Http.getInstance().createRequest(BindStudentService.class);
-        return service.getAccountData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,"0")).compose(RxHelper.io_main());
+        return service.getAccountData(HeaderUtil.getJsonHeaderMap(), SpCache.getString(Config.UID,"0")).compose(RxHelper.io_main());
     }
 }

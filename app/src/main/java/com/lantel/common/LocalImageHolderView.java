@@ -8,6 +8,9 @@ import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleBus;
 import com.lantel.crmparent.R;
 
+/***
+ *  本地菜单按钮的holder
+ */
 public class LocalImageHolderView extends Holder<Integer> {
     private ImageView splash_img;
     private TextView jump_rightnow;

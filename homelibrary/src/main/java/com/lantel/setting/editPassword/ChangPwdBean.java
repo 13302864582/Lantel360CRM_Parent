@@ -1,30 +1,7 @@
 package com.lantel.setting.editPassword;
 
-public class ChangPwdBean {
+import com.lantel.common.HttpResBean;
 
-    /**
-     * error : 0
-     * message : success
-     * data : []
-     * authed : true
-     */
+public class ChangPwdBean extends HttpResBean {
 
-    private int error;
-    private String message;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

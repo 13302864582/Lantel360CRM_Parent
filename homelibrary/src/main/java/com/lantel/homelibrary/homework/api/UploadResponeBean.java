@@ -1,6 +1,8 @@
 package com.lantel.homelibrary.homework.api;
 
-public class UploadResponeBean {
+import com.lantel.common.HttpResBean;
+
+public class UploadResponeBean extends HttpResBean {
 
     /**
      * error : 0
@@ -8,26 +10,7 @@ public class UploadResponeBean {
      * data : {"og_id":0,"storage":"qiniu","file_url":"http://s10.xiao360.com/qms/1/0/XUgOk7PfpdBf2LdpT94pLrqNqeF92zQT.png","file_type":"png","file_name":"屏幕快照 2019-06-19 下午5.40.22.png","file_size":98065,"media_type":"image","create_uid":10028,"file_id":"191"}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

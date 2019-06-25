@@ -1,8 +1,10 @@
 package com.lantel.homelibrary.homework.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class HomeWorkBean {
+public class HomeWorkBean  extends HttpResBean {
 
 
     /**
@@ -11,26 +13,7 @@ public class HomeWorkBean {
      * data : {"complete":{"total":1,"list":[{"ht_id":10,"og_id":0,"bid":8,"lid":0,"ca_id":265,"lesson_type":0,"cid":6,"sid":0,"sids":[""],"eid":10016,"htts_id":0,"content":"新接口第一次发布作业测试","remark":"第一次发布作业","deadline":20190626,"push_status":1,"create_time":"2019-06-19 16:30:36","employee":{"eid":10016,"ename":"老师6号-1","uid":10040,"mobile":"17712345678","photo_url":""},"class_name":"演示6-1班"}],"page":1,"pagesize":20,"sql":"SELECT `eid`,`ename`,`uid`,`mobile`,`photo_url` FROM `x360p_employee` WHERE (  `eid` IN (10016)  AND `x360p_employee`.`og_id` = 0 ) AND `x360p_employee`.`delete_time` IS NULL"},"incomplete":{"total":3,"list":[{"ht_id":10,"og_id":0,"bid":8,"lid":0,"ca_id":265,"lesson_type":0,"cid":6,"sid":0,"sids":[""],"eid":10016,"htts_id":0,"content":"新接口第一次发布作业测试","remark":"第一次发布作业","deadline":20190626,"push_status":1,"create_time":"2019-06-19 16:30:36","employee":{"eid":10016,"ename":"老师6号-1","uid":10040,"mobile":"17712345678","photo_url":""},"class_name":"演示6-1班"},{"ht_id":25,"og_id":0,"bid":8,"lid":0,"ca_id":265,"lesson_type":0,"cid":6,"sid":0,"sids":[""],"eid":10016,"htts_id":0,"content":"第n次吃啥布置作业","remark":"第那次","deadline":20190626,"push_status":1,"create_time":"2019-06-19 19:06:21","employee":{"eid":10016,"ename":"老师6号-1","uid":10040,"mobile":"17712345678","photo_url":""},"class_name":"演示6-1班"},{"ht_id":43,"og_id":0,"bid":8,"lid":0,"ca_id":265,"lesson_type":0,"cid":6,"sid":0,"sids":[""],"eid":10016,"htts_id":0,"content":"布置作业啦","remark":"布置作业啦","deadline":20190627,"push_status":1,"create_time":"2019-06-20 10:16:18","employee":{"eid":10016,"ename":"老师6号-1","uid":10040,"mobile":"17712345678","photo_url":""},"class_name":"演示6-1班"}],"page":1,"pagesize":20,"sql":"SELECT `eid`,`ename`,`uid`,`mobile`,`photo_url` FROM `x360p_employee` WHERE (  `eid` IN (10016)  AND `x360p_employee`.`og_id` = 0 ) AND `x360p_employee`.`delete_time` IS NULL"}}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

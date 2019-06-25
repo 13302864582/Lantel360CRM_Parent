@@ -1,46 +1,47 @@
 package com.lantel.mine.mvp;
 
 import android.os.Bundle;
+
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.mine.api.MineCardBean;
-import com.xiao360.baselibrary.base.BaseRxObserver;
-import com.xiao360.baselibrary.util.LogUtils;
 
 public class MinePresenter extends MineContract.Presenter{
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("===onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("===onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("MinePresenter===onStart: ");
+
         loadData();
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("===onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("===onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("===onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("===onCrete: ");
+
     }
 
 
@@ -48,14 +49,10 @@ public class MinePresenter extends MineContract.Presenter{
     private void loadData() {
         mModel.loadData()
                 .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<MineCardBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(MineCardBean data) {
-                        if(data.getError()==0){
-                                mView.notifyCardData(data);
-                        }else {
-                            onFailure(new Throwable(data.getMessage()));
-                        }
+                    public void onSuccess(HttpResBean data) {
+                        mView.notifyCardData((MineCardBean) data);
                     }
 
                     @Override

@@ -13,13 +13,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cangwang.core.ModuleBus;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.xiao360.baselibrary.util.AppManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.xiao360.baselibrary.util.AppManager;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
-    private Context mContext;
+    protected Context mContext;
     private boolean isConfigChange = false;
 
     @Override
@@ -45,6 +45,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ModuleBus.getInstance().register(this);
 
         mContext = this;
+
         //初始化状态栏
         ImmersionBar.with(this)
                 .hideBar(BarHide.FLAG_SHOW_BAR)
@@ -58,7 +59,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     /**
      * 设置layout前配置
      */
-    private void doBeforeSetcontentView() {
+    protected void doBeforeSetcontentView() {
         // 把actvity放到application栈中管理
         AppManager.getAppManager().addActivity(this);
         // 无标题

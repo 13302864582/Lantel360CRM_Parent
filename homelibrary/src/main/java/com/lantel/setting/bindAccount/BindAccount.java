@@ -5,12 +5,15 @@ import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.BarHide;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
@@ -21,11 +24,11 @@ import com.lantel.setting.bindAccount.list.adapter.BindAccountAdapter;
 import com.lantel.setting.bindAccount.list.model.BindAccountModel;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
 import com.xiao360.baselibrary.base.BaseModel;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
 
 import java.util.ArrayList;
+
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -162,16 +165,15 @@ public class BindAccount extends BaseMVPActivity implements BindAccountAdapter.o
         service.bindPhoto(HeaderUtil.getJsonHeaderMap(),bindPhoneReqBean)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<BindPhoneBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(BindPhoneBean bindPhoneBean) {
-                        if(bindPhoneBean.getError()==0){
-                            SpCache.putBoolean(Config.BIND_PHONE,true);
-                            SpCache.putString(Config.PNONE_NUMBER,phone);
-                            if(null != bindPhone)
-                                bindPhone.dismiss();
-                            notifyBindPhone();
-                        }
+                    public void onSuccess(HttpResBean resBean) {
+                        BindPhoneBean bindPhoneBean = (BindPhoneBean) resBean;
+                        SpCache.putBoolean(Config.BIND_PHONE,true);
+                        SpCache.putString(Config.PNONE_NUMBER,phone);
+                        if(null != bindPhone)
+                            bindPhone.dismiss();
+                        notifyBindPhone();
                         ToastUitl.showShort(bindPhoneBean.getMessage());
                     }
 

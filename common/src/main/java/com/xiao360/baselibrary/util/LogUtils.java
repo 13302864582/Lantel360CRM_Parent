@@ -1,6 +1,5 @@
 package com.xiao360.baselibrary.util;
 
-
 import android.text.TextUtils;
 import android.util.Log;
 

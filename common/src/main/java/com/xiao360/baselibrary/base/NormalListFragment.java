@@ -4,44 +4,55 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.baselibrary.R;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.xiao360.baselibrary.util.LogUtils;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *   抽取的列表上下拉刷新共同基类
+ * */
 public abstract class NormalListFragment<T extends BaseFragmentPresenter, E extends ViewModel> extends ToolBarStateFragment<T, E> {
     protected RecyclerView.Adapter mAdapter;
     protected RecyclerView recyclerView;
-    private boolean hasLoadMore = false;
+    protected boolean hasLoadMore = false;
 
+    public void resetLoadMore() {
+        stateLayout.refreshLayout.setEnableLoadMore(false);
+        hasLoadMore = false;
+    }
+
+    //状态容器布局
     @Override
     protected int getContainerLayoutID() {
         return R.layout.common_container;
     }
 
+    //失败状态容器布局
     @Override
     protected int getFailViewId() {
         return R.id.fail;
     }
 
+    //加载状态容器布局
     @Override
     protected int getLoadingViewId() {
         return R.id.loading;
     }
 
+    //空状态容器布局
     @Override
     protected int getEmptyViewId() {
         return R.id.empty;
     }
 
-
+    //toolbar布局
     @Override
     protected int getToolBarLayoutID() {
         return R.layout.common_toolbar;
     }
 
+    //状态栏布局
     @Override
     protected int getStateBarviewID() {
         return R.id.statebarView;
@@ -53,12 +64,18 @@ public abstract class NormalListFragment<T extends BaseFragmentPresenter, E exte
         initLoadingView();
         initFailView();
         initToolBar();
+
+        //进入默认显示内容
         stateLayout.showContentView();
+
+        //初始化列表
         recyclerView = rootView.findViewById(getListView());
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         mAdapter = getAdapter();
         recyclerView.setAdapter(mAdapter);
+
+        //设置上下拉
         stateLayout.refreshLayout.setEnableLoadMore(false);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

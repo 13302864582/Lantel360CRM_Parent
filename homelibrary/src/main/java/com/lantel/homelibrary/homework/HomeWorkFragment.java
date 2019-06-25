@@ -3,8 +3,6 @@ package com.lantel.homelibrary.homework;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.cangwang.core.IBaseClient;
-import com.cangwang.core.ModuleBus;
 import com.cangwang.core.ModuleEvent;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
@@ -14,11 +12,12 @@ import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
 import com.lantel.homelibrary.homework.mvp.HomeWorkContract;
 import com.lantel.homelibrary.homework.mvp.HomeWorkModel;
 import com.lantel.homelibrary.homework.mvp.HomeWorkPresenter;
-import com.lantel.homelibrary.notify.list.adpter.NotifyAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xiao360.baselibrary.base.NormalListFragment;
+
 import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +25,7 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
 
     @Override
     public void refreshData(ArrayList<HomeWorkItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         ((HomeWrokAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){
@@ -35,6 +34,8 @@ public class HomeWorkFragment extends NormalListFragment<HomeWorkPresenter, Home
             stateLayout.showEmptyView();
         }
     }
+
+
 
     @ModuleEvent(coreClientClass = HomeWorkClient.class)
     public void refreshHomework(String s) {

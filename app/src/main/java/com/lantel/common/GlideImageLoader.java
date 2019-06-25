@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.xiao360.baselibrary.util.DisplayUtil;
 import com.youth.banner.loader.ImageLoader;
 
+//广告的图片加载设置
 public class GlideImageLoader extends ImageLoader {
     private int defaultRes;
 

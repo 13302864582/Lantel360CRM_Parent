@@ -5,14 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.haibin.calendarview.CalendarLayout;
 import com.lantel.homelibrary.R;
 import com.lantel.studylibrary.classes.list.holder.ClassesHolder;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
+
 import java.util.List;
 
 public class ClassesAdapter extends BaseRecyclerViewAdapter<ClassesCardModel> {
@@ -33,7 +32,7 @@ public class ClassesAdapter extends BaseRecyclerViewAdapter<ClassesCardModel> {
         setText(data.getClassName(),classesHolder.classes_name);
         setText(data.getTeacher(),classesHolder.classes_teacher);
         setText(data.getPercent()+"/"+data.getTotal(), classesHolder.classes_percent);
-        GlideUtils.loadCircle(context,data.getHeaImg(),R.color.circle,R.mipmap.circle_default,classesHolder.head_img);
+        GlideUtils.loadCircle(context,data.getHeaImg(),classesHolder.head_img,R.mipmap.circle_default);
         if(data.getTotal() != 0)
         classesHolder.seekBar.setMaxprogress(data.getTotal());
         classesHolder.seekBar.setProgress(data.getPercent());

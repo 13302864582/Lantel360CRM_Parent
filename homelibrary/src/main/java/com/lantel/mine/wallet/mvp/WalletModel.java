@@ -26,12 +26,12 @@ public class WalletModel extends ViewModel {
     public Observable<ResponseBody> loadData(String page, String pageSize) {
         String sid = SpCache.getString(Config.SID,"");
         WalletService service = Http.getInstance().createRequest(WalletService.class);
-        return service.getWalletListData(HeaderUtil.getHeaderMap(),sid,page,pageSize).compose(RxHelper.io_main());
+        return service.getWalletListData(HeaderUtil.getJsonHeaderMap(),sid,page,pageSize).compose(RxHelper.io_main());
     }
 
     public Observable<ResponseBody> loadMonthData(String month,String page, String pageSize) {
         String sid = SpCache.getString(Config.SID,"");
         WalletService service = Http.getInstance().createRequest(WalletService.class);
-        return service.getWalletMonthData(HeaderUtil.getHeaderMap(),sid,month,page,pageSize).compose(RxHelper.io_main());
+        return service.getWalletMonthData(HeaderUtil.getJsonHeaderMap(),sid,month,page,pageSize).compose(RxHelper.io_main());
     }
 }

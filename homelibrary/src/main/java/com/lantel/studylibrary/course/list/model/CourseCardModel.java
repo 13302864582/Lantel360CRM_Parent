@@ -8,27 +8,8 @@ public class CourseCardModel extends BaseModel{
     private String course_end_date;
     private float percent;
     private float total;
-    private float remain;
-
 
     public CourseCardModel() {
-    }
-
-    public CourseCardModel(String name, String start_date, String end_date, int usecount, int totalcount) {
-        this.course_name = name;
-        this.course_start_date = start_date;
-        this.course_end_date = end_date;
-        this.percent = percent;
-        this.percent = usecount;
-        this.total = totalcount;
-    }
-
-    public float getRemain() {
-        return remain;
-    }
-
-    public void setRemain(float remain) {
-        this.remain = remain;
     }
 
     public String getCourse_name() {

@@ -1,8 +1,10 @@
 package com.lantel.homelibrary.homework.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class HomeWorkDetailFinishBean {
+public class HomeWorkDetailFinishBean extends HttpResBean {
 
     /**
      * error : 0
@@ -10,26 +12,7 @@ public class HomeWorkDetailFinishBean {
      * data : {"ht_id":64,"og_id":0,"bid":1,"lid":2,"ca_id":91,"lesson_type":1,"cid":0,"sid":21,"sids":[""],"eid":10007,"htts_id":0,"content":"<p>fzfzfz<\/p>","remark":"","deadline":20190530,"push_status":1,"create_time":"2019-06-21 09:13:12","homework_complete":{"hc_id":25,"og_id":0,"bid":1,"cid":0,"ca_id":91,"lid":2,"ht_id":64,"sid":21,"star":0,"content":"qwertyu","is_check":0,"is_publish":0,"check_time":0,"check_uid":0,"check_level":0,"check_content":null,"result_level":0,"sart_id":0,"is_rejected":0,"rejected_reason":"","rejected_time":0,"create_time":"2019-06-21 09:17:41","complete_attachment":{"ha_id":65,"og_id":0,"ht_id":0,"hc_id":25,"hr_id":0,"att_type":1,"file_id":196,"file_url":"http://s10.xiao360.com/qms/com.lantel.lh01/homework/26054319-4eed-4302-8ead-655ff99ef24d.png","file_type":"png","file_size":1918517,"file_name":"26054319-4eed-4302-8ead-655ff99ef24d.png","duration":"","media_type":"image","create_uid":10028},"homework_reply":null},"student":{"sid":21,"bid":1,"student_name":"test02","sex":"2","photo_url":"http://s10.xiao360.com//Users/mac/Library/Developer/CoreSimulator/Devices/A5F463A1-8F5E-4BD5-A404-EEE1454B889F/data/Containers/Data/Application/C7772289-5FBA-42F0-AAD0-E91F7143388C/Documents/1560491879193.png","school_id_text":""},"one_class":null,"homework_attachment":[{"ha_id":62,"og_id":0,"ht_id":64,"hc_id":0,"hr_id":0,"att_type":0,"file_id":182,"file_url":"http://s10.xiao360.com/qms/1/0/RfjNpbtqK9XbzUEj4r7YLcNoGjQoigKc.png","file_type":"png","file_size":248222,"file_name":"屏幕快照 2019-06-20 上午11.01.18.png","duration":"","media_type":"image","create_uid":1},{"ha_id":63,"og_id":0,"ht_id":64,"hc_id":0,"hr_id":0,"att_type":0,"file_id":146,"file_url":"http://s10.xiao360.com/qms/student_avatar/1/19/06/06/d73d000343f5b813e02e5aeb83f2c478.png","file_type":"png","file_size":336829,"file_name":"648a44cdddcd1a5aabfecb72ff760a54.jpg","duration":"","media_type":"image","create_uid":1},{"ha_id":64,"og_id":0,"ht_id":64,"hc_id":0,"hr_id":0,"att_type":0,"file_id":132,"file_url":"http://s10.xiao360.com/qms/1/0/r23F2zL5w8XsI433KG5xpJxcaP3nF3fb.jpg","file_type":"jpg","file_size":42411,"file_name":"u=2791487048,1056707858&fm=214&gp=0.jpg","duration":"","media_type":"image","create_uid":1}],"employee":{"eid":10007,"ename":"吴喆聪","uid":10031,"mobile":"13800013800","photo_url":""}}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

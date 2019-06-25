@@ -1,27 +1,11 @@
 package com.lantel.studylibrary.preview.preview.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class PreviewDetailBean {
-    private int error;
-    private String message;
+public class PreviewDetailBean extends HttpResBean {
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

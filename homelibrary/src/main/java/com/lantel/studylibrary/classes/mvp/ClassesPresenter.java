@@ -1,10 +1,13 @@
 package com.lantel.studylibrary.classes.mvp;
 
 import android.os.Bundle;
+
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.studylibrary.classes.api.ClassBean;
 import com.lantel.studylibrary.classes.list.model.ClassesCardModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.xiao360.baselibrary.base.BaseRxObserver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,48 +57,35 @@ public class ClassesPresenter extends ClassesContract.Presenter {
     private void loadData(String page, String pageSize, boolean isLoadMore, RefreshLayout refreshLayout) {
         mModel.loadData(page,pageSize)
                 .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<ClassBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(ClassBean data) {
-                        if(data.getError()==0){
-                            List<ClassBean.DataBean.ListBean> listBean = data.getData().getList();
-                            //添加菜单数据
-                            ArrayList<ClassesCardModel> menu = new ArrayList<>();
-                            for (ClassBean.DataBean.ListBean  bean : listBean) {
-                                ClassesCardModel model = new ClassesCardModel();
-                                ClassBean.DataBean.ListBean.TeacherBean teacher = bean.getTeacher();
-                                model.setHeaImg(teacher.getPhoto_url());
-                                model.setTeacher(teacher.getEname());
-                                model.setClassName(bean.getClass_name());
-                                model.setPlace(bean.getClassroom().getRoom_name());
-                                model.setTotal(bean.getArrange_times());
-                                model.setPercent(bean.getAttendance_times());
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                                menu.add(model);
-                            }
-                            if(!isLoadMore){
-                                mView.refreshData(menu);
-                                if(null!=refreshLayout)
+                    public void onSuccess(HttpResBean resBean) {
+                        ClassBean data = (ClassBean) resBean;
+                        List<ClassBean.DataBean.ListBean> listBean = data.getData().getList();
+                        //添加菜单数据
+                        ArrayList<ClassesCardModel> menu = new ArrayList<>();
+                        for (ClassBean.DataBean.ListBean  bean : listBean) {
+                            ClassesCardModel model = new ClassesCardModel();
+                            ClassBean.DataBean.ListBean.TeacherBean teacher = bean.getTeacher();
+                            model.setHeaImg(teacher.getPhoto_url());
+                            model.setTeacher(teacher.getEname());
+                            model.setClassName(bean.getClass_name());
+                            model.setPlace(bean.getClassroom().getRoom_name());
+                            model.setTotal(bean.getArrange_times());
+                            model.setPercent(bean.getAttendance_times());
+                            menu.add(model);
+                        }
+                        if(!isLoadMore){
+                            mView.refreshData(menu);
+                            if(null!=refreshLayout)
                                 refreshLayout.finishRefresh();
-                                mCurrentPage = 1;
-                            }
-                            else {
-                                mView.setLoadMoreData(menu);
-                                if(null!=refreshLayout)
+                            mCurrentPage = 1;
+                        }
+                        else {
+                            mView.setLoadMoreData(menu);
+                            if(null!=refreshLayout)
                                 refreshLayout.finishLoadMore();
-                                mCurrentPage++;
-                            }
-
-                        }else {
-                            onFailure(new Throwable(data.getMessage()));
+                            mCurrentPage++;
                         }
                     }
 

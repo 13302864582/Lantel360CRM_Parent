@@ -1,6 +1,8 @@
 package com.lantel.home.api;
 
-public class HomeMessageBean {
+import com.lantel.common.HttpResBean;
+
+public class HomeMessageBean  extends HttpResBean {
 
     /**
      * error : 0
@@ -8,26 +10,7 @@ public class HomeMessageBean {
      * data : {"today_news_num":0,"today_schedules_num":0,"today_attendances_num":0,"today_reviews_num":0,"today_msg_num":0}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

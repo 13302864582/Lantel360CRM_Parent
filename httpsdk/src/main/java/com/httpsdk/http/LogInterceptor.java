@@ -8,6 +8,10 @@ import java.util.Locale;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 
+/***
+ *   网络日志
+ */
+
 public class LogInterceptor implements Interceptor {
     private String TAG = "okhttp";
 

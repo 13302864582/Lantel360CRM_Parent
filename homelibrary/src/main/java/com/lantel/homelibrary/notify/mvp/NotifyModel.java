@@ -11,6 +11,6 @@ import io.reactivex.Observable;
 public class NotifyModel extends ViewModel {
     public Observable<NotifyBean> loadData(String page, String pageSize) {
         NotifyService service = Http.getInstance().createRequest(NotifyService.class);
-        return service.getNotifyData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
+        return service.getNotifyData(HeaderUtil.getJsonHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 }

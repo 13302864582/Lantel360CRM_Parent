@@ -12,6 +12,6 @@ import io.reactivex.Observable;
 public class MessageModel extends ViewModel {
     public Observable<MessageBean> loadData(String page, String pageSize) {
         MessageService service = Http.getInstance().createRequest(MessageService.class);
-        return service.getMessageData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
+        return service.getMessageData(HeaderUtil.getJsonHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 }

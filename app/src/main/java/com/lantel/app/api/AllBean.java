@@ -1,27 +1,12 @@
 package com.lantel.app.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class AllBean {
-    private int error;
-    private String message;
+public class AllBean  extends HttpResBean {
+
     private AllBean.DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

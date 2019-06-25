@@ -1,8 +1,10 @@
 package com.lantel.homelibrary.output.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class ZipOutputStudengtBean {
+public class ZipOutputStudengtBean extends HttpResBean {
    private List<OutputBean.DataBean.ListBean> outputList;
 
     private List<StudentBean.DataBean.ListBean> studentList;

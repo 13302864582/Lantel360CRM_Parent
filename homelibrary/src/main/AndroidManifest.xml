@@ -92,8 +92,7 @@
 
         <activity android:name=".message.MessageActivity"/>
 
-        <activity android:name=".communicate.CommunicateActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".communicate.CommunicateActivity" />
 
         <activity android:name=".WebActivity"/>
 
@@ -125,7 +124,7 @@
         <!-- ===================================Jpush配置================================================== -->
 
         <!-- Rich push 核心功能 since 2.0.6-->
-       <!-- <activity
+        <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
@@ -134,7 +133,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.lantel.lh01.test" />
             </intent-filter>
-        </activity>-->
+        </activity>
 
         <!-- Required SDK核心功能-->
         <activity
@@ -153,7 +152,6 @@
         <!-- 可配置android:process参数将PushService放在其他进程中     android:process=":mult"-->
         <service
             android:name="cn.jpush.android.service.PushService"
-
             android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
@@ -254,6 +252,17 @@
                 <category android:name="com.lantel.lh01.test" />
             </intent-filter>
         </activity>-->
+
+        <provider
+            android:name="com.lantel.common.AppProvider"
+            android:authorities="com.lantel.lh01.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <!--元数据-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="a848866a9373f83f6ebebf73" /> <!--  </>值来自开发者平台取得的AppKey-->

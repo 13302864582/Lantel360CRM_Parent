@@ -1,28 +1,12 @@
 package com.lantel.homelibrary.course.calendar;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class CalenderSchemBean {
-    private int error;
-    private String message;
+public class CalenderSchemBean  extends HttpResBean {
     private DataBean data;
     private boolean authed;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

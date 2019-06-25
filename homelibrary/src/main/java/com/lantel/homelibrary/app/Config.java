@@ -4,6 +4,7 @@ public class Config {
     public static final String COURSE_TAG = "COURSE_TAG";
     public static final String ATTENCE_TAG = "ATTENCE_TAG";
     public static final String CLASSES_TAG = "CLASSES_TAG";
+    public static final String LIVE_TAG = "LIVE_TAG";
     public static final String OUTPUT_TAG = "OUTPUT_TAG";
     public static final String ACCESSMENT_TAG = "ACCESSMENT_TAG";
     public static final String WALLET_TAG = "WALLET_TAG";
@@ -109,4 +110,5 @@ public class Config {
 
     public static final String COUNT_NOTIFY = "dev_id";
 
+    public static final String REGISTRATIONID = "REGISTRATIONID";
 }

@@ -12,11 +12,11 @@ import okhttp3.ResponseBody;
 public class AttenceModel extends ViewModel {
     public Observable<ResponseBody> loadData(String page, String pageSize) {
         AttenceService service = Http.getInstance().createRequest(AttenceService.class);
-        return service.getAttenceData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
+        return service.getAttenceData(HeaderUtil.getJsonHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 
     public Observable<ResponseBody> loadRangeData(String url) {
         AttenceService service = Http.getInstance().createRequest(AttenceService.class);
-        return service.getAttenceDataRange(HeaderUtil.getHeaderMap(),url).compose(RxHelper.io_main());
+        return service.getAttenceDataRange(HeaderUtil.getJsonHeaderMap(),url).compose(RxHelper.io_main());
     }
 }

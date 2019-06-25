@@ -1,8 +1,10 @@
 package com.lantel.homelibrary.communicate.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class CommunicateBean {
+public class CommunicateBean  extends HttpResBean {
 
     /**
      * error : 0
@@ -10,26 +12,7 @@ public class CommunicateBean {
      * data : {"total":1,"list":[{"ac_id":1,"og_id":0,"sid":0,"eid":0,"message":null,"send_type":0,"app_client_id":0,"message_type":0,"app_module_id":0,"is_read":0,"read_time":"-","create_time":"2019-06-21 10:59:51","create_uid":10028}],"page":1,"pagesize":20,"sql":"SELECT * FROM `x360p_im_chat` WHERE (  `x360p_im_chat`.`og_id` = 0 ) AND `x360p_im_chat`.`delete_time` IS NULL ORDER BY `x360p_im_chat`.`create_time`  desc LIMIT 0,20"}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

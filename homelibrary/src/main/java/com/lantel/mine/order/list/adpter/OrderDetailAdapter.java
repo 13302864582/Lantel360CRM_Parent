@@ -75,7 +75,7 @@ public class OrderDetailAdapter extends BaseRecyclerViewAdapter<BaseModel> {
         setText(data.getDiscount_amount(),holder.discount_amount);
         setText(data.getReduced_amount(),holder.reduced_amount);
         setText(data.getPresent_times(),holder.present_times);
-        GlideUtils.loadImageView(context,data.getList_img(),holder.list_img,R.mipmap.img_load_fail);
+        GlideUtils.loadImageView(context,data.getList_img(),holder.list_img,R.mipmap.img_fail);
     }
 
     private void bindOrderTop(DetailTopHolder holder, DetailTopModel data) {

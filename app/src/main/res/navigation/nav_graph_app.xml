@@ -37,6 +37,15 @@
         >
     </fragment>
 
+    <!--直播页-->
+    <fragment
+        android:id="@+id/Live_Fragment"
+        android:name="com.lantel.live.LiveFragment"
+        android:label="LiveFragment"
+        >
+         </fragment>
+
+
     <!--跳转到学习-->
     <action
         android:id="@+id/action_study"
@@ -60,5 +69,11 @@
     <action
         android:id="@+id/action_growup"
         app:destination="@id/GrowupFragment"
+        />
+
+    <!--跳转到成长-->
+    <action
+        android:id="@+id/action_live"
+        app:destination="@id/Live_Fragment"
         />
 </navigation>

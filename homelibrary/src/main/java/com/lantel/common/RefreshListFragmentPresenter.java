@@ -2,11 +2,12 @@ package com.lantel.common;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseFragmentPresenter;
-import com.xiao360.baselibrary.base.BaseRxObserver;
+
 import java.util.ArrayList;
+
 import io.reactivex.Observable;
 
-public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragmentPresenter<V, M> {
+public abstract class RefreshListFragmentPresenter<T extends HttpResBean, E, V, M> extends BaseFragmentPresenter<V, M> {
     protected int mCurrentPage = 0;
 
     public void refreshData(RefreshLayout refreshLayout) {
@@ -19,24 +20,20 @@ public abstract class RefreshListFragmentPresenter<T, E, V, M> extends BaseFragm
 
     protected void loadData(Observable<T> observable, boolean isLoadMore, RefreshLayout refreshLayout) {
         observable.compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<T>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(T data) {
-                        if (getErrorCode(data) == 0) {
-                            ArrayList<E> list = new ArrayList<>();
-                            if (getTotal(data) != 0) {
-                                setUpData(list, data);
-                            }
-
-                            if (!isLoadMore)
-                                ViewRefreshData(list);
-                            else
-                                ViewSetLoadMoreData(list);
-                            FinishRefreshLoadMore(isLoadMore, refreshLayout);
-                            setUpCurrentPage(isLoadMore);
-                        } else {
-                            onFailure(new Throwable(getErrorMessage(data)));
+                    protected void onSuccess(HttpResBean data) {
+                        ArrayList<E> list = new ArrayList<>();
+                        if (getTotal((T)data) != 0) {
+                            setUpData(list,(T)data);
                         }
+
+                        if (!isLoadMore)
+                            ViewRefreshData(list);
+                        else
+                            ViewSetLoadMoreData(list);
+                        FinishRefreshLoadMore(isLoadMore, refreshLayout);
+                        setUpCurrentPage(isLoadMore);
                     }
 
                     @Override

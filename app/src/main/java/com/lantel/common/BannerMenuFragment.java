@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+//学习，成长共同的fragment基类
 public abstract class BannerMenuFragment extends ToolBarStateFragment implements OnActionPathListener {
     protected TextView title;
     protected AdBanner banner;

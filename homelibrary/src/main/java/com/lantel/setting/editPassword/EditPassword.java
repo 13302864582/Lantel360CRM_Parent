@@ -5,15 +5,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.ToastUitl;
 
 import androidx.lifecycle.ViewModel;
@@ -115,15 +117,14 @@ public class EditPassword extends BaseMVPActivity {
         req.setOldpassword(oldpass);
         req.setPassword(newpass);
         req.setRepassword(newpass);
-        changPwdService.resetpwd(HeaderUtil.getHeaderMap(),req)
+        changPwdService.resetpwd(HeaderUtil.getJsonHeaderMap(),req)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<ChangPwdBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(ChangPwdBean demo) {
-                        ToastUitl.showShort(demo.getMessage());
-                        if(demo.getError()==0)
-                            finish();
+                    public void onSuccess(HttpResBean resBean) {
+                        ToastUitl.showShort(resBean.getMessage());
+                        finish();
                     }
 
                     @Override

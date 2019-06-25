@@ -1,8 +1,10 @@
 package com.lantel.studylibrary.classes.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class ClassBean {
+public class ClassBean extends HttpResBean {
 
     /**
      * error : 0
@@ -10,26 +12,7 @@ public class ClassBean {
      * data : {"total":1,"list":[{"cid":4,"og_id":0,"bid":1,"parent_cid":0,"class_name":"徐老师1班","class_no":"","class_type":0,"lid":0,"sj_id":2,"grade":0,"sg_id":0,"unit_price":"0.00","per_lesson_hour_minutes":0,"consume_source_type":1,"consume_lesson_hour":"1.00","subject_grade":0,"teach_eid":10003,"second_eid":0,"second_eids":"","edu_eid":0,"cr_id":1,"plan_student_nums":16,"student_nums":13,"nums_rate":"0.81","lesson_times":14,"lesson_index":0,"arrange_times":10,"attendance_times":2,"year":2019,"season":"C","start_lesson_time":"2019-05-08","end_lesson_time":"2019-05-20","status":1,"ext_id":"","is_demo":0,"is_online":0,"create_uid":1,"int_start_hour":"0","int_end_hour":"0","student_artwork_count":0,"lesson":null,"classroom":{"cr_id":1,"og_id":0,"bid":1,"room_name":"MR001","seat_nums":16,"max_seat_nums":0,"listen_nums_limit":4,"seat_config":null,"area":"0.00"},"teacher":{"eid":10003,"og_id":0,"bid":1,"ename":"徐老师","pinyin":"xulaoshi","pinyin_abbr":"xls","nick_name":"","rids":[1],"bids":[1,2,3,4],"com_ids":"","lids":[],"sj_ids":[],"grades":"","uid":10014,"account":"17799999999","sex":"1","mobile":"17799999999","email":"","id_card_no":"","bank_card_no":"","photo_url":"http://s10.xiao360.com/qms/user_avatar/10014/19/05/08/4823c2e2a3385f2d0979ad10ecf969dd.jpeg","birth_time":0,"birth_year":0,"birth_month":0,"birth_day":0,"is_part_job":0,"is_on_job":1,"join_int_day":0,"official_int_day":0,"remark":"","option_fields":"[]","user_status":1,"is_fsys":0,"teacher_level":-1,"college_did":0,"major_did":0,"degree_did":0,"have_cert":1,"ext_id":0},"assistant":null}],"page":1,"pagesize":10,"sql":"SELECT * FROM `x360p_class_student` WHERE (  `sid` = 21  AND `x360p_class_student`.`og_id` = 0 ) AND `x360p_class_student`.`delete_time` IS NULL ORDER BY `x360p_class_student`.`create_time`  desc LIMIT 0,10"}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

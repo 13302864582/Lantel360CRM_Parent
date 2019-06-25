@@ -1,22 +1,7 @@
 package com.lantel.setting.bindAccount.api;
 
-public class BindPhoneBean {
-    private int error;
-    private String message;
+import com.lantel.common.HttpResBean;
 
-    public int getError() {
-        return error;
-    }
+public class BindPhoneBean extends HttpResBean {
 
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

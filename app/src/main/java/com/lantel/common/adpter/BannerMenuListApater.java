@@ -8,6 +8,9 @@ import com.lantel.crmparent.R;
 
 import java.util.List;
 
+/***
+ *  学习列表的适配器
+ */
 public class BannerMenuListApater extends SimpleMenuListApater {
     public BannerMenuListApater(Context context, List<SimpleMenuModel> datas) {
         super(context, datas);

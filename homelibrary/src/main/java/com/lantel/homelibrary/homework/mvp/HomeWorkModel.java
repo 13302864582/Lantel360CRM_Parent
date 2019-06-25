@@ -12,7 +12,7 @@ import okhttp3.ResponseBody;
 public class HomeWorkModel extends ViewModel {
     public Observable<HomeWorkBean> loadData(String sid,String page, String pageSize) {
         HomeWorkService studentService = Http.getInstance().createRequest(HomeWorkService.class);
-        Observable<HomeWorkBean> finish = studentService.getHomeWorkDate(HeaderUtil.getHeaderMap(),sid,page,pageSize);
+        Observable<HomeWorkBean> finish = studentService.getHomeWorkDate(HeaderUtil.getJsonHeaderMap(),sid,page,pageSize);
         return finish.compose(RxHelper.io_main());
     }
 }

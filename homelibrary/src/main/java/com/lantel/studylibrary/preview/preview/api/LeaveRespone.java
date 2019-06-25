@@ -1,8 +1,10 @@
 package com.lantel.studylibrary.preview.preview.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class LeaveRespone {
+public class LeaveRespone extends HttpResBean {
 
     /**
      * error : 0
@@ -10,27 +12,10 @@ public class LeaveRespone {
      * data : []
      * authed : true
      */
-
-    private int error;
-    private String message;
     private boolean authed;
     private List<?> data;
 
-    public int getError() {
-        return error;
-    }
 
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public boolean isAuthed() {
         return authed;

@@ -1,35 +1,17 @@
 package com.lantel.home.api;
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class HomeBean {
-
+public class HomeBean extends HttpResBean {
     /**
      * error : 0
      * message : success
      * data : {"org_name":"xxxx","branch_name":"财富中心道场","branch_address":"虹桥路1438号古北国际财富中心二期19楼（高岛屋百货大楼旁边的办公楼）","branch_tel":"13681810678","recommend_cover":"http://sp1.xiao360.com/static/img/recommend-cover.png","student":{"sid":21,"og_id":0,"bid":1,"student_name":"test02","pinyin":"test02","pinyin_abbr":"t","nick_name":"","sex":"2","photo_url":"http://s10.xiao360.com//Users/mac/Library/Developer/CoreSimulator/Devices/A5F463A1-8F5E-4BD5-A404-EEE1454B889F/data/Containers/Data/Application/C7772289-5FBA-42F0-AAD0-E91F7143388C/Documents/1560491879193.png","birth_time":1575216000,"birth_year":2019,"birth_month":12,"birth_day":2,"school_grade":3,"grade_update_int_ym":201906,"school_class":"3","school_id":2,"first_tel":"","first_family_name":"","first_family_rel":4,"first_uid":10028,"second_family_name":"","second_family_rel":0,"second_tel":"","second_uid":0,"eid":0,"sno":"No123456","card_no":"001002","money":"0.000000","credit":"0.00","credit2":"0.00","vip_level":-1,"service_level":0,"last_attendance_time":1559030343,"is_lost":0,"status":1,"mc_id":0,"quit_reason":"","student_type":1,"option_fields":"[]","student_lesson_times":0,"student_lesson_remain_times":0,"student_lesson_hours":"243.00","student_lesson_remain_hours":"237.00","is_demo":0,"is_demo_transfered":1,"is_face_input":0,"face_id":"","referer_sid":0,"in_time":1558022400,"create_time":1558067554,"create_uid":1,"update_time":1560491879,"is_delete":0,"delete_time":null,"delete_uid":0,"ext_id":"","from_did":0},"students":[{"sid":21,"og_id":0,"bid":1,"student_name":"test02","pinyin":"test02","pinyin_abbr":"t","nick_name":"","sex":"2","photo_url":"http://s10.xiao360.com//Users/mac/Library/Developer/CoreSimulator/Devices/A5F463A1-8F5E-4BD5-A404-EEE1454B889F/data/Containers/Data/Application/C7772289-5FBA-42F0-AAD0-E91F7143388C/Documents/1560491879193.png","birth_time":"2019-12-02","birth_year":2019,"birth_month":12,"birth_day":2,"school_grade":3,"grade_update_int_ym":201906,"school_class":"3","school_id":2,"first_tel":"","first_family_name":"","first_family_rel":4,"first_uid":10028,"second_family_name":"","second_family_rel":0,"second_tel":"","second_uid":0,"eid":0,"sno":"No123456","card_no":"001002","money":"0.000000","credit":"0.00","credit2":"0.00","vip_level":-1,"service_level":0,"last_attendance_time":"2019-05-28 15:59:03","is_lost":0,"status":1,"mc_id":0,"quit_reason":"","student_type":1,"option_fields":"[]","student_lesson_times":0,"student_lesson_remain_times":0,"student_lesson_hours":"243.00","student_lesson_remain_hours":"237.00","is_demo":0,"is_demo_transfered":1,"is_face_input":0,"face_id":"","referer_sid":0,"in_time":1558022400,"create_time":"2019-05-17 12:32:34","ext_id":"","from_did":0,"school_id_text":"0"},{"sid":23,"og_id":0,"bid":1,"student_name":"test01","pinyin":"test01","pinyin_abbr":"t","nick_name":"","sex":"1","photo_url":"http://s10.xiao360.com/qms/mmexport1560423364848.jpg","birth_time":"2019-06-14","birth_year":2012,"birth_month":5,"birth_day":9,"school_grade":0,"grade_update_int_ym":0,"school_class":"0","school_id":2,"first_tel":"","first_family_name":"","first_family_rel":4,"first_uid":10028,"second_family_name":"","second_family_rel":0,"second_tel":"","second_uid":0,"eid":0,"sno":"999999","card_no":"888888","money":"220.000000","credit":"0.00","credit2":"0.00","vip_level":-1,"service_level":0,"last_attendance_time":"1970-01-01 08:00:00","is_lost":0,"status":1,"mc_id":0,"quit_reason":"","student_type":1,"option_fields":"[]","student_lesson_times":0,"student_lesson_remain_times":0,"student_lesson_hours":"0.00","student_lesson_remain_hours":"0.00","is_demo":0,"is_demo_transfered":0,"is_face_input":0,"face_id":"","referer_sid":0,"in_time":0,"create_time":"2019-05-17 12:35:23","ext_id":"","from_did":0,"school_id_text":"0"}],"broadcasts":[{"bc_id":19,"og_id":0,"type":2,"is_global":1,"dpt_ids":"","lids":null,"cids":null,"sids":null,"title":"444444","desc":"<p>tessssss<\/p>","create_time":1560412588,"create_uid":1,"update_time":1560412588,"is_delete":0,"delete_uid":0,"delete_time":null,"push_time":1560412588,"read_time":0},{"bc_id":18,"og_id":0,"type":2,"is_global":1,"dpt_ids":"","lids":null,"cids":null,"sids":null,"title":"test","desc":"<p>test<\/p>","create_time":1559786787,"create_uid":1,"update_time":1559786787,"is_delete":0,"delete_uid":0,"delete_time":null,"push_time":1559786787,"read_time":1559786793},{"bc_id":17,"og_id":0,"type":2,"is_global":1,"dpt_ids":"","lids":null,"cids":null,"sids":null,"title":"8594444444440384758493","desc":"<p>都结束了加了房间里是解放军到所肩负的<img class=\"img-responsive\" src=\"http://s10.xiao360.com/qms/data/uploads/file/20190606/1559785269943580.png\" _src=\"http://s10.xiao360.com/qms/data/uploads/file/20190606/1559785269943580.png\"/>到家了开发接口了放假独立思考就飞快的将苦尽甘来分段及结构就房里睡觉空格京东方<img class=\"img-responsive\" src=\"http://s10.xiao360.com/qms/data/uploads/file/20190606/1559785301548287.png\" _src=\"http://s10.xiao360.com/qms/data/uploads/file/20190606/1559785301548287.png\"/>85495467389763728947683947568397583958784793087638298457839475648938758394875389<a href=\"https://www.baidu.com/\" target=\"_blank\" title=\"上课提醒\">https://www.baidu.com/<\/a>富华大厦金服就是罚款多少了看了罚款多少了咖啡店是了接口反倒是<\/p>","create_time":1559785435,"create_uid":1,"update_time":1559785435,"is_delete":0,"delete_uid":0,"delete_time":null,"push_time":1559785435,"read_time":1559785497},{"bc_id":16,"og_id":0,"type":2,"is_global":1,"dpt_ids":"","lids":null,"cids":null,"sids":null,"title":"第三方发的发的范德萨发的是","desc":"<p>4567890876543567890<img class=\"img-responsive\" src=\"http://s10.xiao360.com/qms/data/uploads/file/20190605/1559729519639789.png\" _src=\"http://s10.xiao360.com/qms/data/uploads/file/20190605/1559729519639789.png\"/><\/p>","create_time":1559729538,"create_uid":1,"update_time":1559729538,"is_delete":0,"delete_uid":0,"delete_time":null,"push_time":1559729538,"read_time":1559729551}]}
      * authed : true
      */
-
-    private int error;
-    private String message;
     private DataBean data;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

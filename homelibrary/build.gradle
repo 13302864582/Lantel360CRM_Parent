@@ -50,25 +50,21 @@ android {
 }
 
 
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':common')
     annotationProcessor rootProject.ext.dependencies.glideCompiler
     annotationProcessor rootProject.ext.dependencies.butterknifecompiler
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
-    api 'com.haibin:calendarview:3.6.2'
-    //日历
-    api 'com.android.support:support-v4:23.1.1'
-    api 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
-    api project(':common')
-    api 'com.alexvasilkov:gesture-views:2.5.2'
-    api 'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
-    api 'com.zzhoujay.richtext:richtext:3.0.8'
-    api 'com.excellence:downloader:1.2.0'
-    api 'com.ldoublem.loadingview:loadingviewlib:1.0'
-    api 'com.lqr.audio:library:1.0.0'
-
-    api 'cn.jiguang.sdk:jpush:3.3.2'  // 此处以JPush 3.3.2 版本为例。
-    api 'cn.jiguang.sdk:jcore:2.0.1'  // 此处以JCore 2.0.1 版本为例。
-    api "me.leolin:ShortcutBadger:1.1.22@aar"
+    api rootProject.ext.dependencies.calendarview  //日历
+    api rootProject.ext.dependencies.supportVfour  //support-v4
+    api rootProject.ext.dependencies.FlycoDialogLib   //弹窗
+    api rootProject.ext.dependencies.GestureView  //图片查看控件
+    api rootProject.ext.dependencies.NiceVieoPlayer  //视频控件
+    api rootProject.ext.dependencies.Richtext  //富文本
+    api rootProject.ext.dependencies.Downloader  //下载控件
+    api rootProject.ext.dependencies.Loadingviewlib  //loading动画
+    api rootProject.ext.dependencies.Jpush  //极光推送
+    api rootProject.ext.dependencies.Jcore
+    api rootProject.ext.dependencies.ShortcutBadger  //角标
 }

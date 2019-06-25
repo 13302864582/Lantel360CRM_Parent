@@ -12,15 +12,6 @@ public class MediaModel extends BaseModel {
     private String file_type;
     private String file_url;
     private boolean isLocal;
-    private String file_uri;
-
-    public String getFile_uri() {
-        return file_uri;
-    }
-
-    public void setFile_uri(String file_uri) {
-        this.file_uri = file_uri;
-    }
 
     public boolean isLocal() {
         return isLocal;

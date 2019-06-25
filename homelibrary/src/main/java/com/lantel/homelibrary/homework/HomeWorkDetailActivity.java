@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.transition.SidePropagation;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -22,7 +23,9 @@ import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.MyApplication;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
 import com.lantel.common.Lesson;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.common.PhotoSelectListener;
 import com.lantel.common.PopUtil;
 import com.lantel.common.list.model.MediaModel;
@@ -38,13 +41,10 @@ import com.lantel.homelibrary.homework.api.UploadResponeBean;
 import com.lantel.homelibrary.homework.list.adpter.ClickAddListener;
 import com.lantel.homelibrary.homework.list.adpter.MediaFileAdapter;
 import com.lantel.homelibrary.output.list.AlbumFileView;
-import com.lantel.setting.bindAccount.api.BindAccountBean;
-import com.lantel.setting.personal.SettingPersonFragment;
 import com.lantel.setting.personal.api.UploadBean;
 import com.lantel.setting.personal.api.UploadService;
 import com.ldoublem.loadingviewlib.view.LVFunnyBar;
 import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.xiao360.baselibrary.base.BaseActivity;
 import com.xiao360.baselibrary.base.BaseRxObserver;
@@ -60,11 +60,13 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 import com.zzhoujay.richtext.RichText;
 
-import org.json.JSONObject;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +79,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
@@ -168,6 +169,7 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
     private boolean isFinish;
     private MediaFileAdapter mCommitAdapter;
     private Uri photoUri;
+    private MediaScannerConnection connection;
 
     @Override
     protected int getStateBarviewID() {
@@ -315,9 +317,9 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
             homeWorkService.uploadHomeWork(HeaderUtil.getJsonHeaderMap(),business_id+"",req)
                     .compose(RxHelper.io_main())
                     .compose(bindToLifecycle())
-                    .subscribe(new BaseRxObserver<BindAccountBean>() {
+                    .subscribe(new NormalRxObserver() {
                         @Override
-                        public void onSuccess(BindAccountBean demo) {
+                        public void onSuccess(HttpResBean demo) {
                             progressBar.stopAnim();
                             progressLay.setVisibility(View.GONE);
                             ToastUitl.showShort(demo.getMessage());
@@ -363,9 +365,10 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
                                 }
                                 service.uploadAttachFile(HeaderUtil.getJsonHeaderMap(),"http://dev.xiao360.com/api/upload",attach)
                                         .compose(RxHelper.io_main())
-                                        .subscribe(new BaseRxObserver<UploadResponeBean>() {
+                                        .subscribe(new NormalRxObserver() {
                                             @Override
-                                            public void onSuccess(UploadResponeBean bean) {
+                                            public void onSuccess(HttpResBean res) {
+                                                UploadResponeBean bean = (UploadResponeBean) res;
                                                 emitter.onNext(bean);
                                                 emitter.onComplete();
                                             }
@@ -416,9 +419,10 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
         homeWorkService.getHomeWorkDetail(HeaderUtil.getJsonHeaderMap(), business_id + "")
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<HomeWorkDetailFinishBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(HomeWorkDetailFinishBean detailFinishBean) {
+                    public void onSuccess(HttpResBean resBean) {
+                        HomeWorkDetailFinishBean detailFinishBean = (HomeWorkDetailFinishBean) resBean;
                         if (detailFinishBean.getError() == 0) {
                             HomeWorkDetailFinishBean.DataBean dataBean = detailFinishBean.getData();
                             if (null != dataBean) {
@@ -659,23 +663,89 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
     }
 
     private void addPhoto(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, projectionImg, null, null, null);
-        if (cursor.moveToFirst()) {
-            String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
-            File file = new File(path);
-            if (file.length() > 0) {
+            Cursor cursor = getContentResolver().query(uri, projectionImg, null, null, null);
+            if (cursor.moveToFirst()) {
+                String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
                 MediaModel mediaModel = new MediaModel();
                 mediaModel.setType(Config.PHOTO);
+                try {
+                    mediaModel.setFile_size(PhotoUtil.getBitmapSize(PhotoUtil.getBitmapFormUri(this,uri)));
+                } catch (Exception e) {
+                    LogUtils.d("setFile_size======Exception==="+e.getMessage());
+                    e.printStackTrace();
+                }
                 mediaModel.setFile_url(path);
-                mediaModel.setFile_uri(uri.getPath());
                 mediaModel.setLocal(true);
                 insertModel(mediaModel);
-            } else {
-                ToastUitl.showShort(R.string.size_error);
-            }
+               /* if (file.length() > 0) {
+                    MediaModel mediaModel = new MediaModel();
+                    mediaModel.setType(Config.PHOTO);
+                    mediaModel.setFile_size(file.length());
+                    mediaModel.setFile_url(path);
+                    mediaModel.setLocal(true);
+                    insertModel(mediaModel);
+                } else {
+                    ToastUitl.showShort(R.string.size_error);
+                }*/
+            if (null != cursor)
+                cursor.close();
         }
-        if (null != cursor)
-            cursor.close();
+    }
+
+    public Bitmap getBitmapFormUri(Uri uri) throws FileNotFoundException, IOException {
+        InputStream input = getContentResolver().openInputStream(uri);
+
+        //这一段代码是不加载文件到内存中也得到bitmap的真是宽高，主要是设置inJustDecodeBounds为true
+        BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
+        onlyBoundsOptions.inJustDecodeBounds = true;//不加载到内存
+        onlyBoundsOptions.inDither = true;//optional
+        onlyBoundsOptions.inPreferredConfig = Bitmap.Config.RGB_565;//optional
+        BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
+        input.close();
+        int originalWidth = onlyBoundsOptions.outWidth;
+        int originalHeight = onlyBoundsOptions.outHeight;
+        if ((originalWidth == -1) || (originalHeight == -1))
+            return null;
+
+        //图片分辨率以480x800为标准
+        float hh = 800f;//这里设置高度为800f
+        float ww = 480f;//这里设置宽度为480f
+        //缩放比，由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
+        int be = 1;//be=1表示不缩放
+        if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
+            be = (int) (originalWidth / ww);
+        } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
+            be = (int) (originalHeight / hh);
+        }
+        if (be <= 0)
+            be = 1;
+        //比例压缩
+        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+        bitmapOptions.inSampleSize = be;//设置缩放比例
+        bitmapOptions.inDither = true;
+        bitmapOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+        input = getContentResolver().openInputStream(uri);
+        Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+        input.close();
+
+        return compressImage(bitmap);//再进行质量压缩
+    }
+
+    public Bitmap compressImage(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options，把压缩后的数据存放到baos中
+            options -= 10;//每次都减少10
+            if (options<=0)
+                break;
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
+        return bitmap;
     }
 
     private void addVideo(Uri uri) {
@@ -695,7 +765,6 @@ public class HomeWorkDetailActivity extends BaseActivity implements ClickAddList
                     mediaModel.setDuration(duration);
                     mediaModel.setType(Config.VIDEO);
                     mediaModel.setFile_url(path);
-                    mediaModel.setFile_uri(uri.getPath());
                     insertModel(mediaModel);
                 } else {
                     ToastUitl.showShort(R.string.size_error);

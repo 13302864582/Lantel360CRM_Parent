@@ -15,6 +15,10 @@ import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 
 import java.util.List;
 
+
+/***
+ *  主页菜单的适配器
+ */
 public abstract class SimpleMenuListApater extends BaseRecyclerViewAdapter<SimpleMenuModel> {
     private OnActionPathListener listener;
 

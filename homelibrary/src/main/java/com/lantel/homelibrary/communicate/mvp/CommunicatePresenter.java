@@ -2,16 +2,13 @@ package com.lantel.homelibrary.communicate.mvp;
 
 import android.os.Bundle;
 
-import com.httpsdk.http.RxHelper;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.communicate.api.CommitChatReq;
 import com.lantel.homelibrary.communicate.api.CommunicateBean;
 import com.lantel.homelibrary.communicate.list.model.ItemModel;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.xiao360.baselibrary.base.BaseRxObserver;
-import com.xiao360.baselibrary.image.GlideUtils;
-import com.xiao360.baselibrary.util.DisplayUtil;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
@@ -137,17 +134,16 @@ public class CommunicatePresenter extends CommunicateContract.Presenter<Communic
 
     public void commitMessage(String content) {
         CommitChatReq req = new CommitChatReq();
-        req.setSid(Integer.valueOf(SpCache.getString(Config.SID,"0")));
+        req.setSid(SpCache.getString(Config.SID,"0"));
         req.setMessage(content);
         req.setMessage_type(0);
         req.setApp_client_id(2);
         req.setSend_type(0);
         mModel.commitData(req)
-                .compose(RxHelper.io_main())
                 .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<CommunicateBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(CommunicateBean demo) {
+                    public void onSuccess(HttpResBean resBean) {
                         onLoadMore(null);
                     }
 

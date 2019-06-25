@@ -2,6 +2,7 @@ package com.lantel.common;
 
 import com.lantel.homelibrary.R;
 import com.xiao360.baselibrary.base.BaseActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,6 +23,7 @@ public abstract class FragmentActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
         /*Fragment 动态加载*/
         /*创建实例*/
         fragmentManager = getSupportFragmentManager();/*获取到FragmentManager*/

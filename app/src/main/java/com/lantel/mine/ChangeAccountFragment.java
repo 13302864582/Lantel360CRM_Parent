@@ -1,27 +1,26 @@
 package com.lantel.mine;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Space;
 import android.widget.TextView;
 
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.crmparent.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.mine.api.ChangeAccountListener;
-import com.lantel.mine.api.MineCardBean;
 import com.lantel.mine.api.MineCardService;
 import com.lantel.mine.list.adpter.ChangeAcountAdapter;
 import com.lantel.mine.list.model.ChangeAccountBean;
 import com.lantel.mine.mvp.ChangeAccountModel;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.base.NormalListFragment;
 import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.ArrayList;
+
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,7 +55,6 @@ public class ChangeAccountFragment extends NormalListFragment implements ChangeA
             getActivity().finish();
         });
     }
-
 
     @Override
     protected int getListView() {
@@ -96,15 +94,13 @@ public class ChangeAccountFragment extends NormalListFragment implements ChangeA
     @Override
     public void changeAccount(String uid, String sid) {
         MineCardService mineCardService = Http.getInstance().createRequest(MineCardService.class);
-        mineCardService.changeAccount(HeaderUtil.getHeaderMap(),uid,sid)
+        mineCardService.changeAccount(HeaderUtil.getJsonHeaderMap(),uid,sid)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<MineCardBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(MineCardBean demo) {
-                        if(demo.getError()==0){
-                            SpCache.putString(Config.SID,sid);
-                        }
+                    public void onSuccess(HttpResBean demo) {
+                        SpCache.putString(Config.SID,sid);
                     }
 
                     @Override

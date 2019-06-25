@@ -3,14 +3,14 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.mob.sdk'
 
 android {
-    signingConfigs {
+   /* signingConfigs {
         config {
             keyAlias 'lantel2019'
             keyPassword 'lantel2019'
             storeFile file('C:/Users/fz/Documents/GitHub/Lantel360CRM_Parent/360parentKey.jks')
             storePassword 'lantel2019'
         }
-    }
+    }*/
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -77,6 +77,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.zxing
-    implementation 'com.bigkoo:convenientbanner:2.1.5'
-    implementation 'com.github.czy1121:noticeview:1.1.0'
+    implementation rootProject.ext.dependencies.convenientbanner
+    implementation rootProject.ext.dependencies.noticeview
 }

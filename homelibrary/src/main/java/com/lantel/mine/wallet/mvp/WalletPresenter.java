@@ -8,21 +8,19 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.lantel.homelibrary.app.Config;
+import com.lantel.common.HeaderUtil;
 import com.lantel.mine.wallet.api.WalletOrderBean;
 import com.lantel.mine.wallet.list.model.WalletItemModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
-import com.xiao360.baselibrary.util.SpCache;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-import androidx.lifecycle.ViewModelProviders;
+
 import okhttp3.ResponseBody;
 
 public class WalletPresenter extends WalletContract.Presenter{
@@ -30,39 +28,38 @@ public class WalletPresenter extends WalletContract.Presenter{
     private String mCurrentMonth = "";
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("===onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("===onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("WalletPresenter===onStart: ");
         refreshData(null);
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("===onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("===onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("===onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("===onCrete: ");
+
     }
 
     public void refreshData(RefreshLayout refreshLayout) {
@@ -91,7 +88,9 @@ public class WalletPresenter extends WalletContract.Presenter{
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
                             if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
-                            } else {
+                            } else if(dataBean.get("error").getAsInt()== 401){
+                                HeaderUtil.goToLogin();
+                            }else {
                                 onFail(refreshLayout, isLoadMore);
                             }
                         } catch (IOException e) {
@@ -163,6 +162,8 @@ public class WalletPresenter extends WalletContract.Presenter{
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
                             if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
+                            }else if(dataBean.get("error").getAsInt()== 401){
+                                HeaderUtil.goToLogin();
                             } else {
                                 onFail(refreshLayout,isLoadMore);
                             }

@@ -1,6 +1,6 @@
 package com.lantel.Login.api;
 
-public class RsetBean {
+public class RsetBean{
     private int code;
     private String message;
 

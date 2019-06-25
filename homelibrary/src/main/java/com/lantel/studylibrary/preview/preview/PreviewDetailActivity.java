@@ -4,23 +4,21 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.excellence.downloader.Downloader;
 import com.excellence.downloader.exception.DownloadError;
 import com.excellence.downloader.utils.IListener;
-import com.google.gson.Gson;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.MyApplication;
 import com.lantel.common.ClassRoom;
 import com.lantel.common.HeaderUtil;
-import com.lantel.common.list.model.MediaModel;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
-import com.lantel.studylibrary.preview.preview.api.LeaveRespone;
-import com.lantel.studylibrary.preview.preview.api.PreviewBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewDetailBean;
 import com.lantel.studylibrary.preview.preview.api.PreviewService;
 import com.lantel.studylibrary.preview.preview.list.AttachFileListener;
@@ -31,15 +29,15 @@ import com.lantel.studylibrary.preview.preview.list.model.LeaveReqBean;
 import com.lantel.studylibrary.preview.preview.list.model.PreviewDetailModel;
 import com.ldoublem.loadingviewlib.view.LVFunnyBar;
 import com.xiao360.baselibrary.base.BaseActivity;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
 import com.zzhoujay.richtext.RichText;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -108,9 +106,10 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
             ca_id = getIntent().getStringExtra(Config.CA_ID);
         if (!TextUtils.isEmpty(ca_id)) {
             loadDetail(ca_id)
-                    .subscribe(new BaseRxObserver<PreviewDetailBean>() {
+                    .subscribe(new NormalRxObserver() {
                         @Override
-                        public void onSuccess(PreviewDetailBean bean) {
+                        public void onSuccess(HttpResBean resBean) {
+                            PreviewDetailBean bean = (PreviewDetailBean) resBean;
                             int total = bean.getData().getTotal();
                             if (total != 0) {
                                 PreviewDetailBean.DataBean.ListBean listBean = bean.getData().getList().get(0);
@@ -224,7 +223,7 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
     public Observable<PreviewDetailBean> loadDetail(String ca_id) {
         PreviewService service = Http.getInstance().createRequest(PreviewService.class);
         String url = "course_arranges?with=one_class,course_prepare.course_prepare_attachment&ca_id=" + ca_id;
-        return service.getPrepareDetail(HeaderUtil.getHeaderMap(), url)
+        return service.getPrepareDetail(HeaderUtil.getJsonHeaderMap(), url)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle());
     }
@@ -292,25 +291,19 @@ public class PreviewDetailActivity extends BaseActivity implements AttachFileLis
         leaveReqBean.setSid(sid);
         leaveReqBean.setIs_consume(is_consume+"");
         leaveReqBean.setLeave_type(leave_type+"");
-        service.leave(HeaderUtil.getHeaderMap(),leaveReqBean)
+        service.leave(HeaderUtil.getJsonHeaderMap(),leaveReqBean)
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<LeaveRespone>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(LeaveRespone demo) {
-                        if(demo.getError()==0){
-                            setResult(RESULT_OK);
-                            ToastUitl.showShort(R.string.success_leave);
-                        }else
-                        ToastUitl.showShort(demo.getMessage());
-
-                        LogUtils.d("PreviewDetailActivity1==="+demo.getMessage());
+                    public void onSuccess(HttpResBean resBean) {
+                        setResult(RESULT_OK);
+                        ToastUitl.showShort(R.string.success_leave);
                     }
 
                     @Override
                     public void onFailure(Throwable e) {
                         ToastUitl.showShort(e.getMessage());
-                        LogUtils.d("PreviewDetailActivity===2"+e.getMessage());
                     }
                 });
     }

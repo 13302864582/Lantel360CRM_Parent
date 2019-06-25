@@ -3,6 +3,7 @@ package com.lantel.setting;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.httpsdk.http.Http;
@@ -10,6 +11,8 @@ import com.httpsdk.http.RxHelper;
 import com.lantel.Login.api.LoginService;
 import com.lantel.Login.api.LogoutBean;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.common.list.LineDecoration;
 import com.lantel.crmparent.BuildConfig;
 import com.lantel.crmparent.R;
@@ -17,12 +20,12 @@ import com.lantel.homelibrary.app.Config;
 import com.lantel.setting.list.adpter.SettingListApater;
 import com.lantel.setting.list.model.SettingModel;
 import com.xiao360.baselibrary.base.BaseActivity;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.AppManager;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
 
 import java.util.ArrayList;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -87,12 +90,13 @@ public class SettingActivity extends BaseActivity implements LogoutListener{
     @Override
     public void logout() {
         LoginService loginService = Http.getInstance().createRequest(LoginService.class);
-        loginService.logout(HeaderUtil.getHeaderMap())
+        loginService.logout(HeaderUtil.getJsonHeaderMap())
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<LogoutBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(LogoutBean logoutBean) {
+                    protected void onSuccess(HttpResBean resBean) {
+                        LogoutBean logoutBean = (LogoutBean) resBean;
                         ToastUitl.showShort(logoutBean.getMessage());
                         if(logoutBean.getError()==0){
                             SpCache.putBoolean(Config.IS_LOGIN,false);

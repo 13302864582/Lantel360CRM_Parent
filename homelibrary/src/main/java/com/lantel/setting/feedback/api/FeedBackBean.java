@@ -1,23 +1,6 @@
 package com.lantel.setting.feedback.api;
 
-public class FeedBackBean {
+import com.lantel.common.HttpResBean;
 
-    private int error;
-    private String message;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+public class FeedBackBean extends HttpResBean {
 }

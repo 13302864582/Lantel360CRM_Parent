@@ -11,6 +11,6 @@ import io.reactivex.Observable;
 public class ClassReviewModel extends ViewModel {
     public Observable<ClassReviewBean> loadData(String page, String pageSize) {
         ClassReviewService service = Http.getInstance().createRequest(ClassReviewService.class);
-        return service.getClassReviewData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
+        return service.getClassReviewData(HeaderUtil.getJsonHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 }

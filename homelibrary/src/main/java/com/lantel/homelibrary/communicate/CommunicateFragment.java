@@ -1,9 +1,14 @@
 package com.lantel.homelibrary.communicate;
 
+import android.graphics.Rect;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.lantel.common.KeyboardUtil;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.communicate.list.adpter.CommunicateAdapter;
@@ -21,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -36,6 +43,12 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
 
     @BindView(R2.id.chat_commit)
     TextView chat_commit;
+    @BindView(R2.id.chat_lay)
+    ConstraintLayout chat_lay;
+
+
+    private LinearLayoutManager manager;
+
     @Override
     protected int getContentViewLayoutId() {
         return R.layout.goutong_layout;
@@ -63,10 +76,31 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
         chat_commit.setOnClickListener((View view)-> {
             String content = chat_commit_edit.getText().toString();
             if(!TextUtils.isEmpty(content)){
-                chat_commit_edit.setText("");
                 commitMessage(content);
+                chat_commit_edit.setText("");
             }
         });
+        KeyboardUtil keyboardUtil = new KeyboardUtil(getActivity());
+        keyboardUtil.setOnKeyboardChangeListener(new KeyboardUtil.KeyboardChangeListener() {
+            @Override
+            public void onKeyboardShow(int keyboardHight) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) chat_lay.getLayoutParams();
+                params.bottomMargin = keyboardHight;
+                chat_lay.setLayoutParams(params);
+                int count = mAdapter.getItemCount();
+                if(count>0){
+                    recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+                }
+            }
+
+            @Override
+            public void onKeyboardHide() {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) chat_lay.getLayoutParams();
+                params.bottomMargin = 0;
+                chat_lay.setLayoutParams(params);
+            }
+        });
+
         interval(6000, new RxAction() {
             @Override
             public void action(long number) {
@@ -74,6 +108,16 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
             }
         });
     }
+
+    private boolean isKeyboardShown(View rootView) {
+        final int softKeyboardHeight = 100;
+        Rect r = new Rect();
+        rootView.getWindowVisibleDisplayFrame(r);
+        DisplayMetrics dm = rootView.getResources().getDisplayMetrics();
+        int heightDiff = rootView.getBottom() - r.bottom;
+        return heightDiff > softKeyboardHeight * dm.density;
+    }
+
 
     private void commitMessage(String content) {
         mPresenter.commitMessage(content);
@@ -87,7 +131,7 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
         initToolBar();
         stateLayout.showContentView();
         recyclerView = rootView.findViewById(getListView());
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         mAdapter = getAdapter();
         recyclerView.setAdapter(mAdapter);
@@ -146,13 +190,21 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
     public void setLoadMoreData(ArrayList<ItemModel> list) {
         if(list.size()==0)
             return;
+
         int start = mAdapter.getItemCount();
         ((CommunicateAdapter)mAdapter).getDatas().addAll(list);
-        if(start ==0)
+        if(start ==0){
             mAdapter.notifyDataSetChanged();
-        else {
+            recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+        }else {
             mAdapter.notifyItemRangeInserted(start,list.size());
             mAdapter.notifyItemRangeChanged(start,list.size());
+            int position_first = manager.findFirstVisibleItemPosition();//获取第一个先是的View的索引
+            int position_last = start + list.size() ;//获取最后一个先是的View的索引
+            LogUtils.d("position===="+position_first+"==="+position_last);
+            if(position_last-position_first<4){
+                recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+            }
         }
     }
 
@@ -171,25 +223,24 @@ public class CommunicateFragment extends NormalListFragment<CommunicatePresenter
                 String format = getString(R.string.newMessFormat);
                 String itemTime = datas.get(count-1).getTime();
                 Date date = DisplayUtil.formatIntDay("yyyy-MM-dd HH:mm:ss",itemTime);
-                return String.format(format,date.getTime()/1000+"")+"&with=student,employee&page=1&pagesize=20&order_field=create_time&order_sort=asc";
+                return String.format(format,date.getTime()/1000+"")+"&with=student,employee&is_reverse=1";
             }else {
                 String format = getString(R.string.historyMessFormat);
                 String itemTime = datas.get(0).getTime();
                 Date date = DisplayUtil.formatIntDay("yyyy-MM-dd HH:mm:ss",itemTime);
-                return String.format(format,date.getTime()/1000+"")+"&with=student,employee&page=1&pagesize=20&order_field=create_time&order_sort=asc";
+                return String.format(format,date.getTime()/1000+"")+"&with=student,employee&is_reverse=1";
             }
         }else {
             //无数据
-            String format = getString(R.string.historyMessFormat);
-            return String.format(format,new Date(System.currentTimeMillis()).getTime()/1000+"")+"&with=student,employee&page=1&pagesize=20&order_field=create_time&order_sort=asc";
+            return "im_chats?with=student,employee&page=1&pagesize=20&is_reverse=1";
         }
     }
     /**
      * 每隔milliseconds毫秒后执行指定动作
-     *
      * @param milliSeconds
      * @param rxAction
      */
+
     public void interval(long milliSeconds, final RxAction rxAction) {
         Observable.interval(milliSeconds, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

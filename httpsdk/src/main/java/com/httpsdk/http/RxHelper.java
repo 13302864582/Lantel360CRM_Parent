@@ -14,6 +14,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxHelper {
+    /**
+     * 子线程与主线程切换
+     * */
     public static <T> ObservableTransformer<T, T> io_main() {
         return new ObservableTransformer() {
             @Override

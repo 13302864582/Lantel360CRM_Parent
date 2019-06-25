@@ -2,7 +2,7 @@ package com.lantel.homelibrary.communicate.api;
 
 public class CommitChatReq {
     //'学员ID'
-    private int sid;
+    private String sid;
     //消息内容
     private String message;
     //发送类型：0为学生发给机构，1为机构发给学生
@@ -12,11 +12,11 @@ public class CommitChatReq {
     //发送客户端id,1为教育助手，2为学习管家,10为机构PC端,11为机构微信端,20为学习管家PC端,21为学习管家微信端
     private int app_client_id;
 
-    public int getSid() {
+    public String getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(String sid) {
         this.sid = sid;
     }
 

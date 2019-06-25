@@ -9,11 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.immersionbar.BarHide;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.R2;
 import com.lantel.homelibrary.app.Config;
@@ -21,7 +24,6 @@ import com.lantel.setting.feedback.api.FeedBackBean;
 import com.lantel.setting.feedback.api.FeedBackReqBean;
 import com.lantel.setting.feedback.api.FeedBackService;
 import com.xiao360.baselibrary.base.BaseMVPActivity;
-import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.SpCache;
 import com.xiao360.baselibrary.util.ToastUitl;
 
@@ -29,7 +31,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModel;
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.HeaderMap;
 
 @Route(path = "/lantel/360/feedback")
 public class FeedBackActivity extends BaseMVPActivity {
@@ -113,12 +114,13 @@ public class FeedBackActivity extends BaseMVPActivity {
             reqBean.setBid(SpCache.getString(Config.BID,""));
             if(!TextUtils.isEmpty(content))
             reqBean.setContent(content);
-            feedBackService.feedback(HeaderUtil.getHeaderMap(),reqBean)
+            feedBackService.feedback(HeaderUtil.getJsonHeaderMap(),reqBean)
                     .compose(RxHelper.io_main())
                     .compose(bindToLifecycle())
-                    .subscribe(new BaseRxObserver<FeedBackBean>() {
+                    .subscribe(new NormalRxObserver() {
                         @Override
-                        public void onSuccess(FeedBackBean data) {
+                        public void onSuccess(HttpResBean httpResBean) {
+                            FeedBackBean data = (FeedBackBean) httpResBean;
                             ToastUitl.showShort(data.getMessage());
                             if(data.getError()==0){
                                 finish();

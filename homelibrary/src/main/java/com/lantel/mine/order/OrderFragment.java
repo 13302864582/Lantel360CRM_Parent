@@ -72,7 +72,7 @@ public class OrderFragment extends NormalListFragment<OrderPresenter, OrderModel
 
     @Override
     public void refreshData(ArrayList<OrderItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         ((OrderAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

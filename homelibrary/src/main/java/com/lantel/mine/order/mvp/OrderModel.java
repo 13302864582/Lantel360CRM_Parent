@@ -12,6 +12,6 @@ import io.reactivex.Observable;
 public class OrderModel extends ViewModel {
     public Observable<OrderBean> loadOrderData(String page, String pageSize) {
         OrderService service = Http.getInstance().createRequest(OrderService.class);
-        return service.getOrderListData(HeaderUtil.getHeaderMap(),page,pageSize).compose(RxHelper.io_main());
+        return service.getOrderListData(HeaderUtil.getJsonHeaderMap(),page,pageSize).compose(RxHelper.io_main());
     }
 }

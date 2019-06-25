@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.lantel.common.ShareUtil;
@@ -12,15 +13,12 @@ import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.output.list.holder.CardOutputHolder;
 import com.lantel.homelibrary.output.list.model.CardOutputModel;
-import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.BaseRecyclerViewAdapter;
 import com.xiao360.baselibrary.listview.BaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
 
@@ -37,7 +35,7 @@ public class OutputAdapter extends BaseRecyclerViewAdapter<CardOutputModel>{
     @Override
     protected void bindViewHolder(BaseViewHolder holder, CardOutputModel model, int position, int viewType) {
         CardOutputHolder cardOutputHolder = (CardOutputHolder) holder;
-        GlideUtils.loadImageView(context,model.getHeadImg(),cardOutputHolder.head_img,R.mipmap.circle_default);
+        GlideUtils.loadCircle(context,model.getHeadImg(),cardOutputHolder.head_img,R.mipmap.circle_default);
         setText(model.getTitle(),cardOutputHolder.name);
         setText(model.getTime(),cardOutputHolder.time);
         setText(model.getContent(),cardOutputHolder.content);

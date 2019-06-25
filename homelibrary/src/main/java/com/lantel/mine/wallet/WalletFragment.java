@@ -136,7 +136,7 @@ public class WalletFragment extends NormalListFragment<WalletPresenter, WalletMo
     }
 
     public void refreshData(ArrayList<WalletItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         WalletAdapter walletAdapter = (WalletAdapter) mAdapter;
         if(menu.size()!=0){
             stateLayout.showContentView();

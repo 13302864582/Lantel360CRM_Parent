@@ -12,6 +12,6 @@ import io.reactivex.Observable;
 public class HasReadModel extends ViewModel {
     public Observable<CourseBean> loadData(String page, String pageSize) {
         CourseService service = Http.getInstance().createRequest(CourseService.class);
-        return service.getCourseReading(HeaderUtil.getHeaderMap(),String.valueOf(1),page,pageSize).compose(RxHelper.io_main());
+        return service.getCourseReading(HeaderUtil.getJsonHeaderMap(),String.valueOf(1),page,pageSize).compose(RxHelper.io_main());
     }
 }

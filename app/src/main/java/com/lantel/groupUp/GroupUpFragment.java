@@ -3,6 +3,9 @@ package com.lantel.groupUp;
 import com.lantel.common.BannerMenuFragment;
 import com.lantel.crmparent.R;
 
+/***
+ *  成长界面，时间原因暂时搁置
+ */
 public class GroupUpFragment extends BannerMenuFragment {
     @Override
     protected int getIcons() {

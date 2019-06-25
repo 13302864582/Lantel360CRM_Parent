@@ -82,7 +82,7 @@ public class PreviewFragment extends NormalListFragment<PreviewPresenter, Previe
 
     @Override
     public void refreshData(ArrayList<PreviewItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         ((PreviewAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

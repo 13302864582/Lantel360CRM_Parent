@@ -119,6 +119,7 @@ public class BindStudentFragment extends NormalListFragment<BindStudentPresenter
 
     @Override
     public void refreshData(ArrayList<BindStudentListModel> menu) {
+        resetLoadMore();
         ((BindStudentAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

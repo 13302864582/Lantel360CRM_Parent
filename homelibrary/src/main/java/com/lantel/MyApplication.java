@@ -1,8 +1,6 @@
 package com.lantel;
 
-import android.Manifest;
 import android.util.Log;
-
 import com.excellence.downloader.Downloader;
 import com.httpsdk.http.CacheInterceptor;
 import com.httpsdk.http.Constans;
@@ -11,33 +9,29 @@ import com.httpsdk.http.LogInterceptor;
 import com.lantel.common.ClassRoom;
 import com.lantel.common.ForegroundCallbacks;
 import com.lantel.common.Lesson;
-import com.lantel.common.SchoolArea;
 import com.lantel.homelibrary.app.Config;
-import com.mob.MobSDK;
 import com.tencent.smtt.sdk.QbSdk;
 import com.xiao360.baselibrary.base.BaseApplication;
 import com.xiao360.baselibrary.base.BaseModel;
 import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
-import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 import com.zzhoujay.richtext.RichText;
-
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import cn.jpush.android.api.JPushInterface;
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
 public class MyApplication extends BaseApplication {
+    //班级教室信息保存
     private List<ClassRoom> classRoom;
-    private List<SchoolArea> schoolAreas;
+    //请假信息保存
     private List<BaseModel> leaveTypes;
+    //课程信息保存
     private List<Lesson> lessonList;
 
     public List<Lesson> getLessonList() {
@@ -46,14 +40,6 @@ public class MyApplication extends BaseApplication {
 
     public void setLessonList(List<Lesson> lessonList) {
         this.lessonList = lessonList;
-    }
-
-    public List<SchoolArea> getSchoolAreas() {
-        return schoolAreas;
-    }
-
-    public void setSchoolAreas(List<SchoolArea> schoolAreas) {
-        this.schoolAreas = schoolAreas;
     }
 
     public List<ClassRoom> getClassRoom() {
@@ -74,15 +60,18 @@ public class MyApplication extends BaseApplication {
 
     @Override
     protected void onCreateSelf() {
+        //请求读写权限
         AndPermission.with(this)
                 .runtime()
                 .permission(Permission.READ_EXTERNAL_STORAGE
                         ,Permission.WRITE_EXTERNAL_STORAGE)
                 .start();
+        //下载初始化
         Downloader.init(this);
         File cacheDir = new File(getAppContext().getCacheDir(), "response");
         //缓存的最大尺寸10m
         Cache cache = new Cache(cacheDir, 1024 * 1024 * 10);
+        //富文本初始化
         RichText.initCacheDir(getAppContext());
         OkHttpClient.Builder builder =  new OkHttpClient.Builder()
                .cache(cache).readTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS)//设置读取超时时间
@@ -91,11 +80,19 @@ public class MyApplication extends BaseApplication {
                 .addInterceptor(new LogInterceptor())//添加打印拦截器
                 .addInterceptor(new CacheInterceptor(getAppContext()))
                 .retryOnConnectionFailure(true); //设置出现错误进行重新连接;*/
+        //网络初始化
         Http.init(builder, Constans.baseUrl);
+        //本地存储sp初始化
         SpCache.init(this);
-        MobSDK.init(this);
+        //分享初始化
+        //MobSDK.init(this);
+        //极光推送
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        //保存推送注册的ID
+        String registrationId = JPushInterface.getRegistrationID(this);
+        LogUtils.d("dev_id1==="+registrationId);
+        SpCache.putString(Config.REGISTRATIONID,registrationId);
         //初始化X5内核
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
@@ -109,8 +106,8 @@ public class MyApplication extends BaseApplication {
             }
         });
 
+        //监听程序在后台前台
         ForegroundCallbacks.init(this);
-
         ForegroundCallbacks.get().addListener(new ForegroundCallbacks.Listener() {
             @Override
             public void onBecameForeground() {

@@ -97,7 +97,7 @@ public class MessageFragment extends NormalListFragment<MessagePresenter, Messag
 
     @Override
     public void refreshData(ArrayList<MessageItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+       resetLoadMore();
         ((MessageAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
+import androidx.core.content.FileProvider;
+
 public class PhotoUtil {
     /**
      * 拍照获取
@@ -90,9 +92,12 @@ public class PhotoUtil {
 
     public static File createImageFile(Context context) throws IOException {
         String timeStamp = DisplayUtil.praseformatIntDay("yyyyMMddHHmmss", new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "JPEG_" + timeStamp + "_.jpg";
         File stroageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(imageFileName, ".jpg", stroageDir);
+        //File image = File.createTempFile(imageFileName, ".jpg", stroageDir);
+        File image = new File(stroageDir, imageFileName);
+        if (!image.getParentFile().exists())
+            image.getParentFile().mkdirs();
         return image;
     }
 
@@ -204,7 +209,7 @@ public class PhotoUtil {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    public static Bitmap getBitmapFormUri(Context context,Uri uri) throws FileNotFoundException, IOException {
+    public static Bitmap getBitmapFormUri(Context context,Uri uri) throws Exception {
         InputStream input = context.getContentResolver().openInputStream(uri);
 
         //这一段代码是不加载文件到内存中也得到bitmap的真是宽高，主要是设置inJustDecodeBounds为true
@@ -233,7 +238,7 @@ public class PhotoUtil {
             be = 1;
         //比例压缩
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        bitmapOptions.inSampleSize = be;//设置缩放比例
+        //bitmapOptions.inSampleSize = be;//设置缩放比例
         bitmapOptions.inDither = true;
         bitmapOptions.inPreferredConfig = Bitmap.Config.RGB_565;
         input = context.getContentResolver().openInputStream(uri);
@@ -260,5 +265,17 @@ public class PhotoUtil {
         return bitmap;
     }
 
-
+    /**
+     * 得到bitmap的大小
+     */
+    public static int getBitmapSize(Bitmap bitmap) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {    //API 19
+            return bitmap.getAllocationByteCount();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {//API 12
+            return bitmap.getByteCount();
+        }
+        // 在低版本中用一行的字节x高度
+        return bitmap.getRowBytes() * bitmap.getHeight();
+    }
 }

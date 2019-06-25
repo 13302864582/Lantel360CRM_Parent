@@ -18,6 +18,6 @@ public class PreviewModel extends ViewModel {
     public Observable<PreviewBean> loadData(String page, String pageSize) {
         String sid = SpCache.getString(Config.SID,"");
         PreviewService service = Http.getInstance().createRequest(PreviewService.class);
-        return service.getPrepareData(HeaderUtil.getHeaderMap(),"one_class",sid,page,pageSize).compose(RxHelper.io_main());
+        return service.getPrepareData(HeaderUtil.getJsonHeaderMap(),"one_class",sid,page,pageSize).compose(RxHelper.io_main());
     }
 }

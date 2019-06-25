@@ -94,7 +94,7 @@ public class NotifyFragment extends NormalListFragment<NotifyPresenter, NotifyMo
 
     @Override
     public void refreshData(ArrayList<NotifyItemModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         ((NotifyAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.haibin.calendarview.Calendar;
 import com.httpsdk.http.RxHelper;
+import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.course.api.CourseBean;
 import com.lantel.homelibrary.course.list.model.CourseAllBean;
@@ -88,12 +91,12 @@ public class CoursePresenter extends CourseContract.Presenter {
         mModel.getCourse(mCurrentIntDay, page, pageSize)
                 .compose(RxHelper.io_main())
                 .compose(context.bindToLifecycle())
-                .subscribe(new BaseRxObserver<CourseBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(CourseBean courseBean) {
-                        int error = courseBean.getError();
+                    public void onSuccess(HttpResBean resBean) {
+                        CourseBean courseBean = (CourseBean) resBean;
                         List<CourseBean.DataBean.ListBean> listBean = courseBean.getData().getList();
-                        setCourseList(error, listBean, isLoadMore, refreshLayout);
+                        setCourseList(courseBean.getError(), listBean, isLoadMore, refreshLayout);
                     }
 
                     @Override
@@ -138,6 +141,8 @@ public class CoursePresenter extends CourseContract.Presenter {
                     refreshLayout.finishLoadMore();
 
             }
+        }else if(errorCode == 401){
+            HeaderUtil.goToLogin();
         } else {
             onFail(refreshLayout,isLoadMore);
         }

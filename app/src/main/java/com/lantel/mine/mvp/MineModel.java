@@ -13,6 +13,6 @@ import io.reactivex.Observable;
 public class MineModel extends ViewModel {
     public Observable<MineCardBean> loadData() {
         MineCardService service = Http.getInstance().createRequest(MineCardService.class);
-        return service.getCardData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,"0")).compose(RxHelper.io_main());
+        return service.getCardData(HeaderUtil.getJsonHeaderMap(), SpCache.getString(Config.UID,"0")).compose(RxHelper.io_main());
     }
 }

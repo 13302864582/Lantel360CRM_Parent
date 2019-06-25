@@ -200,28 +200,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
-
-                <TextView
-                    android:id="@+id/ad_txt1"
-                    app:layout_constraintTop_toBottomOf="@id/banner"
-                    app:layout_constraintLeft_toLeftOf="@id/banner"
-                    android:text="@string/ad_txt1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ad_txt1_marginTop"
-                    android:textSize="@dimen/ad_txt1"
-                    android:textColor="@color/ad_txt1"/>
-
-                <TextView
-                    android:id="@+id/ad_txt2"
-                    app:layout_constraintTop_toBottomOf="@id/ad_txt1"
-                    app:layout_constraintLeft_toLeftOf="@id/banner"
-                    android:text="@string/ad_txt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ad_txt1_marginTop"
-                    android:textSize="@dimen/ad_txt2"
-                    android:textColor="@color/ad_txt2"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

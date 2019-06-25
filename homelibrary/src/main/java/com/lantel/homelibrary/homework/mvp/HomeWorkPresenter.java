@@ -10,49 +10,48 @@ import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.homework.api.HomeWorkBean;
 import com.lantel.homelibrary.homework.list.model.HomeWorkItemModel;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
 import com.xiao360.baselibrary.util.SpCache;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
 import io.reactivex.Observable;
 
 public class HomeWorkPresenter extends HomeWorkContract.Presenter<HomeWorkBean, HomeWorkItemModel> {
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("onStart: ");
+
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("onCrete: ");
+
     }
 
     @Override

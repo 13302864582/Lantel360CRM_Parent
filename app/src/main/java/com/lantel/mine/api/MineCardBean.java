@@ -1,29 +1,14 @@
 package com.lantel.mine.api;
 
 
+import com.lantel.common.HttpResBean;
+
 import java.util.List;
 
-public class MineCardBean {
-    private int error;
-    private String message;
+public class MineCardBean  extends HttpResBean {
+
     private DataBean data;
     private boolean authed;
-
-    public int getError() {
-        return error;
-    }
-
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public DataBean getData() {
         return data;

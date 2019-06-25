@@ -83,7 +83,7 @@ public class ClassReviewFragment extends NormalListFragment<ClassReviewPresenter
 
     @Override
     public void refreshData(ArrayList<ClassReviewCardModel> menu) {
-        stateLayout.refreshLayout.setEnableLoadMore(false);
+        resetLoadMore();
         ((ClassReviewAdapter)mAdapter).setDatas(menu);
         mAdapter.notifyDataSetChanged();
         if(menu.size()!=0){

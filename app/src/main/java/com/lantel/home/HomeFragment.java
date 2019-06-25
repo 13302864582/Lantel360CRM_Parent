@@ -2,11 +2,12 @@ package com.lantel.home;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.cangwang.core.IBaseClient;
 import com.cangwang.core.ModuleEvent;
 import com.google.gson.Gson;
 import com.lantel.AppConfig;
@@ -25,11 +26,12 @@ import com.xiao360.baselibrary.base.BaseMVPFragment;
 import com.xiao360.baselibrary.image.GlideUtils;
 import com.xiao360.baselibrary.listview.listener.OnActionPathListener;
 import com.xiao360.baselibrary.util.LogUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 import com.youth.banner.Banner;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
-
 import java.util.ArrayList;
 import java.util.List;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -39,6 +41,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ezy.ui.view.NoticeView;
 
+/***
+ *  主页
+ */
 public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> implements HomeContract.View, OnActionPathListener{
     @BindView(R.id.statebarView)
     View statebarView;
@@ -81,6 +86,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
 
     @Override
     public void initMenuData(ArrayList<SimpleMenuModel> menu) {
+        //设置主页菜单按钮
         homeMenuList.setLayoutManager(new GridLayoutManager(getContext(),4));
         mHomeMenuAdapter = new HomeMenuListApater(getContext(),menu);
         mHomeMenuAdapter.setListener(this);
@@ -89,6 +95,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
 
     @Override
     public void updateTopView(HomeTopModel homeTopModel, ArrayList<ChangeAccountBean> changeAccountBeans) {
+        //更新顶部的信息
         organ.setText(homeTopModel.getOrg_name());
         phoneText.setText(homeTopModel.getBranch_tel());
         schoolArea.setText(homeTopModel.getBranch_name());
@@ -101,6 +108,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
 
     @Override
     public void setNotifyText(List<String> list) {
+        //设置滚动消息数据
         notice.start(list);
         notice.setOnClickListener((View v)-> {
                 ARouter.getInstance().build("/lantel/360/notify").navigation();
@@ -109,6 +117,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
 
     @Override
     public void setUpNotifyMessage(int today_num) {
+        //更新信息红点
         topImgRightRedpoint.setVisibility(today_num>0?View.VISIBLE:View.INVISIBLE);
     }
 
@@ -141,6 +150,7 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
     }
 
     private void initBanner() {
+        //设置广告
         banner.setImageLoader(new GlideImageLoader(R.mipmap.ad));
         //设置图片集合
         List list = new ArrayList<String>();
@@ -150,30 +160,48 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         banner.start();
     }
 
+
     @Override
     public void navigationPath(String path) {
         if(path.equals(getString(R.string.home_credit_path))){
+            //跳转积分
             String url = "http://hzs.xiao360.com/ui/cs";
             ARouter.getInstance().build(getString(R.string.web_path)).withString(Config.WEB_URL,url).navigation();
         }else {
+            //跳转菜单对应的界面
             ARouter.getInstance().build(path).navigation();
         }
     }
 
+    /**
+     * 点击事件处理
+     */
     @OnClick({R.id.top_img_left_user, R.id.username, R.id.arrow_user, R.id.top_img_right_notify, R.id.top_img_right_scan, R.id.phone_img, R.id.phone_text})
     public void onViewClicked(View view) {
         int id = view.getId();
         if(id == R.id.top_img_right_notify){
+            //跳转消息
             ARouter.getInstance().build("/lantel/360/message").navigation();
-            LogUtils.d("onViewClicked===notify");
         }
         else if(id == R.id.top_img_right_scan){
+            //跳转扫描
             navigateScan();
         }
         else if(id == R.id.phone_img || id == R.id.phone_text){
-            LogUtils.d("onViewClicked===phone");
+            //拨打电话
+            String phone = phoneText.getText().toString().trim();
+            if(!TextUtils.isEmpty(phone)){
+                AndPermission.with(this)
+                        .runtime()
+                        .permission(Permission.CALL_PHONE)
+                        .onGranted((List<String> data)-> {
+                                callPhone(phone);
+                        })
+                        .start();
+            }
         }
         else if(id == R.id.top_img_left_user || id == R.id.username || id == R.id.arrow_user){
+            //切换档案
             ArrayList<ChangeAccountBean> changeAccountBeans = mModel.getChangeAccountBeans();
             if(null != changeAccountBeans){
                 Gson gson =new Gson();
@@ -183,9 +211,25 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
         }
     }
 
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
+
+
+    /**
+     * 响应通知事件刷新顶部用户信息
+     */
     @ModuleEvent(coreClientClass = HomeClient.class)
     public void refreshHomeTop(String s) {
-        LogUtils.d("REQUEST_CHANGE_BID===top");
         mPresenter.laodHomeTop();
     }
 
@@ -198,7 +242,6 @@ public class HomeFragment extends BaseMVPFragment<HomePresenter, HomeModel> impl
          * 设置扫描框颜色等
          * 也可以不传这个参数
          **/
-
         ZxingConfig config = new ZxingConfig();
         config.setPlayBeep(true);//是否播放扫描声音 默认为true
         config.setShake(false);//是否震动  默认为true

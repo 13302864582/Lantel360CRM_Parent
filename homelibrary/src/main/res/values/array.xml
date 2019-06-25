@@ -13,24 +13,6 @@
         <item>@string/female</item>
     </string-array>
 
-    <string-array name="bindfile_menu_title">
-        <item>@string/bind_student</item>
-        <item>@string/bind_other</item>
-    </string-array>
-
-    <string-array name="bindfile_menu_path">
-        <item>@string/bind_student_path</item>
-        <item>@string/bind_other_path</item>
-    </string-array>
-
-    <integer-array name="bindfile_menu_icon">
-        <item>@mipmap/bind_student</item>
-        <item>@mipmap/bind_other</item>
-    </integer-array>
-
-
-
-
     <string-array name="bindaccount_menu_title">
         <item>@string/bind_phone</item>
         <!--<item>@string/bind_weibo</item>

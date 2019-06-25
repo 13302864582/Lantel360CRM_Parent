@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 public class CourseModel extends ViewModel {
     public Observable<CourseAllBean> loadData(String int_day,String page, String pageSize) {
         CourseService service = Http.getInstance().createRequest(CourseService.class);
-        Observable<CalenderSchemBean> schemObservable = service.getSchmeDate(HeaderUtil.getHeaderMap(),"1000");
+        Observable<CalenderSchemBean> schemObservable = service.getSchmeDate(HeaderUtil.getJsonHeaderMap(),"1000");
         Observable<CourseBean> courseObservable = getCourse(int_day,page,pageSize);
         return Observable.zip(courseObservable,schemObservable,(CourseBean courseBean,CalenderSchemBean calenderSchemBean)->{
             CourseAllBean courseAllBean = new CourseAllBean();
@@ -40,6 +40,6 @@ public class CourseModel extends ViewModel {
     public  Observable<CourseBean> getCourse(String int_day,String page,String pagesize) {
         CourseService service = Http.getInstance().createRequest(CourseService.class);
         String with = "course_prepare,one_class,textbook,textbook_section";
-        return service.getCourseData(HeaderUtil.getHeaderMap(),"course_arranges?int_day="+int_day+"&with="+with+"&page="+page+"&pagesize="+pagesize);
+        return service.getCourseData(HeaderUtil.getJsonHeaderMap(),"course_arranges?int_day="+int_day+"&with="+with+"&page="+page+"&pagesize="+pagesize);
     }
 }

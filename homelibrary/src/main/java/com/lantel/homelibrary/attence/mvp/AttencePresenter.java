@@ -8,6 +8,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.lantel.common.HeaderUtil;
 import com.lantel.homelibrary.R;
 import com.lantel.homelibrary.app.Config;
 import com.lantel.homelibrary.attence.api.AttenceBean;
@@ -15,11 +16,7 @@ import com.lantel.homelibrary.attence.list.model.AttenceCardModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiao360.baselibrary.base.BaseRxObserver;
 import com.xiao360.baselibrary.util.DisplayUtil;
-import com.xiao360.baselibrary.util.LogUtils;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,39 +31,38 @@ public class AttencePresenter extends AttenceContract.Presenter {
 
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("onStart: ");
         refreshData(null);
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("onCrete: ");
+
     }
 
     public void refreshData(RefreshLayout refreshLayout) {
@@ -87,7 +83,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
                             JsonObject listObject = dataBean.get("data").getAsJsonObject().get("list").getAsJsonObject();
                             if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
-                            } else {
+                            } else if(dataBean.get("error").getAsInt() == 401){
+                                HeaderUtil.goToLogin();
+                            }else {
                                 onFailure(new Throwable(dataBean.get("message").getAsString()));
                             }
                         } catch (Exception e) {
@@ -121,7 +119,9 @@ public class AttencePresenter extends AttenceContract.Presenter {
 
                             if (dataBean.get("error").getAsInt() == 0) {
                                 SetData(listObject, isLoadMore, refreshLayout);
-                            } else {
+                            }  else if(dataBean.get("error").getAsInt() == 401){
+                                HeaderUtil.goToLogin();
+                            }else {
                                 onFailure(new Throwable(dataBean.get("message").getAsString()));
                             }
                         } catch (Exception e) {

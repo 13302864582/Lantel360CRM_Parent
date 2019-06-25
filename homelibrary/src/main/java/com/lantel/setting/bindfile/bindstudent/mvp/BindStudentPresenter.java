@@ -1,9 +1,10 @@
 package com.lantel.setting.bindfile.bindstudent.mvp;
 
 import android.os.Bundle;
+
 import com.lantel.setting.bindfile.bindstudent.api.BindStudentBean;
 import com.lantel.setting.bindfile.bindstudent.list.model.BindStudentListModel;
-import com.xiao360.baselibrary.util.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,39 +14,39 @@ public class BindStudentPresenter extends BindStudentContract.Presenter<BindStud
 
     @Override
     public void onCrete(Bundle savedInstanceState) {
-        LogUtils.d("onCrete: ");
+
     }
 
     //onActivityCreated
     @Override
     public void onCrete() {
-        LogUtils.d("onActivityCreated: ");
+
     }
 
     @Override
     public void onStart() {
-        LogUtils.d("onStart: ");
+
         refreshData(null);
     }
 
     @Override
     public void onResume() {
-        LogUtils.d("onResume: ");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.d("onPause: ");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.d("onStop: ");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.d("onCrete: ");
+
     }
 
     @Override

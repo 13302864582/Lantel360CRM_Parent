@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.httpsdk.http.Http;
 import com.httpsdk.http.RxHelper;
 import com.lantel.common.HeaderUtil;
+import com.lantel.common.HttpResBean;
+import com.lantel.common.NormalRxObserver;
 import com.lantel.common.PhotoSelectListener;
 import com.lantel.common.PopUtil;
 import com.lantel.homelibrary.R;
@@ -96,29 +98,28 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     protected void initView() {
         textRight.setText(R.string.finish);
         BindStudentService service = Http.getInstance().createRequest(BindStudentService.class);
-        service.getAccountData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,"0"))
+        service.getAccountData(HeaderUtil.getJsonHeaderMap(), SpCache.getString(Config.UID,"0"))
                 .compose(RxHelper.io_main())
                 .compose(bindToLifecycle())
-                .subscribe(new BaseRxObserver<BindStudentBean>() {
+                .subscribe(new NormalRxObserver() {
                     @Override
-                    public void onSuccess(BindStudentBean studentBean) {
-                        if(studentBean.getError()==0){
-                            BindStudentBean.DataBean dataBean = studentBean.getData();
-                            if(null != dataBean && null != dataBean.getList()){
-                                String sid = SpCache.getString(Config.SID,"");
-                                List<BindStudentBean.DataBean.ListBean> listBeans = dataBean.getList();
-                                for(int i = 0;i < listBeans.size();i++){
-                                    BindStudentBean.DataBean.ListBean bean = listBeans.get(i);
-                                    if(String.valueOf(bean.getSid()).equals(sid)){
-                                        photoPath = bean.getPhoto_url();
-                                        studentName = bean.getStudent_name();
-                                        GlideUtils.loadCircle(getContext(),photoPath, headImg,R.mipmap.circle_default);
-                                        PersonBean personBean = new PersonBean();
-                                        personBean.setBirthDate(bean.getBirth_time());
-                                        personBean.setName(studentName);
-                                        personBean.setSex(bean.getSex());
-                                        mPresenter.initMenu(personBean);
-                                    }
+                    public void onSuccess(HttpResBean resBean) {
+                        BindStudentBean studentBean = (BindStudentBean) resBean;
+                        BindStudentBean.DataBean dataBean = studentBean.getData();
+                        if(null != dataBean && null != dataBean.getList()){
+                            String sid = SpCache.getString(Config.SID,"");
+                            List<BindStudentBean.DataBean.ListBean> listBeans = dataBean.getList();
+                            for(int i = 0;i < listBeans.size();i++){
+                                BindStudentBean.DataBean.ListBean bean = listBeans.get(i);
+                                if(String.valueOf(bean.getSid()).equals(sid)){
+                                    photoPath = bean.getPhoto_url();
+                                    studentName = bean.getStudent_name();
+                                    GlideUtils.loadCircle(getContext(),photoPath, headImg,R.mipmap.circle_default);
+                                    PersonBean personBean = new PersonBean();
+                                    personBean.setBirthDate(bean.getBirth_time());
+                                    personBean.setName(studentName);
+                                    personBean.setSex(bean.getSex());
+                                    mPresenter.initMenu(personBean);
                                 }
                             }
                         }
@@ -169,7 +170,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
             uploadReq.setBirth_time(date);
             uploadReq.setSid(Integer.valueOf(sid));
             uploadReq.setStudent_name(studentName);
-            uploadService.commitUpload(HeaderUtil.getHeaderMap(),uploadReq)
+            uploadService.commitUpload(HeaderUtil.getJsonHeaderMap(),uploadReq)
                     .compose(RxHelper.io_main())
                     .compose(bindToLifecycle())
                     .subscribe(new BaseRxObserver<UploadResultBean>() {
@@ -177,8 +178,12 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
                         public void onSuccess(UploadResultBean resultBean) {
                             progressBar.stopAnim();
                             progressLay.setVisibility(View.GONE);
-                            ToastUitl.showShort(R.string.upload_success);
-                            getActivity().finish();
+                            String error = resultBean.getError();
+                            if(error.equals("0")){
+                                ToastUitl.showShort(R.string.upload_success);
+                                getActivity().finish();
+                            }else if(error.equals("401"))
+                                HeaderUtil.goToLogin();
                         }
 
                         @Override
@@ -231,7 +236,7 @@ public class SettingPersonFragment extends BaseMVPFragment<SettingPersonPresente
     private void upLoadHeadImg() {
         if (null != photoUrl) {
             UploadService uploadService = Http.getInstance().createRequest(UploadService.class);
-            uploadService.getUploadData(HeaderUtil.getHeaderMap(), "http://dev.xiao360.com/api/upload")
+            uploadService.getUploadData(HeaderUtil.getJsonHeaderMap(), "http://dev.xiao360.com/api/upload")
                     .compose(RxHelper.io_main())
                     .compose(bindToLifecycle())
                     .subscribe(new BaseRxObserver<UploadBean>() {

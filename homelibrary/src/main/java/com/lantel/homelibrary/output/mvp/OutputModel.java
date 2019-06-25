@@ -17,9 +17,9 @@ import io.reactivex.Observable;
 public class OutputModel extends ViewModel {
     public Observable<ZipOutputStudengtBean> loadData(String page, String pageSize) {
         StudentService studentService = Http.getInstance().createRequest(StudentService.class);
-        Observable<StudentBean> studentBeanObservable = studentService.getStudentData(HeaderUtil.getHeaderMap(), SpCache.getString(Config.UID,"0"));
+        Observable<StudentBean> studentBeanObservable = studentService.getStudentData(HeaderUtil.getJsonHeaderMap(), SpCache.getString(Config.UID,"0"));
         OutputService outputService = Http.getInstance().createRequest(OutputService.class);
-        Observable<OutputBean> outputBeanObservable = outputService.getArtWorkDate(HeaderUtil.getHeaderMap(),"student_artworks?with=student_artwork_attachment&page="+page+"&pagesize="+pageSize);
+        Observable<OutputBean> outputBeanObservable = outputService.getArtWorkDate(HeaderUtil.getJsonHeaderMap(),"student_artworks?with=student_artwork_attachment&page="+page+"&pagesize="+pageSize);
         return Observable.zip(studentBeanObservable, outputBeanObservable,(StudentBean studentBean, OutputBean outputBean)->{
             ZipOutputStudengtBean zipOutputStudengtBean = new ZipOutputStudengtBean();
             zipOutputStudengtBean.setOutputError(outputBean.getError());

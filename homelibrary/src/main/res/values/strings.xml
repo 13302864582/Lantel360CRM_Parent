@@ -166,4 +166,6 @@
     <string name="reply">回复</string>
     <string name="size_error">文件大小不能0</string>
     <string name="mess_error">发送失败</string>
+    <string name="live_zhibo">直播</string>
+    <string name="live_in_room">进入</string>
 </resources>
